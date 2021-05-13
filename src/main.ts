@@ -3,12 +3,13 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {AppModule} from './app/app.module';
 import {environment} from './environments/environment';
-import {enableAkitaProdMode} from '@datorama/akita';
-import {AppRoutingModule} from './app/app-routing.module';
+import {akitaDevtools, enableAkitaProdMode} from '@datorama/akita';
 
 if (environment.production) {
   enableProdMode();
   enableAkitaProdMode();
+} else {
+  akitaDevtools();
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)

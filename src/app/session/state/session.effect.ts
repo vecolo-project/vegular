@@ -4,7 +4,7 @@ import {SessionService} from './session.service';
 import {Router} from '@angular/router';
 import {SessionStore} from './session.store';
 import {login, loginFail, loginSuccess} from './session.actions';
-import {map, switchMap} from 'rxjs/operators';
+import {map, switchMap, tap} from 'rxjs/operators';
 
 @Injectable()
 export class SessionEffect {
@@ -13,14 +13,15 @@ export class SessionEffect {
               private sessionService: SessionService, private router: Router) {
   }
 
-  @Effect()
+  @Effect({dispatch: true})
   login$ = this.action$.pipe(
     ofType(login),
-    map(({email, password}) =>
+    switchMap(({email, password}) =>
       this.sessionService.login(email, password).pipe(
         map((user) => {
-          if (user !== null) {
+          if (user) {
             this.action$.dispatch(loginSuccess(user));
+            this.action$.dispatch(loginFail());
           } else {
             this.action$.dispatch(loginFail());
           }
@@ -28,7 +29,7 @@ export class SessionEffect {
       ))
   );
 
-  @Effect()
+  @Effect({dispatch: true})
   loginSuccess$ = this.action$.pipe(
     ofType(loginSuccess),
     map((user) => {

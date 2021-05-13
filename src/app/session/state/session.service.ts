@@ -11,9 +11,10 @@ export class SessionService {
   constructor() {
   }
 
-  login(email: string, password: string): Observable<User | null> {
+  login(email: string, password: string): Observable<User> {
+    console.log('je passe');
     if (password !== 'esgi') {
-      return of(null);
+      return of({username: 'Invalid user', email});
     }
     return of({username: 'Nospy', email});
   }

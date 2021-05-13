@@ -21,6 +21,6 @@ export class SessionStore extends Store<SessionState> {
   }
 
   public setUser(user: User): void {
-    this.update({user});
+    this.update({user: {username: user.username, email: user.email  }});
   }
 }
