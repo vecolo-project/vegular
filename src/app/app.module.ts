@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule, OnInit} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -6,26 +6,26 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {AkitaNgDevtools} from '@datorama/akita-ngdevtools';
-import {AkitaNgRouterStoreModule} from '@datorama/akita-ng-router-store';
 import {SessionModule} from './session/session.module';
-import {MatFormField, MatFormFieldModule} from '@angular/material/form-field';
-import { MaterialModule } from './material-modules/material.module';
+import {MaterialModule} from './material-modules/material.module';
+import {SessionQuery} from './session/state/session.query';
+import {AuthGuardService} from './auth-guard/auth-guard.service';
+import {FormBuilder} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     BrowserAnimationsModule,
     SessionModule,
     MatButtonModule,
-    AkitaNgRouterStoreModule,
-    AkitaNgDevtools.forRoot(),
-    MaterialModule
+    MaterialModule,
+    AkitaNgDevtools.forRoot()
   ],
-  providers: [],
+  providers: [AuthGuardService, FormBuilder],
   bootstrap: [AppComponent]
 })
 export class AppModule {

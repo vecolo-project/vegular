@@ -1,1 +1,19 @@
-<p>login works!</p>
+<h1>Vous devez vous conneter</h1>
+<div [formGroup]="form" class="grid grid-cols-3">
+  <div class="grid grid-rows gap-8">
+    <mat-form-field class="w-full">
+      <input matInput formControlName="fieldEmail" placeholder="Email" type="email">
+      <mat-hint>Saisissez votre email</mat-hint>
+      <mat-error>
+        Email invalide
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input matInput formControlName="fieldPassword" placeholder="Mot de passe" type="password">
+      <mat-hint>Saisissez votre mot de passe</mat-hint>
+    </mat-form-field>
+    <div class="text-right">
+      <button mat-raised-button color="primary" (click)="login()" [disabled]="form.invalid">Se connecter</button>
+    </div>
+  </div>
+</div>

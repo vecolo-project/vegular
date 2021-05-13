@@ -20,4 +20,7 @@ export class SessionStore extends Store<SessionState> {
     super(createInitialState());
   }
 
+  public setUser(user: User): void {
+    this.update({user});
+  }
 }
