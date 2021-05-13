@@ -5,16 +5,25 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
+import {AkitaNgDevtools} from '@datorama/akita-ngdevtools';
+import {AkitaNgRouterStoreModule} from '@datorama/akita-ng-router-store';
+import {SessionModule} from './session/session.module';
+import {MatFormField, MatFormFieldModule} from '@angular/material/form-field';
+import { MaterialModule } from './material-modules/material.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    SessionModule,
+    MatButtonModule,
+    AkitaNgRouterStoreModule,
+    AkitaNgDevtools.forRoot(),
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
