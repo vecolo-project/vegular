@@ -1,0 +1,15 @@
+<div class="grid grid-cols-3">
+  <mat-card class="p-4">
+    <mat-card-header>
+      <mat-card-title>
+        Bonjour {{(user | async).username}}
+      </mat-card-title>
+      <mat-card-subtitle>
+        Ton email est {{(user | async).email}}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions class="text-right">
+      <button mat-raised-button color="warn" (click)="logout()">Se déco</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
