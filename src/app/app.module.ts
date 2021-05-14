@@ -6,9 +6,9 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {AkitaNgDevtools} from '@datorama/akita-ngdevtools';
-import {SessionModule} from './session/session.module';
+import {SessionModule} from './features/session/session.module';
 import {MaterialModule} from './material-modules/material.module';
-import {SessionQuery} from './session/state/session.query';
+import {SessionQuery} from './features/session/state/session.query';
 import {AuthGuardService} from './auth-guard/auth-guard.service';
 import {FormBuilder} from '@angular/forms';
 

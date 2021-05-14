@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
-import {SessionQuery} from '../session/state/session.query';
+import {SessionQuery} from '../features/session/state/session.query';
 
 
 @Injectable()
