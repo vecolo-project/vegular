@@ -4,11 +4,13 @@ import {User} from '../models/user.model';
 
 export interface SessionState {
   user: User | null;
+  token: string | null;
 }
 
 export function createInitialState(): SessionState {
   return {
-    user: null
+    user: null,
+    token: null
   };
 }
 
@@ -21,6 +23,14 @@ export class SessionStore extends Store<SessionState> {
   }
 
   public setUser(user: User): void {
-    this.update({user: {username: user.username, email: user.email  }});
+    this.update({user});
+  }
+
+  public setToken(token: string): void {
+    this.update({token});
+  }
+
+  public logout(): void {
+    this.update(createInitialState);
   }
 }

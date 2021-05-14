@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {SessionService} from '../state/session.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {login} from '../state/session.actions';
-import {Actions} from '@datorama/akita-ng-effects';
+import {SessionService} from '../../state/session.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +11,7 @@ import {Actions} from '@datorama/akita-ng-effects';
 export class LoginComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private action: Actions, private fp: FormBuilder, private router: Router) {
+  constructor(private fp: FormBuilder, private sessionService: SessionService) {
     this.form = this.fp.group({
       fieldEmail: ['', [Validators.required, Validators.email]],
       fieldPassword: ['', [Validators.required]]
@@ -24,10 +22,8 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    this.action.dispatch(login({
-      email: this.form.value.fieldEmail,
-      password: this.form.value.fieldPassword
-    }));
+    console.log(this.form.value.fieldEmail + ' ' + this.form.value.fieldPassword);
+    this.sessionService.login(this.form.value.fieldEmail, this.form.value.fieldPassword);
   }
 
 }

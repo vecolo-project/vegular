@@ -35,12 +35,14 @@ import {MatTreeModule} from '@angular/material/tree';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatRippleModule} from '@angular/material/core';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     MatAutocompleteModule,
     MatCheckboxModule,
     MatDatepickerModule,
@@ -78,6 +80,7 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
     MatTableModule
   ],
   exports: [
+    ReactiveFormsModule,
     MatAutocompleteModule,
     MatCheckboxModule,
     MatDatepickerModule,

@@ -1,31 +1,30 @@
-import {NgModule, OnInit} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
-import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {AkitaNgDevtools} from '@datorama/akita-ngdevtools';
-import {SessionModule} from './features/session/session.module';
-import {MaterialModule} from './material-modules/material.module';
-import {SessionQuery} from './features/session/state/session.query';
-import {AuthGuardService} from './auth-guard/auth-guard.service';
 import {FormBuilder} from '@angular/forms';
+import {CoreModule} from './core/core.module';
+import {ProfileModule} from './features/profile/profile.module';
+import {SharedModule} from './shared/shared.module';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
-    AppRoutingModule,
+    CommonModule,
+    SharedModule,
     BrowserModule,
     BrowserAnimationsModule,
-    SessionModule,
     MatButtonModule,
-    MaterialModule,
-    AkitaNgDevtools.forRoot()
+    CoreModule,
+    ProfileModule,
+    AkitaNgDevtools.forRoot(),
   ],
-  providers: [AuthGuardService, FormBuilder],
+  providers: [FormBuilder],
   bootstrap: [AppComponent]
 })
 export class AppModule {
