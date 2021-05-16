@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from '../component/login/login.component';
+import {LoginComponent} from '../components/login/login.component';
 import {AuthGuardService} from '../guards/auth-guard.service';
 import {ProfileDashboardComponent} from '../../features/profile/components/profile-dashboard/profile-dashboard.component';
 import {routesPath} from './router.navigation';
