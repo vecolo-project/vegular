@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-mobile-menu',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mobile-menu.component.scss'],
 })
 export class MobileMenuComponent implements OnInit {
+  @Input() hide: boolean;
   constructor() {}
 
   ngOnInit(): void {}

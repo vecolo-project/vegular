@@ -1,11 +1,11 @@
 <header class="mb-2">
   <nav class="w-full bg-gray-900 p-4 flex justify-between">
-    <button (click)="showMenu()" class="my-auto">
+    <button (click)="toggleMobileMenu()" class="my-auto">
       <mat-icon aria-hidden="false" aria-label="Menu button">menu</mat-icon>
     </button>
     <button mat-raised-button color="primary">
       <mat-icon aria-label="add" aria-hidden="true">add</mat-icon> New Ride
     </button>
   </nav>
-  <app-mobile-menu hide="true"></app-mobile-menu>
+  <app-mobile-menu [hide]="isMobileMenuHide"></app-mobile-menu>
 </header>

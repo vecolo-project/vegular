@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
   title = 'Vecolo';
+  isMobileMenuHide = true;
   constructor() {}
 
   ngOnInit(): void {}
 
-  showMenu(): void {}
+  toggleMobileMenu(): void {
+    console.log(this.isMobileMenuHide);
+    this.isMobileMenuHide = !this.isMobileMenuHide;
+  }
 }
