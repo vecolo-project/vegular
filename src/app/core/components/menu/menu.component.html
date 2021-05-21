@@ -7,5 +7,7 @@
       <mat-icon aria-label="add" aria-hidden="true">add</mat-icon> New Ride
     </button>
   </nav>
-  <app-mobile-menu [hide]="isMobileMenuHide"></app-mobile-menu>
+  <div *ngIf="isMobileMenuShow">
+    <app-mobile-menu></app-mobile-menu>
+  </div>
 </header>
