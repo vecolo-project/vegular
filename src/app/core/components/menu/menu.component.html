@@ -1,9 +1,19 @@
 <header class="mb-2">
-  <nav class="w-full bg-gray-900 p-4 flex justify-between">
-    <button (click)="toggleMobileMenu()" class="my-auto">
-      <mat-icon aria-hidden="false" aria-label="Menu button">menu</mat-icon>
-    </button>
-    <button mat-raised-button color="primary">
+  <nav class="w-full bg-gray-900 p-4 flex items-center justify-between">
+    <div class="flex items-center flex-grow">
+      <button (click)="toggleMobileMenu()" class="my-auto block md:hidden">
+        <mat-icon aria-hidden="false" aria-label="Menu button">menu</mat-icon>
+      </button>
+      <img src="/assets/logo-Client-bg.png" alt="logo" />
+      <ul class="nav-links-list">
+        <li><button class="nav-link active">Dashboard</button></li>
+        <li><button class="nav-link">Map</button></li>
+        <li><button class="nav-link">Issues</button></li>
+        <li><button class="nav-link">My Rides</button></li>
+      </ul>
+    </div>
+
+    <button mat-raised-button color="primary" class="flex-none">
       <mat-icon aria-label="add" aria-hidden="true">add</mat-icon> New Ride
     </button>
   </nav>
