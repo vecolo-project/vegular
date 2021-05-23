@@ -1,8 +1,8 @@
 .mobile-menu-dropdown {
-  @apply bg-red-400 px-1 border-b border-gray-400;
+  @apply bg-gray-800 px-2 pt-1 border-b border-gray-400;
 }
 .nav-link {
-  @apply py-2 px-3 mb-3 rounded block w-full bg-gray-800;
+  @apply py-2 px-3 mb-3 rounded block w-full text-left;
   &.active {
     @apply bg-gray-900;
   }
