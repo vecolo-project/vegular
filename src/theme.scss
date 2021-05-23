@@ -1,17 +1,17 @@
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 @include mat-core();
 
 $mat-dark-green: (
   50: #e6f6eb,
-  100: #c2e9cf,
-  200: #9adcb0,
-  300: #6ece90,
-  400: #49c378,
-  500: #13b860,
-  600: #03a956,
-  700: #00964a,
-  800: #00964a,
-  900: #00853e,
+  100: #c2eaff,
+  200: #85d4ff,
+  300: #47bfff,
+  400: #1fb0ff,
+  500: #009ff5,
+  600: #007cbe,
+  700: #00507a,
+  800: #00283d,
+  900: #000d14,
   A100: #cfd8dc,
   A200: #b0bec5,
   A400: #78909c,
@@ -31,18 +31,27 @@ $mat-dark-green: (
     A200: $dark-primary-text,
     A400: $light-primary-text,
     A700: $light-primary-text,
-  )
+  ),
 );
 
-
 $primary: mat-palette($mat-dark-green);
-$accent:  mat-palette($mat-pink, 500, 900, A100);
-$warn:    mat-palette($mat-deep-orange);
+$accent: mat-palette($mat-pink, 500, 900, A100);
+$warn: mat-palette($mat-deep-orange);
 $theme: mat-dark-theme($primary, $accent, $warn);
 
 $custom-background-color: #021a31;
-$background: map-get($theme,background);
-$background: map_merge($background, (background: $custom-background-color));
-$theme: map_merge($theme, (background: $background));
+$background: map-get($theme, background);
+$background: map_merge(
+  $background,
+  (
+    background: $custom-background-color,
+  )
+);
+$theme: map_merge(
+  $theme,
+  (
+    background: $background,
+  )
+);
 
 @include angular-material-theme($theme);

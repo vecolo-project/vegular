@@ -4,7 +4,7 @@
       <button (click)="toggleMobileMenu()" class="my-auto block md:hidden">
         <mat-icon aria-hidden="false" aria-label="Menu button">menu</mat-icon>
       </button>
-      <img src="/assets/logo-Client-bg.png" alt="logo" />
+      <img src="/assets/logo-Client-bg.png" class="mr-2" alt="logo" />
       <ul class="nav-links-list">
         <li><button class="nav-link active">Dashboard</button></li>
         <li><button class="nav-link">Map</button></li>
@@ -13,9 +13,23 @@
       </ul>
     </div>
 
-    <button mat-raised-button color="primary" class="flex-none">
-      <mat-icon aria-label="add" aria-hidden="true">add</mat-icon> New Ride
-    </button>
+    <div class="flex items-center mr-5">
+      <button mat-raised-button color="primary" class="flex-none">
+        <mat-icon aria-label="add" aria-hidden="true">add</mat-icon> New Ride
+      </button>
+      <mat-icon
+        aria-label="notification"
+        class="hidden md:inline-block mr-2"
+        aria-hidden="true"
+        >notifications</mat-icon
+      >
+      <button mat-button [matMenuTriggerFor]="menu">pfl</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Your Profile</button>
+        <button mat-menu-item>Settings</button>
+        <button mat-menu-item>Sign out</button>
+      </mat-menu>
+    </div>
   </nav>
   <div *ngIf="isMobileMenuShow">
     <app-mobile-menu></app-mobile-menu>
