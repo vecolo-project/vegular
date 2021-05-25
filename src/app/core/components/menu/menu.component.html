@@ -6,7 +6,15 @@
       </button>
       <img src="/assets/logo-Client-bg.png" class="mr-2" alt="logo" />
       <ul class="nav-links-list">
-        <li><button class="nav-link active">Dashboard</button></li>
+        <li>
+          <button
+            [routerLink]="['/login']"
+            routerLinkActive="active"
+            class="nav-link"
+          >
+            Dashboard
+          </button>
+        </li>
         <li><button class="nav-link">Map</button></li>
         <li><button class="nav-link">Issues</button></li>
         <li><button class="nav-link">My Rides</button></li>
