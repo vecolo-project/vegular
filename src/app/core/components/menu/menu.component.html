@@ -19,11 +19,17 @@
       </button>
       <mat-icon
         aria-label="notification"
-        class="hidden md:inline-block mr-2"
+        class="hidden md:inline-block mx-2"
         aria-hidden="true"
         >notifications</mat-icon
       >
-      <button mat-button [matMenuTriggerFor]="menu">pfl</button>
+      <button
+        mat-button
+        class="hidden md:inline-block min-w-0 p-0"
+        [matMenuTriggerFor]="menu"
+      >
+        pfl
+      </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item>Your Profile</button>
         <button mat-menu-item>Settings</button>
