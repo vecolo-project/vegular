@@ -1,25 +1,23 @@
 import { Injectable } from '@angular/core';
 import { SessionStore } from './session.store';
 import { RouterNavigation } from '../router/router.navigation';
-import axios from 'axios';
+import { requestFactory, RequestFactory } from '../utils/requestFactory';
+import { Request } from '../utils/request';
 
 @Injectable({ providedIn: 'root' })
 export class SessionService {
-  endPoint = 'http://localhost:4562/api';
-
   constructor(
     private routerNavigation: RouterNavigation,
     private sessionStore: SessionStore
   ) {}
 
   async login(email: string, password: string): Promise<void> {
-    const user = await axios.post(this.endPoint + '/auth/login', {
-      email: email,
-      password: password,
-    });
-    console.log(user);
-    this.sessionStore.setUser(user.data.user);
-    this.sessionStore.setToken(user.data.token);
+    const response = await new Request('/auth/login', requestFactory.post())
+      .setBody({ email: email, password: password })
+      .call();
+    this.sessionStore.setUser(response.user);
+    this.sessionStore.setToken(response.token);
+    RequestFactory.addToken(response.token);
     this.routerNavigation.gotoProfile();
   }
 
