@@ -4,6 +4,7 @@ import { SessionService } from '../../../../core/state/session.service';
 import { User } from '../../../../core/models/user.model';
 import { Observable } from 'rxjs';
 import { Request } from '../../../../core/utils/request';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -12,12 +13,17 @@ import { Request } from '../../../../core/utils/request';
 })
 export class ProfileDashboardComponent implements OnInit {
   user: Observable<User>;
+  form: FormGroup;
 
   constructor(
+    private fp: FormBuilder,
     private sessionQuery: SessionQuery,
     private sessionService: SessionService
   ) {
     this.user = sessionQuery.selectUser$;
+    this.form = this.fp.group({
+      fieldEmail: ['', [Validators.required, Validators.email]],
+    });
   }
 
   async ngOnInit(): Promise<void> {

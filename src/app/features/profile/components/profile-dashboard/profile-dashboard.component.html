@@ -10,4 +10,16 @@
       <button mat-raised-button color="warn" (click)="logout()">Se déco</button>
     </mat-card-actions>
   </mat-card>
+  <form action="" [formGroup]="form">
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldEmail"
+        placeholder="Email"
+        type="email"
+      />
+      <mat-hint>Saisissez votre email</mat-hint>
+      <mat-error> Email invalide </mat-error>
+    </mat-form-field>
+  </form>
 </div>
