@@ -7,12 +7,14 @@ let requestFactory: RequestFactory | null = null;
 export class RequestFactory {
   http: AxiosInstance;
   constructor(baseUrl: string, jwtToken?: string) {
+    if (localStorage.getItem('token')) {
+      jwtToken = localStorage.getItem('token');
+    }
     const axiosConfig: AxiosRequestConfig = {
       baseURL: baseUrl,
       headers: {
         'Content-Type': 'application/json',
       },
-      // withCredentials: true,
     };
     if (jwtToken) {
       axiosConfig.headers['Authorization'] = `Bearer ${jwtToken}`;
@@ -22,8 +24,8 @@ export class RequestFactory {
     requestFactory = this;
   }
 
-  static addToken(token: string): void {
-    // TODO Utiliser le localStorage pour save le token
+  static assignToken(token: string): void {
+    localStorage.setItem('token', token);
     requestFactory = new RequestFactory(API_URL, token);
   }
 

@@ -17,7 +17,7 @@ export class SessionService {
       .call();
     this.sessionStore.setUser(response.user);
     this.sessionStore.setToken(response.token);
-    RequestFactory.addToken(response.token);
+    RequestFactory.assignToken(response.token);
     this.routerNavigation.gotoProfile();
   }
 
