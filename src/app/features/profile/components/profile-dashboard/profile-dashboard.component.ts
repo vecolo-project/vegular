@@ -27,7 +27,7 @@ export class ProfileDashboardComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    const users = await new Request('/user').call();
+    const users = await Request.get('/user').call();
     console.log(users);
   }
 

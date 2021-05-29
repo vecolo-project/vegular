@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SessionStore } from './session.store';
 import { RouterNavigation } from '../router/router.navigation';
-import { requestFactory, RequestFactory } from '../utils/requestFactory';
+import { RequestFactory } from '../utils/requestFactory';
 import { Request } from '../utils/request';
 
 @Injectable({ providedIn: 'root' })
@@ -12,7 +12,7 @@ export class SessionService {
   ) {}
 
   async login(email: string, password: string): Promise<void> {
-    const response = await new Request('/auth/login', requestFactory.post())
+    const response = await Request.post('/auth/login')
       .setBody({ email: email, password: password })
       .call();
     this.sessionStore.setUser(response.user);

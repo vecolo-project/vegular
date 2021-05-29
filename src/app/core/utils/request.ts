@@ -41,4 +41,24 @@ export class Request {
     error.response = response;
     throw error;
   }
+
+  static get(url: string): Request {
+    return new Request(url, requestFactory.get());
+  }
+
+  static post(url: string): Request {
+    return new Request(url, requestFactory.post());
+  }
+
+  static put(url: string): Request {
+    return new Request(url, requestFactory.put());
+  }
+
+  static patch(url: string): Request {
+    return new Request(url, requestFactory.patch());
+  }
+
+  static delete(url: string): Request {
+    return new Request(url, requestFactory.delete());
+  }
 }
