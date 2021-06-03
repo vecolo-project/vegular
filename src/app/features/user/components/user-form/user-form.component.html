@@ -1,0 +1,39 @@
+<div>
+  <mat-card class="bg-green-900">
+    <form action="" [formGroup]="form">
+      <mat-form-field class="w-full">
+        <input
+          matInput
+          formControlName="fieldFirstName"
+          placeholder="FirstName"
+          type="text"
+        />
+        <mat-hint>Saisissez votre FirstName</mat-hint>
+        <mat-error> FirstName invalide </mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <input
+          matInput
+          formControlName="fieldLastName"
+          placeholder="Herrera"
+          type="text"
+        />
+        <mat-hint>Saisissez votre LastName</mat-hint>
+        <mat-error> LastName invalide </mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <input
+          matInput
+          formControlName="fieldEmail"
+          placeholder="Email"
+          type="email"
+        />
+        <mat-hint>Saisissez votre email</mat-hint>
+        <mat-error> Email invalide </mat-error>
+      </mat-form-field>
+      <p class="text-center">
+        <button class="px-4 py-2 bg-red-800 rounded">submit</button>
+      </p>
+    </form>
+  </mat-card>
+</div>
