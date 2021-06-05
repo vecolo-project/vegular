@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { SessionQuery } from '../../../../core/state/session.query';
-import { SessionService } from '../../../../core/state/session.service';
-import { User } from '../../../../core/models/user.model';
-import { Observable } from 'rxjs';
-import { Request } from '../../../../core/utils/request';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {SessionQuery} from '../../../../core/state/session.query';
+import {SessionService} from '../../../../core/state/session.service';
+import {User} from '../../../../shared/models/user.model';
+import {Observable} from 'rxjs';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -27,8 +26,6 @@ export class ProfileDashboardComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    const users = await Request.get('/user').call();
-    console.log(users);
   }
 
   logout(): void {

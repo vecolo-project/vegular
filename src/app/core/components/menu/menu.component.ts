@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {RouterNavigation} from '../../router/router.navigation';
+import {SessionQuery} from '../../state/session.query';
+import {SessionService} from '../../state/session.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,9 +11,12 @@ import { Component, OnInit } from '@angular/core';
 export class MenuComponent implements OnInit {
   title = 'Vecolo';
   isMobileMenuShow = false;
-  constructor() {}
 
-  ngOnInit(): void {}
+  constructor(public routerNavigation: RouterNavigation, public sessionQuery: SessionQuery, public sessionService: SessionService) {
+  }
+
+  ngOnInit(): void {
+  }
 
   toggleMobileMenu(): void {
     this.isMobileMenuShow = !this.isMobileMenuShow;

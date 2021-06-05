@@ -1,16 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AuthGuardService } from './guards/auth-guard.service';
-import { AppRoutingModule } from './router/app-routing.module';
-import { LoginComponent } from './components/login/login.component';
-import { RouterNavigation } from './router/router.navigation';
-import { SharedModule } from '../shared/shared.module';
-import { MobileMenuComponent } from './components/menu/mobile-menu/mobile-menu.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AuthGuardService} from './guards/auth-guard.service';
+import {AppRoutingModule} from './router/app-routing.module';
+import {RouterNavigation} from './router/router.navigation';
+import {SharedModule} from '../shared/shared.module';
+import {MobileMenuComponent} from './components/menu/mobile-menu/mobile-menu.component';
+import {HttpClientWrapper} from './utils/httpClientWrapper';
+import {MenuComponent} from './components/menu/menu.component';
 
 @NgModule({
-  declarations: [LoginComponent, MobileMenuComponent],
+  declarations: [MenuComponent, MobileMenuComponent],
   imports: [CommonModule, SharedModule, AppRoutingModule],
-  exports: [LoginComponent, MobileMenuComponent, AppRoutingModule],
-  providers: [AuthGuardService, RouterNavigation],
+  exports: [MenuComponent, MobileMenuComponent, AppRoutingModule],
+  providers: [AuthGuardService, RouterNavigation, HttpClientWrapper],
 })
-export class CoreModule {}
+export class CoreModule {
+}

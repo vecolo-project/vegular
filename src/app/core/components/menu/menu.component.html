@@ -4,44 +4,50 @@
       <button (click)="toggleMobileMenu()" class="my-auto block md:hidden">
         <mat-icon aria-hidden="false" aria-label="Menu button">menu</mat-icon>
       </button>
-      <img src="/assets/logo-Client-bg.png" class="mr-2" alt="logo" />
+        <img (click)="routerNavigation.gotoHome()" src="/assets/logo-Client-bg.png" class="mr-2" alt="logo"/>
       <ul class="nav-links-list">
         <li>
-          <button
-            [routerLink]="['/login']"
-            routerLinkActive="active"
-            class="nav-link"
-          >
-            Dashboard
-          </button>
+          <button class="nav-link">Dashboard</button>
         </li>
-        <li><button class="nav-link">Map</button></li>
-        <li><button class="nav-link">Issues</button></li>
-        <li><button class="nav-link">My Rides</button></li>
+        <li>
+          <button class="nav-link">Map</button>
+        </li>
+        <li>
+          <button class="nav-link">Issues</button>
+        </li>
+        <li>
+          <button class="nav-link">My Rides</button>
+        </li>
       </ul>
     </div>
 
     <div class="flex items-center mr-5">
       <button mat-raised-button color="primary" class="flex-none">
-        <mat-icon aria-label="add" aria-hidden="true">add</mat-icon> New Ride
+        <mat-icon aria-label="add" aria-hidden="true">add</mat-icon>
+        New Ride
       </button>
       <mat-icon
         aria-label="notification"
         class="hidden md:inline-block mx-2"
         aria-hidden="true"
-        >notifications</mat-icon
+      >notifications
+      </mat-icon
       >
       <button
         mat-button
         class="hidden md:inline-block min-w-0 p-0"
         [matMenuTriggerFor]="menu"
       >
-        pfl
+        <mat-icon>account_circle</mat-icon>
+        Mon compte
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Your Profile</button>
-        <button mat-menu-item>Settings</button>
-        <button mat-menu-item>Sign out</button>
+        <button *ngIf="sessionQuery.isLoggedIn()" (click)="routerNavigation.gotoProfile()" mat-menu-item>Mon profil
+        </button>
+        <button mat-menu-item *ngIf="sessionQuery.isLoggedIn()" (click)="sessionService.logout()">Se déconnecter
+        </button>
+        <button mat-menu-item *ngIf="!sessionQuery.isLoggedIn()" (click)="routerNavigation.gotoAuth()">Se connecter
+        </button>
       </mat-menu>
     </div>
   </nav>
