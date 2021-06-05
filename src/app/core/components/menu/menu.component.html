@@ -29,11 +29,6 @@
         </li>
         <li>
           <button *ngIf="sessionQuery.isLoggedIn()"
-                  [routerLink]="[routesPath.dashboard]" routerLinkActive="bg-blue-500" class="nav-link">Mon espace
-          </button>
-        </li>
-        <li>
-          <button *ngIf="sessionQuery.isLoggedIn()"
                   [routerLink]="[routesPath.subscription]" routerLinkActive="bg-blue-500" class="nav-link">Mon
             abonnement
           </button>

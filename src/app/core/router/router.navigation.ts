@@ -5,7 +5,6 @@ export const routesPath = {
   auth: 'auth',
   signup: 'auth/signup',
   profile: 'profile',
-  dashboard: 'dashboard',
   subscription: 'subscription',
   subscriptions: 'subscriptions',
   rides: 'rides',

@@ -20,11 +20,6 @@ const routes: Routes = [
   },
   // Auth
   {
-    path: routesPath.dashboard,
-    loadChildren: () => import('../../features/user-dashboard/user-dashboard.module').then(m => m.UserDashboardModule),
-    canActivate: [AuthGuardService]
-  },
-  {
     path: routesPath.subscription,
     loadChildren: () => import('../../features/user-subscription/user-subscription.module').then(m => m.UserSubscriptionModule),
     canActivate: [AuthGuardService]
