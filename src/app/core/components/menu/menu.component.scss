@@ -1,0 +1,9 @@
+.nav-links-list {
+  @apply hidden md:flex list-none md:flex-row md:items-center justify-around w-1/2 xl:w-1/4;
+}
+.nav-link {
+  @apply py-2 px-3 rounded block w-full bg-gray-800;
+  &.active {
+    @apply bg-blue-900;
+  }
+}

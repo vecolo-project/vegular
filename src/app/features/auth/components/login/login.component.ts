@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {SessionService} from '../../state/session.service';
+import {SessionService} from '../../../../core/state/session.service';
 
 @Component({
   selector: 'app-login',
@@ -21,9 +21,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(): void {
-    console.log(this.form.value.fieldEmail + ' ' + this.form.value.fieldPassword);
-    this.sessionService.login(this.form.value.fieldEmail, this.form.value.fieldPassword);
+  async login(): Promise<void> {
+    await this.sessionService.login(this.form.value.fieldEmail, this.form.value.fieldPassword);
   }
 
 }
