@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SessionQuery} from '../../../../core/state/session.query';
+import {User} from '../../../../shared/models/user.model';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  user: Observable<User>;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private sessionQuery: SessionQuery) {
   }
 
+  ngOnInit(): void {
+    this.user = this.sessionQuery.selectUser$;
+  }
 }

@@ -1,1 +1,5 @@
-<p>home works!</p>
+<div class="grid grid-cols-3">
+  <div *ngIf="user|async">
+    <app-user-card [user]="user|async"></app-user-card>
+  </div>
+</div>

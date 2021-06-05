@@ -24,7 +24,7 @@ export class SessionService {
       });
       this.sessionStore.setUser(response.user);
       this.sessionStore.setToken(response.token);
-      this.routerNavigation.gotoProfile();
+      this.routerNavigation.gotoHome();
     } catch (e) {
       this.snackBar.open('Erreur de connexion : ' + e.error.error, '',
         {

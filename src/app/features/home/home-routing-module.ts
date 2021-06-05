@@ -1,5 +1,4 @@
 import {RouterModule, Routes} from '@angular/router';
-import {ProfileDashboardComponent} from '../profile/components/profile-dashboard/profile-dashboard.component';
 import {NgModule} from '@angular/core';
 import {HomeComponent} from './containers/home/home.component';
 

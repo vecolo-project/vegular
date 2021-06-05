@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {EntityStore, Store, StoreConfig} from '@datorama/akita';
+import {Store, StoreConfig} from '@datorama/akita';
 import {User} from '../../shared/models/user.model';
 
 export interface SessionState {

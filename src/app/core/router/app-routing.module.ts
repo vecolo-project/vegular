@@ -1,13 +1,56 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from '../../features/auth/components/login/login.component';
 import {AuthGuardService} from '../guards/auth-guard.service';
-import {ProfileDashboardComponent} from '../../features/profile/components/profile-dashboard/profile-dashboard.component';
 import {routesPath} from './router.navigation';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: routesPath.home,
+    pathMatch: 'full'
+  },
+  {
     path: routesPath.home,
+    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: routesPath.dashboard,
+    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: routesPath.map,
+    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: routesPath.subscription,
+    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: routesPath.ride,
+    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: routesPath.issue,
+    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: routesPath.users,
+    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: routesPath.stations,
+    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: routesPath.bikes,
+    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: routesPath.subscriptions,
+    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: routesPath.finances,
     loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
   },
   {
