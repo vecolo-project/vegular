@@ -4,6 +4,7 @@ import {AuthGuardService} from '../guards/auth-guard.service';
 import {routesPath} from './router.navigation';
 
 const routes: Routes = [
+  // No Auth
   {
     path: '',
     redirectTo: routesPath.home,
@@ -13,6 +14,11 @@ const routes: Routes = [
     path: routesPath.home,
     loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
   },
+  {
+    path: routesPath.auth,
+    loadChildren: () => import('../../features/auth/auth.module').then(m => m.AuthModule)
+  },
+  // Auth
   {
     path: routesPath.dashboard,
     loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
@@ -34,6 +40,12 @@ const routes: Routes = [
     loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
   },
   {
+    path: routesPath.profile,
+    loadChildren: () => import('../../features/profile/profile.module').then(m => m.ProfileModule),
+    canActivate: [AuthGuardService],
+  },
+  // Staff
+  {
     path: routesPath.users,
     loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
   },
@@ -52,15 +64,6 @@ const routes: Routes = [
   {
     path: routesPath.finances,
     loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
-  },
-  {
-    path: routesPath.auth,
-    loadChildren: () => import('../../features/auth/auth.module').then(m => m.AuthModule)
-  },
-  {
-    path: routesPath.profile,
-    loadChildren: () => import('../../features/profile/profile.module').then(m => m.ProfileModule),
-    canActivate: [AuthGuardService],
   }
 ];
 
