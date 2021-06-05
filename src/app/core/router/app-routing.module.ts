@@ -6,11 +6,6 @@ import {routesPath} from './router.navigation';
 const routes: Routes = [
   // No Auth
   {
-    path: '',
-    redirectTo: routesPath.home,
-    pathMatch: 'full'
-  },
-  {
     path: routesPath.home,
     loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
   },
@@ -21,23 +16,23 @@ const routes: Routes = [
   // Auth
   {
     path: routesPath.dashboard,
-    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+    loadChildren: () => import('../../features/user-dashboard/user-dashboard.module').then(m => m.UserDashboardModule)
   },
   {
     path: routesPath.map,
-    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+    loadChildren: () => import('../../features/map/map.module').then(m => m.MapModule)
   },
   {
     path: routesPath.subscription,
-    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+    loadChildren: () => import('../../features/user-subscription/user-subscription.module').then(m => m.UserSubscriptionModule)
   },
   {
-    path: routesPath.ride,
-    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+    path: routesPath.rides,
+    loadChildren: () => import('../../features/user-rides/user-rides.module').then(m => m.UserRidesModule)
   },
   {
     path: routesPath.issue,
-    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+    loadChildren: () => import('../../features/user-issues/user-issues.module').then(m => m.UserIssuesModule)
   },
   {
     path: routesPath.profile,
@@ -47,24 +42,29 @@ const routes: Routes = [
   // Staff
   {
     path: routesPath.users,
-    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+    loadChildren: () => import('../../features/users/users.module').then(m => m.UsersModule)
   },
   {
     path: routesPath.stations,
-    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+    loadChildren: () => import('../../features/stations/stations.module').then(m => m.StationsModule)
   },
   {
     path: routesPath.bikes,
-    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+    loadChildren: () => import('../../features/bikes/bikes.module').then(m => m.BikesModule)
   },
   {
     path: routesPath.subscriptions,
-    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
+    loadChildren: () => import('../../features/subscriptions/subscriptions.module').then(m => m.SubscriptionsModule)
   },
   {
     path: routesPath.finances,
-    loadChildren: () => import('../../features/home/home.module').then(m => m.HomeModule)
-  }
+    loadChildren: () => import('../../features/finances/finances.module').then(m => m.FinancesModule)
+  },
+  {
+    path: '**',
+    redirectTo: routesPath.home,
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({
