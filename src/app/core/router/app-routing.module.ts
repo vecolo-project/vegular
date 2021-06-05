@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuardService} from '../guards/auth-guard.service';
 import {routesPath} from './router.navigation';
+import {StaffGuardService} from '../guards/staff-guard.service';
 
 const routes: Routes = [
   // No Auth
@@ -13,26 +14,30 @@ const routes: Routes = [
     path: routesPath.auth,
     loadChildren: () => import('../../features/auth/auth.module').then(m => m.AuthModule)
   },
-  // Auth
-  {
-    path: routesPath.dashboard,
-    loadChildren: () => import('../../features/user-dashboard/user-dashboard.module').then(m => m.UserDashboardModule)
-  },
   {
     path: routesPath.map,
     loadChildren: () => import('../../features/map/map.module').then(m => m.MapModule)
   },
+  // Auth
+  {
+    path: routesPath.dashboard,
+    loadChildren: () => import('../../features/user-dashboard/user-dashboard.module').then(m => m.UserDashboardModule),
+    canActivate: [AuthGuardService]
+  },
   {
     path: routesPath.subscription,
-    loadChildren: () => import('../../features/user-subscription/user-subscription.module').then(m => m.UserSubscriptionModule)
+    loadChildren: () => import('../../features/user-subscription/user-subscription.module').then(m => m.UserSubscriptionModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: routesPath.rides,
-    loadChildren: () => import('../../features/user-rides/user-rides.module').then(m => m.UserRidesModule)
+    loadChildren: () => import('../../features/user-rides/user-rides.module').then(m => m.UserRidesModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: routesPath.issue,
-    loadChildren: () => import('../../features/user-issues/user-issues.module').then(m => m.UserIssuesModule)
+    loadChildren: () => import('../../features/user-issues/user-issues.module').then(m => m.UserIssuesModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: routesPath.profile,
@@ -42,23 +47,28 @@ const routes: Routes = [
   // Staff
   {
     path: routesPath.users,
-    loadChildren: () => import('../../features/users/users.module').then(m => m.UsersModule)
+    loadChildren: () => import('../../features/users/users.module').then(m => m.UsersModule),
+    canActivate: [StaffGuardService]
   },
   {
     path: routesPath.stations,
-    loadChildren: () => import('../../features/stations/stations.module').then(m => m.StationsModule)
+    loadChildren: () => import('../../features/stations/stations.module').then(m => m.StationsModule),
+    canActivate: [StaffGuardService]
   },
   {
     path: routesPath.bikes,
-    loadChildren: () => import('../../features/bikes/bikes.module').then(m => m.BikesModule)
+    loadChildren: () => import('../../features/bikes/bikes.module').then(m => m.BikesModule),
+    canActivate: [StaffGuardService]
   },
   {
     path: routesPath.subscriptions,
-    loadChildren: () => import('../../features/subscriptions/subscriptions.module').then(m => m.SubscriptionsModule)
+    loadChildren: () => import('../../features/subscriptions/subscriptions.module').then(m => m.SubscriptionsModule),
+    canActivate: [StaffGuardService]
   },
   {
     path: routesPath.finances,
-    loadChildren: () => import('../../features/finances/finances.module').then(m => m.FinancesModule)
+    loadChildren: () => import('../../features/finances/finances.module').then(m => m.FinancesModule),
+    canActivate: [StaffGuardService]
   },
   {
     path: '**',
