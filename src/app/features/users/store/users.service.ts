@@ -1,0 +1,29 @@
+import {Injectable} from '@angular/core';
+import {UsersStore} from './users.store';
+import {HttpClientWrapper} from '../../../core/utils/httpClientWrapper';
+import {Snackbar} from '../../../shared/snackbar/snakbar';
+import {User} from '../../../shared/models/user.model';
+import {API_RESSOURCE_URI} from '../../../shared/api-ressource-uri/api-ressource-uri';
+
+@Injectable({providedIn: 'root'})
+export class UsersService {
+  constructor(
+    private usersStore: UsersStore,
+    private http: HttpClientWrapper,
+    private snackBar: Snackbar
+  ) {
+  }
+
+  async getUsers(): Promise<void> {
+    this.usersStore.setLoading(true);
+    try {
+      const response = await this.http.get<User[]>(API_RESSOURCE_URI.GET_USERS);
+      this.usersStore.set(response);
+    } catch (e) {
+      this.usersStore.set([]);
+      this.snackBar.warnning('Erreur lors de la récupération des utilisateurs : ' + e.error.error);
+    } finally {
+      this.usersStore.setLoading(false);
+    }
+  }
+}

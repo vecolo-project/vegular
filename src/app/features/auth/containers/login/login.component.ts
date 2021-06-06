@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {SessionService} from '../../../../core/state/session.service';
+import {SessionService} from '../../../../core/store/session.service';
 
 @Component({
   selector: 'app-login',

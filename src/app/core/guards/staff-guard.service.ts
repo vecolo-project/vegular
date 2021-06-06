@@ -4,7 +4,7 @@ import {
   CanActivate,
   RouterStateSnapshot,
 } from '@angular/router';
-import { SessionQuery } from '../state/session.query';
+import { SessionQuery } from '../store/session.query';
 import { RouterNavigation } from '../router/router.navigation';
 
 @Injectable({ providedIn: 'root' })

@@ -25,3 +25,13 @@
   <tr mat-header-row *matHeaderRowDef="['name','position','symbol']"></tr>
   <tr mat-row *matRowDef="let row; columns: ['name','position','symbol']"></tr>
 </mat-table>
+
+<mat-card class="mt-6">
+  <mat-spinner *ngIf="loading"></mat-spinner>
+  <mat-card-content *ngIf="!loading">
+    <div *ngFor="let userId of usersIds">
+      {{userList[userId].firstName}}
+    </div>
+
+  </mat-card-content>
+</mat-card>
