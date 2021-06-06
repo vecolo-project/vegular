@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {SessionQuery} from '../state/session.query';
+import {SessionQuery} from '../store/session.query';
 import {HttpTools} from '../../shared/http-tools/http-tools';
 
 @Injectable()
@@ -42,8 +42,8 @@ export class HttpClientWrapper {
   }
 
   async getAuthToken(): Promise<string> {
-    if (await this.sessionQuery.isLoggedIn()) {
-      return 'Bearer ' + await this.sessionQuery.selectToken$.toPromise();
+    if (this.sessionQuery.isLoggedIn()) {
+      return 'Bearer ' + await this.sessionQuery.getToken();
     }
     return '';
   }

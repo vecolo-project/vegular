@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {MatTableDataSource} from '@angular/material/table';
+import {HashMap} from '@datorama/akita';
+import {User} from '../../../../shared/models/user.model';
+import {UsersService} from '../../store/users.service';
 
 interface userListItem {
   firstName: string;
@@ -13,11 +16,27 @@ interface userListItem {
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit {
-  public users = [{ firstName: 'John', lastName: 'gg', role: 'CLIENT' }];
+
+  @Input()
+  userList: HashMap<User>;
+
+  @Input()
+  usersIds: number[];
+
+  @Input()
+  loading: boolean;
+
+  @Output()
+  getUsers = new EventEmitter();
+
+  public users = [{firstName: 'John', lastName: 'gg', role: 'CLIENT'}];
   public dataSource: MatTableDataSource<userListItem>;
+
   constructor() {
     this.dataSource = new MatTableDataSource(this.users);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    setTimeout(() => this.getUsers.emit());
+  }
 }
