@@ -6,12 +6,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {AkitaNgDevtools} from '@datorama/akita-ngdevtools';
 import {FormBuilder} from '@angular/forms';
 import {CoreModule} from './core/core.module';
-import {ProfileModule} from './features/profile/profile.module';
 import {SharedModule} from './shared/shared.module';
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
-import {AuthModule} from './features/auth/auth.module';
-import {HomeModule} from './features/home/home.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,9 +19,6 @@ import {HomeModule} from './features/home/home.module';
     BrowserModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    ProfileModule,
-    AuthModule,
-    HomeModule,
     HttpClientModule,
     AkitaNgDevtools.forRoot(),
   ],

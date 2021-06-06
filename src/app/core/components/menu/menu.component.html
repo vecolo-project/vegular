@@ -29,18 +29,13 @@
         </li>
         <li>
           <button *ngIf="sessionQuery.isLoggedIn()"
-                  [routerLink]="[routesPath.dashboard]" routerLinkActive="bg-blue-500" class="nav-link">Mon espace
-          </button>
-        </li>
-        <li>
-          <button *ngIf="sessionQuery.isLoggedIn()"
                   [routerLink]="[routesPath.subscription]" routerLinkActive="bg-blue-500" class="nav-link">Mon
             abonnement
           </button>
         </li>
         <li>
           <button *ngIf="sessionQuery.isLoggedIn()"
-                  [routerLink]="[routesPath.ride]" routerLinkActive="bg-blue-500" class="nav-link">Mes courses
+                  [routerLink]="[routesPath.rides]" routerLinkActive="bg-blue-500" class="nav-link">Mes courses
           </button>
         </li>
         <li>
@@ -101,7 +96,7 @@
         </button>
         <button mat-menu-item *ngIf="sessionQuery.isLoggedIn()" (click)="sessionService.logout()">Se déconnecter
         </button>
-        <button mat-menu-item *ngIf="sessionQuery.isLoggedIn()" (click)="routerNavigation.gotoSignup()">S'inscrire
+        <button mat-menu-item *ngIf="!sessionQuery.isLoggedIn()" (click)="routerNavigation.gotoSignup()">S'inscrire
         </button>
         <button mat-menu-item *ngIf="!sessionQuery.isLoggedIn()" (click)="routerNavigation.gotoAuth()">Se connecter
         </button>

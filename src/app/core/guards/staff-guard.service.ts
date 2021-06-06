@@ -5,7 +5,7 @@ import {RouterNavigation} from '../router/router.navigation';
 
 
 @Injectable()
-export class AuthGuardService implements CanActivate {
+export class StaffGuardService implements CanActivate {
 
   constructor(public routerNavigation: RouterNavigation, public sessionQuery: SessionQuery) {
   }
