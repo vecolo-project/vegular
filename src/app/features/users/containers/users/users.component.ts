@@ -24,7 +24,7 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getUsers(): void {
+  getUsers(limit: number, offset: number): void {
     this.usersService.getUsers();
   }
 

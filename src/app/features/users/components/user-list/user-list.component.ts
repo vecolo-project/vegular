@@ -27,7 +27,7 @@ export class UserListComponent implements OnInit {
   loading: boolean;
 
   @Output()
-  getUsers = new EventEmitter();
+  getUsers = new EventEmitter<{ limit: number, offset: number }>();
 
   public users = [{firstName: 'John', lastName: 'gg', role: 'CLIENT'}];
   public dataSource: MatTableDataSource<userListItem>;
@@ -37,6 +37,6 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    setTimeout(() => this.getUsers.emit());
+    setTimeout(() => this.getUsers.emit({limit: 100, offset: 1}));
   }
 }
