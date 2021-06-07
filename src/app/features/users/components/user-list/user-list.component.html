@@ -1,37 +1,61 @@
-<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-  <!-- Position Column -->
-  <ng-container matColumnDef="position">
-    <th mat-header-cell *matHeaderCellDef>Id</th>
-    <td mat-cell *matCellDef="let user">{{ user.id }}</td>
-  </ng-container>
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let user">
-      {{ user.firstName }} {{ user.lastName }}
-    </td>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="symbol">
-    <th mat-header-cell *matHeaderCellDef>Role</th>
-    <td mat-cell *matCellDef="let user">{{ user.role }}</td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="['name','position','symbol']"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['name','position','symbol']"></tr>
-</mat-table>
-
-<mat-card class="mt-6">
-  <mat-spinner *ngIf="loading"></mat-spinner>
-  <mat-card-content *ngIf="!loading">
-    <div *ngFor="let userId of usersIds">
-      {{userList[userId].firstName}}
+<div *ngIf="loading">
+  <p>spinner</p>
+</div>
+<div *ngIf="!loading" class="flex flex-col">
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="shadow overflow-hidden border-b border-gray-900 sm:rounded-lg">
+      <table class="min-w-full divide-y divide-gray-500">
+        <thead class="bg-gray-900">
+          <tr>
+            <th class="th">id</th>
+            <th class="th">firstName</th>
+            <th class="th">lastName</th>
+            <th class="th">email</th>
+            <th class="th">pseudo</th>
+            <th class="th">newsletter</th>
+            <th class="th">Role</th>
+          </tr>
+        </thead>
+        <tbody class="bg-gray-800 divide-y divide-gray-600">
+          <tr *ngFor="let id of usersIds">
+            <td class="td">
+              <div class="flex items-center">
+                {{ userList[id].id }}
+              </div>
+            </td>
+            <td class="td">
+              <div class="flex items-center">
+                {{ userList[id].firstName }}
+              </div>
+            </td>
+            <td class="td">
+              <div class="flex items-center">
+                {{ userList[id].lastName }}
+              </div>
+            </td>
+            <td class="td">
+              <div class="flex items-center">
+                {{ userList[id].email }}
+              </div>
+            </td>
+            <td class="td">
+              <div class="flex items-center">
+                {{ userList[id].pseudo }}
+              </div>
+            </td>
+            <td class="td">
+              <div class="flex items-center">
+                {{ userList[id].newsletter }}
+              </div>
+            </td>
+            <td class="td">
+              <div class="flex items-center">
+                {{ userList[id].role }}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

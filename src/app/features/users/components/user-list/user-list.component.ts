@@ -1,14 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-import {HashMap} from '@datorama/akita';
-import {User} from '../../../../shared/models/user.model';
-import {UsersService} from '../../store/users.service';
-
-interface userListItem {
-  firstName: string;
-  lastName: string;
-  role: string;
-}
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { HashMap } from '@datorama/akita';
+import { User } from '../../../../shared/models/user.model';
 
 @Component({
   selector: 'app-user-list',
@@ -16,7 +8,6 @@ interface userListItem {
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit {
-
   @Input()
   userList: HashMap<User>;
 
@@ -27,16 +18,15 @@ export class UserListComponent implements OnInit {
   loading: boolean;
 
   @Output()
-  getUsers = new EventEmitter<{ limit: number, offset: number }>();
+  getUsers = new EventEmitter<{ limit: number; offset: number }>();
 
-  public users = [{firstName: 'John', lastName: 'gg', role: 'CLIENT'}];
-  public dataSource: MatTableDataSource<userListItem>;
-
-  constructor() {
-    this.dataSource = new MatTableDataSource(this.users);
-  }
+  constructor() {}
 
   ngOnInit(): void {
-    setTimeout(() => this.getUsers.emit({limit: 100, offset: 1}));
+    console.log(this.loading);
+    setTimeout(() => {
+      this.getUsers.emit({ limit: 100, offset: 1 });
+      console.log(this.loading);
+    });
   }
 }
