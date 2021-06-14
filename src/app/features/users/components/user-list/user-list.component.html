@@ -3,20 +3,21 @@
 </div>
 <div *ngIf="!loading" class="flex flex-col">
   <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-    <div class="shadow overflow-hidden border-b border-gray-900 sm:rounded-lg">
+    <div class="shadow overflow-y-auto border-b border-gray-600 rounded-lg">
       <table class="min-w-full divide-y divide-gray-500">
-        <thead class="bg-gray-900">
+        <thead class="bg-gray-800">
           <tr>
             <th class="th">id</th>
             <th class="th">firstName</th>
             <th class="th">lastName</th>
             <th class="th">email</th>
-            <th class="th">pseudo</th>
-            <th class="th">newsletter</th>
+            <th class="hidden lg:table-cell th">pseudo</th>
+            <th class="hidden lg:table-cell th">newsletter</th>
             <th class="th">Role</th>
+            <th class="th"></th>
           </tr>
         </thead>
-        <tbody class="bg-gray-800 divide-y divide-gray-600">
+        <tbody class="bg-gray-700 divide-y divide-gray-600">
           <tr *ngFor="let id of usersIds">
             <td class="td">
               <div class="flex items-center">
@@ -38,12 +39,12 @@
                 {{ userList[id].email }}
               </div>
             </td>
-            <td class="td">
+            <td class="td hidden lg:table-cell">
               <div class="flex items-center">
                 {{ userList[id].pseudo }}
               </div>
             </td>
-            <td class="td">
+            <td class="td hidden lg:table-cell">
               <div class="flex items-center">
                 {{ userList[id].newsletter }}
               </div>
@@ -51,6 +52,24 @@
             <td class="td">
               <div class="flex items-center">
                 {{ userList[id].role }}
+              </div>
+            </td>
+            <td class="td">
+              <div class="flex items-center gap-2">
+                <button
+                  [routerLink]="['/users/edit', userList[id]]"
+                  mat-button
+                  class="bg-blue-700 min-w-min px-2"
+                >
+                  <mat-icon>mode_edit</mat-icon>
+                </button>
+                <button
+                  (onclick)="delete(userList[id])"
+                  mat-button
+                  class="bg-red-700 min-w-min px-2"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
               </div>
             </td>
           </tr>

@@ -29,4 +29,7 @@ export class UserListComponent implements OnInit {
       console.log(this.loading);
     });
   }
+  delete(userId: number): void {
+    // TODO http call to delete user
+  }
 }

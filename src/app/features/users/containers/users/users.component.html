@@ -1,5 +1,7 @@
 <p>users works!</p>
-<app-user-list [userList]="users | async"
-               [usersIds]="usersIds | async"
-               [loading]="usersLoading | async"
-               (getUsers)="getUsers($event.limit,$event.offset)"></app-user-list>
+<app-user-list
+  [userList]="users | async"
+  [usersIds]="usersIds | async"
+  [loading]="usersLoading | async"
+  (getUsers)="getUsers($event.limit, $event.offset)"
+></app-user-list>
