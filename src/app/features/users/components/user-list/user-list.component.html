@@ -64,6 +64,7 @@
                   <mat-icon>mode_edit</mat-icon>
                 </button>
                 <button
+                  *ngIf="sessionQuery.isAdmin()"
                   (click)="deleteUser(id)"
                   mat-button
                   class="bg-red-700 min-w-min px-2"
