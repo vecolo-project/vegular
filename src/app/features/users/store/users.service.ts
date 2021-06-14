@@ -1,18 +1,17 @@
-import {Injectable} from '@angular/core';
-import {UsersStore} from './users.store';
-import {HttpClientWrapper} from '../../../core/utils/httpClientWrapper';
-import {Snackbar} from '../../../shared/snackbar/snakbar';
-import {User} from '../../../shared/models/user.model';
-import {API_RESSOURCE_URI} from '../../../shared/api-ressource-uri/api-ressource-uri';
+import { Injectable } from '@angular/core';
+import { UsersStore } from './users.store';
+import { HttpClientWrapper } from '../../../core/utils/httpClientWrapper';
+import { Snackbar } from '../../../shared/snackbar/snakbar';
+import { User } from '../../../shared/models/user.model';
+import { API_RESSOURCE_URI } from '../../../shared/api-ressource-uri/api-ressource-uri';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class UsersService {
   constructor(
     private usersStore: UsersStore,
     private http: HttpClientWrapper,
     private snackBar: Snackbar
-  ) {
-  }
+  ) {}
 
   async getUsers(): Promise<void> {
     this.usersStore.setLoading(true);
@@ -21,7 +20,22 @@ export class UsersService {
       this.usersStore.set(response);
     } catch (e) {
       this.usersStore.set([]);
-      this.snackBar.warnning('Erreur lors de la récupération des utilisateurs : ' + e.error.error);
+      this.snackBar.warnning(
+        'Erreur lors de la récupération des utilisateurs : ' + e.error.error
+      );
+    } finally {
+      this.usersStore.setLoading(false);
+    }
+  }
+  async deleteUser(userId: number): Promise<void> {
+    this.usersStore.setLoading(true);
+    try {
+      await this.http.delete<User[]>(API_RESSOURCE_URI.DELETE_USER + userId);
+      this.usersStore.remove(userId);
+    } catch (e) {
+      this.snackBar.warnning(
+        "Erreur lors de la suppréssion de l'utilisateur : " + e.error.error
+      );
     } finally {
       this.usersStore.setLoading(false);
     }

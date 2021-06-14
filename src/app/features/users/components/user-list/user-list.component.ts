@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HashMap } from '@datorama/akita';
 import { User } from '../../../../shared/models/user.model';
-
+import { UsersService } from '../../store/users.service';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -20,16 +20,16 @@ export class UserListComponent implements OnInit {
   @Output()
   getUsers = new EventEmitter<{ limit: number; offset: number }>();
 
-  constructor() {}
+  constructor(private usersService: UsersService) {}
 
   ngOnInit(): void {
-    console.log(this.loading);
     setTimeout(() => {
       this.getUsers.emit({ limit: 100, offset: 1 });
-      console.log(this.loading);
     });
   }
-  delete(userId: number): void {
-    // TODO http call to delete user
+
+  deleteUser(userId: number): void {
+    console.log(userId);
+    this.usersService.deleteUser(userId);
   }
 }
