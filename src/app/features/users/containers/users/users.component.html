@@ -4,4 +4,5 @@
   [usersIds]="usersIds | async"
   [loading]="usersLoading | async"
   (getUsers)="getUsers($event.limit, $event.offset)"
+  [sessionQuery]="sessionQuery"
 ></app-user-list>

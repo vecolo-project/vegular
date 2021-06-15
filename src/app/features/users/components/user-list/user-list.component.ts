@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HashMap } from '@datorama/akita';
+import { SessionQuery } from '../../../../core/store/session.query';
 import { User } from '../../../../shared/models/user.model';
 import { UsersService } from '../../store/users.service';
 @Component({
@@ -19,6 +20,9 @@ export class UserListComponent implements OnInit {
 
   @Output()
   getUsers = new EventEmitter<{ limit: number; offset: number }>();
+
+  @Input()
+  sessionQuery: SessionQuery;
 
   constructor(private usersService: UsersService) {}
 
