@@ -24,16 +24,14 @@ export class UserListComponent implements OnInit {
   @Input()
   sessionQuery: SessionQuery;
 
+  @Input()
+  deleteUser = Function;
+
   constructor(private usersService: UsersService) {}
 
   ngOnInit(): void {
     setTimeout(() => {
       this.getUsers.emit({ limit: 100, offset: 1 });
     });
-  }
-
-  deleteUser(userId: number): void {
-    console.log(userId);
-    this.usersService.deleteUser(userId);
   }
 }

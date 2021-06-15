@@ -1,6 +1,9 @@
 <div *ngIf="loading">
   <p>spinner</p>
 </div>
+<p *ngIf="!loading" class="text-right mb-4">
+  <button mat-raised-button color="primary"><mat-icon>add</mat-icon>Add</button>
+</p>
 <div *ngIf="!loading" class="flex flex-col">
   <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="shadow overflow-y-auto border-b border-gray-600 rounded-lg">

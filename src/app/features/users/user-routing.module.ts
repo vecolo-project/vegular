@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UsersComponent } from './containers/users/users.component';
-import { UsersFormComponent } from './components/users-form/users-form.component';
 
 const usersRoutes: Routes = [
   { path: '', component: UsersComponent },
-  { path: '/edit/:id', component: UsersFormComponent },
+  { path: 'edit/:id', component: UsersComponent },
 ];
 
 @NgModule({
