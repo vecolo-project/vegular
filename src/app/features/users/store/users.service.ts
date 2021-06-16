@@ -4,13 +4,16 @@ import { HttpClientWrapper } from '../../../core/utils/httpClientWrapper';
 import { Snackbar } from '../../../shared/snackbar/snakbar';
 import { User } from '../../../shared/models/user.model';
 import { API_RESSOURCE_URI } from '../../../shared/api-ressource-uri/api-ressource-uri';
+import { UsersQuery } from './users.query';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
   constructor(
     private usersStore: UsersStore,
     private http: HttpClientWrapper,
-    private snackBar: Snackbar
+    private snackBar: Snackbar,
+    private usersQuery: UsersQuery
   ) {}
 
   async getUsers(): Promise<void> {
@@ -27,6 +30,14 @@ export class UsersService {
       this.usersStore.setLoading(false);
     }
   }
+
+  getUser(id: number): Observable<User> {
+    if (this.usersQuery.hasEntity(id)) {
+      return this.usersQuery.selectEntity(id);
+    }
+    // TODO GET User From API ?
+  }
+
   async deleteUser(userId: number): Promise<void> {
     this.usersStore.setLoading(true);
     try {

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { UsersState, UsersStore } from './users.store';
-import { HashMap, Query } from '@datorama/akita';
+import { HashMap, QueryEntity } from '@datorama/akita';
 import { Observable } from 'rxjs';
 import { User } from '../../../shared/models/user.model';
 
 @Injectable({ providedIn: 'root' })
-export class UsersQuery extends Query<UsersState> {
+export class UsersQuery extends QueryEntity<UsersState> {
   selectUsers$: Observable<HashMap<User>> = this.select('entities');
   selectIds$: Observable<number[]> = this.select('ids');
   selectCount$: Observable<number> = this.select('count');

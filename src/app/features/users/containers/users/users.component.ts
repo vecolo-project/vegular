@@ -5,7 +5,7 @@ import { User } from '../../../../shared/models/user.model';
 import { UsersQuery } from '../../store/users.query';
 import { UsersService } from '../../store/users.service';
 import { SessionQuery } from '../../../../core/store/session.query';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -21,7 +21,8 @@ export class UsersComponent implements OnInit {
     private usersQuery: UsersQuery,
     private usersService: UsersService,
     public sessionQuery: SessionQuery,
-    public router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.users = this.usersQuery.selectUsers$;
     this.usersIds = this.usersQuery.selectIds$;
@@ -29,6 +30,14 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  isListMode(): boolean {
+    return this.router.isActive('/user', true);
+  }
+
+  isEditMode(): boolean {
+    return this.router.isActive('/users/edit', false);
+  }
 
   getUsers(limit: number, offset: number): void {
     this.usersService.getUsers();
@@ -39,9 +48,12 @@ export class UsersComponent implements OnInit {
     console.log(userId);
   }
 
-  getUser(id: number): void {
+  getUser(): Observable<User> {
+    const id: number = this.route.snapshot.params.id;
     console.log(id);
-
-    // this.usersQuery.selectEntity(id);
+    return this.usersService.getUser(id);
+    // if (this.isEditMode()) {
+    // }
+    // return null;
   }
 }

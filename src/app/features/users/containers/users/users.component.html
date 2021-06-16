@@ -1,6 +1,6 @@
 <p>users works!</p>
 <app-user-list
-  *ngIf="router.isActive('/users', true)"
+  *ngIf="isListMode()"
   [userList]="users | async"
   [usersIds]="usersIds | async"
   [loading]="usersLoading | async"
@@ -8,7 +8,4 @@
   [sessionQuery]="sessionQuery"
   [deleteUser]="deleteUser"
 ></app-user-list>
-<app-users-form
-  *ngIf="router.isActive('/users/edit', false)"
-  [user]="user"
-></app-users-form>
+<app-users-form *ngIf="isEditMode()" [getUser]="getUser"></app-users-form>

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { User } from '../../../../shared/models/user.model';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-users-form',
@@ -10,13 +10,16 @@ import { User } from '../../../../shared/models/user.model';
 })
 export class UsersFormComponent implements OnInit {
   form: FormGroup;
+  user: Observable<User>;
 
   @Input()
-  user?: Observable<User>;
+  getUser: Function;
 
   constructor(private fp: FormBuilder) {
     this.form = fp.group({});
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getUser().subscribe((user: User) => console.log(user));
+  }
 }
