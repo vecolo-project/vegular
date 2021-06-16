@@ -33,8 +33,9 @@ export class UsersService {
 
   getUser(id: number): Observable<User> {
     if (this.usersQuery.hasEntity(id)) {
-      return this.usersQuery.selectEntity(id);
+      console.log('query has entitty id');
     }
+    return this.usersQuery.selectEntity(1);
     // TODO GET User From API ?
   }
 

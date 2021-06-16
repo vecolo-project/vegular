@@ -27,12 +27,13 @@ export class UsersComponent implements OnInit {
     this.users = this.usersQuery.selectUsers$;
     this.usersIds = this.usersQuery.selectIds$;
     this.usersLoading = this.usersQuery.isLoading$;
+    this.getUser.bind(this);
   }
 
   ngOnInit(): void {}
 
   isListMode(): boolean {
-    return this.router.isActive('/user', true);
+    return this.router.isActive('/users', true);
   }
 
   isEditMode(): boolean {
@@ -49,11 +50,10 @@ export class UsersComponent implements OnInit {
   }
 
   getUser(): Observable<User> {
-    const id: number = this.route.snapshot.params.id;
-    console.log(id);
-    return this.usersService.getUser(id);
-    // if (this.isEditMode()) {
-    // }
-    // return null;
+    if (this.isEditMode()) {
+      const id: number = Number(this.route.snapshot.params.id);
+      return this.usersService.getUser(id);
+    }
+    return null;
   }
 }

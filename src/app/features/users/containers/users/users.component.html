@@ -8,4 +8,4 @@
   [sessionQuery]="sessionQuery"
   [deleteUser]="deleteUser"
 ></app-user-list>
-<app-users-form *ngIf="isEditMode()" [getUser]="getUser"></app-users-form>
+<app-users-form *ngIf="isEditMode()" [user]="getUser()"></app-users-form>

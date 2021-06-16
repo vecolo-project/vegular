@@ -10,16 +10,17 @@ import { User } from 'src/app/shared/models/user.model';
 })
 export class UsersFormComponent implements OnInit {
   form: FormGroup;
-  user: Observable<User>;
 
   @Input()
-  getUser: Function;
+  public user: Observable<User>;
 
-  constructor(private fp: FormBuilder) {
+  constructor(public fp: FormBuilder) {
     this.form = fp.group({});
   }
 
   ngOnInit(): void {
-    this.getUser().subscribe((user: User) => console.log(user));
+    this.user.subscribe((user) => {
+      console.log(user);
+    });
   }
 }
