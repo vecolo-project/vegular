@@ -6,6 +6,7 @@ import { User } from '../../../shared/models/user.model';
 import { API_RESSOURCE_URI } from '../../../shared/api-ressource-uri/api-ressource-uri';
 import { UsersQuery } from './users.query';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
@@ -31,12 +32,10 @@ export class UsersService {
     }
   }
 
-  getUser(id: number): Observable<User> {
-    if (this.usersQuery.hasEntity(id)) {
-      console.log('query has entitty id');
-    }
-    return this.usersQuery.selectEntity(1);
-    // TODO GET User From API ?
+  getUser(id: number): User {
+    console.log(id, this.usersQuery.getEntity(id));
+    return this.usersQuery.getEntity(id);
+    // TODO GET User From API ? if we have pagination
   }
 
   async deleteUser(userId: number): Promise<void> {

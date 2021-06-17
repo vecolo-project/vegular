@@ -49,7 +49,7 @@ export class UsersComponent implements OnInit {
     console.log(userId);
   }
 
-  getUser(): Observable<User> {
+  getUser(): User {
     if (this.isEditMode()) {
       const id: number = Number(this.route.snapshot.params.id);
       return this.usersService.getUser(id);

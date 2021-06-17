@@ -12,15 +12,13 @@ export class UsersFormComponent implements OnInit {
   form: FormGroup;
 
   @Input()
-  public user: Observable<User>;
+  public user: User;
 
-  constructor(public fp: FormBuilder) {
+  constructor(private fp: FormBuilder) {
     this.form = fp.group({});
   }
 
   ngOnInit(): void {
-    this.user.subscribe((user) => {
-      console.log(user);
-    });
+    console.log(this.user);
   }
 }
