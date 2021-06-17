@@ -5,8 +5,6 @@ import { Snackbar } from '../../../shared/snackbar/snakbar';
 import { User } from '../../../shared/models/user.model';
 import { API_RESSOURCE_URI } from '../../../shared/api-ressource-uri/api-ressource-uri';
 import { UsersQuery } from './users.query';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
@@ -32,10 +30,28 @@ export class UsersService {
     }
   }
 
-  getUser(id: number): User {
-    console.log(id, this.usersQuery.getEntity(id));
+  async getUser(id: number): Promise<User> {
+    const user = this.usersQuery.getEntity(id);
+    if (user) {
+      return user;
+    }
+    await this.getSingleUser(id);
     return this.usersQuery.getEntity(id);
-    // TODO GET User From API ? if we have pagination
+  }
+
+  async getSingleUser(id: number): Promise<void> {
+    this.usersStore.setLoading(true);
+    try {
+      const response = this.http.get<User>(API_RESSOURCE_URI.GET_USER); // TODO add id in request
+      console.log(response); // TODO remove this line
+      this.usersStore.update({ id: response });
+    } catch (e) {
+      this.snackBar.warnning(
+        "Erreur lors de la récupération de l'utilisateur : " + e.error.error
+      );
+    } finally {
+      this.usersStore.setLoading(false);
+    }
   }
 
   async deleteUser(userId: number): Promise<void> {

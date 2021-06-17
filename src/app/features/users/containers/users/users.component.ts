@@ -46,12 +46,12 @@ export class UsersComponent implements OnInit {
 
   deleteUser(userId: number): void {
     this.usersService.deleteUser(userId);
-    console.log(userId);
+    console.log(userId); // TODO remove this and check for real delete
   }
 
-  getUser(): User {
-    if (this.isEditMode()) {
-      const id: number = Number(this.route.snapshot.params.id);
+  async getUser(): Promise<User> {
+    const id: number = Number(this.route.snapshot.params.id);
+    if (id) {
       return this.usersService.getUser(id);
     }
     return null;
