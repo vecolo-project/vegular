@@ -33,9 +33,10 @@ export class UsersService {
 
   async retrieveEditUser(id: number): Promise<void> {
     try {
-      const response = await this.http.get<User>(API_RESSOURCE_URI.GET_USERS + id);
-      console.log(response);
-      this.usersStore.update({editUser: response});
+      const response = await this.http.get<{ user: User }>(API_RESSOURCE_URI.GET_USERS + id);
+      // const response = await this.http.get<{ user: User }>(API_RESSOURCE_URI.GET_CURRENT_USER);
+      // console.log(response);
+      this.usersStore.update({editUser: response.user});
     } catch (e) {
       this.snackBar.warnning(
         "Erreur lors de la récupération de l'utilisateur : " + e.error.error
