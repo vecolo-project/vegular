@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HashMap } from '@datorama/akita';
-import { User } from '../../../../shared/models/user.model';
-import { UsersQuery } from '../../store/users.query';
-import { UsersService } from '../../store/users.service';
-import { SessionQuery } from '../../../../core/store/session.query';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {HashMap} from '@datorama/akita';
+import {User} from '../../../../shared/models/user.model';
+import {UsersQuery} from '../../store/users.query';
+import {UsersService} from '../../store/users.service';
+import {SessionQuery} from '../../../../core/store/session.query';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -14,6 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UsersComponent implements OnInit {
   users: Observable<HashMap<User>>;
+  editUser: Observable<User>;
   usersIds: Observable<number[]>;
   usersLoading: Observable<boolean>;
 
@@ -27,10 +28,11 @@ export class UsersComponent implements OnInit {
     this.users = this.usersQuery.selectUsers$;
     this.usersIds = this.usersQuery.selectIds$;
     this.usersLoading = this.usersQuery.isLoading$;
-    this.getUser.bind(this);
+    this.editUser = this.usersQuery.selectEditUsers$;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   isListMode(): boolean {
     return this.router.isActive('/users', true);
@@ -49,11 +51,7 @@ export class UsersComponent implements OnInit {
     console.log(userId); // TODO remove this and check for real delete
   }
 
-  async getUser(): Promise<User> {
-    const id: number = Number(this.route.snapshot.params.id);
-    if (id) {
-      return this.usersService.getUser(id);
-    }
-    return null;
+  setEditUser(id): void {
+    this.usersQuery.setEditUser(id);
   }
 }

@@ -6,6 +6,7 @@
   [loading]="usersLoading | async"
   (getUsers)="getUsers($event.limit, $event.offset)"
   [sessionQuery]="sessionQuery"
-  [deleteUser]="deleteUser"
+  (deleteUser)="deleteUser($event)"
+  (setEditUser)="setEditUser($event)"
 ></app-user-list>
-<app-users-form *ngIf="isEditMode()" [user]="getUser()"></app-users-form>
+<app-users-form *ngIf="isEditMode()" [user]="editUser | async"></app-users-form>
