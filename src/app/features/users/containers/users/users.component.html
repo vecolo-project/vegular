@@ -1,12 +1,11 @@
 <p>users works!</p>
 <app-user-list
   *ngIf="isListMode()"
-  [userList]="users | async"
-  [userListArray]="usersQuery.selectAll() | async"
-  [usersIds]="usersIds | async"
+  [userListArray]="users | async"
+  [usersCount]="userCount | async"
   [loading]="usersLoading | async"
+  [isAdmin]="sessionQuery.isAdmin$ | async"
   (getUsers)="getUsers($event.limit, $event.offset)"
-  [sessionQuery]="sessionQuery"
   (deleteUser)="deleteUser($event)"
   (setEditUser)="setEditUser($event)"
 ></app-user-list>

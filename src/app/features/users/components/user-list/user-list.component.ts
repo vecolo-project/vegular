@@ -1,9 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {HashMap} from '@datorama/akita';
-import {SessionQuery} from '../../../../core/store/session.query';
 import {User} from '../../../../shared/models/user.model';
 import {UsersService} from '../../store/users.service';
-import {MatTableDataSource} from "@angular/material/table";
+import {SessionQuery} from "../../../../core/store/session.query";
 
 @Component({
   selector: 'app-user-list',
@@ -12,22 +10,19 @@ import {MatTableDataSource} from "@angular/material/table";
 })
 export class UserListComponent implements OnInit {
   @Input()
-  userList: HashMap<User>;
-
-  @Input()
   userListArray: User[];
 
   @Input()
-  usersIds: number[];
+  usersCount: number;
 
   @Input()
   loading: boolean;
 
+  @Input()
+  isAdmin: boolean;
+
   @Output()
   getUsers = new EventEmitter<{ limit: number; offset: number }>();
-
-  @Input()
-  sessionQuery: SessionQuery;
 
   @Output()
   deleteUser = new EventEmitter<number>();
@@ -35,15 +30,18 @@ export class UserListComponent implements OnInit {
   @Output()
   setEditUser = new EventEmitter<number>();
 
-  displayedColumns = ['id', 'firstName', 'lastName', 'email', 'role','actions'];
-  dataSource;
+  displayedColumns = ['id', 'firstName', 'lastName', 'email', 'role', 'actions'];
 
-  constructor(private usersService: UsersService) {
+  constructor() {
   }
 
   ngOnInit(): void {
+    this.getUsersF(10, 1);
+  }
+
+  getUsersF(limit, offset): void {
     setTimeout(() => {
-      this.getUsers.emit({limit: 100, offset: 1});
+      this.getUsers.emit({limit, offset});
     });
   }
 }

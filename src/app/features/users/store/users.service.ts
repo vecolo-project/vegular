@@ -16,11 +16,12 @@ export class UsersService {
   ) {
   }
 
-  async getUsers(): Promise<void> {
+  async getUsers(limit: number, offset: number): Promise<void> {
     this.usersStore.setLoading(true);
     try {
-      const response = await this.http.get<User[]>(API_RESSOURCE_URI.GET_USERS);
+      const response = await this.http.get<User[]>(API_RESSOURCE_URI.GET_USERS + `?limit=${limit}&offset=${offset}`);
       this.usersStore.set(response);
+      this.usersStore.update({count: response.length}) //TODO change response and add total
     } catch (e) {
       this.usersStore.set([]);
       this.snackBar.warnning(

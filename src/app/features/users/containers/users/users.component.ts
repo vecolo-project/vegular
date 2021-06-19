@@ -13,9 +13,9 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  users: Observable<HashMap<User>>;
+  users: Observable<User[]>;
+  userCount:Observable<number>
   editUser: Observable<User>;
-  usersIds: Observable<number[]>;
   usersLoading: Observable<boolean>;
 
   constructor(
@@ -25,8 +25,8 @@ export class UsersComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.users = this.usersQuery.selectUsers$;
-    this.usersIds = this.usersQuery.selectIds$;
+    this.users = this.usersQuery.selectAll();
+    this.userCount = this.usersQuery.selectCount$;
     this.usersLoading = this.usersQuery.isLoading$;
     this.editUser = this.usersQuery.selectEditUsers$;
   }
@@ -43,7 +43,7 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers(limit: number, offset: number): void {
-    this.usersService.getUsers();
+    this.usersService.getUsers(limit, offset);
   }
 
   deleteUser(userId: number): void {
