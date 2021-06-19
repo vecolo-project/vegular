@@ -57,25 +57,26 @@
                 {{ userList[id].role }}
               </div>
             </td>
-            <td class="td">
-              <div class="flex items-center gap-2">
-                <button
-                  [routerLink]="['/users/edit/', id]"
-                  mat-button
-                  class="bg-blue-700 min-w-min px-2"
-                >
-                  <mat-icon>mode_edit</mat-icon>
-                </button>
-                <button
-                  *ngIf="sessionQuery.isAdmin()"
-                  (click)="deleteUser(id)"
-                  mat-button
-                  class="bg-red-700 min-w-min px-2"
-                >
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </div>
-            </td>
+          <td class="td">
+            <div class="flex items-center gap-2">
+              <button
+                [routerLink]="['/users/edit/', id]"
+                (click)="setEditUser.emit(id)"
+                mat-button
+                class="bg-blue-700 min-w-min px-2"
+              >
+                <mat-icon>mode_edit</mat-icon>
+              </button>
+              <button
+                *ngIf="sessionQuery.isAdmin()"
+                (click)="deleteUser.emit(id)"
+                mat-button
+                class="bg-red-700 min-w-min px-2"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </td>
           </tr>
         </tbody>
       </table>

@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { HashMap } from '@datorama/akita';
-import { SessionQuery } from '../../../../core/store/session.query';
-import { User } from '../../../../shared/models/user.model';
-import { UsersService } from '../../store/users.service';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {HashMap} from '@datorama/akita';
+import {SessionQuery} from '../../../../core/store/session.query';
+import {User} from '../../../../shared/models/user.model';
+import {UsersService} from '../../store/users.service';
+
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -24,14 +25,18 @@ export class UserListComponent implements OnInit {
   @Input()
   sessionQuery: SessionQuery;
 
-  @Input()
-  deleteUser = Function;
+  @Output()
+  deleteUser = new EventEmitter<number>();
 
-  constructor(private usersService: UsersService) {}
+  @Output()
+  setEditUser = new EventEmitter<number>();
+
+  constructor(private usersService: UsersService) {
+  }
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.getUsers.emit({ limit: 100, offset: 1 });
+      this.getUsers.emit({limit: 100, offset: 1});
     });
   }
 }
