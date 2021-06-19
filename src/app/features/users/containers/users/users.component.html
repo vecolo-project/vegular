@@ -9,4 +9,8 @@
   (deleteUser)="deleteUser($event)"
   (setEditUser)="setEditUser($event)"
 ></app-user-list>
-<app-users-form *ngIf="isEditMode()" [user]="editUser | async"></app-users-form>
+<app-users-form
+  *ngIf="isEditMode()"
+  [user]="editUser | async"
+  (retrieveEditUser)="retrieveEditUser()"
+></app-users-form>

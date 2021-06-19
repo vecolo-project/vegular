@@ -54,4 +54,8 @@ export class UsersComponent implements OnInit {
   setEditUser(id): void {
     this.usersQuery.setEditUser(id);
   }
+  retrieveEditUser(): void {
+    const id = Number(this.route.snapshot.params.id);
+    this.usersService.retrieveEditUser(id);
+  }
 }

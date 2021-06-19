@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { User } from 'src/app/shared/models/user.model';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {User} from 'src/app/shared/models/user.model';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-users-form',
@@ -14,11 +14,19 @@ export class UsersFormComponent implements OnInit {
   @Input()
   public user: User;
 
-  constructor(private fp: FormBuilder) {
+  @Output()
+  public retrieveEditUser = new EventEmitter<any>();
+
+
+  constructor(private fp: FormBuilder, private route: ActivatedRoute) {
     this.form = fp.group({});
   }
 
   ngOnInit(): void {
-    console.log(this.user);
+    if (!this.user) {
+      setTimeout(() => {
+        this.retrieveEditUser.emit();
+      });
+    }
   }
 }
