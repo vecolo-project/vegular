@@ -1,4 +1,8 @@
 <p>users-form works!</p>
+<div *ngIf="user">
+
+  {{user.email}}
+</div>
 <form [formGroup]="form" action="" class="mb-3">
   <mat-card>
     <!-- <mat-form-field class="w-full">
