@@ -3,6 +3,7 @@ import {HashMap} from '@datorama/akita';
 import {SessionQuery} from '../../../../core/store/session.query';
 import {User} from '../../../../shared/models/user.model';
 import {UsersService} from '../../store/users.service';
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-user-list',
@@ -12,6 +13,9 @@ import {UsersService} from '../../store/users.service';
 export class UserListComponent implements OnInit {
   @Input()
   userList: HashMap<User>;
+
+  @Input()
+  userListArray: User[];
 
   @Input()
   usersIds: number[];
@@ -30,6 +34,9 @@ export class UserListComponent implements OnInit {
 
   @Output()
   setEditUser = new EventEmitter<number>();
+
+  displayedColumns = ['id', 'firstName', 'lastName', 'email', 'role','actions'];
+  dataSource;
 
   constructor(private usersService: UsersService) {
   }

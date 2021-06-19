@@ -7,6 +7,7 @@ import {User} from '../../../shared/models/user.model';
 @Injectable({providedIn: 'root'})
 export class UsersQuery extends QueryEntity<UsersState, User> {
   selectUsers$: Observable<HashMap<User>> = this.select('entities');
+  selectUsersArray$: Observable<User[]> = this.selectAll();
   selectEditUsers$: Observable<User> = this.select('editUser')
   selectIds$: Observable<number[]> = this.select('ids');
   selectCount$: Observable<number> = this.select('count');

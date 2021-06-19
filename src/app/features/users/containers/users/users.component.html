@@ -2,6 +2,7 @@
 <app-user-list
   *ngIf="isListMode()"
   [userList]="users | async"
+  [userListArray]="usersQuery.selectAll() | async"
   [usersIds]="usersIds | async"
   [loading]="usersLoading | async"
   (getUsers)="getUsers($event.limit, $event.offset)"

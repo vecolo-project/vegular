@@ -19,7 +19,7 @@ export class UsersComponent implements OnInit {
   usersLoading: Observable<boolean>;
 
   constructor(
-    private usersQuery: UsersQuery,
+    public usersQuery: UsersQuery,
     private usersService: UsersService,
     public sessionQuery: SessionQuery,
     private router: Router,
@@ -54,6 +54,7 @@ export class UsersComponent implements OnInit {
   setEditUser(id): void {
     this.usersQuery.setEditUser(id);
   }
+
   retrieveEditUser(): void {
     const id = Number(this.route.snapshot.params.id);
     this.usersService.retrieveEditUser(id);
