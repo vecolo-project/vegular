@@ -5,87 +5,8 @@
   </button>
 </p>
 <div class="flex flex-col my-2">
-  <!--<div class="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-    <div class="shadow overflow-y-auto border-b border-gray-600 rounded-lg">
-      <table class="min-w-full divide-y divide-gray-500">
-        <thead class="bg-gray-800">
-        <tr>
-          <th class="th">id</th>
-          <th class="th">firstName</th>
-          <th class="th">lastName</th>
-          <th class="th">email</th>
-          <th class="hidden lg:table-cell th">pseudo</th>
-          <th class="hidden lg:table-cell th">newsletter</th>
-          <th class="th">Role</th>
-          <th class="th"></th>
-        </tr>
-        </thead>
-        <tbody class="bg-gray-700 divide-y divide-gray-600">
-        <tr *ngFor="let id of usersIds">
-          <td class="td">
-            <div class="flex items-center">
-              {{ userList[id].id }}
-            </div>
-          </td>
-          <td class="td">
-            <div class="flex items-center">
-              {{ userList[id].firstName }}
-            </div>
-          </td>
-          <td class="td">
-            <div class="flex items-center">
-              {{ userList[id].lastName }}
-            </div>
-          </td>
-          <td class="td">
-            <div class="flex items-center">
-              {{ userList[id].email }}
-            </div>
-          </td>
-          <td class="td hidden lg:table-cell">
-            <div class="flex items-center">
-              {{ userList[id].pseudo }}
-            </div>
-          </td>
-          <td class="td hidden lg:table-cell">
-            <div class="flex items-center">
-              {{ userList[id].newsletter }}
-            </div>
-          </td>
-          <td class="td">
-            <div class="flex items-center">
-              {{ userList[id].role }}
-            </div>
-          </td>
-          <td class="td">
-            <div class="flex items-center gap-2">
-              <button
-                [routerLink]="['/users/edit/', id]"
-                (click)="setEditUser.emit(id)"
-                mat-button
-                class="bg-blue-700 min-w-min px-2"
-              >
-                <mat-icon>mode_edit</mat-icon>
-              </button>
-              <button
-                *ngIf="sessionQuery.isAdmin()"
-                (click)="deleteUser.emit(id)"
-                mat-button
-                class="bg-red-700 min-w-min px-2"
-              >
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>-->
-  <mat-spinner *ngIf="loading">
-  </mat-spinner>
+  <mat-spinner *ngIf="loading"></mat-spinner>
   <table mat-table [dataSource]="userListArray" class="mat-elevation-z8">
-
     <mat-text-column name="id"></mat-text-column>
     <mat-text-column name="firstName"></mat-text-column>
     <mat-text-column name="lastName"></mat-text-column>
@@ -116,16 +37,14 @@
       </td>
     </ng-container>
 
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
   <mat-paginator
     [length]="userListArray.length"
     [pageSize]="10"
-    [pageSizeOptions]="[5,10,20]"
-    (page)="getUsersF($event.pageSize,$event.pageIndex*$event.pageSize)"
+    [pageSizeOptions]="[5, 10, 20]"
+    (page)="getUsersF($event.pageSize, $event.pageIndex * $event.pageSize)"
     showFirstLastButtons
   ></mat-paginator>
 </div>
-

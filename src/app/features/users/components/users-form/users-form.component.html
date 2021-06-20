@@ -1,13 +1,13 @@
 <p>users-form works!</p>
 <div *ngIf="user">
-
-  {{user.email}}
+  {{ user.email }}
 </div>
 <form [formGroup]="form" action="" class="mb-3">
   <mat-card>
-    <!-- <mat-form-field class="w-full">
+    <mat-form-field class="w-full">
       <input
         matInput
+        [value]="user.id"
         formControlName="id"
         placeholder="id"
         type="text"
@@ -17,6 +17,7 @@
     <mat-form-field class="w-full">
       <input
         matInput
+        [value]="user.firstName"
         formControlName="firstName"
         placeholder="Jhon"
         type="text"
@@ -25,9 +26,10 @@
     <mat-form-field class="w-full">
       <input
         matInput
+        [value]="user.lastName"
         formControlName="lastname"
         placeholder="Doe"
-        type="password"
+        type="text"
       />
     </mat-form-field>
     <mat-form-field class="w-full">
@@ -42,11 +44,14 @@
     <mat-form-field class="w-full">
       <input
         matInput
+        [value]="user.email"
         formControlName="email"
         placeholder="jhon.doe@exemple.com"
         type="email"
       />
-    </mat-form-field> -->
-    <p>works</p>
+    </mat-form-field>
+    <p class="text-center">
+      <button mat-button class="bg-indigo-500">enregister</button>
+    </p>
   </mat-card>
 </form>
