@@ -1,0 +1,57 @@
+<p>users-form works!</p>
+<div *ngIf="user">
+  {{ user.email }}
+</div>
+<form [formGroup]="form" action="" class="mb-3">
+  <mat-card>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        [value]="user.id"
+        formControlName="id"
+        placeholder="id"
+        type="text"
+        disabled
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        [value]="user.firstName"
+        formControlName="firstName"
+        placeholder="Jhon"
+        type="text"
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        [value]="user.lastName"
+        formControlName="lastname"
+        placeholder="Doe"
+        type="text"
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldPassword"
+        placeholder="Mot de passe"
+        type="password"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        [value]="user.email"
+        formControlName="email"
+        placeholder="jhon.doe@exemple.com"
+        type="email"
+      />
+    </mat-form-field>
+    <p class="text-center">
+      <button mat-button class="bg-indigo-500">enregister</button>
+    </p>
+  </mat-card>
+</form>

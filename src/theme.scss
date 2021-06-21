@@ -327,7 +327,7 @@ $accent: mat-palette($mat-pink, 500, 900, A100);
 $warn: mat-palette($mat-deep-orange);
 $theme: mat-dark-theme($primary, $accent, $warn);
 
-$custom-background-color: #021a31;
+$custom-background-color: $gray-900;
 $background: map-get($theme, background);
 $background: map_merge(
   $background,
