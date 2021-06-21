@@ -10,7 +10,7 @@
   (setEditUser)="setEditUser($event)"
 ></app-user-list>
 <app-users-form
-  *ngIf="isEditMode()"
+  *ngIf="isEditMode() || isAddMode()"
   [user]="editUser | async"
   (retrieveEditUser)="retrieveEditUser()"
 ></app-users-form>

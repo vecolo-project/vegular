@@ -1,5 +1,6 @@
 <p>users-form works!</p>
 <div *ngIf="user">
+  {{ user.id }}
   {{ user.email }}
 </div>
 <form [formGroup]="form" action="" class="mb-3">
@@ -7,46 +8,32 @@
     <mat-form-field class="w-full">
       <input
         matInput
-        [value]="user.id"
-        formControlName="id"
-        placeholder="id"
-        type="text"
-        disabled
-      />
-    </mat-form-field>
-    <mat-form-field class="w-full">
-      <input
-        matInput
-        [value]="user.firstName"
-        formControlName="firstName"
-        placeholder="Jhon"
+        formControlName="fieldFirstName"
+        placeholder="first name"
         type="text"
       />
     </mat-form-field>
     <mat-form-field class="w-full">
       <input
         matInput
-        [value]="user.lastName"
-        formControlName="lastname"
-        placeholder="Doe"
+        formControlName="fieldLastName"
+        placeholder="last name"
         type="text"
       />
     </mat-form-field>
-    <mat-form-field class="w-full">
+    <!-- <mat-form-field class="w-full">
       <input
         matInput
         formControlName="fieldPassword"
         placeholder="Mot de passe"
         type="password"
       />
-    </mat-form-field>
-
+    </mat-form-field> -->
     <mat-form-field class="w-full">
       <input
         matInput
-        [value]="user.email"
-        formControlName="email"
-        placeholder="jhon.doe@exemple.com"
+        formControlName="fieldEmail"
+        placeholder="email"
         type="email"
       />
     </mat-form-field>

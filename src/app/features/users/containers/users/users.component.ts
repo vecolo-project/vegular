@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
-import {HashMap} from '@datorama/akita';
-import {User} from '../../../../shared/models/user.model';
-import {UsersQuery} from '../../store/users.query';
-import {UsersService} from '../../store/users.service';
-import {SessionQuery} from '../../../../core/store/session.query';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HashMap } from '@datorama/akita';
+import { User } from '../../../../shared/models/user.model';
+import { UsersQuery } from '../../store/users.query';
+import { UsersService } from '../../store/users.service';
+import { SessionQuery } from '../../../../core/store/session.query';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -14,7 +14,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class UsersComponent implements OnInit {
   users: Observable<User[]>;
-  userCount:Observable<number>
+  userCount: Observable<number>;
   editUser: Observable<User>;
   usersLoading: Observable<boolean>;
 
@@ -31,8 +31,7 @@ export class UsersComponent implements OnInit {
     this.editUser = this.usersQuery.selectEditUsers$;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   isListMode(): boolean {
     return this.router.isActive('/users', true);
@@ -40,6 +39,10 @@ export class UsersComponent implements OnInit {
 
   isEditMode(): boolean {
     return this.router.isActive('/users/edit', false);
+  }
+
+  isAddMode(): boolean {
+    return this.router.isActive('/users/add', true);
   }
 
   getUsers(limit: number, offset: number): void {

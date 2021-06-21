@@ -36,7 +36,7 @@ export class UsersService {
   async retrieveEditUser(id: number): Promise<void> {
     try {
       const response = await this.http.get<{ user: User }>(
-        API_RESSOURCE_URI.GET_USERS + id
+        API_RESSOURCE_URI.GET_CURRENT_USER
       );
       /* TODO Remove line below when api goes well
       const response = await this.http.get<{ user: User }>(API_RESSOURCE_URI.GET_CURRENT_USER);
