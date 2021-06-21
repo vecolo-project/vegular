@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/shared/models/user.model';
 import { ActivatedRoute } from '@angular/router';
@@ -8,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './users-form.component.html',
   styleUrls: ['./users-form.component.scss'],
 })
-export class UsersFormComponent implements OnInit {
+export class UsersFormComponent implements OnInit, OnChanges {
   form: FormGroup;
 
   @Input()
@@ -22,6 +29,7 @@ export class UsersFormComponent implements OnInit {
       fieldEmail: ['', [Validators.required, Validators.email]],
       fieldFirstName: ['', [Validators.required]],
       fieldLastName: ['', [Validators.required]],
+      fieldPassword: [''],
     });
   }
 
@@ -30,10 +38,15 @@ export class UsersFormComponent implements OnInit {
       setTimeout(() => {
         this.retrieveEditUser.emit();
       });
-    } else {
-      this.form.controls.fieldEmail.patchValue(this.user.email);
-      this.form.controls.fieldFirstName.patchValue(this.user.firstName);
-      this.form.controls.fieldLastName.patchValue(this.user.lastName);
     }
+    this.form.controls.fieldEmail.patchValue(this.user.email);
+    this.form.controls.fieldFirstName.patchValue(this.user.firstName);
+    this.form.controls.fieldLastName.patchValue(this.user.lastName);
+  }
+
+  ngOnChanges(): void {
+    this.form.controls.fieldEmail.patchValue(this.user.email);
+    this.form.controls.fieldFirstName.patchValue(this.user.firstName);
+    this.form.controls.fieldLastName.patchValue(this.user.lastName);
   }
 }
