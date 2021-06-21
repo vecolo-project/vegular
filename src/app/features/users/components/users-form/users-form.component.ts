@@ -24,12 +24,16 @@ export class UsersFormComponent implements OnInit, OnChanges {
   @Output()
   public retrieveEditUser = new EventEmitter<any>();
 
+  @Output()
+  public saveUser = new EventEmitter<User>();
+
   constructor(private fp: FormBuilder, private route: ActivatedRoute) {
     this.form = this.fp.group({
       fieldEmail: ['', [Validators.required, Validators.email]],
       fieldFirstName: ['', [Validators.required]],
       fieldLastName: ['', [Validators.required]],
       fieldPassword: [''],
+      fieldConfirmPassword: [''],
     });
   }
 
@@ -38,15 +42,22 @@ export class UsersFormComponent implements OnInit, OnChanges {
       setTimeout(() => {
         this.retrieveEditUser.emit();
       });
+    } else {
+      this.form.controls.fieldEmail.patchValue(this.user.email);
+      this.form.controls.fieldFirstName.patchValue(this.user.firstName);
+      this.form.controls.fieldLastName.patchValue(this.user.lastName);
     }
-    this.form.controls.fieldEmail.patchValue(this.user.email);
-    this.form.controls.fieldFirstName.patchValue(this.user.firstName);
-    this.form.controls.fieldLastName.patchValue(this.user.lastName);
   }
 
   ngOnChanges(): void {
-    this.form.controls.fieldEmail.patchValue(this.user.email);
-    this.form.controls.fieldFirstName.patchValue(this.user.firstName);
-    this.form.controls.fieldLastName.patchValue(this.user.lastName);
+    if (this.user) {
+      this.form.controls.fieldEmail.patchValue(this.user.email);
+      this.form.controls.fieldFirstName.patchValue(this.user.firstName);
+      this.form.controls.fieldLastName.patchValue(this.user.lastName);
+    }
+  }
+
+  save(): void {
+    this.saveUser.emit(this.form.value);
   }
 }

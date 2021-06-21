@@ -54,12 +54,16 @@ export class UsersComponent implements OnInit {
     console.log(userId); // TODO remove this and check for real delete
   }
 
-  setEditUser(id): void {
+  setEditUser(id: number): void {
     this.usersQuery.setEditUser(id);
   }
 
   retrieveEditUser(): void {
     const id = Number(this.route.snapshot.params.id);
     this.usersService.retrieveEditUser(id);
+  }
+
+  saveUser(user: User): void {
+    console.log(user);
   }
 }

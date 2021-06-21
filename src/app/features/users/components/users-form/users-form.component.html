@@ -8,6 +8,14 @@
     <mat-form-field class="w-full">
       <input
         matInput
+        formControlName="fieldEmail"
+        placeholder="email"
+        type="email"
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
         formControlName="fieldFirstName"
         placeholder="first name"
         type="text"
@@ -32,13 +40,15 @@
     <mat-form-field class="w-full">
       <input
         matInput
-        formControlName="fieldEmail"
-        placeholder="email"
-        type="email"
+        formControlName="fieldConfirmPassword"
+        placeholder="Confirmation de mot de passe"
+        type="password"
       />
     </mat-form-field>
     <p class="text-center">
-      <button mat-button class="bg-indigo-500">enregister</button>
+      <button mat-button (click)="save()" class="bg-indigo-500">
+        enregister
+      </button>
     </p>
   </mat-card>
 </form>

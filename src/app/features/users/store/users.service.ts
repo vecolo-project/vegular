@@ -34,6 +34,7 @@ export class UsersService {
   }
 
   async retrieveEditUser(id: number): Promise<void> {
+    this.usersStore.setLoading(true);
     try {
       const response = await this.http.get<{ user: User }>(
         API_RESSOURCE_URI.GET_CURRENT_USER
@@ -62,6 +63,21 @@ export class UsersService {
       );
     } finally {
       this.usersStore.setLoading(false);
+    }
+  }
+
+  async putUser(user: User) {
+    this.usersStore.setLoading(true);
+    try {
+      const response = await this.http.put<User>(
+        API_RESSOURCE_URI.PUT_USER,
+        user
+      );
+      this.usersStore.update({ editUser: response });
+    } catch (e) {
+      this.snackBar.warnning(
+        "Erreur lors de la modification de l'utilisateur : " + e.error.error
+      );
     }
   }
 }
