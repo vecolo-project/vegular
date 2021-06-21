@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {User} from '../../../../shared/models/user.model';
-import {UsersService} from '../../store/users.service';
-import {SessionQuery} from "../../../../core/store/session.query";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { User } from '../../../../shared/models/user.model';
+import { UsersService } from '../../store/users.service';
+import { SessionQuery } from '../../../../core/store/session.query';
 
 @Component({
   selector: 'app-user-list',
@@ -30,18 +30,24 @@ export class UserListComponent implements OnInit {
   @Output()
   setEditUser = new EventEmitter<number>();
 
-  displayedColumns = ['id', 'firstName', 'lastName', 'email', 'role', 'actions'];
+  displayedColumns = [
+    'id',
+    'firstName',
+    'lastName',
+    'email',
+    'role',
+    'actions',
+  ];
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.getUsersF(10, 1);
   }
 
-  getUsersF(limit, offset): void {
+  getUsersF(limit: number, offset: number): void {
     setTimeout(() => {
-      this.getUsers.emit({limit, offset});
+      this.getUsers.emit({ limit, offset });
     });
   }
 }
