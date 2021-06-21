@@ -70,7 +70,7 @@ export class UsersService {
     this.usersStore.setLoading(true);
     try {
       const response = await this.http.put<User>(
-        API_RESSOURCE_URI.PUT_USER,
+        API_RESSOURCE_URI.PUT_USER + user.id,
         user
       );
       this.usersStore.update({ editUser: response });

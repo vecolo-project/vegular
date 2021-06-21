@@ -58,6 +58,13 @@ export class UsersFormComponent implements OnInit, OnChanges {
   }
 
   save(): void {
-    this.saveUser.emit(this.form.value);
+    const userProps = {
+      email: this.form.value.fieldEmail,
+      firstName: this.form.value.fieldFirstName,
+      lastName: this.form.value.fieldLastName,
+      password: this.form.value.fieldPassword,
+    };
+    const newUser = { ...this.user, ...userProps };
+    this.saveUser.emit(newUser);
   }
 }

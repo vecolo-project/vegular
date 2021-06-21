@@ -65,5 +65,6 @@ export class UsersComponent implements OnInit {
 
   saveUser(user: User): void {
     console.log(user);
+    this.usersService.putUser(user);
   }
 }
