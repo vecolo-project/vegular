@@ -1,6 +1,7 @@
 import {Bike, Ride, StationMaintenanceThread, StationMonitoring} from ".";
 
 export type Station = {
+  id: number
   batteryCapacity: number,
   bikeCapacity: number,
   streetNumber: number,

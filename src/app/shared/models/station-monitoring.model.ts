@@ -1,4 +1,4 @@
-import { Station } from ".";
+import {Station} from ".";
 
 export type StationMonitoring = {
   id: number;
