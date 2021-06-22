@@ -1,6 +1,2 @@
 <p>map works!</p>
-<div style="height:600px;"
-     leaflet
-     [leafletOptions]="options"
-     [leafletLayersControl]="layersControl">
-</div>
+<app-stations-map [stations]="stations | async"></app-stations-map>

@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {circle, latLng, polygon, tileLayer} from 'leaflet';
+import {Station} from "../../../../shared/models";
+import {Observable} from "rxjs";
+import {StationsQuery} from "../../../stations/store/stations.query";
+import {StationsService} from "../../../stations/store/stations.service";
 
 @Component({
   selector: 'app-map',
@@ -8,33 +11,15 @@ import {circle, latLng, polygon, tileLayer} from 'leaflet';
 })
 export class MapComponent implements OnInit {
 
-  options = {
-    layers: [
-      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        {
-          maxZoom: 18,
-          attribution: 'Vecolo',
-        })
-    ],
-    zoom: 10,
-    center: latLng(48.858222, 2.343683)
-  };
+  stations: Observable<Station[]>
 
-  layersControl = {
-    baseLayers: {
-      'Open Street Map': tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 18, attribution: '...'}),
-      'Open Cycle Map': tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png', {maxZoom: 18, attribution: '...'})
-    },
-    overlays: {
-      'Big Circle': circle([46.95, -122], {radius: 5000}),
-      'Big Square': polygon([[46.8, -121.55], [46.9, -121.55], [46.9, -121.7], [46.8, -121.7]])
-    }
-  };
-
-  constructor() {
+  constructor(private stationsService: StationsService,
+              private stationsQuery: StationsQuery) {
+    this.stations = stationsQuery.selectStationsArray$;
   }
 
   ngOnInit(): void {
+    this.stationsService.getStations(100, 0);
   }
 
 }
