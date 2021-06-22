@@ -49,14 +49,15 @@
         type="password"
       />
     </mat-form-field>
-
     <mat-form-field class="w-full">
+      <mat-label>Date de naissance</mat-label>
       <input
         matInput
         formControlName="fieldBirthDate"
-        placeholder="Date de naissance"
-        type="text"
+        [matDatepicker]="picker"
       />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <mat-form-field class="w-full">
       <input

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HashMap } from '@datorama/akita';
-import { User } from '../../../../shared/models/user.model';
+import { User, UserOut } from '../../../../shared/models/user.model';
 import { UsersQuery } from '../../store/users.query';
 import { UsersService } from '../../store/users.service';
 import { SessionQuery } from '../../../../core/store/session.query';
@@ -63,8 +63,15 @@ export class UsersComponent implements OnInit {
     this.usersService.retrieveEditUser(id);
   }
 
-  saveUser(user: User): void {
-    console.log(user);
-    this.usersService.putUser(user);
+  saveUser(user: UserOut): void {
+    if (user.password.length === 0) {
+      delete user.password;
+    }
+    console.log(user.id);
+    if (user.id === null) {
+      this.usersService.postUser(user);
+    } else {
+      this.usersService.putUser(user);
+    }
   }
 }

@@ -6,4 +6,5 @@ export const API_RESSOURCE_URI = {
   GET_CURRENT_USER: environment.API_URL + '/user/current', // TODO use /user/:id but it's not ready
   DELETE_USER: environment.API_URL + '/user/',
   PUT_USER: environment.API_URL + '/user/',
+  POST_USER: environment.API_URL + '/user/',
 };
