@@ -14,6 +14,14 @@
       />
     </mat-form-field>
     <mat-form-field class="w-full">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="fieldRole">
+        <option value="ADMIN">ADMIN</option>
+        <option value="STAFF">STAFF</option>
+        <option value="CLIENT">CLIENT</option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-full">
       <input
         matInput
         formControlName="fieldFirstName"
@@ -45,6 +53,30 @@
         type="password"
       />
     </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldBirthDate"
+        placeholder="Date de naissance"
+        type="text"
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldPseudo"
+        placeholder="Pseudo"
+        type="text"
+      />
+    </mat-form-field>
+
+    <!-- <input
+          matInput
+          formControlName="fieldRole"
+          placeholder="Confirmation de mot de passe"
+          type="text"
+        /> -->
     <p class="text-center">
       <button mat-button (click)="save()" class="bg-indigo-500">
         enregister
