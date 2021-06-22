@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {UsersState, UsersStore} from './users.store';
-import {HashMap, Query, QueryEntity} from '@datorama/akita';
+import {HashMap, QueryEntity} from '@datorama/akita';
 import {Observable} from 'rxjs';
 import {User} from '../../../shared/models/user.model';
 

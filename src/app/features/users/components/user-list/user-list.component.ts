@@ -1,7 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from '../../../../shared/models/user.model';
-import {UsersService} from '../../store/users.service';
-import {SessionQuery} from "../../../../core/store/session.query";
 
 @Component({
   selector: 'app-user-list',

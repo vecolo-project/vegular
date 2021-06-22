@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {HashMap} from '@datorama/akita';
 import {User} from '../../../../shared/models/user.model';
 import {UsersQuery} from '../../store/users.query';
 import {UsersService} from '../../store/users.service';
