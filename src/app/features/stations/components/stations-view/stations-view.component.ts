@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Station} from "../../../../shared/models";
 
 @Component({
   selector: 'app-stations-view',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StationsViewComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  station: Station
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

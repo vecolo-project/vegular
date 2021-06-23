@@ -21,7 +21,7 @@ export class StationsService {
         API_RESSOURCE_URI.GET_STATIONS + `?limit=${limit}&offset=${offset}`
       );
       this.stationsStore.set(response);
-      this.stationsStore.update({count: response.length}); //TODO change response and add total
+      this.stationsStore.update({count: response.length});
     } catch (e) {
       this.stationsStore.set([]);
       this.snackBar.warnning(
@@ -30,5 +30,22 @@ export class StationsService {
     } finally {
       this.stationsStore.setLoading(false);
     }
+  }
+
+  async getStation(stationId: number): Promise<void> {
+    try {
+      const response = await this.http.get<Station>(
+        API_RESSOURCE_URI.GET_STATIONS + '/' + stationId
+      );
+      this.stationsStore.update({viewStation: response});
+    } catch (e) {
+      this.stationsStore.update({viewStation: undefined});
+      this.snackBar.warnning(
+        'Erreur lors de la récupération d\'une station : ' + e.error.error
+      );
+    } finally {
+      this.stationsStore.setLoading(false);
+    }
+
   }
 }

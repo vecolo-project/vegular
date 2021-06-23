@@ -8,6 +8,7 @@ import {Station} from '../../../shared/models';
 export class StationsQuery extends QueryEntity<StationsState, Station> {
   selectStationsArray$: Observable<Station[]> = this.selectAll();
   selectEditStation$: Observable<Station> = this.select('editStation')
+  selectViewStation$: Observable<Station> = this.select('viewStation')
   selectIds$: Observable<number[]> = this.select('ids');
   selectCount$: Observable<number> = this.select('count');
   isLoading$: Observable<boolean> = this.select('loading');
