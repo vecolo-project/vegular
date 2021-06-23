@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-stations',
@@ -7,9 +8,21 @@ import {Component, OnInit} from '@angular/core';
 })
 export class StationsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+  }
 
   ngOnInit(): void {
+  }
+
+  isViewMode(): boolean {
+    return this.router.isActive('/stations/view', false);
+  }
+
+  isListMode(): boolean {
+    return this.router.isActive('/stations', true);
   }
 
 }
