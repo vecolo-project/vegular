@@ -52,10 +52,9 @@ export class StationsMapComponent implements OnInit, OnChanges {
     return marker([station.coordinateY, station.coordinateX],
       {
         icon: icon({
-          iconSize: [22, 35],
-          iconAnchor: [11, 35],
-          iconUrl: 'assets/images/marker-icon.png',
-          iconRetinaUrl: 'assets/images/marker-icon-2x.png',
+          iconSize: [35, 35],
+          iconAnchor: [18, 35],
+          iconUrl: 'assets/images/station2.png',
           shadowUrl: 'assets/images/marker-shadow.png'
         })
       })
