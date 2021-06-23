@@ -4,6 +4,7 @@ import {MapComponent} from './containers/map/map.component';
 import {MapRoutingModule} from './map-routing.module';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import { StationsMapComponent } from './components/stations-map/stations-map.component';
+import {LeafletMarkerClusterModule} from "@asymmetrik/ngx-leaflet-markercluster";
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { StationsMapComponent } from './components/stations-map/stations-map.com
   ],
   imports: [
     LeafletModule,
+    LeafletMarkerClusterModule,
     MapRoutingModule,
     CommonModule
   ]

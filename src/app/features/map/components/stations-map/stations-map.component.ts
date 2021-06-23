@@ -1,5 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {icon, latLng, marker, tileLayer} from "leaflet";
+import {DivIcon, icon, latLng, marker, MarkerClusterGroupOptions, tileLayer} from "leaflet";
+import "leaflet.markercluster"
 import {Station} from "../../../../shared/models";
 
 @Component({
@@ -20,9 +21,16 @@ export class StationsMapComponent implements OnInit, OnChanges {
           attribution: 'Vecolo',
         })
     ],
-    zoom: 10,
+    zoom: 12,
     center: latLng(48.858222, 2.343683)
   };
+
+  markerClusterOptions: MarkerClusterGroupOptions =
+    {
+      showCoverageOnHover: true,
+      removeOutsideVisibleBounds: true,
+      maxClusterRadius: 100
+    }
 
   layers = []
 
@@ -52,10 +60,11 @@ export class StationsMapComponent implements OnInit, OnChanges {
         })
       })
       .bindPopup(
-        `<h2>Position : ${station.city.toUpperCase()} - ${station.zipcode}</h2>
-                <li>ID : ${station.id}</li>
+        `<h2>Station ${station.id}</h2>
+                <li>Adresse : ${station.streetNumber} ${station.streetName} ${station.city.toUpperCase()} (${station.zipcode})</li>
                 <li>Vélos disponibles : ${station.stationMonitoring[0]?.usedBikeSlot}/${station.bikeCapacity}</li>
                 <li>Batterie : ${station.stationMonitoring[0]?.batteryPercent.toFixed(2)}%</li>
+                <li>État : ${station.stationMonitoring[0]?.status.toUpperCase()}</li>
         `
       )
   }
