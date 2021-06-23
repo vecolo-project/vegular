@@ -1,1 +1,15 @@
-<p>stations-view works!</p>
+<div class="grid grid-cols-3 gap-4">
+  <mat-card>
+    <section class="battery-section">
+      <mat-progress-bar
+        [ngClass]="getProgressColorClass()"
+        [color]="'primary'"
+        [mode]="'buffer'"
+        [value]="station.stationMonitoring[0]?.batteryPercent"
+      ></mat-progress-bar>
+      <div style="position: absolute; padding: 10px; color: white;">
+        {{station.stationMonitoring[0]?.batteryPercent.toFixed(2)}}%
+      </div>
+    </section>
+  </mat-card>
+</div>

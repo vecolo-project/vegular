@@ -17,4 +17,16 @@ export class StationsViewComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getProgressColorClass(): string {
+    if (this.station.stationMonitoring[0]?.batteryPercent < 15) {
+      return "battery-low"
+    }
+    if (this.station.stationMonitoring[0]?.batteryPercent < 33) {
+      return "battery-warn"
+    }
+    if (this.station.stationMonitoring[0]?.batteryPercent < 75) {
+      return "battery-good"
+    }
+    return "battery-great"
+  }
 }
