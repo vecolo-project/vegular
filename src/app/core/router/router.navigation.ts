@@ -15,7 +15,8 @@ export const routesPath = {
   users: 'users',
   bikes: 'bikes',
   finances: 'finances',
-  stations: 'stations'
+  stations: 'stations',
+  stationView: 'stations/view'
 };
 
 @Injectable()
@@ -37,5 +38,13 @@ export class RouterNavigation {
 
   gotoHome(): void {
     this.router.navigate([routesPath.home]);
+  }
+
+  gotoStationList(): void {
+    this.router.navigate([routesPath.stations]);
+  }
+
+  gotoStationView(stationId: number): void {
+    this.router.navigate([routesPath.stationView + '/' + stationId]);
   }
 }
