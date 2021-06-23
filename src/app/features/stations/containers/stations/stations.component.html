@@ -1,3 +1,4 @@
-<p>stations works!</p>
-<app-stations-list *ngIf="isListMode()"></app-stations-list>
-<app-stations-view *ngIf="isViewMode()" [station]="viewStation | async"></app-stations-view>
+<div class="mt-10">
+  <app-stations-list *ngIf="isListMode()"></app-stations-list>
+  <app-stations-view *ngIf="isViewMode()" [station]="viewStation | async"></app-stations-view>
+</div>
