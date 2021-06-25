@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Station} from "../../../../shared/models";
 import {interval} from "rxjs";
+import {AnimationOptions} from "ngx-lottie";
 
 @Component({
   selector: 'app-stations-view',
@@ -14,6 +15,10 @@ export class StationsViewComponent implements OnInit {
 
   @Output()
   getStation = new EventEmitter<number>();
+
+  lottieStationOptions: AnimationOptions = {
+    path: 'assets/lottie/solarPanel2.json',
+  }
 
   constructor() {
   }

@@ -1,7 +1,7 @@
 <div class="grid md:grid-cols-2 grid-cols-1 gap-4">
   <mat-card>
     <mat-card-header>
-      <img mat-card-avatar src="/assets/images/station2.png" alt=""/>
+      <ng-lottie mat-card-avatar [options]="lottieStationOptions"></ng-lottie>
       <mat-card-title>Station {{station?.id}}
         - {{station?.streetNumber}} {{station?.streetName}} {{station?.city.toUpperCase()}} ({{station?.zipcode}})
       </mat-card-title>
