@@ -1,9 +1,8 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {DivIcon, icon, latLng, marker, MarkerClusterGroupOptions, tileLayer} from "leaflet";
+import {icon, latLng, marker, MarkerClusterGroupOptions, tileLayer} from "leaflet";
 import "leaflet.markercluster"
-import {Station} from "../../../../shared/models";
-import {RouterNavigation, routesPath} from "../../../../core/router/router.navigation";
-import {environment} from "../../../../../environments/environment";
+import {Station, StationMonitoringStatus} from "../../../../shared/models";
+import {routesPath} from "../../../../core/router/router.navigation";
 
 @Component({
   selector: 'app-stations-map',
@@ -56,7 +55,7 @@ export class StationsMapComponent implements OnInit, OnChanges {
         icon: icon({
           iconSize: [35, 35],
           iconAnchor: [18, 35],
-          iconUrl: 'assets/images/station2.png',
+          iconUrl: 'assets/images/' + (station.stationMonitoring[0]?.status == StationMonitoringStatus.ACTIVE ? 'station.png' : 'station_off.png'),
           shadowUrl: 'assets/images/marker-shadow.png'
         })
       })
