@@ -15,6 +15,7 @@ export class StationsMapComponent implements OnInit, OnChanges {
   @Input()
   stations: Station[];
 
+
   options = {
     layers: [
       tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -47,7 +48,6 @@ export class StationsMapComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-
   }
 
   markerMaker(station: Station): any {
@@ -61,7 +61,7 @@ export class StationsMapComponent implements OnInit, OnChanges {
         })
       })
       .bindPopup(
-        `<a href="${location.origin + '/' + routesPath.stationView + '/' + station.id}"><h2>Station ${station.id}</h2></a>
+        `<a href="${'/' + routesPath.stationView + '/' + station.id}"><h2>Station ${station.id}</h2></a>
                 <li>Adresse : ${station.streetNumber} ${station.streetName} ${station.city.toUpperCase()} (${station.zipcode})</li>
                 <li>Vélos disponibles : ${station.stationMonitoring[0]?.usedBikeSlot}/${station.bikeCapacity}</li>
                 <li>Batterie : ${station.stationMonitoring[0]?.batteryPercent.toFixed(2)}%</li>

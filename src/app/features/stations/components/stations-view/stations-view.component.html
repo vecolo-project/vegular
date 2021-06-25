@@ -1,11 +1,11 @@
-<div class="grid grid-cols-3 gap-4">
+<div class="grid md:grid-cols-2 grid-cols-1 gap-4">
   <mat-card>
     <mat-card-header>
       <img mat-card-avatar src="/assets/images/station2.png" alt=""/>
-      <mat-card-title>Station {{station.id}}
-        - {{station.streetNumber}} {{station.streetName}} {{station.city.toUpperCase()}} ({{station.zipcode}})
+      <mat-card-title>Station {{station?.id}}
+        - {{station?.streetNumber}} {{station?.streetName}} {{station?.city.toUpperCase()}} ({{station?.zipcode}})
       </mat-card-title>
-      <mat-card-subtitle>État : {{station.stationMonitoring[0]?.status.toUpperCase()}}</mat-card-subtitle>
+      <mat-card-subtitle>État : {{station?.stationMonitoring[0]?.status.toUpperCase()}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="space-y-4">
 
@@ -13,17 +13,17 @@
         <mat-progress-bar
           [ngClass]="getProgressColorClass()"
           [mode]="'buffer'"
-          [value]="station.stationMonitoring[0]?.batteryPercent"
+          [value]="station?.stationMonitoring[0]?.batteryPercent"
         ></mat-progress-bar>
         <div style="position: absolute; padding: 10px; color: white;">
-          {{station.stationMonitoring[0]?.batteryPercent.toFixed(2)}}%
+          {{station?.stationMonitoring[0]?.batteryPercent.toFixed(2)}}%
         </div>
       </section>
-      <div class="text-lg">Puissance de Charge : {{station.stationMonitoring[0]?.chargingPower}} VA</div>
+      <div class="text-lg">Puissance de Charge : {{station?.stationMonitoring[0]?.chargingPower}} VA</div>
       <div class="text-lg">
-        Vélos disponibles : {{station.stationMonitoring[0]?.usedBikeSlot}}/{{station.bikeCapacity}}
+        Vélos disponibles : {{station?.stationMonitoring[0]?.usedBikeSlot}}/{{station?.bikeCapacity}}
       </div>
-      
+
     </mat-card-content>
   </mat-card>
 </div>

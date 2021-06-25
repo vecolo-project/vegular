@@ -17,7 +17,7 @@ export class StationsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private stationsService: StationsService,
+    public stationsService: StationsService,
     private stationsQuery: StationsQuery
   ) {
   }
