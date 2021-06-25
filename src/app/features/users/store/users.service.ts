@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {UsersStore} from './users.store';
-import {HttpClientWrapper} from '../../../core/utils/httpClientWrapper';
-import {Snackbar} from '../../../shared/snackbar/snakbar';
-import {User} from '../../../shared/models/user.model';
-import {API_RESSOURCE_URI} from '../../../shared/api-ressource-uri/api-ressource-uri';
-import {UsersQuery} from './users.query';
+import { Injectable } from '@angular/core';
+import { UsersStore } from './users.store';
+import { HttpClientWrapper } from '../../../core/utils/httpClientWrapper';
+import { Snackbar } from '../../../shared/snackbar/snakbar';
+import { User, UserOut } from '../../../shared/models/user.model';
+import { API_RESSOURCE_URI } from '../../../shared/api-ressource-uri/api-ressource-uri';
+import { UsersQuery } from './users.query';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
@@ -18,11 +18,11 @@ export class UsersService {
   async getUsers(limit: number, offset: number): Promise<void> {
     this.usersStore.setLoading(true);
     try {
-      const response = await this.http.get<User[]>(
+      const response = await this.http.get<{ users: User[]; count: number }>(
         API_RESSOURCE_URI.GET_USERS + `?limit=${limit}&offset=${offset}`
       );
-      this.usersStore.set(response);
-      this.usersStore.update({ count: response.length }); //TODO change response and add total
+      this.usersStore.set(response.users);
+      this.usersStore.update({ count: response.count }); //TODO change response and add total
     } catch (e) {
       this.usersStore.set([]);
       this.snackBar.warnning(
@@ -34,9 +34,10 @@ export class UsersService {
   }
 
   async retrieveEditUser(id: number): Promise<void> {
+    this.usersStore.setLoading(true);
     try {
       const response = await this.http.get<{ user: User }>(
-        API_RESSOURCE_URI.GET_USERS + id
+        API_RESSOURCE_URI.GET_CURRENT_USER
       );
       /* TODO Remove line below when api goes well
       const response = await this.http.get<{ user: User }>(API_RESSOURCE_URI.GET_CURRENT_USER);
@@ -59,6 +60,40 @@ export class UsersService {
     } catch (e) {
       this.snackBar.warnning(
         "Erreur lors de la suppréssion de l'utilisateur : " + e.error.error
+      );
+    } finally {
+      this.usersStore.setLoading(false);
+    }
+  }
+
+  async putUser(user: UserOut) {
+    this.usersStore.setLoading(true);
+    try {
+      const response = await this.http.put<User>(
+        API_RESSOURCE_URI.PUT_USER + user.id,
+        user
+      );
+      this.usersStore.update({ editUser: response });
+    } catch (e) {
+      this.snackBar.warnning(
+        "Erreur lors de la modification de l'utilisateur : " + e.error.error
+      );
+    } finally {
+      this.usersStore.setLoading(false);
+    }
+  }
+
+  async postUser(user: UserOut) {
+    this.usersStore.setLoading(true);
+    try {
+      const response = await this.http.post<User>(
+        API_RESSOURCE_URI.POST_USER,
+        user
+      );
+      this.usersStore.update({ editUser: response });
+    } catch (e) {
+      this.snackBar.warnning(
+        "Erreur lors de l'ajout de l'utilisateur : " + e.error.error
       );
     } finally {
       this.usersStore.setLoading(false);

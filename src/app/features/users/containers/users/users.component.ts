@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
-import {User} from '../../../../shared/models/user.model';
-import {UsersQuery} from '../../store/users.query';
-import {UsersService} from '../../store/users.service';
-import {SessionQuery} from '../../../../core/store/session.query';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HashMap } from '@datorama/akita';
+import { User, UserOut } from '../../../../shared/models/user.model';
+import { UsersQuery } from '../../store/users.query';
+import { UsersService } from '../../store/users.service';
+import { SessionQuery } from '../../../../core/store/session.query';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -13,7 +14,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class UsersComponent implements OnInit {
   users: Observable<User[]>;
-  userCount:Observable<number>
+  userCount: Observable<number>;
   editUser: Observable<User>;
   usersLoading: Observable<boolean>;
 
@@ -30,8 +31,7 @@ export class UsersComponent implements OnInit {
     this.editUser = this.usersQuery.selectEditUsers$;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   isListMode(): boolean {
     return this.router.isActive('/users', true);
@@ -39,6 +39,10 @@ export class UsersComponent implements OnInit {
 
   isEditMode(): boolean {
     return this.router.isActive('/users/edit', false);
+  }
+
+  isAddMode(): boolean {
+    return this.router.isActive('/users/add', true);
   }
 
   getUsers(limit: number, offset: number): void {
@@ -50,12 +54,24 @@ export class UsersComponent implements OnInit {
     console.log(userId); // TODO remove this and check for real delete
   }
 
-  setEditUser(id): void {
+  setEditUser(id: number): void {
     this.usersQuery.setEditUser(id);
   }
 
   retrieveEditUser(): void {
     const id = Number(this.route.snapshot.params.id);
     this.usersService.retrieveEditUser(id);
+  }
+
+  saveUser(user: UserOut): void {
+    if (user.password.length === 0) {
+      delete user.password;
+    }
+    console.log(user.id);
+    if (user.id === null) {
+      this.usersService.postUser(user);
+    } else {
+      this.usersService.putUser(user);
+    }
   }
 }

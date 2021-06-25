@@ -1,5 +1,5 @@
 <p class="text-right mb-4">
-  <button mat-raised-button color="primary">
+  <button mat-raised-button color="primary" routerLink="/users/add">
     <mat-icon>add</mat-icon>
     Add
   </button>
@@ -41,7 +41,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
   <mat-paginator
-    [length]="userListArray.length"
+    [length]="usersCount"
     [pageSize]="10"
     [pageSizeOptions]="[5, 10, 20]"
     (page)="getUsersF($event.pageSize, $event.pageIndex * $event.pageSize)"
