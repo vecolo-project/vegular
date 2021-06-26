@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BikeManufacturer } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-bikes-manufacturer-list',
@@ -6,9 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bikes-manufacturer-list.component.scss'],
 })
 export class BikesManufacturerListComponent implements OnInit {
-  bikesManufacturer = [];
+  @Input()
+  manufacturers: BikeManufacturer[];
+
+  @Input()
+  loading: boolean;
+
+  @Output()
+  getManufacturers = new EventEmitter();
+
+  @Input()
+  manufacturersCount: number;
+
   displayedColumns = ['id', 'name', 'phone', 'address'];
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.getManufacturers.emit();
+    });
+  }
 }

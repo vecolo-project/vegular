@@ -32,4 +32,21 @@ export class BikeManufacturerService {
       this.bikeManufacturerStore.setLoading(false);
     }
   }
+  async getManufacturers(): Promise<void> {
+    this.bikeManufacturerStore.setLoading(true);
+    try {
+      const response = await this.http.get<BikeManufacturer[]>(
+        API_RESSOURCE_URI.GET_BIKE_MANUFACTURERS
+      );
+      this.bikeManufacturerStore.set(response);
+      this.bikeManufacturerStore.update({ count: response.length });
+    } catch (e) {
+      this.bikeManufacturerStore.set([]);
+      this.snackBar.warnning(
+        'Erreur lors de la récupération des fabriquants : ' + e.error.error
+      );
+    } finally {
+      this.bikeManufacturerStore.setLoading(false);
+    }
+  }
 }

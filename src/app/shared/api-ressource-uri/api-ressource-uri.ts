@@ -11,5 +11,8 @@ export const API_RESSOURCE_URI = {
   POST_USER: environment.API_URL + '/user/',
   // Stations
   GET_STATIONS: environment.API_URL + '/station/',
+
+  // Bike
   POST_BIKE_MANUFACTURER: environment.API_URL + '/bike-manufacturer',
+  GET_BIKE_MANUFACTURERS: environment.API_URL + '/bike-manufacturer',
 };

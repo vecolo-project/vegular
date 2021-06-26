@@ -5,7 +5,12 @@
     ><app-bikes-model-list></app-bikes-model-list
   ></mat-tab>
   <mat-tab label="Fabriquant"
-    ><app-bikes-manufacturer-list></app-bikes-manufacturer-list
+    ><app-bikes-manufacturer-list
+      [manufacturers]="manufacturers | async"
+      [manufacturersCount]="manufacturersCount | async"
+      (getManufacturers)="getManufacturers()"
+      [loading]="manufacturerLoading | async"
+    ></app-bikes-manufacturer-list
   ></mat-tab>
 </mat-tab-group>
 <app-bikes-manufacturer-form
