@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable} from "rxjs";
-import {Station} from "../../../../shared/models";
+import {Station, StationMonitoring} from "../../../../shared/models";
 import {StationsQuery} from "../../store/stations.query";
 import {StationsService} from "../../store/stations.service";
+import {endOfDay, startOfDay, subDays} from "date-fns";
 
 @Component({
   selector: 'app-stations',
@@ -13,6 +14,7 @@ import {StationsService} from "../../store/stations.service";
 export class StationsComponent implements OnInit {
 
   viewStation: Observable<Station>;
+  stationMonitorings: Observable<StationMonitoring[]>;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,11 +26,18 @@ export class StationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.viewStation = this.stationsQuery.selectViewStation$;
-
+    this.stationMonitorings = this.stationsQuery.selectViewStationMonitoring$;
     if (this.isViewMode()) {
-      const stationId = this.route.snapshot.params.id;
+      const stationId = Number.parseInt(this.route.snapshot.params.id);
       this.stationsService.getStation(stationId);
+      this.retrieveMonitoring(stationId, 3);
     }
+  }
+
+  retrieveMonitoring(stationId: number, nbDays: number) {
+    const now = new Date();
+    const dayAgo = subDays(now, nbDays);
+    this.stationsService.getStationMonitoring(stationId, dayAgo, now);
   }
 
   isViewMode(): boolean {

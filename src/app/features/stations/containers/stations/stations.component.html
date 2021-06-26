@@ -2,6 +2,8 @@
   <app-stations-list *ngIf="isListMode()"></app-stations-list>
   <app-stations-view *ngIf="isViewMode()"
                      [station]="viewStation | async"
+                     [stationMonitorings]="stationMonitorings | async"
+                     (getMonitoring)="retrieveMonitoring($event.stationId,$event.nbDays)"
                      (getStation)="stationsService.getStation($event)"
   ></app-stations-view>
 </div>

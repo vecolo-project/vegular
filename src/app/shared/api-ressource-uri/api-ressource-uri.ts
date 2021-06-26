@@ -11,4 +11,6 @@ export const API_RESSOURCE_URI = {
   POST_USER: environment.API_URL + '/user/',
   // Stations
   GET_STATIONS: environment.API_URL + '/station/',
+  //Station monitoring
+  STATION_MONITORING: environment.API_URL + '/station-monitoring/'
 };
