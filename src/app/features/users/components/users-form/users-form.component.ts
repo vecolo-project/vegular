@@ -49,6 +49,7 @@ export class UsersFormComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     if (this.isAddMode) {
+      this.form.reset();
       return;
     }
     if (!this.user) {

@@ -66,11 +66,12 @@ export class UsersService {
     }
   }
 
-  async putUser(user: PutUser) {
+  async putUser(user: PutUser, id: number) {
+    console.log(id);
     this.usersStore.setLoading(true);
     try {
       const response = await this.http.put<User>(
-        API_RESSOURCE_URI.PUT_USER + user.id,
+        API_RESSOURCE_URI.PUT_USER + id,
         user
       );
       this.usersStore.update({ editUser: response });

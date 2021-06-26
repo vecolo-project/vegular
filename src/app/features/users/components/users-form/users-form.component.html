@@ -61,20 +61,9 @@
         type="text"
       />
     </mat-form-field>
-    <mat-form-field class="w-full">
-      <mat-label>Newsletter</mat-label>
-      <mat-select formControlName="fieldNewsletter">
-        <mat-option value="true">Oui</mat-option>
-        <mat-option value="false">Non</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <!-- <input
-          matInput
-          formControlName="fieldRole"
-          placeholder="Confirmation de mot de passe"
-          type="text"
-        /> -->
+    <mat-slide-toggle formControlName="fieldNewsletter" class="example-margin">
+      Newsletter
+    </mat-slide-toggle>
     <p class="text-center">
       <button mat-button (click)="save()" class="bg-indigo-500">
         enregister

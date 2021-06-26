@@ -10,7 +10,7 @@ export type User = {
 };
 
 export type UserFormData = {
-  id: null | string | number;
+  id: null | number;
   email: string;
   firstName: string;
   lastName: string;
@@ -35,7 +35,6 @@ export type RegisterUser = {
 };
 
 export type PutUser = {
-  id: number;
   firstName: string;
   lastName: string;
   password?: string;
