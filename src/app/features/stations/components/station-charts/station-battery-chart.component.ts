@@ -14,8 +14,10 @@ export class StationBatteryChartComponent implements OnInit, OnChanges {
   stationMonitorings: StationMonitoring[];
 
 
-  lineChartData: ChartDataSets[];
-  lineChartLabels: Label[];
+  lineChartBatteryData: ChartDataSets[];
+  lineChartBatteryLabels: Label[];
+  lineChartBikeData: ChartDataSets[];
+  lineChartBikeLabels: Label[];
   lineChartOptions: ChartOptions = {
     responsive: true,
     defaultColor: '#fefefe',
@@ -59,23 +61,37 @@ export class StationBatteryChartComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.computeChart()
+    this.computeBatteryChart();
+    this.computeBikeChart();
   }
 
   ngOnChanges(): void {
-    this.computeChart();
+    this.computeBatteryChart();
+    this.computeBikeChart();
   }
 
 
-  private computeChart() {
+  private computeBatteryChart() {
     const moduloFilter = this.stationMonitorings.length > 500 ? Math.round(this.stationMonitorings.length / 500) : 1;
-    this.lineChartData = [
+    this.lineChartBatteryData = [
       {
         data: this.stationMonitorings.filter((value, index) => index % moduloFilter === 0).map(m => m.batteryPercent),
         label: 'Batterie de la station',
         spanGaps: true,
       }
     ]
-    this.lineChartLabels = this.stationMonitorings.filter((value, index) => index % moduloFilter === 0).map(m => format(addHours(new Date(m.createdAt), 2), 'yyyy-MM-dd HH:mm:ss'));
+    this.lineChartBatteryLabels = this.stationMonitorings.filter((value, index) => index % moduloFilter === 0).map(m => format(addHours(new Date(m.createdAt), 2), 'yyyy-MM-dd HH:mm:ss'));
+  }
+
+  private computeBikeChart() {
+    const moduloFilter = this.stationMonitorings.length > 100 ? Math.round(this.stationMonitorings.length / 100) : 1;
+    this.lineChartBikeData = [
+      {
+        data: this.stationMonitorings.filter((value, index) => index % moduloFilter === 0).map(m => m.usedBikeSlot),
+        label: 'Vélos disponibles',
+        spanGaps: true,
+      }
+    ]
+    this.lineChartBikeLabels = this.stationMonitorings.filter((value, index) => index % moduloFilter === 0).map(m => format(addHours(new Date(m.createdAt), 2), 'yyyy-MM-dd HH:mm:ss'));
   }
 }

@@ -12,5 +12,6 @@ export const API_RESSOURCE_URI = {
   // Stations
   GET_STATIONS: environment.API_URL + '/station/',
   //Station monitoring
-  STATION_MONITORING: environment.API_URL + '/station-monitoring/'
+  STATION_MONITORING: environment.API_URL + '/station-monitoring/',
+  OSM_SEARCH_ADDRESS: 'https://nominatim.openstreetmap.org/search.php?'
 };

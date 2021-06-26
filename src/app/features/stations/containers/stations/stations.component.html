@@ -1,5 +1,9 @@
 <div class="mt-10">
-  <app-stations-list *ngIf="isListMode()"></app-stations-list>
+  <app-stations-list *ngIf="isListMode()"
+                     [addressSearchResults]="addressResultSearch | async"
+                     (searchEvent)="stationsService.searchAddress($event)"
+  ></app-stations-list>
+
   <app-stations-view *ngIf="isViewMode()"
                      [station]="viewStation | async"
                      [stationMonitorings]="stationMonitorings | async"

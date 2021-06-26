@@ -4,6 +4,8 @@ import {HttpClientWrapper} from '../../../core/utils/httpClientWrapper';
 import {Snackbar} from '../../../shared/snackbar/snakbar';
 import {Station, StationMonitoring} from '../../../shared/models';
 import {API_RESSOURCE_URI} from '../../../shared/api-ressource-uri/api-ressource-uri';
+import {HttpTools} from "../../../shared/http-tools/http-tools";
+import {OsmSearchResponse} from "../../../shared/models/osmSearchResponse";
 
 @Injectable({providedIn: 'root'})
 export class StationsService {
@@ -48,12 +50,12 @@ export class StationsService {
     }
   }
 
-  async getStationMonitoring(stationId: number, start: Date, end: Date) {
+  async getStationMonitoring(stationId: number, start: Date, end: Date): Promise<void> {
     try {
       const response = await this.http.get<StationMonitoring[]>(
-        API_RESSOURCE_URI.STATION_MONITORING + stationId + '/period/?dateStart='+start.toISOString()+'&dateEnd='+end.toISOString()
+        API_RESSOURCE_URI.STATION_MONITORING + stationId + '/period/?dateStart=' + start.toISOString() + '&dateEnd=' + end.toISOString()
       );
-      this.stationsStore.update({stationMonitoring:response});
+      this.stationsStore.update({stationMonitoring: response});
     } catch (e) {
       this.stationsStore.update({stationMonitoring: []});
       this.snackBar.warnning(
@@ -62,6 +64,17 @@ export class StationsService {
     } finally {
       this.stationsStore.setLoading(false);
     }
+  }
 
+  async searchAddress(address: string): Promise<void> {
+    this.stationsStore.update({addressAutocomplete: []})
+    const response = await this.http.get<OsmSearchResponse[]>(API_RESSOURCE_URI.OSM_SEARCH_ADDRESS +
+      HttpTools.ObjectToHttpParams({
+        q: address,
+        format: 'json',
+        countrycodes: 'fr',
+        addressdetails: 1
+      }));
+    this.stationsStore.update({addressAutocomplete: response});
   }
 }

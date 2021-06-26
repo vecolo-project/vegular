@@ -4,7 +4,8 @@ import {Observable} from "rxjs";
 import {Station, StationMonitoring} from "../../../../shared/models";
 import {StationsQuery} from "../../store/stations.query";
 import {StationsService} from "../../store/stations.service";
-import {endOfDay, startOfDay, subDays} from "date-fns";
+import {subDays} from "date-fns";
+import {OsmSearchResponse} from "../../../../shared/models/osmSearchResponse";
 
 @Component({
   selector: 'app-stations',
@@ -15,6 +16,7 @@ export class StationsComponent implements OnInit {
 
   viewStation: Observable<Station>;
   stationMonitorings: Observable<StationMonitoring[]>;
+  addressResultSearch: Observable<OsmSearchResponse[]>;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,6 +28,7 @@ export class StationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.viewStation = this.stationsQuery.selectViewStation$;
+    this.addressResultSearch = this.stationsQuery.selectAdressSearchResult$;
     this.stationMonitorings = this.stationsQuery.selectViewStationMonitoring$;
     if (this.isViewMode()) {
       const stationId = Number.parseInt(this.route.snapshot.params.id);
