@@ -1,0 +1,83 @@
+<p>users-form works!</p>
+<form [formGroup]="form" action="" class="mb-3">
+  <mat-card>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldEmail"
+        placeholder="email"
+        type="email"
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="fieldRole">
+        <mat-option value="ADMIN">ADMIN</mat-option>
+        <mat-option value="STAFF">STAFF</mat-option>
+        <mat-option value="CLIENT">CLIENT</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldFirstName"
+        placeholder="first name"
+        type="text"
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldLastName"
+        placeholder="last name"
+        type="text"
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldPassword"
+        placeholder="Mot de passe"
+        type="password"
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldConfirmPassword"
+        placeholder="Confirmation de mot de passe"
+        type="password"
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <mat-label>Date de naissance</mat-label>
+      <input
+        matInput
+        formControlName="fieldBirthDate"
+        [matDatepicker]="picker"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldPseudo"
+        placeholder="Pseudo"
+        type="text"
+      />
+    </mat-form-field>
+
+    <!-- <input
+          matInput
+          formControlName="fieldRole"
+          placeholder="Confirmation de mot de passe"
+          type="text"
+        /> -->
+    <p class="text-center">
+      <button mat-button (click)="save()" class="bg-indigo-500">
+        enregister
+      </button>
+    </p>
+  </mat-card>
+</form>

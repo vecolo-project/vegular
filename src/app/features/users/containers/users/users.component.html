@@ -1,1 +1,18 @@
 <p>users works!</p>
+<app-user-list
+  *ngIf="isListMode()"
+  [userListArray]="users | async"
+  [usersCount]="userCount | async"
+  [loading]="usersLoading | async"
+  [isAdmin]="sessionQuery.isAdmin$ | async"
+  (getUsers)="getUsers($event.limit, $event.offset)"
+  (deleteUser)="deleteUser($event)"
+  (setEditUser)="setEditUser($event)"
+></app-user-list>
+<app-users-form
+  *ngIf="isEditMode() || isAddMode()"
+  [user]="editUser | async"
+  (retrieveEditUser)="retrieveEditUser()"
+  (saveUser)="saveUser($event)"
+  [isAddMode]="isAddMode()"
+></app-users-form>

@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { SessionStore } from './session.store';
-import { RouterNavigation } from '../router/router.navigation';
-import { User } from '../../shared/models/user.model';
-import { HttpClientWrapper } from '../utils/httpClientWrapper';
-import { API_RESSOURCE_URI } from '../../shared/api-ressource-uri/api-ressource-uri';
-import { Snackbar } from '../../shared/snackbar/snakbar';
+import {Injectable} from '@angular/core';
+import {SessionStore} from './session.store';
+import {RouterNavigation} from '../router/router.navigation';
+import {User} from '../../shared/models/user.model';
+import {HttpClientWrapper} from '../utils/httpClientWrapper';
+import {API_RESSOURCE_URI} from '../../shared/api-ressource-uri/api-ressource-uri';
+import {Snackbar} from '../../shared/snackbar/snakbar';
 
 @Injectable({ providedIn: 'root' })
 export class SessionService {
@@ -27,7 +27,7 @@ export class SessionService {
       this.sessionStore.setUser(response.user);
       this.sessionStore.setToken(response.token);
       this.routerNavigation.gotoHome();
-      this.snackBar.success('vous êtes maintenant connecter');
+      this.snackBar.success('vous êtes maintenant connecté');
     } catch (e) {
       this.snackBar.warnning('Erreur de connexion : ' + e.error.error);
     }
