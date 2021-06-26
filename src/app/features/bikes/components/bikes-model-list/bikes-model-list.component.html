@@ -1,0 +1,19 @@
+<p>bikes-model-list works!</p>
+<div class="flex flex-col my-2">
+  <table mat-table [dataSource]="bikesModel" class="mat-elevation-z8">
+    <mat-text-column name="id"></mat-text-column>
+    <mat-text-column name="name"></mat-text-column>
+    <mat-text-column name="manufacturer"></mat-text-column>
+    <mat-text-column name="battery capacity"></mat-text-column>
+    <mat-text-column name="weight"></mat-text-column>
+    <mat-text-column name="max power"></mat-text-column>
+    <mat-text-column name="max speed"></mat-text-column>
+    <mat-text-column name="max distance"></mat-text-column>
+    <mat-text-column name="description"></mat-text-column>
+    <mat-text-column name="image"></mat-text-column>
+    <mat-text-column name="icon"></mat-text-column>
+    <mat-text-column name="creation date"></mat-text-column>
+    <mat-text-column name="update date"></mat-text-column>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  </table>
+</div>

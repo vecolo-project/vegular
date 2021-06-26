@@ -1,0 +1,10 @@
+<p>bikes-manufacturer-list works!</p>
+<div class="flex flex-col my-2">
+  <table mat-table [dataSource]="bikesManufacturer" class="mat-elevation-z8">
+    <mat-text-column name="id"></mat-text-column>
+    <mat-text-column name="name"></mat-text-column>
+    <mat-text-column name="phone"></mat-text-column>
+    <mat-text-column name="address"></mat-text-column>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  </table>
+</div>

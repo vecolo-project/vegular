@@ -1,0 +1,15 @@
+<p>bikes-list works!</p>
+<div class="flex flex-col my-2">
+  <table mat-table [dataSource]="bikes" class="mat-elevation-z8">
+    <mat-text-column name="id"></mat-text-column>
+    <mat-text-column name="matricule"></mat-text-column>
+    <mat-text-column name="station"></mat-text-column>
+    <mat-text-column name="battery percent"></mat-text-column>
+    <mat-text-column name="recharging"></mat-text-column>
+    <mat-text-column name="model"></mat-text-column>
+    <mat-text-column name="status"></mat-text-column>
+    <mat-text-column name="creation date"></mat-text-column>
+    <mat-text-column name="update date"></mat-text-column>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  </table>
+</div>
