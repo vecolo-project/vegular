@@ -1,4 +1,4 @@
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 export const API_RESSOURCE_URI = {
   // Auth
@@ -11,4 +11,5 @@ export const API_RESSOURCE_URI = {
   POST_USER: environment.API_URL + '/user/',
   // Stations
   GET_STATIONS: environment.API_URL + '/station/',
+  POST_BIKE_MANUFACTURER: environment.API_URL + '/bike-manufacturer',
 };

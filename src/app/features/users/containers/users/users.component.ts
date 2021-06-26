@@ -71,6 +71,7 @@ export class UsersComponent implements OnInit {
     const putUser = buildPutUserFromUserFormData(user);
     this.usersService.putUser(putUser, id);
   }
+
   postUser(user: UserFormData) {
     const postUser = buildPostUserFromUserFormData(user);
     this.usersService.postUser(postUser);
