@@ -51,13 +51,7 @@
     </mat-form-field>
     <mat-form-field class="w-full">
       <mat-label>Date de naissance</mat-label>
-      <input
-        matInput
-        formControlName="fieldBirthDate"
-        [matDatepicker]="picker"
-      />
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <input matInput formControlName="fieldBirthDate" type="text" />
     </mat-form-field>
     <mat-form-field class="w-full">
       <input
@@ -66,6 +60,13 @@
         placeholder="Pseudo"
         type="text"
       />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <mat-label>Newsletter</mat-label>
+      <mat-select formControlName="fieldNewsletter">
+        <mat-option value="true">Oui</mat-option>
+        <mat-option value="false">Non</mat-option>
+      </mat-select>
     </mat-form-field>
 
     <!-- <input

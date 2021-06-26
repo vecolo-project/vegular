@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { UsersStore } from './users.store';
 import { HttpClientWrapper } from '../../../core/utils/httpClientWrapper';
 import { Snackbar } from '../../../shared/snackbar/snakbar';
-import { User, UserOut } from '../../../shared/models/user.model';
+import { PutUser, RegisterUser, User } from '../../../shared/models/user.model';
 import { API_RESSOURCE_URI } from '../../../shared/api-ressource-uri/api-ressource-uri';
 import { UsersQuery } from './users.query';
 
@@ -66,7 +66,7 @@ export class UsersService {
     }
   }
 
-  async putUser(user: UserOut) {
+  async putUser(user: PutUser) {
     this.usersStore.setLoading(true);
     try {
       const response = await this.http.put<User>(
@@ -83,7 +83,7 @@ export class UsersService {
     }
   }
 
-  async postUser(user: UserOut) {
+  async postUser(user: RegisterUser) {
     this.usersStore.setLoading(true);
     try {
       const response = await this.http.post<User>(

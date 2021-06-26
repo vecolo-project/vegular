@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HashMap } from '@datorama/akita';
-import { User, UserOut } from '../../../../shared/models/user.model';
+import { User, UserFormData } from '../../../../shared/models/user.model';
 import { UsersQuery } from '../../store/users.query';
 import { UsersService } from '../../store/users.service';
 import { SessionQuery } from '../../../../core/store/session.query';
 import { ActivatedRoute, Router } from '@angular/router';
+import {
+  buildPostUserFromUserFormData,
+  buildPutUserFromUserFormData,
+} from '../../userTypeAdapter';
 
 @Component({
   selector: 'app-user',
@@ -63,15 +66,12 @@ export class UsersComponent implements OnInit {
     this.usersService.retrieveEditUser(id);
   }
 
-  saveUser(user: UserOut): void {
-    if (user.password.length === 0) {
-      delete user.password;
-    }
-    console.log(user.id);
-    if (user.id === null) {
-      this.usersService.postUser(user);
-    } else {
-      this.usersService.putUser(user);
-    }
+  putUser(user: UserFormData): void {
+    const putUser = buildPutUserFromUserFormData(user);
+    this.usersService.putUser(putUser);
+  }
+  postUser(user: UserFormData) {
+    const postUser = buildPostUserFromUserFormData(user);
+    this.usersService.postUser(postUser);
   }
 }

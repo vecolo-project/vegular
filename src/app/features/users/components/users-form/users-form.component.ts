@@ -7,7 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/app/shared/models/user.model';
+import { User, UserFormData } from 'src/app/shared/models/user.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -28,7 +28,10 @@ export class UsersFormComponent implements OnInit, OnChanges {
   public retrieveEditUser = new EventEmitter<any>();
 
   @Output()
-  public saveUser = new EventEmitter<User>();
+  public postUser = new EventEmitter<UserFormData>();
+
+  @Output()
+  public putUser = new EventEmitter<UserFormData>();
 
   constructor(private fp: FormBuilder, private route: ActivatedRoute) {
     this.form = this.fp.group({
@@ -84,32 +87,32 @@ export class UsersFormComponent implements OnInit, OnChanges {
   }
 
   private saveForAdd(): void {
-    const user = {
-      id: null,
-      email: this.form.value.fieldEmail,
-      firstName: this.form.value.fieldFirstName,
-      lastName: this.form.value.fieldLastName,
-      password: this.form.value.fieldPassword,
-      birthDate: this.form.value.fieldBirthDate,
-      pseudo: this.form.value.fieldPseudo,
-      role: this.form.value.fieldRole,
-      newsletter: this.form.value.fieldNewsletter,
-    };
-    this.saveUser.emit(user);
+    this.postUser.emit({
+      id: this.user.id ? this.user.id : null,
+      email: this.form.value.fieldEmail as string,
+      firstName: this.form.value.fieldFirstName as string,
+      lastName: this.form.value.fieldLastName as string,
+      password: this.form.value.fieldPassword as string,
+      birthDate: this.form.value.fieldBirthDate as string,
+      pseudo: this.form.value.fieldPseudo as string,
+      role: this.form.value.fieldRole as string,
+      newsletter: this.form.value.fieldNewsletter as string,
+      isActive: 'true',
+    });
   }
 
   private saveForEdit(): void {
-    const userProps = {
-      email: this.form.value.fieldEmail,
-      firstName: this.form.value.fieldFirstName,
-      lastName: this.form.value.fieldLastName,
-      password: this.form.value.fieldPassword,
-      birthDate: this.form.value.fieldBirthDate,
-      pseudo: this.form.value.fieldPseudo,
-      role: this.form.value.fieldRole,
-      newsletter: this.form.value.fieldNewsletter,
-    };
-    const newUser = { ...this.user, ...userProps };
-    this.saveUser.emit(newUser);
+    this.putUser.emit({
+      id: this.user.id ? this.user.id : null,
+      email: this.form.value.fieldEmail as string,
+      firstName: this.form.value.fieldFirstName as string,
+      lastName: this.form.value.fieldLastName as string,
+      password: this.form.value.fieldPassword as string,
+      birthDate: this.form.value.fieldBirthDate as string,
+      pseudo: this.form.value.fieldPseudo as string,
+      role: this.form.value.fieldRole as string,
+      newsletter: this.form.value.fieldNewsletter as string,
+      isActive: 'true',
+    });
   }
 }
