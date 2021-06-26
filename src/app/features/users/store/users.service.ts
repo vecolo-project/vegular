@@ -52,7 +52,7 @@ export class UsersService {
   async deleteUser(userId: number): Promise<void> {
     this.usersStore.setLoading(true);
     try {
-      await this.http.delete<User[]>(API_RESSOURCE_URI.DELETE_USER + userId);
+      await this.http.delete<void>(API_RESSOURCE_URI.DELETE_USER + userId);
       this.usersStore.remove(userId);
     } catch (e) {
       this.snackBar.warnning(

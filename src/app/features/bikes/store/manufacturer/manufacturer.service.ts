@@ -49,4 +49,55 @@ export class BikeManufacturerService {
       this.bikeManufacturerStore.setLoading(false);
     }
   }
+
+  async getManufacturer(id: number): Promise<void> {
+    this.bikeManufacturerStore.setLoading(true);
+    try {
+      const response = await this.http.get<BikeManufacturer>(
+        API_RESSOURCE_URI.GET_BIKE_MANUFACTURER + id
+      );
+      this.bikeManufacturerStore.update({ editManufacturer: response });
+    } catch (e) {
+      this.bikeManufacturerStore.set({ editManufacturer: null });
+      this.snackBar.warnning(
+        'Erreur lors de la récupération du fabriquant : ' + e.error.error
+      );
+    } finally {
+      this.bikeManufacturerStore.setLoading(false);
+    }
+  }
+
+  async deleteManufacturer(id: number): Promise<void> {
+    this.bikeManufacturerStore.setLoading(true);
+    try {
+      await this.http.delete<void>(API_RESSOURCE_URI.DELETE_MANUFACTURER + id);
+      this.bikeManufacturerStore.remove(id);
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la suppression du fabriquant : ' + e.error.error
+      );
+    } finally {
+      this.bikeManufacturerStore.setLoading(false);
+    }
+  }
+
+  async putManufacturer(
+    manufacturer: BikeManufacturerProps,
+    id: number
+  ): Promise<void> {
+    this.bikeManufacturerStore.setLoading(true);
+    try {
+      const response = await this.http.put<BikeManufacturer>(
+        API_RESSOURCE_URI.PUT_MANUFACTURER + id,
+        manufacturer
+      );
+      this.bikeManufacturerStore.update({ editManufacturer: response });
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la modification du fabriquant : ' + e.error.error
+      );
+    } finally {
+      this.bikeManufacturerStore.setLoading(false);
+    }
+  }
 }
