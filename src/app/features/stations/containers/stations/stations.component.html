@@ -1,7 +1,15 @@
+<app-address-search
+  [addressSearchResults]="addressResultSearch | async"
+  [initialAdressValue]=""
+  (searchEvent)="stationsService.searchAddress($event)"
+  (addressSelectEvent)="onSelect($event)"
+></app-address-search>
+
 <div class="mt-10">
   <app-stations-list *ngIf="isListMode()"
-                     [addressSearchResults]="addressResultSearch | async"
-                     (searchEvent)="stationsService.searchAddress($event)"
+                     [stationList]="stationList | async"
+                     [stationCount]="stationCount | async"
+                     (getSations)="this.getStations($event.limit,$event.offset)"
   ></app-stations-list>
 
   <app-stations-view *ngIf="isViewMode()"

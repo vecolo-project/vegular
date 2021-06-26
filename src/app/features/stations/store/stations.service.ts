@@ -19,11 +19,11 @@ export class StationsService {
   async getStations(limit: number, offset: number): Promise<void> {
     this.stationsStore.setLoading(true);
     try {
-      const response = await this.http.get<Station[]>(
+      const response = await this.http.get<{ stations: Station[], count: number }>(
         API_RESSOURCE_URI.GET_STATIONS + `?limit=${limit}&offset=${offset}`
       );
-      this.stationsStore.set(response);
-      this.stationsStore.update({count: response.length});
+      this.stationsStore.set(response.stations);
+      this.stationsStore.update({count: response.count});
     } catch (e) {
       this.stationsStore.set([]);
       this.snackBar.warnning(

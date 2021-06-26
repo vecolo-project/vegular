@@ -15,6 +15,8 @@ import {OsmSearchResponse} from "../../../../shared/models/osmSearchResponse";
 export class StationsComponent implements OnInit {
 
   viewStation: Observable<Station>;
+  stationList: Observable<Station[]>;
+  stationCount: Observable<number>;
   stationMonitorings: Observable<StationMonitoring[]>;
   addressResultSearch: Observable<OsmSearchResponse[]>;
 
@@ -24,12 +26,14 @@ export class StationsComponent implements OnInit {
     public stationsService: StationsService,
     private stationsQuery: StationsQuery
   ) {
-  }
-
-  ngOnInit(): void {
     this.viewStation = this.stationsQuery.selectViewStation$;
     this.addressResultSearch = this.stationsQuery.selectAdressSearchResult$;
     this.stationMonitorings = this.stationsQuery.selectViewStationMonitoring$;
+    this.stationList = this.stationsQuery.selectStationsArray$;
+    this.stationCount = this.stationsQuery.selectCount$;
+  }
+
+  ngOnInit(): void {
     if (this.isViewMode()) {
       const stationId = Number.parseInt(this.route.snapshot.params.id);
       this.stationsService.getStation(stationId);
@@ -50,5 +54,14 @@ export class StationsComponent implements OnInit {
   isListMode(): boolean {
     return this.router.isActive('/stations', true);
   }
+
+  onSelect(value: any) {
+    console.log(value);
+  }
+
+  getStations(limit: number, offset: number): void {
+    this.stationsService.getStations(limit, offset);
+  }
+
 
 }

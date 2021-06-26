@@ -1,6 +1,39 @@
-<app-address-search
-  [addressSearchResults]="addressSearchResults"
-  [initialAdressValue]=""
-  (searchEvent)="searchEvent.emit($event)"
-  (addressSelectEvent)="onSelect($event)"
-></app-address-search>
+<div class="flex flex-col my-2">
+<table mat-table [dataSource]="stationList" class="mat-elevation-z8">
+  <mat-text-column name="id"></mat-text-column>
+  <ng-container matColumnDef="address">
+    <th mat-header-cell *matHeaderCellDef>Adresse</th>
+    <td mat-cell *matCellDef="let element">
+      {{element.streetNumber}} {{element.streetName}} - {{element.city}} ({{element.zipcode}})
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef>Statut</th>
+    <td mat-cell *matCellDef="let element">
+      {{element.stationMonitoring[0]?.status}}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="battery">
+    <th mat-header-cell *matHeaderCellDef>Batterie</th>
+    <td mat-cell *matCellDef="let element">
+      {{element.stationMonitoring[0]?.batteryPercent.toFixed(2)}}%
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="bikes">
+    <th mat-header-cell *matHeaderCellDef>Vélos</th>
+    <td mat-cell *matCellDef="let element">
+      {{element.stationMonitoring[0]?.usedBikeSlot}}/{{element.bikeCapacity}}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns:displayedColumns"></tr>
+</table>
+<mat-paginator
+  [length]="stationCount"
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10, 20]"
+  (page)="getStationsF($event.pageSize, $event.pageIndex * $event.pageSize)"
+  showFirstLastButtons
+></mat-paginator>
+</div>

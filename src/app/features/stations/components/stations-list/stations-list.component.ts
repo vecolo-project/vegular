@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {OsmSearchResponse} from "../../../../shared/models/osmSearchResponse";
-import {FormControl} from "@angular/forms";
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {Station} from "../../../../shared/models";
 
 @Component({
   selector: 'app-stations-list',
@@ -8,19 +7,38 @@ import {FormControl} from "@angular/forms";
   styleUrls: ['./stations-list.component.scss']
 })
 export class StationsListComponent implements OnInit {
+
   @Input()
-  addressSearchResults: OsmSearchResponse[];
+  stationList: Station[];
+
+  @Input()
+  stationCount: number;
 
   @Output()
-  searchEvent = new EventEmitter<string>()
+  getSations = new EventEmitter<{ limit: number, offset: number }>()
+
+  displayedColumns = [
+    'id',
+    'address',
+    'status',
+    'battery',
+    'bikes'
+  ]
 
   constructor() {
   }
 
   ngOnInit(): void {
+    this.getStationsF(10,1)
   }
 
   onSelect(value: any) {
     console.log(value);
+  }
+
+  getStationsF(limit: number, offset: number): void {
+    setTimeout(() => {
+      this.getSations.emit({limit, offset});
+    });
   }
 }
