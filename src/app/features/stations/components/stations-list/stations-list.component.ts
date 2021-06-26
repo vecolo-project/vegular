@@ -22,7 +22,8 @@ export class StationsListComponent implements OnInit {
     'address',
     'status',
     'battery',
-    'bikes'
+    'bikes',
+    'action'
   ]
 
   constructor() {
