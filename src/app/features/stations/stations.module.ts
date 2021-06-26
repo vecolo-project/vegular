@@ -6,6 +6,7 @@ import {StationsListComponent} from './components/stations-list/stations-list.co
 import {StationsViewComponent} from './components/stations-view/stations-view.component';
 import {SharedModule} from "../../shared/shared.module";
 import {StationBatteryChartComponent} from './components/station-charts/station-battery-chart.component';
+import { AddressSearchComponent } from './components/address-search/address-search.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import {StationBatteryChartComponent} from './components/station-charts/station-
     StationsListComponent,
     StationsViewComponent,
     StationBatteryChartComponent,
+    AddressSearchComponent,
   ],
     imports: [
         StationsRoutingModule,
