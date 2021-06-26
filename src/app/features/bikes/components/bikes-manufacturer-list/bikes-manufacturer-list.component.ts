@@ -19,7 +19,7 @@ export class BikesManufacturerListComponent implements OnInit {
   @Input()
   manufacturersCount: number;
 
-  displayedColumns = ['id', 'name', 'phone', 'address'];
+  displayedColumns = ['id', 'name', 'phone', 'address', 'actions'];
   constructor() {}
 
   ngOnInit(): void {
