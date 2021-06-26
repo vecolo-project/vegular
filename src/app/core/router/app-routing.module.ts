@@ -48,7 +48,7 @@ const routes: Routes = [
   {
     path: routesPath.stations,
     loadChildren: () => import('../../features/stations/stations.module').then(m => m.StationsModule),
-    canActivate: [StaffGuardService]
+    // canActivate: [StaffGuardService]
   },
   {
     path: routesPath.bikes,
