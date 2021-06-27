@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClientWrapper } from 'src/app/core/utils/httpClientWrapper';
-import { BikeModel } from 'src/app/shared/models';
+import { BikeModel, BikeModelProps } from 'src/app/shared/models';
 import { Snackbar } from 'src/app/shared/snackbar/snakbar';
 import { API_RESSOURCE_URI } from '../../../../shared/api-ressource-uri/api-ressource-uri';
 import { BikeModelQuery } from './model.query';
@@ -37,7 +37,7 @@ export class BikeModelService {
     throw new Error('Method not implemented.');
   }
 
-  async postModel(model: BikeModel) {
+  async postModel(model: BikeModelProps) {
     this.bikeModelStore.setLoading(true);
     try {
       const response = await this.http.post<BikeModel>(
