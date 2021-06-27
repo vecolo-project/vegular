@@ -27,7 +27,7 @@ export class SessionService {
       this.sessionStore.setUser(response.user);
       this.sessionStore.setToken(response.token);
       this.routerNavigation.gotoHome();
-      this.snackBar.success('vous êtes maintenant connecter');
+      this.snackBar.success('vous êtes maintenant connecté');
     } catch (e) {
       this.snackBar.warnning('Erreur de connexion : ' + e.error.error);
     }
