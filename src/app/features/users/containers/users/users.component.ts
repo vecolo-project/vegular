@@ -54,7 +54,6 @@ export class UsersComponent implements OnInit {
 
   deleteUser(userId: number): void {
     this.usersService.deleteUser(userId);
-    console.log(userId); // TODO remove this and check for real delete
   }
 
   setEditUser(id: number): void {
@@ -71,6 +70,7 @@ export class UsersComponent implements OnInit {
     const putUser = buildPutUserFromUserFormData(user);
     this.usersService.putUser(putUser, id);
   }
+
   postUser(user: UserFormData) {
     const postUser = buildPostUserFromUserFormData(user);
     this.usersService.postUser(postUser);

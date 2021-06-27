@@ -1,0 +1,47 @@
+<div class="my-4">
+  <button
+    [routerLink]="['/bikes']"
+    mat-button
+    class="bg-red-600 text-black min-w-min px-2"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<form [formGroup]="form" action="" class="mb-3">
+  <mat-card>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldName"
+        placeholder="Nom"
+        type=" text"
+      />
+      <mat-error>Ce champs et requis</mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldPhone"
+        placeholder="Téléphone"
+        type=" text"
+      />
+      <mat-error
+        >Le numéro de téléphone doit faire au moins 10 caractères</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <textarea
+        matInput
+        formControlName="fieldAddress"
+        placeholder="Adresse"
+        type=" textarea"
+      ></textarea>
+      <mat-error>Ce champs et requis</mat-error>
+    </mat-form-field>
+    <p class="text-center">
+      <button mat-button (click)="save()" class="bg-indigo-500">
+        enregister
+      </button>
+    </p>
+  </mat-card>
+</form>

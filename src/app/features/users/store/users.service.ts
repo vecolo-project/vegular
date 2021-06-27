@@ -39,9 +39,6 @@ export class UsersService {
       const response = await this.http.get<{ user: User }>(
         API_RESSOURCE_URI.GET_CURRENT_USER
       );
-      /* TODO Remove line below when api goes well
-      const response = await this.http.get<{ user: User }>(API_RESSOURCE_URI.GET_CURRENT_USER);
-      console.log(response); */
       this.usersStore.update({ editUser: response.user });
     } catch (e) {
       this.snackBar.warnning(
@@ -55,7 +52,7 @@ export class UsersService {
   async deleteUser(userId: number): Promise<void> {
     this.usersStore.setLoading(true);
     try {
-      await this.http.delete<User[]>(API_RESSOURCE_URI.DELETE_USER + userId);
+      await this.http.delete<void>(API_RESSOURCE_URI.DELETE_USER + userId);
       this.usersStore.remove(userId);
     } catch (e) {
       this.snackBar.warnning(
@@ -67,7 +64,6 @@ export class UsersService {
   }
 
   async putUser(user: PutUser, id: number) {
-    console.log(id);
     this.usersStore.setLoading(true);
     try {
       const response = await this.http.put<User>(

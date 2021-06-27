@@ -25,7 +25,7 @@ export class UsersFormComponent implements OnInit, OnChanges {
   public isAddMode: boolean;
 
   @Output()
-  public retrieveEditUser = new EventEmitter<any>();
+  public retrieveEditUser = new EventEmitter();
 
   @Output()
   public postUser = new EventEmitter<UserFormData>();
