@@ -6,6 +6,10 @@ const bikesRoutes: Routes = [
   { path: '', component: BikesComponent },
   { path: 'manufacturer/add', component: BikesComponent },
   { path: 'manufacturer/edit/:id', component: BikesComponent },
+  { path: 'model/add', component: BikesComponent },
+  { path: 'model/edit/:id', component: BikesComponent },
+  { path: 'add', component: BikesComponent },
+  { path: 'edit/:id', component: BikesComponent },
 ];
 
 @NgModule({

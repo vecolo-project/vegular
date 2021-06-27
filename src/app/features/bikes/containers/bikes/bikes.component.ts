@@ -41,6 +41,22 @@ export class BikesComponent implements OnInit {
     return this.router.isActive('bikes/manufacturer/edit', false);
   }
 
+  isAddModelForm(): boolean {
+    return this.router.isActive('bikes/model/add', true);
+  }
+
+  isEditModelForm(): boolean {
+    return this.router.isActive('bikes/model/edit', false);
+  }
+
+  isAddBikeForm(): boolean {
+    return this.router.isActive('bikes/add', true);
+  }
+
+  isEditBikeForm(): boolean {
+    return this.router.isActive('bikes/edit', false);
+  }
+
   getManufacturers(): void {
     this.manufacturerService.getManufacturers();
   }
