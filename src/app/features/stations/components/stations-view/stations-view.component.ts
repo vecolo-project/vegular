@@ -12,14 +12,23 @@ export class StationsViewComponent implements OnInit {
   @Input()
   station: Station
 
+  @Input()
+  token:string
+
   @Output()
   getStation = new EventEmitter<number>();
 
   @Output()
   getMonitoring = new EventEmitter<{ stationId: number, nbDays: number; }>();
 
+  @Output()
+  getToken = new EventEmitter<number>();
+
   @Input()
   stationMonitorings: StationMonitoring[];
+
+  @Input()
+  isAdmin: boolean
 
   lottieStationOptions: AnimationOptions = {
     path: 'assets/lottie/solarPanel2.json',
@@ -42,7 +51,7 @@ export class StationsViewComponent implements OnInit {
     return undefined;
   }
 
-  retrieveMonitoring(nbDays:number) {
+  retrieveMonitoring(nbDays: number) {
     this.getMonitoring.emit({stationId: this.station?.id, nbDays: nbDays})
   }
 

@@ -1,6 +1,7 @@
 export type OsmSearchResponse = {
   address: {
     city: string,
+    town: string,
     city_district: string,
     country: string,
     country_code: string,

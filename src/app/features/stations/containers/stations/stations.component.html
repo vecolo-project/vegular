@@ -1,10 +1,3 @@
-<app-address-search
-  [addressSearchResults]="addressResultSearch | async"
-  [initialAdressValue]=""
-  (searchEvent)="stationsService.searchAddress($event)"
-  (addressSelectEvent)="onSelect($event)"
-></app-address-search>
-
 <div class="mt-10">
   <app-stations-list *ngIf="isListMode()"
                      [stationList]="stationList | async"
@@ -16,7 +9,13 @@
   <app-stations-view *ngIf="isViewMode()"
                      [station]="viewStation | async"
                      [stationMonitorings]="stationMonitorings | async"
+                     [isAdmin]="sessionQuery.isAdmin$ | async"
+                     [token]="viewStationToken | async"
+                     (getToken)="getStationToken($event)"
                      (getMonitoring)="retrieveMonitoring($event.stationId,$event.nbDays)"
                      (getStation)="stationsService.getStation($event)"
   ></app-stations-view>
+
+  <app-station-create *ngIf="isCreateMode()" (submit)="onCreateStationSubmit($event)"
+  ></app-station-create>
 </div>

@@ -8,10 +8,11 @@ import {OsmSearchResponse} from "../../../shared/models/osmSearchResponse";
 @Injectable({providedIn: 'root'})
 export class StationsQuery extends QueryEntity<StationsState, Station> {
   selectStationsArray$: Observable<Station[]> = this.selectAll();
-  selectEditStation$: Observable<Station> = this.select('editStation')
-  selectViewStation$: Observable<Station> = this.select('viewStation')
-  selectViewStationMonitoring$: Observable<StationMonitoring[]> = this.select('stationMonitoring')
-  selectAdressSearchResult$: Observable<OsmSearchResponse[]> = this.select('addressAutocomplete')
+  selectEditStation$: Observable<Station> = this.select('editStation');
+  selectViewStation$: Observable<Station> = this.select('viewStation');
+  selectViewStationToken$: Observable<string> = this.select('viewStationToken');
+  selectViewStationMonitoring$: Observable<StationMonitoring[]> = this.select('stationMonitoring');
+  selectAdressSearchResult$: Observable<OsmSearchResponse[]> = this.select('addressAutocomplete');
   selectIds$: Observable<number[]> = this.select('ids');
   selectCount$: Observable<number> = this.select('count');
   isLoading$: Observable<boolean> = this.select('loading');
@@ -21,7 +22,8 @@ export class StationsQuery extends QueryEntity<StationsState, Station> {
   }
 
   setViewStation(id): void {
-    this.store.update({viewStation: this.getEntity(id)})
+    this.store.update({viewStation: this.getEntity(id)});
+    this.store.update({viewStationToken: ''});
   }
 
 }

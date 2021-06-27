@@ -23,6 +23,15 @@
       <div class="text-lg">
         Vélos disponibles : {{getLastMonitoring()?.usedBikeSlot}}/{{station?.bikeCapacity}}
       </div>
+      <div *ngIf="isAdmin" class="space-y-4">
+        <button mat-raised-button
+                color="warn"
+                (click)="getToken.emit(station.id)"
+        >Générer le token de la sation</button>
+        <p>
+          <strong class="break-all">{{token}}</strong>
+        </p>
+      </div>
 
     </mat-card-content>
   </mat-card>

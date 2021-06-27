@@ -18,7 +18,7 @@ export class StationChartComponent implements OnInit, OnChanges {
   lineChartBatteryLabels: Label[];
   lineChartBikeData: ChartDataSets[];
   lineChartBikeLabels: Label[];
-  lineChartOptions: ChartOptions = {
+  lineChartBatteryOptions: ChartOptions = {
     responsive: true,
     defaultColor: '#fefefe',
     scales: {
@@ -27,7 +27,35 @@ export class StationChartComponent implements OnInit, OnChanges {
           fontColor: "#fefefe",
           fontSize: 14,
           // stepSize: 1,
+          beginAtZero: true,
+          max: 100
+        }
+      }],
+      xAxes: [{
+        ticks: {
+          fontColor: "#fefefe",
+          fontSize: 14,
+          // stepSize: 1,
           beginAtZero: true
+        }
+      }]
+    },
+    legend: {
+      labels: {
+        fontColor: '#fefefe'
+      },
+    }
+  };
+  lineChartBikeOptions: ChartOptions = {
+    responsive: true,
+    defaultColor: '#fefefe',
+    scales: {
+      yAxes: [{
+        ticks: {
+          fontColor: "#fefefe",
+          fontSize: 14,
+          // stepSize: 1,
+          beginAtZero: true,
         }
       }],
       xAxes: [{

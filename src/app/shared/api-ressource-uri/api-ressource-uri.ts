@@ -10,7 +10,7 @@ export const API_RESSOURCE_URI = {
   PUT_USER: environment.API_URL + '/user/',
   POST_USER: environment.API_URL + '/user/',
   // Stations
-  GET_STATIONS: environment.API_URL + '/station/',
+  BASE_STATIONS: environment.API_URL + '/station/',
   //Station monitoring
   STATION_MONITORING: environment.API_URL + '/station-monitoring/',
   OSM_SEARCH_ADDRESS: 'https://nominatim.openstreetmap.org/search.php?'

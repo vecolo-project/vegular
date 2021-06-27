@@ -7,6 +7,7 @@ import {StationsService} from "../../store/stations.service";
 import {subDays} from "date-fns";
 import {OsmSearchResponse} from "../../../../shared/models/osmSearchResponse";
 import {RouterNavigation} from "../../../../core/router/router.navigation";
+import {SessionQuery} from "../../../../core/store/session.query";
 
 @Component({
   selector: 'app-stations',
@@ -16,6 +17,7 @@ import {RouterNavigation} from "../../../../core/router/router.navigation";
 export class StationsComponent implements OnInit {
 
   viewStation: Observable<Station>;
+  viewStationToken: Observable<string>;
   stationList: Observable<Station[]>;
   stationCount: Observable<number>;
   stationMonitorings: Observable<StationMonitoring[]>;
@@ -26,9 +28,11 @@ export class StationsComponent implements OnInit {
     private router: Router,
     private routerNavigation: RouterNavigation,
     public stationsService: StationsService,
-    private stationsQuery: StationsQuery
+    private stationsQuery: StationsQuery,
+    public sessionQuery: SessionQuery
   ) {
     this.viewStation = this.stationsQuery.selectViewStation$;
+    this.viewStationToken = this.stationsQuery.selectViewStationToken$;
     this.addressResultSearch = this.stationsQuery.selectAdressSearchResult$;
     this.stationMonitorings = this.stationsQuery.selectViewStationMonitoring$;
     this.stationList = this.stationsQuery.selectStationsArray$;
@@ -53,12 +57,12 @@ export class StationsComponent implements OnInit {
     return this.router.isActive('/stations/view', false);
   }
 
-  isListMode(): boolean {
-    return this.router.isActive('/stations', true);
+  isCreateMode(): boolean {
+    return this.router.isActive('/stations/add', true);
   }
 
-  onSelect(value: any) {
-    console.log(value);
+  isListMode(): boolean {
+    return this.router.isActive('/stations', true);
   }
 
   getStations(limit: number, offset: number): void {
@@ -68,6 +72,14 @@ export class StationsComponent implements OnInit {
   onViewStation(stationId: number) {
     this.stationsQuery.setViewStation(stationId);
     this.routerNavigation.gotoStationView(stationId);
+  }
+
+  onCreateStationSubmit(station: Station) {
+    this.stationsService.createStation(station);
+  }
+
+  getStationToken(stationId: number) {
+    this.stationsService.getStationToken(stationId);
   }
 
 }

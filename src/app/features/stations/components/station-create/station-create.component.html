@@ -1,1 +1,33 @@
-<p>station-create works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Ajouter une station</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="stationForm">
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Capacité de la batterie</mat-label>
+        <input matInput
+               min="0"
+               formControlName="BATTERY_CAPACITY"
+               type="number">
+      </mat-form-field>
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Capacité de vélos</mat-label>
+        <input matInput
+               min="0"
+               formControlName="BIKE_CAPACITY"
+               type="number">
+      </mat-form-field>
+      <app-address-search (searchEvent)="onAddressInputSearch()"
+                          (addressSelectEvent)="onSelectAdress($event)"
+      ></app-address-search>
+    </form>
+  </mat-card-content>
+  <mat-card-actions class="flex justify-end">
+      <button
+        [disabled]="stationForm.invalid"
+        (click)="onSubmit()"
+        mat-raised-button
+        color="primary">Ajouter une station</button>
+  </mat-card-actions>
+</mat-card>

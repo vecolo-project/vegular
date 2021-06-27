@@ -32,7 +32,7 @@ export class StationsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getStationsF(10,1)
+    this.getStationsF(10,0)
   }
 
   onSelect(value: any) {
