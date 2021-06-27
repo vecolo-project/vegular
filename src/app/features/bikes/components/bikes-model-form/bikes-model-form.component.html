@@ -1,1 +1,82 @@
-<p>bikes-model-form works!</p>
+<div class="my-4">
+  <button
+    [routerLink]="['/bikes']"
+    mat-button
+    class="bg-red-600 text-black min-w-min px-2"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<form [formGroup]="form" action="" class="mb-3">
+  <mat-card>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldName"
+        placeholder="Nom"
+        type=" text"
+      />
+      <mat-error>Ce champs et requis</mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldManufacturer"
+        placeholder="Fabriquant"
+        type=" text"
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldBattery"
+        placeholder="Batterie capacity"
+        type=" text"
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldWeight"
+        placeholder="Poids"
+        type=" text"
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldMaxPower"
+        placeholder="Max Power"
+        type=" text"
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldMaxSpeed"
+        placeholder="Vitesse maximal"
+        type=" text"
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        formControlName="fieldDistance"
+        placeholder="Distance maximal"
+        type=" text"
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <textarea
+        matInput
+        formControlName="fieldDescription"
+        placeholder="Description"
+      ></textarea>
+    </mat-form-field>
+    <p class="text-center">
+      <button mat-button (click)="save()" class="bg-indigo-500">
+        enregister
+      </button>
+    </p>
+  </mat-card>
+</form>
