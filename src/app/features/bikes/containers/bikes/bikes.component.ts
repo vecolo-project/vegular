@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { BikeManufacturer, BikeManufacturerProps } from 'src/app/shared/models';
+import {
+  BikeManufacturer,
+  BikeManufacturerProps,
+  BikeModel,
+} from 'src/app/shared/models';
 import { BikeManufacturerQuery } from '../../store/manufacturer/manufacturer.query';
 import { BikeManufacturerService } from '../../store/manufacturer/manufacturer.service';
+import { BikeModelService } from '../../store/model/model.service';
 
 @Component({
   selector: 'app-bikes',
@@ -19,7 +24,8 @@ export class BikesComponent implements OnInit {
   constructor(
     private router: Router,
     private manufacturerService: BikeManufacturerService,
-    private manufacturerQuery: BikeManufacturerQuery
+    private manufacturerQuery: BikeManufacturerQuery,
+    private bikeModelService: BikeModelService
   ) {
     this.manufacturers = this.manufacturerQuery.selectAll();
     this.manufacturersCount = this.manufacturerQuery.selectCount$;
@@ -82,5 +88,24 @@ export class BikesComponent implements OnInit {
 
   setEditManufacturer(id: number): void {
     this.manufacturerQuery.setEditManufacturer(id);
+  }
+
+  getModels(): void {
+    this.bikeModelService.getModels();
+  }
+
+  getSingleModel(id: number): void {
+    this.bikeModelService.getModel(id);
+  }
+
+  postModel(model: BikeModel): void {
+    delete model.id;
+    this.bikeModelService.postModel(model);
+  }
+
+  putModel(model: BikeModel): void {
+    const id = model.id;
+    delete model.id;
+    this.bikeModelService.putModel(model, id);
   }
 }
