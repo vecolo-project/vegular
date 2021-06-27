@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {MaterialModule} from './material-modules/material.module';
 import {LottieModule} from "ngx-lottie";
 import player from 'lottie-web';
+import {ChartsModule} from "ng2-charts";
 
 export function playerFactory() {
   return player;
@@ -13,12 +14,14 @@ export function playerFactory() {
   imports: [
     CommonModule,
     MaterialModule,
-    LottieModule.forRoot({player: playerFactory})
+    LottieModule.forRoot({player: playerFactory}),
+    ChartsModule
   ],
   exports: [
     CommonModule,
     MaterialModule,
-    LottieModule
+    LottieModule,
+    ChartsModule
   ]
 })
 export class SharedModule {

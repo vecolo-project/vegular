@@ -1,0 +1,25 @@
+<div class="grid grid-cols-2 gap-4">
+
+  <div class="chart-wrapper">
+    <canvas baseChart
+            [datasets]="lineChartBatteryData"
+            [labels]="lineChartBatteryLabels"
+            [options]="lineChartBatteryOptions"
+            [colors]="lineChartColors"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"
+            [plugins]="lineChartPlugins">
+    </canvas>
+  </div>
+  <div class="chart-wrapper">
+    <canvas baseChart
+            [datasets]="lineChartBikeData"
+            [labels]="lineChartBikeLabels"
+            [options]="lineChartBikeOptions"
+            [colors]="lineChartColors"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"
+            [plugins]="lineChartPlugins">
+    </canvas>
+  </div>
+</div>

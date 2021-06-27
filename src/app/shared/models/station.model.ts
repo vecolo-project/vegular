@@ -1,7 +1,7 @@
 import {Bike, Ride, StationMaintenanceThread, StationMonitoring} from ".";
 
 export type Station = {
-  id: number
+  id?: number
   batteryCapacity: number,
   bikeCapacity: number,
   streetNumber: number,
@@ -10,11 +10,11 @@ export type Station = {
   zipcode: string,
   coordinateX: number,
   coordinateY: number,
-  stationMonitoring: StationMonitoring[],
-  startRide: Ride[],
-  endRide: Ride[],
-  stationMaintenanceThread: StationMaintenanceThread[],
-  bike: Bike[],
-  createdAt: Date,
-  updatedAt: Date,
+  stationMonitoring?: StationMonitoring[],
+  startRide?: Ride[],
+  endRide?: Ride[],
+  stationMaintenanceThread?: StationMaintenanceThread[],
+  bike?: Bike[],
+  createdAt?: Date,
+  updatedAt?: Date,
 };
