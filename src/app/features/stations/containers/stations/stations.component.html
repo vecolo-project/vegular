@@ -9,6 +9,7 @@
   <app-stations-list *ngIf="isListMode()"
                      [stationList]="stationList | async"
                      [stationCount]="stationCount | async"
+                     (viewStation)="onViewStation($event)"
                      (getSations)="this.getStations($event.limit,$event.offset)"
   ></app-stations-list>
 

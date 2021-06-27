@@ -6,10 +6,10 @@ import {addHours, format} from 'date-fns';
 
 @Component({
   selector: 'app-station-battery-chart',
-  templateUrl: './station-battery-chart.component.html',
-  styleUrls: ['./station-battery-chart.component.scss']
+  templateUrl: './station-chart.component.html',
+  styleUrls: ['./station-chart.component.scss']
 })
-export class StationBatteryChartComponent implements OnInit, OnChanges {
+export class StationChartComponent implements OnInit, OnChanges {
   @Input()
   stationMonitorings: StationMonitoring[];
 
@@ -26,7 +26,7 @@ export class StationBatteryChartComponent implements OnInit, OnChanges {
         ticks: {
           fontColor: "#fefefe",
           fontSize: 14,
-          stepSize: 1,
+          // stepSize: 1,
           beginAtZero: true
         }
       }],
@@ -34,7 +34,7 @@ export class StationBatteryChartComponent implements OnInit, OnChanges {
         ticks: {
           fontColor: "#fefefe",
           fontSize: 14,
-          stepSize: 1,
+          // stepSize: 1,
           beginAtZero: true
         }
       }]

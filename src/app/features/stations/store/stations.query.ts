@@ -20,8 +20,8 @@ export class StationsQuery extends QueryEntity<StationsState, Station> {
     super(store);
   }
 
-  setEditStation(id): void {
-    this.store.update({editStation: this.getEntity(id)})
+  setViewStation(id): void {
+    this.store.update({viewStation: this.getEntity(id)})
   }
 
 }

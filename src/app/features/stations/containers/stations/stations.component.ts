@@ -6,6 +6,7 @@ import {StationsQuery} from "../../store/stations.query";
 import {StationsService} from "../../store/stations.service";
 import {subDays} from "date-fns";
 import {OsmSearchResponse} from "../../../../shared/models/osmSearchResponse";
+import {RouterNavigation} from "../../../../core/router/router.navigation";
 
 @Component({
   selector: 'app-stations',
@@ -23,6 +24,7 @@ export class StationsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private routerNavigation: RouterNavigation,
     public stationsService: StationsService,
     private stationsQuery: StationsQuery
   ) {
@@ -63,5 +65,9 @@ export class StationsComponent implements OnInit {
     this.stationsService.getStations(limit, offset);
   }
 
+  onViewStation(stationId: number) {
+    this.stationsQuery.setViewStation(stationId);
+    this.routerNavigation.gotoStationView(stationId);
+  }
 
 }

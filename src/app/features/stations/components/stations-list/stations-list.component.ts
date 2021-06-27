@@ -17,14 +17,16 @@ export class StationsListComponent implements OnInit {
   @Output()
   getSations = new EventEmitter<{ limit: number, offset: number }>()
 
+  @Output()
+  viewStation = new EventEmitter<number>();
+
   displayedColumns = [
     'id',
     'address',
     'status',
     'battery',
-    'bikes',
-    'action'
-  ]
+    'bikes'
+]
 
   constructor() {
   }
@@ -35,6 +37,10 @@ export class StationsListComponent implements OnInit {
 
   onSelect(value: any) {
     console.log(value);
+  }
+
+  onViewStation(station: Station) {
+    this.viewStation.emit(station.id);
   }
 
   getStationsF(limit: number, offset: number): void {

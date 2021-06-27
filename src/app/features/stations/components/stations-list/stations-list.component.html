@@ -4,8 +4,12 @@
   </div>
   <div>
     <table mat-table [dataSource]="stationList" style="width: 100%">
-      <mat-text-column name="id"></mat-text-column>
-      <ng-container matColumnDef="address">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.id}}
+        </td>
+      </ng-container>      <ng-container matColumnDef="address">
         <th mat-header-cell *matHeaderCellDef>Adresse</th>
         <td mat-cell *matCellDef="let element">
           {{element.streetNumber}} {{element.streetName}} - {{element.city}} ({{element.zipcode}})
@@ -30,15 +34,10 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element">
-          <mat-icon [routerLink]="'/stations/view/'+element.id">visibility</mat-icon>
-        </td>
-      </ng-container>
-
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns:displayedColumns"></tr>
+      <tr mat-row
+          (click)="onViewStation(row)"
+          *matRowDef="let row; columns:displayedColumns"></tr>
     </table>
     <mat-paginator
       [length]="stationCount"
