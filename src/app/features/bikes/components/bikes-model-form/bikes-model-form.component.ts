@@ -1,6 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BikeModel, BikeModelProps } from 'src/app/shared/models';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import {
+  BikeManufacturer,
+  BikeModel,
+  BikeModelProps,
+} from 'src/app/shared/models';
 
 @Component({
   selector: 'app-bikes-model-form',
@@ -25,6 +31,16 @@ export class BikesModelFormComponent implements OnInit {
   @Output()
   retrieveEditModel = new EventEmitter<number>();
 
+  options = [
+    {
+      id: 2,
+      name: 'HERRERA',
+      phone: '0781482970',
+      address: "28 rue d'Avon 77300 Fontainbleauxxx",
+    },
+  ];
+  filteredOptions: Observable<BikeManufacturer[]>;
+
   constructor(private fp: FormBuilder) {
     this.form = this.fp.group({
       fieldName: ['', [Validators.required]],
@@ -38,7 +54,27 @@ export class BikesModelFormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.filteredOptions =
+      this.form.controls.fieldManufacturer.valueChanges.pipe(
+        startWith(''),
+        map((value) => (typeof value === 'string' ? value : value.name)),
+        map((name) => (name ? this._filter(name) : this.options.slice()))
+      );
+  }
+
+  displayAutocomplete(manufacturer: BikeManufacturer): string {
+    return manufacturer && manufacturer.name ? manufacturer.name : '';
+  }
+
+  private _filter(name: string): any[] {
+    const filterValue = name.toLowerCase();
+
+    return this.options.filter((option) =>
+      option.name.toLowerCase().includes(filterValue)
+    );
+  }
+
   save() {
     const model = {
       id: null,
