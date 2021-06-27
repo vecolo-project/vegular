@@ -24,7 +24,6 @@ export class BikeManufacturerService {
       );
       this.bikeManufacturerStore.update({ editManufacturer: response });
     } catch (err) {
-      console.log(err);
       this.snackBar.warnning(
         "Erreur lors de l'ajout du fabriquant : " + err.error.error
       );
@@ -70,9 +69,7 @@ export class BikeManufacturerService {
   async deleteManufacturer(id: number): Promise<void> {
     this.bikeManufacturerStore.setLoading(true);
     try {
-      const response = await this.http.delete(
-        API_RESSOURCE_URI.DELETE_MANUFACTURER + id
-      );
+      await this.http.delete(API_RESSOURCE_URI.DELETE_MANUFACTURER + id);
       this.bikeManufacturerStore.remove(id);
     } catch (e) {
       this.snackBar.warnning(

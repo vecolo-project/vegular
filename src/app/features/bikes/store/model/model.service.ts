@@ -15,15 +15,45 @@ export class BikeModelService {
     private bikeModelQuery: BikeModelQuery
   ) {}
 
-  getModels() {
-    throw new Error('Method not implemented.');
+  async getModels() {
+    this.bikeModelStore.setLoading(true);
+    try {
+      const response = await this.http.get<BikeModel[]>(
+        API_RESSOURCE_URI.GET_BIKE_MANUFACTURERS
+      );
+      this.bikeModelStore.set(response);
+      this.bikeModelStore.update({ count: response.length });
+    } catch (e) {
+      this.bikeModelStore.set([]);
+      this.snackBar.warnning(
+        'Erreur lors de la récupération des modèles : ' + e.error.error
+      );
+    } finally {
+      this.bikeModelStore.setLoading(false);
+    }
   }
+
   getModel(id: number) {
     throw new Error('Method not implemented.');
   }
-  postModel(model: BikeModel) {
-    throw new Error('Method not implemented.');
+
+  async postModel(model: BikeModel) {
+    this.bikeModelStore.setLoading(true);
+    try {
+      const response = await this.http.post<BikeModel>(
+        API_RESSOURCE_URI.POST_BIKE_MANUFACTURER,
+        model
+      );
+      this.bikeModelStore.update({ editModel: response });
+    } catch (err) {
+      this.snackBar.warnning(
+        "Erreur lors de l'ajout du fabriquant : " + err.error.error
+      );
+    } finally {
+      this.bikeModelStore.setLoading(false);
+    }
   }
+
   putModel(model: BikeModel, id: number) {
     throw new Error('Method not implemented.');
   }
