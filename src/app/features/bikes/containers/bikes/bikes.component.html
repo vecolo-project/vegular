@@ -1,4 +1,3 @@
-<p>bikes works!</p>
 <mat-tab-group *ngIf="isRoot()">
   <mat-tab label="Vélo"><app-bikes-list></app-bikes-list></mat-tab>
   <mat-tab label="Modèle"
@@ -10,10 +9,16 @@
       [manufacturersCount]="manufacturersCount | async"
       (getManufacturers)="getManufacturers()"
       [loading]="manufacturerLoading | async"
+      (deleteManufacturer)="deleteManufacturer($event)"
+      (setEditManufacturer)="setEditManufacturer($event)"
     ></app-bikes-manufacturer-list
   ></mat-tab>
 </mat-tab-group>
 <app-bikes-manufacturer-form
-  *ngIf="isAddManufacturerForm()"
+  *ngIf="isAddManufacturerForm() || isEditManufacturerForm()"
+  [isEditMode]="isEditManufacturerForm()"
   (postManufacturer)="postManufacturer($event)"
+  (putManufacturer)="putManufacturer($event)"
+  [editManufacturer]="editManufacturer | async"
+  (retrieveEditManufacturer)="getSingleManufacturer($event)"
 ></app-bikes-manufacturer-form>

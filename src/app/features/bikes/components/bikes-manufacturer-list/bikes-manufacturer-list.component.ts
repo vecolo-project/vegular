@@ -11,13 +11,19 @@ export class BikesManufacturerListComponent implements OnInit {
   manufacturers: BikeManufacturer[];
 
   @Input()
+  manufacturersCount: number;
+
+  @Input()
   loading: boolean;
 
   @Output()
   getManufacturers = new EventEmitter();
 
-  @Input()
-  manufacturersCount: number;
+  @Output()
+  deleteManufacturer = new EventEmitter<number>();
+
+  @Output()
+  setEditManufacturer = new EventEmitter<number>();
 
   displayedColumns = ['id', 'name', 'phone', 'address', 'actions'];
   constructor() {}

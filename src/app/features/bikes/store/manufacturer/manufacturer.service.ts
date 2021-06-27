@@ -70,7 +70,9 @@ export class BikeManufacturerService {
   async deleteManufacturer(id: number): Promise<void> {
     this.bikeManufacturerStore.setLoading(true);
     try {
-      await this.http.delete<void>(API_RESSOURCE_URI.DELETE_MANUFACTURER + id);
+      const response = await this.http.delete(
+        API_RESSOURCE_URI.DELETE_MANUFACTURER + id
+      );
       this.bikeManufacturerStore.remove(id);
     } catch (e) {
       this.snackBar.warnning(

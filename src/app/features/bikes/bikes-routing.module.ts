@@ -5,6 +5,7 @@ import { BikesComponent } from './containers/bikes/bikes.component';
 const bikesRoutes: Routes = [
   { path: '', component: BikesComponent },
   { path: 'manufacturer/add', component: BikesComponent },
+  { path: 'manufacturer/edit/:id', component: BikesComponent },
 ];
 
 @NgModule({

@@ -54,7 +54,6 @@ export class UsersComponent implements OnInit {
 
   deleteUser(userId: number): void {
     this.usersService.deleteUser(userId);
-    console.log(userId); // TODO remove this and check for real delete
   }
 
   setEditUser(id: number): void {

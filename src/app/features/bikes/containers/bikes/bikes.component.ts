@@ -14,6 +14,8 @@ export class BikesComponent implements OnInit {
   manufacturers: Observable<BikeManufacturer[]>;
   manufacturersCount: Observable<number>;
   manufacturerLoading: Observable<boolean>;
+  editManufacturer: Observable<BikeManufacturer>;
+
   constructor(
     private router: Router,
     private manufacturerService: BikeManufacturerService,
@@ -22,6 +24,7 @@ export class BikesComponent implements OnInit {
     this.manufacturers = this.manufacturerQuery.selectAll();
     this.manufacturersCount = this.manufacturerQuery.selectCount$;
     this.manufacturerLoading = this.manufacturerQuery.isLoading$;
+    this.editManufacturer = this.manufacturerQuery.selectEditManufacturer$;
   }
 
   ngOnInit(): void {}
@@ -34,11 +37,34 @@ export class BikesComponent implements OnInit {
     return this.router.isActive('bikes/manufacturer/add', true);
   }
 
+  isEditManufacturerForm(): boolean {
+    return this.router.isActive('bikes/manufacturer/edit', false);
+  }
+
   getManufacturers(): void {
     this.manufacturerService.getManufacturers();
   }
 
+  getSingleManufacturer(id: number): void {
+    this.manufacturerService.getManufacturer(id);
+  }
+
   postManufacturer(manufacturer: BikeManufacturerProps): void {
+    delete manufacturer.id;
     this.manufacturerService.postManufacturer(manufacturer);
+  }
+
+  putManufacturer(manufacturer: BikeManufacturerProps): void {
+    const id = manufacturer.id;
+    delete manufacturer.id;
+    this.manufacturerService.putManufacturer(manufacturer, id);
+  }
+
+  deleteManufacturer(id: number): void {
+    this.manufacturerService.deleteManufacturer(id);
+  }
+
+  setEditManufacturer(id: number): void {
+    this.manufacturerQuery.setEditManufacturer(id);
   }
 }

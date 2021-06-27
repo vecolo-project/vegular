@@ -9,6 +9,7 @@ export type BikeManufacturer = {
 };
 
 export type BikeManufacturerProps = {
+  id: number | null;
   name: string;
   phone: string;
   address: string;
