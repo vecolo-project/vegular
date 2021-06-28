@@ -105,6 +105,26 @@ export class StationsService {
     }
   }
 
+  async updateStation(station: Station): Promise<void> {
+    this.stationsStore.setLoading(true);
+    try {
+      const response = await this.http.put<Station>(
+        API_RESSOURCE_URI.BASE_STATIONS + station.id,
+        station
+      );
+      response.stationMonitoring = [];
+      this.stationsStore.update(station.id, station);
+      this.stationsStore.update({viewStation: station});
+      this.snackBar.success("Station mis à jour");
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la création d\'une station : ' + e.error.error
+      );
+    } finally {
+      this.stationsStore.setLoading(false);
+    }
+  }
+
   async getStationToken(stationId: number): Promise<void> {
     this.stationsStore.setLoading(true);
     try {

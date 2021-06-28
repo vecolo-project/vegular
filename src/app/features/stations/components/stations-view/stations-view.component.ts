@@ -1,7 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {Station, StationMonitoring} from "../../../../shared/models";
 import {interval} from "rxjs";
 import {AnimationOptions} from "ngx-lottie";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {OsmSearchResponse} from "../../../../shared/models/osmSearchResponse";
 
 @Component({
   selector: 'app-stations-view',
@@ -13,7 +15,7 @@ export class StationsViewComponent implements OnInit {
   station: Station
 
   @Input()
-  token:string
+  token: string
 
   @Output()
   getStation = new EventEmitter<number>();
@@ -28,24 +30,44 @@ export class StationsViewComponent implements OnInit {
   stationMonitorings: StationMonitoring[];
 
   @Input()
-  isAdmin: boolean
+  isAdmin: boolean;
+
+  @Output()
+  submit = new EventEmitter<Station>();
+
+  editMode: boolean;
+  stationForm: FormGroup;
 
   lottieStationOptions: AnimationOptions = {
     path: 'assets/lottie/solarPanel2.json',
   }
 
-  constructor() {
+  constructor(@Inject(FormBuilder) fb) {
+    this.stationForm = fb.group({
+      BATTERY_CAPACITY: ['', [Validators.required, Validators.min(1)]],
+      BIKE_CAPACITY: ['', [Validators.required, Validators.min(0)]],
+      STREET_NUMBER: ['', [Validators.required]],
+      STREET_NAME: ['', [Validators.required]],
+      CITY: ['', [Validators.required]],
+      ZIPCODE: ['', [Validators.required]],
+      COORDINATE_Y: ['', [Validators.required]],
+      COORDINATE_X: ['', [Validators.required]]
+    })
+
   }
 
   ngOnInit(): void {
     const obs = interval(5000)
       .subscribe(() => {
-        this.getStation.emit(this.station?.id);
+        if (!this.editMode) {
+          this.getStation.emit(this.station?.id);
+        }
       });
+    this.editMode = false;
   }
 
   getLastMonitoring(): StationMonitoring {
-    if (this.station?.stationMonitoring.length > 0) {
+    if (this.station?.stationMonitoring?.length > 0) {
       return this.station.stationMonitoring[0];
     }
     return undefined;
@@ -66,5 +88,52 @@ export class StationsViewComponent implements OnInit {
       return "battery-good"
     }
     return "battery-great"
+  }
+
+  onEdit() {
+    this.stationForm.controls.BATTERY_CAPACITY.patchValue(this.station.batteryCapacity);
+    this.stationForm.controls.BIKE_CAPACITY.patchValue(this.station.bikeCapacity);
+    this.stationForm.controls.STREET_NUMBER.patchValue(this.station.streetNumber);
+    this.stationForm.controls.STREET_NAME.patchValue(this.station.streetName);
+    this.stationForm.controls.CITY.patchValue(this.station.city);
+    this.stationForm.controls.ZIPCODE.patchValue(this.station.zipcode);
+    this.stationForm.controls.COORDINATE_Y.patchValue(this.station.coordinateY);
+    this.stationForm.controls.COORDINATE_X.patchValue(this.station.coordinateX);
+    this.editMode = true;
+  }
+
+  onSubmit() {
+    const station: Station = {
+      id: this.station.id,
+      batteryCapacity: this.stationForm.value.BATTERY_CAPACITY,
+      bikeCapacity: this.stationForm.value.BIKE_CAPACITY,
+      streetNumber: this.stationForm.value.STREET_NUMBER,
+      streetName: this.stationForm.value.STREET_NAME,
+      city: this.stationForm.value.CITY,
+      zipcode: this.stationForm.value.ZIPCODE,
+      coordinateX: this.stationForm.value.COORDINATE_X,
+      coordinateY: this.stationForm.value.COORDINATE_Y
+    }
+    this.submit.emit(station);
+    this.editMode = false;
+  }
+
+  onAddressInputSearch() {
+    console.log('search')
+    this.stationForm.controls.STREET_NUMBER.patchValue(null);
+    this.stationForm.controls.STREET_NAME.patchValue(null);
+    this.stationForm.controls.CITY.patchValue(null);
+    this.stationForm.controls.ZIPCODE.patchValue(null);
+    this.stationForm.controls.COORDINATE_Y.patchValue(null);
+    this.stationForm.controls.COORDINATE_X.patchValue(null);
+  }
+
+  onSelectAdress(address: OsmSearchResponse) {
+    this.stationForm.controls.STREET_NUMBER.patchValue(address.address.house_number || 0);
+    this.stationForm.controls.STREET_NAME.patchValue(address.address.road);
+    this.stationForm.controls.CITY.patchValue(address.address.city || address.address.town);
+    this.stationForm.controls.ZIPCODE.patchValue(address.address.postcode);
+    this.stationForm.controls.COORDINATE_Y.patchValue(address.lat);
+    this.stationForm.controls.COORDINATE_X.patchValue(address.lon);
   }
 }

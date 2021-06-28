@@ -78,6 +78,10 @@ export class StationsComponent implements OnInit {
     this.stationsService.createStation(station);
   }
 
+  onUpdateStationSubmit(station: Station) {
+    this.stationsService.updateStation(station);
+  }
+
   getStationToken(stationId: number) {
     this.stationsService.getStationToken(stationId);
   }

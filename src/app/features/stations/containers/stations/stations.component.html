@@ -14,6 +14,7 @@
                      (getToken)="getStationToken($event)"
                      (getMonitoring)="retrieveMonitoring($event.stationId,$event.nbDays)"
                      (getStation)="stationsService.getStation($event)"
+                     (submit)="onUpdateStationSubmit($event)"
   ></app-stations-view>
 
   <app-station-create *ngIf="isCreateMode()" (submit)="onCreateStationSubmit($event)"
