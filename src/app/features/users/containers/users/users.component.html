@@ -13,6 +13,7 @@
   *ngIf="isEditMode() || isAddMode()"
   [user]="editUser | async"
   (retrieveEditUser)="retrieveEditUser()"
-  (saveUser)="saveUser($event)"
+  (putUser)="putUser($event)"
+  (postUser)="postUser($event)"
   [isAddMode]="isAddMode()"
 ></app-users-form>

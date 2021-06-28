@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { UsersStore } from './users.store';
 import { HttpClientWrapper } from '../../../core/utils/httpClientWrapper';
 import { Snackbar } from '../../../shared/snackbar/snakbar';
-import { User, UserOut } from '../../../shared/models/user.model';
+import { PutUser, RegisterUser, User } from '../../../shared/models/user.model';
 import { API_RESSOURCE_URI } from '../../../shared/api-ressource-uri/api-ressource-uri';
 import { UsersQuery } from './users.query';
 
@@ -39,9 +39,6 @@ export class UsersService {
       const response = await this.http.get<{ user: User }>(
         API_RESSOURCE_URI.GET_CURRENT_USER
       );
-      /* TODO Remove line below when api goes well
-      const response = await this.http.get<{ user: User }>(API_RESSOURCE_URI.GET_CURRENT_USER);
-      console.log(response); */
       this.usersStore.update({ editUser: response.user });
     } catch (e) {
       this.snackBar.warnning(
@@ -55,7 +52,7 @@ export class UsersService {
   async deleteUser(userId: number): Promise<void> {
     this.usersStore.setLoading(true);
     try {
-      await this.http.delete<User[]>(API_RESSOURCE_URI.DELETE_USER + userId);
+      await this.http.delete<void>(API_RESSOURCE_URI.DELETE_USER + userId);
       this.usersStore.remove(userId);
     } catch (e) {
       this.snackBar.warnning(
@@ -66,11 +63,11 @@ export class UsersService {
     }
   }
 
-  async putUser(user: UserOut) {
+  async putUser(user: PutUser, id: number) {
     this.usersStore.setLoading(true);
     try {
       const response = await this.http.put<User>(
-        API_RESSOURCE_URI.PUT_USER + user.id,
+        API_RESSOURCE_URI.PUT_USER + id,
         user
       );
       this.usersStore.update({ editUser: response });
@@ -83,7 +80,7 @@ export class UsersService {
     }
   }
 
-  async postUser(user: UserOut) {
+  async postUser(user: RegisterUser) {
     this.usersStore.setLoading(true);
     try {
       const response = await this.http.post<User>(

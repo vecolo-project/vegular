@@ -1,4 +1,3 @@
-<p>users-form works!</p>
 <form [formGroup]="form" action="" class="mb-3">
   <mat-card>
     <mat-form-field class="w-full">
@@ -51,13 +50,7 @@
     </mat-form-field>
     <mat-form-field class="w-full">
       <mat-label>Date de naissance</mat-label>
-      <input
-        matInput
-        formControlName="fieldBirthDate"
-        [matDatepicker]="picker"
-      />
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <input matInput formControlName="fieldBirthDate" type="text" />
     </mat-form-field>
     <mat-form-field class="w-full">
       <input
@@ -67,13 +60,9 @@
         type="text"
       />
     </mat-form-field>
-
-    <!-- <input
-          matInput
-          formControlName="fieldRole"
-          placeholder="Confirmation de mot de passe"
-          type="text"
-        /> -->
+    <mat-slide-toggle formControlName="fieldNewsletter" class="example-margin">
+      Newsletter
+    </mat-slide-toggle>
     <p class="text-center">
       <button mat-button (click)="save()" class="bg-indigo-500">
         enregister
