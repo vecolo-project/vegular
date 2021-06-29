@@ -89,7 +89,7 @@ export class UsersFormComponent implements OnInit, OnChanges {
 
   private saveForAdd(): void {
     this.postUser.emit({
-      id: this.user.id ? this.user.id : null,
+      id: this.user && this.user.id ? this.user.id : null,
       email: this.form.value.fieldEmail as string,
       firstName: this.form.value.fieldFirstName as string,
       lastName: this.form.value.fieldLastName as string,

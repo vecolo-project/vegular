@@ -22,6 +22,7 @@ export function buildPostUserFromUserFormData(
   delete user.id;
   const role: Role = Role[user.role];
   const birthDate: Date = new Date(user.birthDate);
+  const newsletter: boolean = user.newsletter === 'true';
   const isActive: boolean = user.isActive === 'true';
-  return { ...user, role, birthDate, isActive };
+  return { ...user, role, birthDate, isActive, newsletter };
 }
