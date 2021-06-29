@@ -22,6 +22,9 @@ export class BikesModelFormComponent implements OnInit {
   @Input()
   editModel: BikeModel;
 
+  @Input()
+  manufacturers: BikeManufacturer[];
+
   @Output()
   postModel = new EventEmitter<BikeModelProps>();
 
@@ -31,14 +34,10 @@ export class BikesModelFormComponent implements OnInit {
   @Output()
   retrieveEditModel = new EventEmitter<number>();
 
-  options = [
-    {
-      id: 2,
-      name: 'HERRERA',
-      phone: '0781482970',
-      address: "28 rue d'Avon 77300 Fontainbleauxxx",
-    },
-  ];
+  @Output()
+  getManufacturers = new EventEmitter();
+
+  options = [];
   filteredOptions: Observable<BikeManufacturer[]>;
 
   constructor(private fp: FormBuilder) {
@@ -55,16 +54,33 @@ export class BikesModelFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.manufacturers && this.manufacturers.length > 0) {
+      this.options = this.manufacturers;
+      this._setFilters();
+    } else {
+      console.log('getManufacturers');
+      this.getManufacturers.emit();
+    }
+  }
+
+  ngOnChanges(): void {
+    if (this.manufacturers) {
+      this.options = this.manufacturers;
+      this._setFilters();
+    }
+  }
+
+  displayAutocomplete(manufacturer: BikeManufacturer): string {
+    return manufacturer && manufacturer.name ? manufacturer.name : '';
+  }
+
+  private _setFilters() {
     this.filteredOptions =
       this.form.controls.fieldManufacturer.valueChanges.pipe(
         startWith(''),
         map((value) => (typeof value === 'string' ? value : value.name)),
         map((name) => (name ? this._filter(name) : this.options.slice()))
       );
-  }
-
-  displayAutocomplete(manufacturer: BikeManufacturer): string {
-    return manufacturer && manufacturer.name ? manufacturer.name : '';
   }
 
   private _filter(name: string): any[] {

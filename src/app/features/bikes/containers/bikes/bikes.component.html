@@ -26,6 +26,8 @@
 <app-bikes-model-form
   *ngIf="isAddModelForm() || isEditModelForm()"
   [isEditMode]="isEditModelForm()"
+  [manufacturers]="manufacturers | async"
+  (getManufacturers)="getManufacturers()"
   (postModel)="postModel($event)"
   (putModel)="putModel($event)"
   [editModel]="editModel | async"
