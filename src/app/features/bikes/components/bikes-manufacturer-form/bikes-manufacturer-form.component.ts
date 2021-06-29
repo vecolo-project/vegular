@@ -63,7 +63,10 @@ export class BikesManufacturerFormComponent implements OnInit {
 
   save(): void {
     const manufacturer = {
-      id: this.editManufacturer.id ? this.editManufacturer.id : null,
+      id:
+        this.editManufacturer && this.editManufacturer.id
+          ? this.editManufacturer.id
+          : null,
       name: String(this.form.value.fieldName),
       phone: String(this.form.value.fieldPhone),
       address: String(this.form.value.fieldAddress),

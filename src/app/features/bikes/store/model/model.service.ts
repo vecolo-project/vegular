@@ -33,7 +33,7 @@ export class BikeModelService {
     }
   }
 
-  getModel(id: number) {
+  getModel(id: number): Promise<never> {
     throw new Error('Method not implemented.');
   }
 
@@ -54,7 +54,11 @@ export class BikeModelService {
     }
   }
 
-  putModel(model: BikeModel, id: number) {
+  async putModel(model: BikeModel, id: number): Promise<never> {
+    throw new Error('Method not implemented.');
+  }
+
+  async deleteModel(id: number): Promise<never> {
     throw new Error('Method not implemented.');
   }
 }
