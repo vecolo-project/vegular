@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterNavigation, routesPath} from '../../router/router.navigation';
-import {SessionQuery} from '../../state/session.query';
-import {SessionService} from '../../state/session.service';
+import {SessionQuery} from '../../store/session.query';
+import {SessionService} from '../../store/session.service';
 import {Router} from '@angular/router';
 
 @Component({

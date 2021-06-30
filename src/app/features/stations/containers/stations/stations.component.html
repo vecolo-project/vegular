@@ -1,1 +1,21 @@
-<p>stations works!</p>
+<div class="mt-10">
+  <app-stations-list *ngIf="isListMode()"
+                     [stationList]="stationList | async"
+                     [stationCount]="stationCount | async"
+                     (viewStation)="onViewStation($event)"
+                     (getSations)="this.getStations($event.limit,$event.offset)"
+  ></app-stations-list>
+
+  <app-stations-view *ngIf="isViewMode()"
+                     [station]="viewStation | async"
+                     [stationMonitorings]="stationMonitorings | async"
+                     [isAdmin]="sessionQuery.isAdmin$ | async"
+                     [token]="viewStationToken | async"
+                     (getToken)="getStationToken($event)"
+                     (getMonitoring)="retrieveMonitoring($event.stationId,$event.nbDays)"
+                     (getStation)="stationsService.getStation($event)"
+  ></app-stations-view>
+
+  <app-station-create *ngIf="isCreateMode()" (submit)="onCreateStationSubmit($event)"
+  ></app-station-create>
+</div>

@@ -1,0 +1,50 @@
+<div class="grid gap-2">
+  <div class="justify-self-end">
+    <button routerLink="/stations/add" mat-raised-button color="primary">Ajouter une station</button>
+  </div>
+  <div>
+    <table mat-table [dataSource]="stationList" style="width: 100%">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.id}}
+        </td>
+      </ng-container>      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef>Adresse</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.streetNumber}} {{element.streetName}} - {{element.city}} ({{element.zipcode}})
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Statut</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.stationMonitoring[0]?.status}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="battery">
+        <th mat-header-cell *matHeaderCellDef>Batterie</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.stationMonitoring[0]?.batteryPercent.toFixed(2)}}%
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="bikes">
+        <th mat-header-cell *matHeaderCellDef>Vélos</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.stationMonitoring[0]?.usedBikeSlot}}/{{element.bikeCapacity}}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row
+          (click)="onViewStation(row)"
+          *matRowDef="let row; columns:displayedColumns"></tr>
+    </table>
+    <mat-paginator
+      [length]="stationCount"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      (page)="getStationsF($event.pageSize, $event.pageIndex * $event.pageSize)"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>

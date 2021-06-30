@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SessionQuery} from './core/state/session.query';
+import {SessionQuery} from './core/store/session.query';
 
 @Component({
   selector: 'app-root',
