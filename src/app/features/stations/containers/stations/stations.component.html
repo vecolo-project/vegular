@@ -10,11 +10,13 @@
                      [station]="viewStation | async"
                      [stationMonitorings]="stationMonitorings | async"
                      [isAdmin]="sessionQuery.isAdmin$ | async"
+                     [isStaff]="sessionQuery.isStaff$ | async"
                      [token]="viewStationToken | async"
                      (getToken)="getStationToken($event)"
                      (getMonitoring)="retrieveMonitoring($event.stationId,$event.nbDays)"
                      (getStation)="stationsService.getStation($event)"
                      (submit)="onUpdateStationSubmit($event)"
+                     (deleteStation)="onDeleteStationSubmit($event)"
   ></app-stations-view>
 
   <app-station-create *ngIf="isCreateMode()" (submit)="onCreateStationSubmit($event)"

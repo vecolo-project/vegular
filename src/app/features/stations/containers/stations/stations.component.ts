@@ -5,7 +5,7 @@ import {Station, StationMonitoring} from "../../../../shared/models";
 import {StationsQuery} from "../../store/stations.query";
 import {StationsService} from "../../store/stations.service";
 import {subDays} from "date-fns";
-import {OsmSearchResponse} from "../../../../shared/models/osmSearchResponse";
+import {OsmSearchResponse} from "../../../../shared/models/osmSearchResponse.model";
 import {RouterNavigation} from "../../../../core/router/router.navigation";
 import {SessionQuery} from "../../../../core/store/session.query";
 
@@ -80,6 +80,10 @@ export class StationsComponent implements OnInit {
 
   onUpdateStationSubmit(station: Station) {
     this.stationsService.updateStation(station);
+  }
+
+  onDeleteStationSubmit(stationId: number) {
+    this.stationsService.deleteStation(stationId);
   }
 
   getStationToken(stationId: number) {

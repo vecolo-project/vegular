@@ -5,7 +5,7 @@ import {Snackbar} from '../../../shared/snackbar/snakbar';
 import {Station, StationMonitoring} from '../../../shared/models';
 import {API_RESSOURCE_URI} from '../../../shared/api-ressource-uri/api-ressource-uri';
 import {HttpTools} from "../../../shared/http-tools/http-tools";
-import {OsmSearchResponse} from "../../../shared/models/osmSearchResponse";
+import {OsmSearchResponse} from "../../../shared/models/osmSearchResponse.model";
 import {RouterNavigation} from "../../../core/router/router.navigation";
 
 @Injectable({providedIn: 'root'})
@@ -43,7 +43,7 @@ export class StationsService {
     }
     try {
       const response = await this.http.get<Station>(
-        API_RESSOURCE_URI.BASE_STATIONS + '/' + stationId
+        API_RESSOURCE_URI.BASE_STATIONS + stationId
       );
       this.stationsStore.update({viewStation: response});
     } catch (e) {
@@ -52,6 +52,28 @@ export class StationsService {
         'Erreur lors de la récupération d\'une station : ' + e.error.error
       );
     } finally {
+      this.stationsStore.setLoading(false);
+    }
+  }
+
+  async deleteStation(stationId: number): Promise<void> {
+    this.stationsStore.setLoading(true);
+    try {
+      await this.http.delete<Station>(
+        API_RESSOURCE_URI.BASE_STATIONS + stationId
+      );
+      this.stationsStore.remove(stationId);
+      this.snackBar.success(
+        'La station a été supprimé'
+      );
+    } catch (e) {
+      console.log(e);
+      this.stationsStore.update({viewStation: undefined});
+      this.snackBar.warnning(
+        'Erreur lors de la suppression d\'une station : ' + e.error.error
+      );
+    } finally {
+      this.routerNavigation.gotoStationList();
       this.stationsStore.setLoading(false);
     }
   }

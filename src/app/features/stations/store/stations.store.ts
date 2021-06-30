@@ -1,7 +1,7 @@
 import {EntityState, EntityStore, StoreConfig} from '@datorama/akita';
 import {Station, StationMonitoring} from '../../../shared/models';
 import {Injectable} from '@angular/core';
-import {OsmSearchResponse} from "../../../shared/models/osmSearchResponse";
+import {OsmSearchResponse} from "../../../shared/models/osmSearchResponse.model";
 
 export interface StationsState extends EntityState<Station, number> {
   count: number;

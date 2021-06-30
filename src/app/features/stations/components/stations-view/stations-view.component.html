@@ -34,12 +34,18 @@
       </div>
 
     </mat-card-content>
-    <mat-card-actions class="flex justify-end">
+    <mat-card-actions *ngIf="isStaff" class="flex justify-end space-x-2">
       <button
         mat-raised-button
         color="primary"
         (click)="onEdit()"
       >Modifier
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="onDelete()"
+      >Supprimer
       </button>
     </mat-card-actions>
   </mat-card>

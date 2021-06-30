@@ -3,7 +3,7 @@ import {StationsState, StationsStore} from './stations.store';
 import {QueryEntity} from '@datorama/akita';
 import {Observable} from 'rxjs';
 import {Station, StationMonitoring} from '../../../shared/models';
-import {OsmSearchResponse} from "../../../shared/models/osmSearchResponse";
+import {OsmSearchResponse} from "../../../shared/models/osmSearchResponse.model";
 
 @Injectable({providedIn: 'root'})
 export class StationsQuery extends QueryEntity<StationsState, Station> {

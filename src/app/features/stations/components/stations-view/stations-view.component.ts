@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {Station, StationMonitoring} from "../../../../shared/models";
-import {interval} from "rxjs";
+import {OsmSearchResponse, Station, StationMonitoring} from "../../../../shared/models";
+import {interval, Subscription} from "rxjs";
 import {AnimationOptions} from "ngx-lottie";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {OsmSearchResponse} from "../../../../shared/models/osmSearchResponse";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmDialogComponent} from "../../../../shared/confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'app-stations-view',
@@ -21,6 +22,9 @@ export class StationsViewComponent implements OnInit {
   getStation = new EventEmitter<number>();
 
   @Output()
+  deleteStation = new EventEmitter<number>();
+
+  @Output()
   getMonitoring = new EventEmitter<{ stationId: number, nbDays: number; }>();
 
   @Output()
@@ -32,17 +36,22 @@ export class StationsViewComponent implements OnInit {
   @Input()
   isAdmin: boolean;
 
+  @Input()
+  isStaff: boolean;
+
   @Output()
   submit = new EventEmitter<Station>();
 
   editMode: boolean;
   stationForm: FormGroup;
 
+  obs: Subscription;
+
   lottieStationOptions: AnimationOptions = {
     path: 'assets/lottie/solarPanel2.json',
   }
 
-  constructor(@Inject(FormBuilder) fb) {
+  constructor(@Inject(FormBuilder) fb, private dialog: MatDialog) {
     this.stationForm = fb.group({
       BATTERY_CAPACITY: ['', [Validators.required, Validators.min(1)]],
       BIKE_CAPACITY: ['', [Validators.required, Validators.min(0)]],
@@ -57,7 +66,7 @@ export class StationsViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const obs = interval(5000)
+    this.obs = interval(5000)
       .subscribe(() => {
         if (!this.editMode) {
           this.getStation.emit(this.station?.id);
@@ -135,5 +144,20 @@ export class StationsViewComponent implements OnInit {
     this.stationForm.controls.ZIPCODE.patchValue(address.address.postcode);
     this.stationForm.controls.COORDINATE_Y.patchValue(address.lat);
     this.stationForm.controls.COORDINATE_X.patchValue(address.lon);
+  }
+
+  onDelete(): void {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Suppression d\'une station',
+        message: 'Êtes vous sûr de vouloir supprimer cette station ?'
+      }
+    });
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.obs.unsubscribe();
+        this.deleteStation.emit(this.station.id);
+      }
+    })
   }
 }
