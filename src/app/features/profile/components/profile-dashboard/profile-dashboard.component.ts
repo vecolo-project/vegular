@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {SessionQuery} from '../../../../core/state/session.query';
-import {SessionService} from '../../../../core/state/session.service';
+import {SessionQuery} from '../../../../core/store/session.query';
+import {SessionService} from '../../../../core/store/session.service';
 import {User} from '../../../../shared/models/user.model';
 import {Observable} from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
