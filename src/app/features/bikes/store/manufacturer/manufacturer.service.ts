@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClientWrapper } from 'src/app/core/utils/httpClientWrapper';
-import { BikeManufacturer, BikeManufacturerProps } from 'src/app/shared/models';
-import { Snackbar } from 'src/app/shared/snackbar/snakbar';
-import { API_RESSOURCE_URI } from '../../../../shared/api-ressource-uri/api-ressource-uri';
-import { BikeManufacturerQuery } from './manufacturer.query';
-import { BikeManufacturerStore } from './manufacturer.store';
+import {Injectable} from '@angular/core';
+import {HttpClientWrapper} from 'src/app/core/utils/httpClientWrapper';
+import {BikeManufacturer, BikeManufacturerProps} from 'src/app/shared/models';
+import {Snackbar} from 'src/app/shared/snackbar/snakbar';
+import {API_RESSOURCE_URI} from '../../../../shared/api-ressource-uri/api-ressource-uri';
+import {BikeManufacturerQuery} from './manufacturer.query';
+import {BikeManufacturerStore} from './manufacturer.store';
 
 @Injectable({ providedIn: 'root' })
 export class BikeManufacturerService {

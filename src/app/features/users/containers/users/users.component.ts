@@ -1,14 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { User, UserFormData } from '../../../../shared/models/user.model';
-import { UsersQuery } from '../../store/users.query';
-import { UsersService } from '../../store/users.service';
-import { SessionQuery } from '../../../../core/store/session.query';
-import { ActivatedRoute, Router } from '@angular/router';
-import {
-  buildPostUserFromUserFormData,
-  buildPutUserFromUserFormData,
-} from '../../userTypeAdapter';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {User, UserFormData} from '../../../../shared/models/user.model';
+import {UsersQuery} from '../../store/users.query';
+import {UsersService} from '../../store/users.service';
+import {SessionQuery} from '../../../../core/store/session.query';
+import {ActivatedRoute, Router} from '@angular/router';
+import {buildPostUserFromUserFormData, buildPutUserFromUserFormData,} from '../../userTypeAdapter';
 
 @Component({
   selector: 'app-user',

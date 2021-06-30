@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {StationMonitoring} from "../../../../shared/models";
 import {ChartDataSets, ChartOptions, ChartType} from "chart.js";
 import {Color, Label, PluginServiceGlobalRegistrationAndOptions,} from "ng2-charts";

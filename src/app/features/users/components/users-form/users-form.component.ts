@@ -1,14 +1,7 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User, UserFormData } from 'src/app/shared/models/user.model';
-import { ActivatedRoute } from '@angular/router';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output,} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {User, UserFormData} from 'src/app/shared/models/user.model';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-users-form',

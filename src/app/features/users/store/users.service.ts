@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { UsersStore } from './users.store';
-import { HttpClientWrapper } from '../../../core/utils/httpClientWrapper';
-import { Snackbar } from '../../../shared/snackbar/snakbar';
-import { PutUser, RegisterUser, User } from '../../../shared/models/user.model';
-import { API_RESSOURCE_URI } from '../../../shared/api-ressource-uri/api-ressource-uri';
-import { UsersQuery } from './users.query';
+import {Injectable} from '@angular/core';
+import {UsersStore} from './users.store';
+import {HttpClientWrapper} from '../../../core/utils/httpClientWrapper';
+import {Snackbar} from '../../../shared/snackbar/snakbar';
+import {PutUser, RegisterUser, User} from '../../../shared/models/user.model';
+import {API_RESSOURCE_URI} from '../../../shared/api-ressource-uri/api-ressource-uri';
+import {UsersQuery} from './users.query';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {

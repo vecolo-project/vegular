@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { BikeManufacturer, BikeManufacturerProps } from 'src/app/shared/models';
-import { BikeManufacturerQuery } from '../../store/manufacturer/manufacturer.query';
-import { BikeManufacturerService } from '../../store/manufacturer/manufacturer.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {BikeManufacturer, BikeManufacturerProps} from 'src/app/shared/models';
+import {BikeManufacturerQuery} from '../../store/manufacturer/manufacturer.query';
+import {BikeManufacturerService} from '../../store/manufacturer/manufacturer.service';
 
 @Component({
   selector: 'app-bikes',
