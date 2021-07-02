@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BikeManufacturer } from 'src/app/shared/models';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {BikeManufacturer} from 'src/app/shared/models';
 
 @Component({
   selector: 'app-bikes-manufacturer-list',
