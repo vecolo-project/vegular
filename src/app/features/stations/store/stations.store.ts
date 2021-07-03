@@ -1,18 +1,23 @@
 import {EntityState, EntityStore, StoreConfig} from '@datorama/akita';
-import {Station} from '../../../shared/models';
+import {Station, StationMonitoring} from '../../../shared/models';
 import {Injectable} from '@angular/core';
+import {OsmSearchResponse} from "../../../shared/models/osmSearchResponse";
 
 export interface StationsState extends EntityState<Station, number> {
   count: number;
-  editStation: Station;
   viewStation: Station;
+  viewStationToken: string;
+  stationMonitoring: StationMonitoring[],
+  addressAutocomplete: OsmSearchResponse[];
 }
 
 export function createInitialState(): StationsState {
   return {
     count: 0,
-    editStation: undefined,
-    viewStation: undefined
+    viewStation: undefined,
+    viewStationToken: '',
+    stationMonitoring: [],
+    addressAutocomplete: []
   };
 }
 

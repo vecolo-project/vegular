@@ -5,13 +5,19 @@ import {StationsRoutingModule} from './stations-routing.module';
 import {StationsListComponent} from './components/stations-list/stations-list.component';
 import {StationsViewComponent} from './components/stations-view/stations-view.component';
 import {SharedModule} from "../../shared/shared.module";
+import {StationChartComponent} from './components/station-charts/station-chart.component';
+import {AddressSearchComponent} from './components/address-search/address-search.component';
+import {StationCreateComponent} from './components/station-create/station-create.component';
 
 
 @NgModule({
   declarations: [
     StationsComponent,
     StationsListComponent,
-    StationsViewComponent
+    StationsViewComponent,
+    StationChartComponent,
+    AddressSearchComponent,
+    StationCreateComponent,
   ],
     imports: [
         StationsRoutingModule,

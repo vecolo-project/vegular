@@ -19,7 +19,8 @@ export class StationsMapComponent implements OnInit, OnChanges {
     layers: [
       tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
-          maxZoom: 18,
+          minZoom:11,
+          maxZoom: 19,
           attribution: 'Vecolo',
         })
     ],
@@ -31,7 +32,9 @@ export class StationsMapComponent implements OnInit, OnChanges {
     {
       showCoverageOnHover: true,
       removeOutsideVisibleBounds: true,
-      maxClusterRadius: 100
+      maxClusterRadius: 100,
+      animate:true,
+      animateAddingMarkers:true
     }
 
   layers = []
