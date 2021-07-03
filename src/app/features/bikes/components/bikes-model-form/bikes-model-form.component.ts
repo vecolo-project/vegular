@@ -37,6 +37,9 @@ export class BikesModelFormComponent implements OnInit {
   @Output()
   getManufacturers = new EventEmitter();
 
+  @Output()
+  uploadModelImage = new EventEmitter();
+
   options = [];
   filteredOptions: Observable<BikeManufacturer[]>;
 
@@ -44,12 +47,13 @@ export class BikesModelFormComponent implements OnInit {
     this.form = this.fp.group({
       fieldName: ['', [Validators.required]],
       fieldManufacturer: ['', [Validators.required]],
-      fieldBattery: ['', [Validators.required]],
-      fieldWeight: ['', [Validators.required]],
-      fieldMaxPower: ['', [Validators.required]],
-      fieldMaxSpeed: ['', [Validators.required]],
-      fieldDistance: ['', [Validators.required]],
+      fieldBattery: ['', [Validators.required, Validators.min(0)]],
+      fieldWeight: ['', [Validators.required, Validators.min(0)]],
+      fieldMaxPower: ['', [Validators.required, Validators.min(0)]],
+      fieldMaxSpeed: ['', [Validators.required, Validators.min(0)]],
+      fieldDistance: ['', [Validators.required, Validators.min(0)]],
       fieldDescription: ['', [Validators.required]],
+      fieldImage: [''],
     });
   }
 
@@ -58,7 +62,6 @@ export class BikesModelFormComponent implements OnInit {
       this.options = this.manufacturers;
       this._setFilters();
     } else {
-      console.log('getManufacturers');
       this.getManufacturers.emit();
     }
   }
@@ -104,5 +107,15 @@ export class BikesModelFormComponent implements OnInit {
       description: this.form.value.fieldDescription,
     };
     this.postModel.emit(model);
+  }
+
+  changeImage(event: any): void {
+    let fileList: FileList = event.target.files;
+    if (fileList.length) {
+      const file = fileList[0];
+      const formData = new FormData();
+      formData.append('file', file, file.name);
+      this.uploadModelImage.emit(formData);
+    }
   }
 }
