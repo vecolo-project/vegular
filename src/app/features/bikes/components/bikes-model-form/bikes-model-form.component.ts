@@ -1,8 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import {BikeManufacturer, BikeModel, BikeModelProps,} from 'src/app/shared/models';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import {
+  BikeManufacturer,
+  BikeModel,
+  BikeModelProps,
+} from 'src/app/shared/models';
 
 @Component({
   selector: 'app-bikes-model-form',
@@ -110,7 +114,7 @@ export class BikesModelFormComponent implements OnInit {
     if (fileList.length) {
       const file = fileList[0];
       const formData = new FormData();
-      formData.append('file', file, file.name);
+      formData.append('bikeModelImage', file, file.name);
       this.uploadModelImage.emit(formData);
     }
   }

@@ -40,15 +40,19 @@ export class HttpClientWrapper {
   private async getHeaders(additionalHeader?: {
     [key: string]: string;
   }): Promise<object> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: await this.getAuthToken(),
-    });
+    const lines = new Map<string, string>();
+    lines.set('Content-Type', 'application/json');
+    lines.set('Authorization', await this.getAuthToken());
     if (additionalHeader) {
       for (const key in additionalHeader) {
-        headers.set(key, additionalHeader[key]);
+        lines.set(key, additionalHeader[key]);
       }
     }
+    // HttpHeaders value arre not overwirteable when they are set
+    let headers = new HttpHeaders();
+    lines.forEach((value, key) => {
+      headers = headers.set(key, value);
+    });
     return { headers };
   }
 
