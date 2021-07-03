@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { User } from '../../../../shared/models/user.model';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {User} from '../../../../shared/models/user.model';
+
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',

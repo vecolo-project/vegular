@@ -5,7 +5,7 @@ export type User = {
   birthDate: Date;
   email: string;
   pseudo: string;
-  newsletter: string;
+  newsletter: boolean;
   role: Role;
 };
 
@@ -29,7 +29,7 @@ export type RegisterUser = {
   birthDate: Date;
   email: string;
   pseudo: string;
-  newsletter: string;
+  newsletter: boolean;
   role: Role;
   isActive: boolean;
 };
