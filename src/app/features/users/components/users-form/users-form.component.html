@@ -64,7 +64,7 @@
     <mat-form-field class="w-full">
       <mat-label>Date de naissance</mat-label>
       <input matInput formControlName="fieldBirthDate" [matDatepicker]="datepicker"/>
-      <mat-datepicker-toggle [for]="datepicker"></mat-datepicker-toggle>
+      <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
       <mat-datepicker #datepicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field class="w-full">
