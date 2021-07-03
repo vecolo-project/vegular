@@ -11,9 +11,11 @@ export const API_RESSOURCE_URI = {
   POST_USER: environment.API_URL + '/user/',
   // Stations
   BASE_STATIONS: environment.API_URL + '/station/',
+  // MAP
+  OSM_SEARCH_ADDRESS: 'https://nominatim.openstreetmap.org/search.php?',
   //Station monitoring
   STATION_MONITORING: environment.API_URL + '/station-monitoring/',
-  OSM_SEARCH_ADDRESS: 'https://nominatim.openstreetmap.org/search.php?',
+  // MANUFACTURER
   POST_BIKE_MANUFACTURER: environment.API_URL + '/bike-manufacturer',
   GET_BIKE_MANUFACTURERS: environment.API_URL + '/bike-manufacturer',
   GET_BIKE_MANUFACTURER: environment.API_URL + '/bike-manufacturer/',

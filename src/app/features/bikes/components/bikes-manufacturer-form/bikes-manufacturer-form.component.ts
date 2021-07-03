@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {BikeManufacturer, BikeManufacturerProps} from 'src/app/shared/models';
+import { Snackbar } from 'src/app/shared/snackbar/snakbar';
 
 @Component({
   selector: 'app-bikes-manufacturer-form',
@@ -26,7 +27,7 @@ export class BikesManufacturerFormComponent implements OnInit {
   @Output()
   retrieveEditManufacturer = new EventEmitter<number>();
 
-  constructor(private fp: FormBuilder, private route: ActivatedRoute) {
+  constructor(private fp: FormBuilder, private route: ActivatedRoute, private snackBar: Snackbar) {
     this.form = this.fp.group({
       fieldName: ['', [Validators.required]],
       fieldPhone: ['', [Validators.required, Validators.minLength(10)]],
@@ -63,7 +64,10 @@ export class BikesManufacturerFormComponent implements OnInit {
 
   save(): void {
     const manufacturer = {
-      id: this.editManufacturer.id ? this.editManufacturer.id : null,
+      id:
+        this.editManufacturer && this.editManufacturer.id
+          ? this.editManufacturer.id
+          : null,
       name: String(this.form.value.fieldName),
       phone: String(this.form.value.fieldPhone),
       address: String(this.form.value.fieldAddress),
@@ -73,5 +77,6 @@ export class BikesManufacturerFormComponent implements OnInit {
     } else {
       this.postManufacturer.emit(manufacturer);
     }
+    this.snackBar.success('Enregistré');
   }
 }

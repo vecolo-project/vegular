@@ -19,19 +19,31 @@
       <mat-error>Ce champs et requis</mat-error>
     </mat-form-field>
     <mat-form-field class="w-full">
+      <mat-label>Assignee</mat-label>
       <input
+        type="text"
         matInput
         formControlName="fieldManufacturer"
-        placeholder="Fabriquant"
-        type=" text"
+        [matAutocomplete]="auto"
       />
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="displayAutocomplete"
+      >
+        <mat-option
+          *ngFor="let option of filteredOptions | async"
+          [value]="option"
+        >
+          {{ option.name }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
     <mat-form-field class="w-full">
       <input
         matInput
         formControlName="fieldBattery"
         placeholder="Batterie capacity"
-        type=" text"
+        type=" number"
       />
     </mat-form-field>
     <mat-form-field class="w-full">
@@ -39,7 +51,7 @@
         matInput
         formControlName="fieldWeight"
         placeholder="Poids"
-        type=" text"
+        type=" number"
       />
     </mat-form-field>
     <mat-form-field class="w-full">
@@ -47,7 +59,7 @@
         matInput
         formControlName="fieldMaxPower"
         placeholder="Max Power"
-        type=" text"
+        type=" number"
       />
     </mat-form-field>
     <mat-form-field class="w-full">
@@ -55,7 +67,7 @@
         matInput
         formControlName="fieldMaxSpeed"
         placeholder="Vitesse maximal"
-        type=" text"
+        type=" number"
       />
     </mat-form-field>
     <mat-form-field class="w-full">
@@ -63,7 +75,7 @@
         matInput
         formControlName="fieldDistance"
         placeholder="Distance maximal"
-        type=" text"
+        type=" number"
       />
     </mat-form-field>
     <mat-form-field class="w-full">

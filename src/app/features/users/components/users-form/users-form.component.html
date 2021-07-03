@@ -1,3 +1,12 @@
+<div class="my-4">
+  <button
+    [routerLink]="['/users']"
+    mat-button
+    class="bg-red-600 text-black min-w-min px-2"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
 <form [formGroup]="form" action="" class="mb-3">
   <mat-card>
     <mat-form-field class="w-full">
@@ -39,6 +48,10 @@
         placeholder="Mot de passe"
         type="password"
       />
+      <mat-error
+        >Ce champs doit faire au moins 7 characters et correspondre a la
+        confirmation</mat-error
+      >
     </mat-form-field>
     <mat-form-field class="w-full">
       <input
@@ -50,7 +63,9 @@
     </mat-form-field>
     <mat-form-field class="w-full">
       <mat-label>Date de naissance</mat-label>
-      <input matInput formControlName="fieldBirthDate" type="text" />
+      <input matInput formControlName="fieldBirthDate" [matDatepicker]="datepicker"/>
+      <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+      <mat-datepicker #datepicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field class="w-full">
       <input
@@ -64,7 +79,11 @@
       Newsletter
     </mat-slide-toggle>
     <p class="text-center">
-      <button mat-button (click)="save()" class="bg-indigo-500">
+      <button
+        mat-button
+        (click)="save()"
+        class="bg-indigo-500"
+      >
         enregister
       </button>
     </p>

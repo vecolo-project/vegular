@@ -1,4 +1,4 @@
-import {Bike, BikeManufacturer} from ".";
+import { Bike, BikeManufacturer } from '.';
 
 export type BikeModel = {
   id: number;
@@ -15,4 +15,15 @@ export type BikeModel = {
   bikeManufacturer: BikeManufacturer;
   createdAt: Date;
   updatedAt: Date;
-}
+};
+
+export type BikeModelProps = {
+  id: number | null;
+  name: string;
+  batteryCapacity: number;
+  weight: number;
+  maxPower: number;
+  maxSpeed: number;
+  maxDistance: number;
+  description: string;
+};
