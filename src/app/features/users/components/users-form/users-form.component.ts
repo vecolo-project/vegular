@@ -17,6 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PasswordValidator } from 'src/app/shared/validator/password';
 import { FormStatus } from 'src/app/shared/form/FormStatus';
 import { format } from 'date-fns';
+import { Snackbar } from 'src/app/shared/snackbar/snakbar';
 
 @Component({
   selector: 'app-users-form',
@@ -41,7 +42,7 @@ export class UsersFormComponent implements OnInit, OnChanges {
   @Output()
   public putUser = new EventEmitter<UserFormData>();
 
-  constructor(private fp: FormBuilder, private route: ActivatedRoute) {
+  constructor(private fp: FormBuilder, private route: ActivatedRoute, private snackBar: Snackbar) {
     this.form = this.fp.group(
       {
         fieldEmail: ['', [Validators.required, Validators.email]],
@@ -110,7 +111,7 @@ export class UsersFormComponent implements OnInit, OnChanges {
     } else {
       this.saveForEdit(user);
     }
-    // TODO mettre une snakbar "bien joué"
+    this.snackBar.success('Enregisté');
   }
 
   private saveForAdd(user: any): void {
