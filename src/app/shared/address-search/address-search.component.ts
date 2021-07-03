@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {OsmSearchResponse} from "../../../../shared/models/osmSearchResponse";
+import {OsmSearchResponse} from "../models/osmSearchResponse.model";
 import {FormControl, Validators} from "@angular/forms";
 import {Observable} from "rxjs";
-import {StationsService} from "../../store/stations.service";
-import {StationsQuery} from "../../store/stations.query";
+import {StationsService} from "../../features/stations/store/stations.service";
+import {StationsQuery} from "../../features/stations/store/stations.query";
 
 @Component({
   selector: 'app-address-search',

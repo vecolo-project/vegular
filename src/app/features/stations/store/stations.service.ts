@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {StationsStore} from './stations.store';
 import {HttpClientWrapper} from '../../../core/utils/httpClientWrapper';
 import {Snackbar} from '../../../shared/snackbar/snakbar';
-import {Station, StationMonitoring} from '../../../shared/models';
+import {Ride, Station, StationMonitoring} from '../../../shared/models';
 import {API_RESSOURCE_URI} from '../../../shared/api-ressource-uri/api-ressource-uri';
 import {HttpTools} from "../../../shared/http-tools/http-tools";
-import {OsmSearchResponse} from "../../../shared/models/osmSearchResponse";
+import {OsmSearchResponse} from "../../../shared/models/osmSearchResponse.model";
 import {RouterNavigation} from "../../../core/router/router.navigation";
 
 @Injectable({providedIn: 'root'})
@@ -20,6 +20,7 @@ export class StationsService {
 
   async getStations(limit: number, offset: number): Promise<void> {
     this.stationsStore.setLoading(true);
+    this.stationsStore.set([]);
     try {
       const response = await this.http.get<{ stations: Station[], count: number }>(
         API_RESSOURCE_URI.BASE_STATIONS + `?limit=${limit}&offset=${offset}`
@@ -27,12 +28,26 @@ export class StationsService {
       this.stationsStore.set(response.stations);
       this.stationsStore.update({count: response.count});
     } catch (e) {
-      this.stationsStore.set([]);
       this.snackBar.warnning(
         'Erreur lors de la récupération des stations : ' + e.error.error
       );
     } finally {
       this.stationsStore.setLoading(false);
+    }
+  }
+
+  async getRides(stationId: number, limit: number, offset: number): Promise<void> {
+    this.stationsStore.update({stationRides: []});
+    try {
+      const response = await this.http.get<{ rides: Ride[], count: number }>(
+        API_RESSOURCE_URI.RIDE_STATION + stationId + `?limit=${limit}&offset=${offset}`
+      );
+      this.stationsStore.update({stationRides: response.rides});
+      this.stationsStore.update({stationRidesCount: response.count});
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la récupération des courses d\'une station : ' + e.error.error
+      );
     }
   }
 
@@ -43,7 +58,7 @@ export class StationsService {
     }
     try {
       const response = await this.http.get<Station>(
-        API_RESSOURCE_URI.BASE_STATIONS + '/' + stationId
+        API_RESSOURCE_URI.BASE_STATIONS + stationId
       );
       this.stationsStore.update({viewStation: response});
     } catch (e) {
@@ -52,6 +67,28 @@ export class StationsService {
         'Erreur lors de la récupération d\'une station : ' + e.error.error
       );
     } finally {
+      this.stationsStore.setLoading(false);
+    }
+  }
+
+  async deleteStation(stationId: number): Promise<void> {
+    this.stationsStore.setLoading(true);
+    try {
+      await this.http.delete<Station>(
+        API_RESSOURCE_URI.BASE_STATIONS + stationId
+      );
+      this.stationsStore.remove(stationId);
+      this.snackBar.success(
+        'La station a été supprimé'
+      );
+    } catch (e) {
+      console.log(e);
+      this.stationsStore.update({viewStation: undefined});
+      this.snackBar.warnning(
+        'Erreur lors de la suppression d\'une station : ' + e.error.error
+      );
+    } finally {
+      this.routerNavigation.gotoStationList();
       this.stationsStore.setLoading(false);
     }
   }
@@ -96,6 +133,26 @@ export class StationsService {
       response.stationMonitoring = [];
       this.stationsStore.add(response);
       this.routerNavigation.gotoStationList();
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la création d\'une station : ' + e.error.error
+      );
+    } finally {
+      this.stationsStore.setLoading(false);
+    }
+  }
+
+  async updateStation(station: Station): Promise<void> {
+    this.stationsStore.setLoading(true);
+    try {
+      const response = await this.http.put<Station>(
+        API_RESSOURCE_URI.BASE_STATIONS + station.id,
+        station
+      );
+      response.stationMonitoring = [];
+      this.stationsStore.update(station.id, station);
+      this.stationsStore.update({viewStation: station});
+      this.snackBar.success("Station mis à jour");
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de la création d\'une station : ' + e.error.error

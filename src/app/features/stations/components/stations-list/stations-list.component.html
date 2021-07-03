@@ -9,7 +9,8 @@
         <td mat-cell *matCellDef="let element">
           {{element.id}}
         </td>
-      </ng-container>      <ng-container matColumnDef="address">
+      </ng-container>
+      <ng-container matColumnDef="address">
         <th mat-header-cell *matHeaderCellDef>Adresse</th>
         <td mat-cell *matCellDef="let element">
           {{element.streetNumber}} {{element.streetName}} - {{element.city}} ({{element.zipcode}})

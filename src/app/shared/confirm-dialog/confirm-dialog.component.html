@@ -1,0 +1,8 @@
+<h1>{{data.title}}</h1>
+<mat-dialog-content>
+  {{data.message}}
+</mat-dialog-content>
+<mat-dialog-actions class="flex justify-end">
+  <button mat-raised-button color="primary" [matDialogClose]="true">Confirmer</button>
+  <button mat-raised-button color="warn" [matDialogClose]="false">Annuler</button>
+</mat-dialog-actions>
