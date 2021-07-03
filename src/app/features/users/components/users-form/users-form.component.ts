@@ -6,9 +6,16 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { User, UserFormData } from 'src/app/shared/models/user.model';
 import { ActivatedRoute } from '@angular/router';
+import { PasswordValidator } from 'src/app/shared/validator/password';
+import { FormStatus } from 'src/app/shared/form/FormStatus';
 
 @Component({
   selector: 'app-users-form',
@@ -34,17 +41,20 @@ export class UsersFormComponent implements OnInit, OnChanges {
   public putUser = new EventEmitter<UserFormData>();
 
   constructor(private fp: FormBuilder, private route: ActivatedRoute) {
-    this.form = this.fp.group({
-      fieldEmail: ['', [Validators.required, Validators.email]],
-      fieldFirstName: ['', [Validators.required]],
-      fieldLastName: ['', [Validators.required]],
-      fieldPassword: [''],
-      fieldConfirmPassword: [''],
-      fieldBirthDate: ['', [Validators.required]],
-      fieldPseudo: ['', [Validators.required]],
-      fieldRole: ['', [Validators.required]],
-      fieldNewsletter: ['', [Validators.required]],
-    });
+    this.form = this.fp.group(
+      {
+        fieldEmail: ['', [Validators.required, Validators.email]],
+        fieldFirstName: ['', [Validators.required]],
+        fieldLastName: ['', [Validators.required]],
+        fieldPassword: ['', [Validators.minLength(7)]],
+        fieldConfirmPassword: [''],
+        fieldBirthDate: ['', [Validators.required]],
+        fieldPseudo: ['', [Validators.required]],
+        fieldRole: ['', [Validators.required]],
+        fieldNewsletter: ['', [Validators.required]],
+      },
+      { validators: PasswordValidator.confirmPasswordValidator }
+    );
   }
 
   ngOnInit(): void {
@@ -80,7 +90,7 @@ export class UsersFormComponent implements OnInit, OnChanges {
   }
 
   save(): void {
-    if (this.isAddMode) {
+    if (this.isAddMode && this.form.status === FormStatus.VALID) {
       this.saveForAdd();
     } else {
       this.saveForEdit();

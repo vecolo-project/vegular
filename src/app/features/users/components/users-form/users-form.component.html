@@ -48,6 +48,10 @@
         placeholder="Mot de passe"
         type="password"
       />
+      <mat-error
+        >Ce champs doit faire au moins 7 characters et correspondre a la
+        confirmation</mat-error
+      >
     </mat-form-field>
     <mat-form-field class="w-full">
       <input
@@ -73,7 +77,12 @@
       Newsletter
     </mat-slide-toggle>
     <p class="text-center">
-      <button mat-button (click)="save()" class="bg-indigo-500">
+      <button
+        mat-button
+        (click)="save()"
+        [disabled]="form.status === 'VALID'"
+        class="bg-indigo-500"
+      >
         enregister
       </button>
     </p>
