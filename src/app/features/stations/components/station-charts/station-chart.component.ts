@@ -2,7 +2,7 @@ import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {StationMonitoring} from "../../../../shared/models";
 import {ChartDataSets, ChartOptions, ChartType} from "chart.js";
 import {Color, Label, PluginServiceGlobalRegistrationAndOptions,} from "ng2-charts";
-import {addHours, format} from 'date-fns';
+import {format} from 'date-fns';
 
 @Component({
   selector: 'app-station-battery-chart',
@@ -108,7 +108,7 @@ export class StationChartComponent implements OnInit, OnChanges {
         spanGaps: true,
       }
     ]
-    this.lineChartBatteryLabels = this.stationMonitorings.filter((value, index) => index % moduloFilter === 0).map(m => format(addHours(new Date(m.createdAt), 2), 'yyyy-MM-dd HH:mm:ss'));
+    this.lineChartBatteryLabels = this.stationMonitorings.filter((value, index) => index % moduloFilter === 0).map(m => format(new Date(m.createdAt), 'yyyy-MM-dd HH:mm:ss'));
   }
 
   private computeBikeChart() {
@@ -120,6 +120,6 @@ export class StationChartComponent implements OnInit, OnChanges {
         spanGaps: true,
       }
     ]
-    this.lineChartBikeLabels = this.stationMonitorings.filter((value, index) => index % moduloFilter === 0).map(m => format(addHours(new Date(m.createdAt), 2), 'yyyy-MM-dd HH:mm:ss'));
+    this.lineChartBikeLabels = this.stationMonitorings.filter((value, index) => index % moduloFilter === 0).map(m => format(new Date(m.createdAt), 'yyyy-MM-dd HH:mm:ss'));
   }
 }
