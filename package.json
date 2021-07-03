@@ -27,6 +27,7 @@
     "@datorama/akita-ng-router-store": "^6.0.0",
     "@ngneat/tailwind": "^7.0.3",
     "axios": "^0.21.1",
+    "date-fns": "^2.22.1",
     "leaflet": "^1.7.1",
     "leaflet.markercluster": "^1.5.0",
     "lottie-web": "^5.7.11",
