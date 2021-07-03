@@ -6,9 +6,18 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { User, UserFormData } from 'src/app/shared/models/user.model';
 import { ActivatedRoute } from '@angular/router';
+import { PasswordValidator } from 'src/app/shared/validator/password';
+import { FormStatus } from 'src/app/shared/form/FormStatus';
+import { format } from 'date-fns';
+import { Snackbar } from 'src/app/shared/snackbar/snakbar';
 
 @Component({
   selector: 'app-users-form',
@@ -33,18 +42,21 @@ export class UsersFormComponent implements OnInit, OnChanges {
   @Output()
   public putUser = new EventEmitter<UserFormData>();
 
-  constructor(private fp: FormBuilder, private route: ActivatedRoute) {
-    this.form = this.fp.group({
-      fieldEmail: ['', [Validators.required, Validators.email]],
-      fieldFirstName: ['', [Validators.required]],
-      fieldLastName: ['', [Validators.required]],
-      fieldPassword: [''],
-      fieldConfirmPassword: [''],
-      fieldBirthDate: ['', [Validators.required]],
-      fieldPseudo: ['', [Validators.required]],
-      fieldRole: ['', [Validators.required]],
-      fieldNewsletter: ['', [Validators.required]],
-    });
+  constructor(private fp: FormBuilder, private route: ActivatedRoute, private snackBar: Snackbar) {
+    this.form = this.fp.group(
+      {
+        fieldEmail: ['', [Validators.required, Validators.email]],
+        fieldFirstName: ['', [Validators.required]],
+        fieldLastName: ['', [Validators.required]],
+        fieldPassword: ['', [Validators.minLength(7)]],
+        fieldConfirmPassword: [''],
+        fieldBirthDate: ['', [Validators.required]],
+        fieldPseudo: ['', [Validators.required]],
+        fieldRole: ['', [Validators.required]],
+        fieldNewsletter: ['', [Validators.required]],
+      },
+      { validators: PasswordValidator.confirmPasswordValidator }
+    );
   }
 
   ngOnInit(): void {
@@ -80,40 +92,33 @@ export class UsersFormComponent implements OnInit, OnChanges {
   }
 
   save(): void {
-    if (this.isAddMode) {
-      this.saveForAdd();
-    } else {
-      this.saveForEdit();
-    }
-  }
-
-  private saveForAdd(): void {
-    this.postUser.emit({
-      id: this.user && this.user.id ? this.user.id : null,
-      email: this.form.value.fieldEmail as string,
-      firstName: this.form.value.fieldFirstName as string,
-      lastName: this.form.value.fieldLastName as string,
-      password: this.form.value.fieldPassword as string,
-      birthDate: this.form.value.fieldBirthDate as string,
-      pseudo: this.form.value.fieldPseudo as string,
-      role: this.form.value.fieldRole as string,
-      newsletter: this.form.value.fieldNewsletter as string,
-      isActive: 'true',
-    });
-  }
-
-  private saveForEdit(): void {
-    this.putUser.emit({
+    const birthDate = new Date(this.form.value.fieldBirthDate);
+    const user = {
       id: this.user.id ? this.user.id : null,
-      email: this.form.value.fieldEmail as string,
-      firstName: this.form.value.fieldFirstName as string,
-      lastName: this.form.value.fieldLastName as string,
-      password: this.form.value.fieldPassword as string,
-      birthDate: this.form.value.fieldBirthDate as string,
-      pseudo: this.form.value.fieldPseudo as string,
-      role: this.form.value.fieldRole as string,
-      newsletter: this.form.value.fieldNewsletter as string,
+      email: String(this.form.value.fieldEmail),
+      firstName: String(this.form.value.fieldFirstName),
+      lastName: String(this.form.value.fieldLastName),
+      password: String(this.form.value.fieldPassword),
+      birthDate: format(birthDate, "yyyy-LL-dd"),
+      pseudo: String(this.form.value.fieldPseudo),
+      role: String(this.form.value.fieldRole),
+      newsletter: String(this.form.value.fieldNewsletter),
       isActive: 'true',
-    });
+    }
+
+    if (this.isAddMode && this.form.status === FormStatus.VALID) {
+      this.saveForAdd(user);
+    } else {
+      this.saveForEdit(user);
+    }
+    this.snackBar.success('Enregisté');
+  }
+
+  private saveForAdd(user: any): void {
+    this.postUser.emit(user);
+  }
+
+  private saveForEdit(user: any): void {
+    this.putUser.emit(user);
   }
 }

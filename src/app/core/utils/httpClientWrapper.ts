@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { SessionQuery } from '../store/session.query';
-import { HttpTools } from '../../shared/http-tools/http-tools';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {SessionQuery} from '../store/session.query';
+import {HttpTools} from '../../shared/http-tools/http-tools';
 
 @Injectable()
 export class HttpClientWrapper {
-  constructor(private http: HttpClient, private sessionQuery: SessionQuery) {}
+  constructor(private http: HttpClient, private sessionQuery: SessionQuery) {
+  }
 
   async get<T>(url: string): Promise<T> {
     return await this.http

@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { BikeManufacturer, BikeManufacturerProps } from 'src/app/shared/models';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {BikeManufacturer, BikeManufacturerProps} from 'src/app/shared/models';
 
 @Component({
   selector: 'app-bikes-manufacturer-form',

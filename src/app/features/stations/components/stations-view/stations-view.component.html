@@ -5,7 +5,7 @@
       <mat-card-title>Station {{station?.id}}
         - {{station?.streetNumber}} {{station?.streetName}} {{station?.city.toUpperCase()}} ({{station?.zipcode}})
       </mat-card-title>
-      <mat-card-subtitle>État : {{station?.stationMonitoring[0]?.status.toUpperCase()}}</mat-card-subtitle>
+      <mat-card-subtitle>État : {{getLastMonitoring()?.status.toUpperCase()}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="space-y-4">
 
@@ -13,17 +13,41 @@
         <mat-progress-bar
           [ngClass]="getProgressColorClass()"
           [mode]="'buffer'"
-          [value]="station?.stationMonitoring[0]?.batteryPercent"
+          [value]="getLastMonitoring()?.batteryPercent"
         ></mat-progress-bar>
         <div style="position: absolute; padding: 10px; color: white;">
-          {{station?.stationMonitoring[0]?.batteryPercent.toFixed(2)}}%
+          {{getLastMonitoring()?.batteryPercent.toFixed(2)}}%
         </div>
       </section>
-      <div class="text-lg">Puissance de Charge : {{station?.stationMonitoring[0]?.chargingPower}} VA</div>
+      <div class="text-lg">Puissance de Charge : {{getLastMonitoring()?.chargingPower}} VA</div>
       <div class="text-lg">
-        Vélos disponibles : {{station?.stationMonitoring[0]?.usedBikeSlot}}/{{station?.bikeCapacity}}
+        Vélos disponibles : {{getLastMonitoring()?.usedBikeSlot}}/{{station?.bikeCapacity}}
+      </div>
+      <div *ngIf="isAdmin" class="space-y-4">
+        <button mat-raised-button
+                color="warn"
+                (click)="getToken.emit(station.id)"
+        >Générer le token de la sation</button>
+        <p>
+          <strong class="break-all">{{token}}</strong>
+        </p>
       </div>
 
     </mat-card-content>
+  </mat-card>
+  <mat-card class="col-span-2">
+    <mat-card-header>
+      <mat-icon mat-card-avatar>battery_std</mat-icon>
+      <mat-card-title>
+        Statut de la borne
+      </mat-card-title>
+      <mat-card-subtitle>
+        <mat-form-field>
+          <input type="number" matInput value="3" min="0" (change)="retrieveMonitoring($event.target.value)">
+          <mat-hint>Nombre de jours</mat-hint>
+        </mat-form-field>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <app-station-battery-chart [stationMonitorings]="stationMonitorings"></app-station-battery-chart>
   </mat-card>
 </div>
