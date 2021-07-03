@@ -1,23 +1,11 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-} from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { User, UserFormData } from 'src/app/shared/models/user.model';
-import { ActivatedRoute } from '@angular/router';
-import { PasswordValidator } from 'src/app/shared/validator/password';
-import { FormStatus } from 'src/app/shared/form/FormStatus';
-import { format } from 'date-fns';
-import { Snackbar } from 'src/app/shared/snackbar/snakbar';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output,} from '@angular/core';
+import {FormBuilder, FormGroup, Validators,} from '@angular/forms';
+import {User, UserFormData} from 'src/app/shared/models/user.model';
+import {ActivatedRoute} from '@angular/router';
+import {PasswordValidator} from 'src/app/shared/validator/password';
+import {FormStatus} from 'src/app/shared/form/FormStatus';
+import {format} from 'date-fns';
+import {Snackbar} from 'src/app/shared/snackbar/snakbar';
 
 @Component({
   selector: 'app-users-form',

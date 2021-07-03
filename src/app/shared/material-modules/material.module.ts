@@ -33,11 +33,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatBadgeModule} from '@angular/material/badge';
-import {MatRippleModule, MAT_DATE_LOCALE, DateAdapter} from '@angular/material/core';
+import {MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {ReactiveFormsModule} from '@angular/forms';
-import {MatNativeDateModule} from '@angular/material/core';
-import { MY_FORMATS } from 'src/app/core/config/date';
+import {MY_FORMATS} from 'src/app/core/config/date';
 
 @NgModule({
   declarations: [],

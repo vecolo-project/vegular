@@ -4,13 +4,15 @@ import {MaterialModule} from './material-modules/material.module';
 import {LottieModule} from "ngx-lottie";
 import player from 'lottie-web';
 import {ChartsModule} from "ng2-charts";
+import {AddressSearchComponent} from "./address-search/address-search.component";
+import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
 
 export function playerFactory() {
   return player;
 }
 
 @NgModule({
-  declarations: [],
+  declarations: [AddressSearchComponent, ConfirmDialogComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -21,7 +23,9 @@ export function playerFactory() {
     CommonModule,
     MaterialModule,
     LottieModule,
-    ChartsModule
+    ChartsModule,
+    AddressSearchComponent,
+    ConfirmDialogComponent
   ]
 })
 export class SharedModule {

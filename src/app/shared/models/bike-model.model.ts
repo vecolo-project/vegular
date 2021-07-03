@@ -1,4 +1,4 @@
-import { Bike, BikeManufacturer } from '.';
+import {Bike, BikeManufacturer} from '.';
 
 export type BikeModel = {
   id: number;

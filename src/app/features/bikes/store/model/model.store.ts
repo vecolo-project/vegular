@@ -1,6 +1,6 @@
-import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
-import { Injectable } from '@angular/core';
-import { BikeModel } from 'src/app/shared/models';
+import {EntityState, EntityStore, StoreConfig} from '@datorama/akita';
+import {Injectable} from '@angular/core';
+import {BikeModel} from 'src/app/shared/models';
 
 export interface BikeModelState extends EntityState<BikeModel, number> {
   count: number;

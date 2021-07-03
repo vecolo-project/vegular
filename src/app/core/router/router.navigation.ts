@@ -47,4 +47,7 @@ export class RouterNavigation {
   gotoStationView(stationId: number): void {
     this.router.navigate([routesPath.stationView + '/' + stationId]);
   }
+  gotoBikeEdit(stationId: number): void {
+    this.router.navigate([routesPath.bikes + '/edit/' + stationId]);
+  }
 }
