@@ -15,7 +15,7 @@ export function createInitialState(): BikeState {
 }
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: 'BikeModel' })
+@StoreConfig({ name: 'bike' })
 export class BikeStore extends EntityStore<BikeState, Bike> {
   constructor() {
     super(createInitialState());

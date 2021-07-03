@@ -1,10 +1,11 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {OsmSearchResponse, Station, StationMonitoring} from "../../../../shared/models";
-import {interval, Subscription} from "rxjs";
+import {Bike, OsmSearchResponse, Ride, Station, StationMonitoring} from "../../../../shared/models";
+import {interval, Subscription, timer} from "rxjs";
 import {AnimationOptions} from "ngx-lottie";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmDialogComponent} from "../../../../shared/confirm-dialog/confirm-dialog.component";
+import {RouterNavigation} from "../../../../core/router/router.navigation";
 
 @Component({
   selector: 'app-stations-view',
@@ -42,6 +43,40 @@ export class StationsViewComponent implements OnInit {
   @Output()
   submit = new EventEmitter<Station>();
 
+  @Input()
+  bikes: Bike[];
+
+  @Input()
+  bikeCount: number;
+
+  @Output()
+  getBikes = new EventEmitter<{ stationId: number, limit: number, offset: number; }>();
+
+  @Input()
+  rides: Ride[];
+
+  @Input()
+  rideCount: number;
+
+  @Output()
+  getRides = new EventEmitter<{ stationId: number, limit: number, offset: number; }>();
+
+  bikeDisplayedColumns = [
+    'matricule',
+    'battery',
+    'status',
+    'model',
+  ]
+
+  rideDisplayedColumns = [
+    'start',
+    'end',
+    'duration-length',
+    'invoice',
+    'matricule',
+    'user'
+  ]
+
   editMode: boolean;
   stationForm: FormGroup;
 
@@ -51,7 +86,7 @@ export class StationsViewComponent implements OnInit {
     path: 'assets/lottie/solarPanel2.json',
   }
 
-  constructor(@Inject(FormBuilder) fb, private dialog: MatDialog) {
+  constructor(@Inject(FormBuilder) fb, private dialog: MatDialog, private routerNavigation: RouterNavigation) {
     this.stationForm = fb.group({
       BATTERY_CAPACITY: ['', [Validators.required, Validators.min(1)]],
       BIKE_CAPACITY: ['', [Validators.required, Validators.min(0)]],
@@ -68,10 +103,16 @@ export class StationsViewComponent implements OnInit {
   ngOnInit(): void {
     this.obs = interval(5000)
       .subscribe(() => {
-        if (!this.editMode) {
+        if (!this.editMode && this.station) {
           this.getStation.emit(this.station?.id);
         }
       });
+    timer(2000)
+      .subscribe(() => {
+        this.retrieveMonitoring(3);
+        this.onGetBikes(10, 0);
+        this.onGetRides(10, 0);
+      })
     this.editMode = false;
   }
 
@@ -82,8 +123,34 @@ export class StationsViewComponent implements OnInit {
     return undefined;
   }
 
+  onGetBikes(limit: number, offset: number) {
+    if (this.station) {
+      this.getBikes.emit({stationId: this.station?.id, limit, offset});
+    }
+  }
+
+  onViewBike(bike: Bike) {
+    if (this.isStaff) {
+      this.routerNavigation.gotoBikeEdit(bike.id);
+    }
+  }
+
+  onGetRides(limit: number, offset: number) {
+    if (this.station && this.isStaff) {
+      this.getRides.emit({stationId: this.station?.id, limit, offset});
+    }
+  }
+
+  onViewRide(ride: Ride) {
+    if (this.isStaff) {
+      this.routerNavigation.gotoBikeEdit(ride.bike.id);
+    }
+  }
+
   retrieveMonitoring(nbDays: number) {
-    this.getMonitoring.emit({stationId: this.station?.id, nbDays: nbDays})
+    if (this.station) {
+      this.getMonitoring.emit({stationId: this.station?.id, nbDays: nbDays});
+    }
   }
 
   getProgressColorClass(): string {

@@ -1,5 +1,5 @@
-<div class="grid lg:grid-cols-2 grid-cols-1 gap-4">
-  <mat-card *ngIf="!editMode">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+  <mat-card class="col-span-2 lg:col-span-1" *ngIf="!editMode">
     <mat-card-header>
       <ng-lottie mat-card-avatar [options]="lottieStationOptions"></ng-lottie>
       <mat-card-title>Station {{station?.id}}
@@ -20,7 +20,7 @@
       </section>
       <div class="text-lg">Puissance de Charge : {{getLastMonitoring()?.chargingPower}} VA</div>
       <div class="text-lg">
-        Vélos disponibles : {{getLastMonitoring()?.usedBikeSlot}}/{{station?.bikeCapacity}}
+        Vélos connectés : {{getLastMonitoring()?.usedBikeSlot}}/{{station?.bikeCapacity}}
       </div>
       <div *ngIf="isAdmin" class="space-y-4">
         <button mat-raised-button
@@ -49,7 +49,7 @@
       </button>
     </mat-card-actions>
   </mat-card>
-  <mat-card *ngIf="editMode">
+  <mat-card class="col-span-2 lg:col-span-1" *ngIf="editMode">
     <mat-card-header>
       <ng-lottie mat-card-avatar [options]="lottieStationOptions"></ng-lottie>
       <mat-card-title>Station {{station?.id}}
@@ -95,6 +95,52 @@
       </button>
     </mat-card-actions>
   </mat-card>
+  <mat-card class="col-span-2 lg:col-span-1">
+    <mat-card-header>
+      <mat-card-title>
+        Vélos
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table mat-table [dataSource]="bikes" style="width:100%">
+        <ng-container matColumnDef="matricule">
+          <th mat-header-cell *matHeaderCellDef>Matricule</th>
+          <td mat-cell *matCellDef="let element">
+            {{element.matriculate}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="battery">
+          <th mat-header-cell *matHeaderCellDef>Batterie</th>
+          <td mat-cell *matCellDef="let element">
+            {{element.batteryPercent}}%
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Statut</th>
+          <td mat-cell *matCellDef="let element">
+            {{element.status}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="model">
+          <th mat-header-cell *matHeaderCellDef>Modèle</th>
+          <td mat-cell *matCellDef="let element">
+            {{element.model?.name}} - {{element.model?.bikeManufacturer?.name}}
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="bikeDisplayedColumns"></tr>
+        <tr mat-row
+            (click)="onViewBike(row)"
+            *matRowDef="let row; columns: bikeDisplayedColumns"></tr>
+      </table>
+      <mat-paginator
+        [length]="bikeCount"
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 20]"
+        (page)="onGetBikes($event.pageSize, $event.pageIndex * $event.pageSize)"
+        showFirstLastButtons
+      ></mat-paginator>
+    </mat-card-content>
+  </mat-card>
   <mat-card class="col-span-2" *ngIf="!editMode">
     <mat-card-header>
       <mat-icon mat-card-avatar>battery_std</mat-icon>
@@ -109,5 +155,63 @@
       </mat-card-subtitle>
     </mat-card-header>
     <app-station-battery-chart [stationMonitorings]="stationMonitorings"></app-station-battery-chart>
+  </mat-card>
+  <mat-card *ngIf="isStaff" class="col-span-2">
+    <mat-card-header>
+      <mat-card-title>
+        Courses
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table mat-table [dataSource]="rides" style="width:100%">
+        <ng-container matColumnDef="start">
+          <th mat-header-cell *matHeaderCellDef>Borne de départ</th>
+          <td mat-cell *matCellDef="let element">
+            ID: {{element.startStation?.id}} - RUE: {{element.startStation?.streetName}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="end">
+          <th mat-header-cell *matHeaderCellDef>Borne d'arrivée</th>
+          <td mat-cell *matCellDef="let element">
+            ID: {{element.endStation?.id}} - RUE: {{element.endStation?.streetName}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="duration-length">
+          <th mat-header-cell *matHeaderCellDef>Durée/Distance</th>
+          <td mat-cell *matCellDef="let element">
+            {{element.duration}}min / {{element.rideLength / 1000}}km
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="invoice">
+          <th mat-header-cell *matHeaderCellDef>Facturation</th>
+          <td mat-cell *matCellDef="let element">
+            {{element.invoiceAmount}}€
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="matricule">
+          <th mat-header-cell *matHeaderCellDef>Vélo</th>
+          <td mat-cell *matCellDef="let element">
+            {{element.bike?.matriculate}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="user">
+          <th mat-header-cell *matHeaderCellDef>Utilisateur</th>
+          <td mat-cell *matCellDef="let element">
+            {{element.user?.email}}
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="rideDisplayedColumns"></tr>
+        <tr mat-row
+            (click)="onViewRide(row)"
+            *matRowDef="let row; columns: rideDisplayedColumns"></tr>
+      </table>
+      <mat-paginator
+        [length]="rideCount"
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 20]"
+        (page)="onGetRides($event.pageSize, $event.pageIndex * $event.pageSize)"
+        showFirstLastButtons
+      ></mat-paginator>
+    </mat-card-content>
   </mat-card>
 </div>

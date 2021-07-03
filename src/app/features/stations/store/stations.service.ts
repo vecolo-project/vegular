@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {StationsStore} from './stations.store';
 import {HttpClientWrapper} from '../../../core/utils/httpClientWrapper';
 import {Snackbar} from '../../../shared/snackbar/snakbar';
-import {Station, StationMonitoring} from '../../../shared/models';
+import {Ride, Station, StationMonitoring} from '../../../shared/models';
 import {API_RESSOURCE_URI} from '../../../shared/api-ressource-uri/api-ressource-uri';
 import {HttpTools} from "../../../shared/http-tools/http-tools";
 import {OsmSearchResponse} from "../../../shared/models/osmSearchResponse.model";
@@ -20,6 +20,7 @@ export class StationsService {
 
   async getStations(limit: number, offset: number): Promise<void> {
     this.stationsStore.setLoading(true);
+    this.stationsStore.set([]);
     try {
       const response = await this.http.get<{ stations: Station[], count: number }>(
         API_RESSOURCE_URI.BASE_STATIONS + `?limit=${limit}&offset=${offset}`
@@ -27,12 +28,26 @@ export class StationsService {
       this.stationsStore.set(response.stations);
       this.stationsStore.update({count: response.count});
     } catch (e) {
-      this.stationsStore.set([]);
       this.snackBar.warnning(
         'Erreur lors de la récupération des stations : ' + e.error.error
       );
     } finally {
       this.stationsStore.setLoading(false);
+    }
+  }
+
+  async getRides(stationId: number, limit: number, offset: number): Promise<void> {
+    this.stationsStore.update({stationRides: []});
+    try {
+      const response = await this.http.get<{ rides: Ride[], count: number }>(
+        API_RESSOURCE_URI.RIDE_STATION + stationId + `?limit=${limit}&offset=${offset}`
+      );
+      this.stationsStore.update({stationRides: response.rides});
+      this.stationsStore.update({stationRidesCount: response.count});
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la récupération des courses d\'une station : ' + e.error.error
+      );
     }
   }
 

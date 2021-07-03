@@ -25,3 +25,8 @@
 li{
   margin-left: 15px;
 }
+
+.mat-row:hover .mat-cell {
+  background-color: #1f2937;
+  cursor: pointer;
+}

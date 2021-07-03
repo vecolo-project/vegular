@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable} from "rxjs";
-import {Station, StationMonitoring} from "../../../../shared/models";
+import {Bike, OsmSearchResponse, Ride, Station, StationMonitoring} from "../../../../shared/models";
 import {StationsQuery} from "../../store/stations.query";
 import {StationsService} from "../../store/stations.service";
 import {subDays} from "date-fns";
-import {OsmSearchResponse} from "../../../../shared/models/osmSearchResponse.model";
 import {RouterNavigation} from "../../../../core/router/router.navigation";
 import {SessionQuery} from "../../../../core/store/session.query";
+import {BikeService} from "../../../bikes/store/bike/bike.service";
+import {BikeQuery} from "../../../bikes/store/bike/bike.query";
 
 @Component({
   selector: 'app-stations',
@@ -18,8 +19,12 @@ export class StationsComponent implements OnInit {
 
   viewStation: Observable<Station>;
   viewStationToken: Observable<string>;
+  viewStationBikes: Observable<Bike[]>
+  viewStationBikesCount: Observable<number>
   stationList: Observable<Station[]>;
   stationCount: Observable<number>;
+  rideList: Observable<Ride[]>;
+  rideCount: Observable<number>;
   stationMonitorings: Observable<StationMonitoring[]>;
   addressResultSearch: Observable<OsmSearchResponse[]>;
 
@@ -28,6 +33,8 @@ export class StationsComponent implements OnInit {
     private router: Router,
     private routerNavigation: RouterNavigation,
     public stationsService: StationsService,
+    private bikeService: BikeService,
+    private bikeQuery: BikeQuery,
     private stationsQuery: StationsQuery,
     public sessionQuery: SessionQuery
   ) {
@@ -37,6 +44,10 @@ export class StationsComponent implements OnInit {
     this.stationMonitorings = this.stationsQuery.selectViewStationMonitoring$;
     this.stationList = this.stationsQuery.selectStationsArray$;
     this.stationCount = this.stationsQuery.selectCount$;
+    this.viewStationBikes = this.bikeQuery.selectBikeArray$;
+    this.viewStationBikesCount = this.bikeQuery.selectCount$;
+    this.rideList = this.stationsQuery.selectViewStationRides$;
+    this.rideCount = this.stationsQuery.selectViewStationRidesCount$;
   }
 
   ngOnInit(): void {
@@ -67,6 +78,14 @@ export class StationsComponent implements OnInit {
 
   getStations(limit: number, offset: number): void {
     this.stationsService.getStations(limit, offset);
+  }
+
+  getBikes(stationId: number, limit: number, offset: number): void {
+    this.bikeService.getBikeFromStation(stationId, limit, offset);
+  }
+
+  getRides(stationId: number, limit: number, offset: number): void {
+    this.stationsService.getRides(stationId, limit, offset);
   }
 
   onViewStation(stationId: number) {
