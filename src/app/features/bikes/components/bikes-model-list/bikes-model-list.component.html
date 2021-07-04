@@ -9,7 +9,28 @@
     <ng-container *ngFor="let def of tableDef">
       <ng-container [matColumnDef]="def.key">
         <th mat-header-cell *matHeaderCellDef>{{ def.header }}</th>
-        <td mat-cell *matCellDef="let element">{{ element[def.key] }}</td>
+        <td mat-cell *matCellDef="let element">
+          <div *ngIf="def.key === 'action'" class="flex items-center gap-2">
+            <button
+              [routerLink]="['/bikes/model/edit/', element.id]"
+              (click)="setEditModel.emit(element.id)"
+              mat-button
+              class="bg-blue-700 min-w-min px-2"
+            >
+              <mat-icon>mode_edit</mat-icon>
+            </button>
+            <button
+              (click)="deleteModel.emit(element.id)"
+              mat-button
+              class="bg-red-700 min-w-min px-2"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <ng-container *ngIf="def.key !== 'action'">{{
+            element[def.key]
+          }}</ng-container>
+        </td>
       </ng-container>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -124,4 +124,8 @@ export class BikesComponent implements OnInit {
   uploadModelImage(formData: FormData): void {
     this.bikeModelService.uploadImage(formData);
   }
+
+  deleteModel(id: number): void {
+    this.bikeModelService.deleteModel(id);
+  }
 }

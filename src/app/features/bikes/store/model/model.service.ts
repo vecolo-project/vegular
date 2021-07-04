@@ -64,7 +64,18 @@ export class BikeModelService {
     throw new Error('Method not implemented.');
   }
 
-  async deleteModel(id: number): Promise<never> {
-    throw new Error('Method not implemented.');
+  async deleteModel(id: number): Promise<void> {
+    this.bikeModelStore.setLoading(true);
+    try {
+      console.log(API_RESSOURCE_URI.BASE_MODELS + id);
+      await this.http.delete(API_RESSOURCE_URI.BASE_MODELS + id);
+      this.bikeModelStore.remove(id);
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la suppression du model : ' + e.error.error
+      );
+    } finally {
+      this.bikeModelStore.setLoading(false);
+    }
   }
 }
