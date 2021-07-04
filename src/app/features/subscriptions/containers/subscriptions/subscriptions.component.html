@@ -1,9 +1,15 @@
 
 <mat-tab-group mat-align-tabs="center">
-  <mat-tab label="Forfaits">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">local_offer</mat-icon>&nbsp;Forfaits
+    </ng-template>
     <app-plan-list></app-plan-list>
   </mat-tab>
-  <mat-tab label="Abonnements">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">card_membership</mat-icon>&nbsp;Abonnements
+    </ng-template>
     <app-subscription-list></app-subscription-list>
   </mat-tab>
 </mat-tab-group>
