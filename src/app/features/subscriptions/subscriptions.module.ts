@@ -5,13 +5,21 @@ import {SubscriptionsRoutingModule} from './subscriptions-routing.module';
 import { PlanListComponent } from './components/plan-list/plan-list.component';
 import { SubscriptionListComponent } from './components/subscription-list/subscription-list.component';
 import {SharedModule} from "../../shared/shared.module";
+import { SubscriptionViewComponent } from './components/subscription-view/subscription-view.component';
+import { PlanViewComponent } from './components/plan-view/plan-view.component';
+import { PlanAddComponent } from './components/plan-add/plan-add.component';
+import { SubscriptionAddComponent } from './components/subscription-add/subscription-add.component';
 
 
 @NgModule({
   declarations: [
     SubscriptionsComponent,
     PlanListComponent,
-    SubscriptionListComponent
+    SubscriptionListComponent,
+    SubscriptionViewComponent,
+    PlanViewComponent,
+    PlanAddComponent,
+    SubscriptionAddComponent
   ],
   imports: [
     CommonModule,

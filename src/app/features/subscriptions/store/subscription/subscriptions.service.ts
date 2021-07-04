@@ -6,7 +6,7 @@ import {SubscriptionsStore} from "./subscriptions.store";
 import {SubscriptionsQuery} from "./subscriptions.query";
 
 @Injectable({providedIn: 'root'})
-export class PlansService {
+export class SubscriptionsService {
   constructor(
     private subscriptionsStore: SubscriptionsStore,
     private http: HttpClientWrapper,
@@ -15,7 +15,7 @@ export class PlansService {
   ) {
   }
 
-  async getSubscriptions(): Promise<never> {
+  async getSubscriptions(limit: number, offset: number): Promise<never> {
     throw new Error('Method not implemented.');
   }
 
@@ -27,7 +27,7 @@ export class PlansService {
     throw new Error('Method not implemented.');
   }
 
-  async putSubscription(subscription: Subscription, id: number): Promise<never> {
+  async putSubscription(subscription: Subscription): Promise<never> {
     throw new Error('Method not implemented.');
   }
 

@@ -7,6 +7,10 @@ export const routesPath = {
   profile: 'profile',
   subscription: 'subscription',
   subscriptions: 'subscriptions',
+  subscriptionAdd: 'subscriptions/add',
+  subscriptionView: 'subscriptions/view',
+  planAdd: 'subscriptions/plan/add',
+  planView: 'subscriptions/plan/view',
   rides: 'rides',
   newRide: 'rides/new',
   map: 'map',
@@ -43,13 +47,31 @@ export class RouterNavigation {
   gotoStationList(): void {
     this.router.navigate([routesPath.stations]);
   }
+
   gotoSubscriptionList(): void {
     this.router.navigate([routesPath.subscriptions]);
+  }
+
+  gotoSubscriptionView(subscriptionId: number): void {
+    this.router.navigate([routesPath.subscriptionView + '/' + subscriptionId])
+  }
+
+  gotoSubscriptionAdd(): void {
+    this.router.navigate([routesPath.subscriptionAdd])
+  }
+
+  gotoPlanView(planId: number): void {
+    this.router.navigate([routesPath.planView + '/' + planId])
+  }
+
+  gotoPlanAdd(): void {
+    this.router.navigate([routesPath.planAdd])
   }
 
   gotoStationView(stationId: number): void {
     this.router.navigate([routesPath.stationView + '/' + stationId]);
   }
+
   gotoBikeEdit(stationId: number): void {
     this.router.navigate([routesPath.bikes + '/edit/' + stationId]);
   }
