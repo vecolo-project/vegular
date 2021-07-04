@@ -29,7 +29,6 @@ export class StationCreateComponent implements OnInit {
   }
 
   onAddressInputSearch() {
-    console.log('search')
     this.stationForm.controls.STREET_NUMBER.patchValue(null);
     this.stationForm.controls.STREET_NAME.patchValue(null);
     this.stationForm.controls.CITY.patchValue(null);

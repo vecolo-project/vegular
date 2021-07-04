@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {HttpClientWrapper} from 'src/app/core/utils/httpClientWrapper';
-import {BikeModel, BikeModelProps} from 'src/app/shared/models';
-import {Snackbar} from 'src/app/shared/snackbar/snakbar';
-import {API_RESSOURCE_URI} from '../../../../shared/api-ressource-uri/api-ressource-uri';
-import {BikeModelQuery} from './model.query';
-import {BikeModelStore} from './model.store';
+import { Injectable } from '@angular/core';
+import { HttpClientWrapper } from 'src/app/core/utils/httpClientWrapper';
+import { BikeModel, BikeModelProps } from 'src/app/shared/models';
+import { Snackbar } from 'src/app/shared/snackbar/snakbar';
+import { API_RESSOURCE_URI } from '../../../../shared/api-ressource-uri/api-ressource-uri';
+import { BikeModelQuery } from './model.query';
+import { BikeModelStore } from './model.store';
 
 @Injectable({ providedIn: 'root' })
 export class BikeModelService {
@@ -19,7 +19,7 @@ export class BikeModelService {
     this.bikeModelStore.setLoading(true);
     try {
       const response = await this.http.get<BikeModel[]>(
-        API_RESSOURCE_URI.GET_BIKE_MANUFACTURERS
+        API_RESSOURCE_URI.BASE_MODELS
       );
       this.bikeModelStore.set(response);
       this.bikeModelStore.update({ count: response.length });
@@ -41,17 +41,23 @@ export class BikeModelService {
     this.bikeModelStore.setLoading(true);
     try {
       const response = await this.http.post<BikeModel>(
-        API_RESSOURCE_URI.POST_BIKE_MANUFACTURER,
+        API_RESSOURCE_URI.BASE_MODELS,
         model
       );
       this.bikeModelStore.update({ editModel: response });
     } catch (err) {
       this.snackBar.warnning(
-        "Erreur lors de l'ajout du fabriquant : " + err.error.error
+        "Erreur lors de l'ajout du modèle : " + err.error.error
       );
     } finally {
       this.bikeModelStore.setLoading(false);
     }
+  }
+
+  async uploadImage(image: FormData) {
+    await this.http.post(API_RESSOURCE_URI.BASE_MODELS + 'add-image', image, {
+      'Content-Type': 'multipart/form-data',
+    });
   }
 
   async putModel(model: BikeModel, id: number): Promise<never> {

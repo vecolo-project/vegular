@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BikeModel } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-bikes-model-list',
@@ -6,23 +7,77 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./bikes-model-list.component.scss'],
 })
 export class BikesModelListComponent implements OnInit {
+  @Input()
+  models: BikeModel[];
+
+  @Input()
+  modelsCount: number;
+
+  @Input()
+  loading: boolean;
+
+  @Output()
+  getModels = new EventEmitter();
+
+  @Output()
+  setEditModel = new EventEmitter<number>();
+
+  @Output()
+  deleteModel = new EventEmitter<number>();
+
+  constructor() {}
+
   displayedColumns = [
     'id',
     'name',
-    'manufacturer',
-    'battery capacity',
+    'bikeManufacturer',
+    'batteryCapacity',
     'weight',
-    'max power',
-    'max speed',
-    'max distance',
+    'maxPower',
+    'maxSpeed',
+    'maxDistance',
     'description',
-    'image',
-    'icon',
-    'creation date',
-    'update date',
   ];
-  bikesModel = [];
-  constructor() {}
+  tableDef: Array<any> = [
+    {
+      key: 'id',
+      header: 'id',
+    },
+    {
+      key: 'name',
+      header: 'Name',
+    },
+    {
+      key: 'bikeManufacturer',
+      header: 'manufacturer',
+    },
+    {
+      key: 'batteryCapacity',
+      header: 'Battery capacity',
+    },
+    {
+      key: 'weight',
+      header: 'Poids',
+    },
+    {
+      key: 'maxPower',
+      header: 'Max power',
+    },
+    {
+      key: 'maxSpeed',
+      header: 'Max speed',
+    },
+    {
+      key: 'maxDistance',
+      header: 'Max distance',
+    },
+    {
+      key: 'description',
+      header: 'Description',
+    },
+  ];
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    setTimeout(() => this.getModels.emit());
+  }
 }
