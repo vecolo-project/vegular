@@ -16,7 +16,7 @@ export function createInitialState(): PlanState {
 
 @Injectable({ providedIn: 'root' })
 @StoreConfig({ name: 'plan' })
-export class PlanStore extends EntityStore<PlanState, Plan> {
+export class PlansStore extends EntityStore<PlanState, Plan> {
   constructor() {
     super(createInitialState());
   }

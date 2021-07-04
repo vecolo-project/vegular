@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {HashMap, QueryEntity} from '@datorama/akita';
 import {Observable} from 'rxjs';
 import {Plan} from 'src/app/shared/models';
-import {PlanState, PlanStore} from './plan.store';
+import {PlanState, PlansStore} from './plans.store';
 
 @Injectable({providedIn: 'root'})
-export class PlanQuery extends QueryEntity<PlanState, Plan> {
+export class PlansQuery extends QueryEntity<PlanState, Plan> {
   selectPlans$: Observable<HashMap<Plan>> = this.select('entities');
   selectPlanArray$: Observable<Plan[]> = this.selectAll();
   selectViewPlan$: Observable<Plan> = this.select('viewPlan');
@@ -13,7 +13,7 @@ export class PlanQuery extends QueryEntity<PlanState, Plan> {
   selectCount$: Observable<number> = this.select('count');
   isLoading$: Observable<boolean> = this.select('loading');
 
-  constructor(protected store: PlanStore) {
+  constructor(protected store: PlansStore) {
     super(store);
   }
 
