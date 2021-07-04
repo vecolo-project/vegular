@@ -1,17 +1,14 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {SubscriptionsComponent} from "./containers/subscriptions/subscriptions.component";
-import {PlanViewComponent} from "./components/plan-view/plan-view.component";
-import {PlanAddComponent} from "./components/plan-add/plan-add.component";
-import {SubscriptionAddComponent} from "./components/subscription-add/subscription-add.component";
-import {SubscriptionViewComponent} from "./components/subscription-view/subscription-view.component";
+import {AdminGuardService} from "../../core/guards/admin-guard.service";
 
 const subscriptionsRoutes: Routes = [
   {path: '', component: SubscriptionsComponent},
-  {path: '/plan/view/:id', component: PlanViewComponent},
-  {path: '/plan/add', component: PlanAddComponent},
-  {path: '/view/:id', component: SubscriptionViewComponent},
-  {path: '/add', component: SubscriptionAddComponent}
+  {path: 'plan/add', component: SubscriptionsComponent, canActivate: [AdminGuardService]},
+  {path: 'add', component: SubscriptionsComponent},
+  {path: 'plan/view/:id', component: SubscriptionsComponent},
+  {path: 'view/:id', component: SubscriptionsComponent}
 ];
 
 @NgModule({

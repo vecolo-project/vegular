@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Plan} from "../../../../shared/models";
 
 @Component({
   selector: 'app-plan-list',
@@ -7,9 +8,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlanListComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  planList: Plan[];
 
-  ngOnInit(): void {
+  @Input()
+  planCount: number;
+
+  @Input()
+  isAdmin: boolean;
+
+  @Output()
+  getPlans = new EventEmitter<{ limit: number, offset: number }>();
+
+  @Output()
+  viewPlan = new EventEmitter<number>();
+
+  displayedColumns = [
+    'id',
+    'name',
+    'priceMonth',
+    'priceRide',
+    'unlimited'
+  ]
+
+  constructor() {
   }
 
+  ngOnInit(): void {
+    this.getPlansF(10, 0);
+  }
+
+  onViewPlan(plan: Plan) {
+    this.viewPlan.emit(plan.id);
+  }
+
+  getPlansF(limit: number, offset: number) {
+    setTimeout(() => this.getPlans.emit({limit, offset}));
+  }
 }

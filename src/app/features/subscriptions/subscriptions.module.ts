@@ -22,9 +22,9 @@ import { SubscriptionAddComponent } from './components/subscription-add/subscrip
     SubscriptionAddComponent
   ],
   imports: [
+    SubscriptionsRoutingModule,
     CommonModule,
-    SharedModule,
-    SubscriptionsRoutingModule
+    SharedModule
   ]
 })
 export class SubscriptionsModule {

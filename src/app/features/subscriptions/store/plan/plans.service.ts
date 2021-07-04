@@ -75,11 +75,10 @@ export class PlansService {
   async putPlan(plan: Plan): Promise<void> {
     this.planStore.setLoading(true);
     try {
-      const response = await this.http.put<Station>(
+      await this.http.put<Plan>(
         API_RESSOURCE_URI.BASE_PLAN + plan.id,
         plan
       );
-      response.stationMonitoring = [];
       this.planStore.update(plan.id, plan);
       this.planStore.update({viewPlan: plan});
       this.snackBar.success("Forfait mis à jour");
@@ -96,7 +95,7 @@ export class PlansService {
     this.planStore.setLoading(true);
     try {
       await this.http.delete<Station>(
-        API_RESSOURCE_URI.BASE_STATIONS + id
+        API_RESSOURCE_URI.BASE_PLAN + id
       );
       this.planStore.remove(id);
       this.snackBar.success(
@@ -108,7 +107,7 @@ export class PlansService {
         'Erreur lors de la suppression d\'un forfait : ' + e.error.error
       );
     } finally {
-      this.routerNavigation.gotoStationList();
+      this.routerNavigation.gotoSubscriptionList();
       this.planStore.setLoading(false);
     }
   }

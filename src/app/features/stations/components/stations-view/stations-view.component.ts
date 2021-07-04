@@ -14,10 +14,10 @@ import {RouterNavigation} from "../../../../core/router/router.navigation";
 })
 export class StationsViewComponent implements OnInit {
   @Input()
-  station: Station
+  station: Station;
 
   @Input()
-  token: string
+  token: string;
 
   @Output()
   getStation = new EventEmitter<number>();

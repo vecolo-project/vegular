@@ -42,6 +42,10 @@ export class SubscriptionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.isPlanViewMode()) {
+      const planId = Number.parseInt(this.route.snapshot.params.id);
+      this.planService.getPlan(planId);
+    }
   }
 
   isListMode(): boolean {
@@ -50,6 +54,9 @@ export class SubscriptionsComponent implements OnInit {
 
   isPlanViewMode(): boolean {
     return this.router.isActive('/subscriptions/plan/view', false);
+  }
+  isPlanAddMode(): boolean {
+    return this.router.isActive('/subscriptions/plan/add', true);
   }
 
   isSubscriptionViewMode(): boolean {
@@ -71,6 +78,10 @@ export class SubscriptionsComponent implements OnInit {
 
   onUpdatePlan(plan: Plan): void {
     this.planService.putPlan(plan);
+  }
+
+  onDeletePlan(id: number): void {
+    this.planService.deletePlan(id);
   }
 
   getSubscriptions(limit: number, offset: number): void {
