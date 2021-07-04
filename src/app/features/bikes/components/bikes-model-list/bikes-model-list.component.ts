@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BikeModel } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-bikes-model-list',
@@ -6,6 +7,26 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./bikes-model-list.component.scss'],
 })
 export class BikesModelListComponent implements OnInit {
+  @Input()
+  models: BikeModel[];
+
+  @Input()
+  modelsCount: number;
+
+  @Input()
+  loading: boolean;
+
+  @Output()
+  getModels = new EventEmitter();
+
+  @Output()
+  setEditModel = new EventEmitter<number>();
+
+  @Output()
+  deleteModel = new EventEmitter<number>();
+
+  constructor() {}
+
   displayedColumns = [
     'id',
     'name',
@@ -21,8 +42,8 @@ export class BikesModelListComponent implements OnInit {
     'creation date',
     'update date',
   ];
-  bikesModel = [];
-  constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    setTimeout(() => this.getModels.emit());
+  }
 }

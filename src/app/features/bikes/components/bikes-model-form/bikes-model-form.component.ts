@@ -94,11 +94,11 @@ export class BikesModelFormComponent implements OnInit {
     );
   }
 
-  save() {
+  save(): void {
     const model = {
       id: null,
       name: this.form.value.fieldName,
-      batter: this.form.value.fieldManufacturer,
+      bikeManufacturer: this.form.value.fieldManufacturer.id,
       batteryCapacity: this.form.value.fieldBattery,
       weight: this.form.value.fieldWeight,
       maxPower: this.form.value.fieldMaxPower,

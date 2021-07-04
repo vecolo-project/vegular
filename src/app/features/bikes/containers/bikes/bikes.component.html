@@ -1,7 +1,14 @@
 <mat-tab-group *ngIf="isRoot()">
   <mat-tab label="Vélo"><app-bikes-list></app-bikes-list></mat-tab>
   <mat-tab label="Modèle"
-    ><app-bikes-model-list></app-bikes-model-list
+    ><app-bikes-model-list
+      [models]="models | async"
+      [modelsCount]="modelsCount | async"
+      [loading]="manufacturerLoading | async"
+      (getModels)="getModels()"
+      (setEditModel)="setEditModel($event)"
+      (deleteModel)="deleteModel($event)"
+    ></app-bikes-model-list
   ></mat-tab>
   <mat-tab label="Fabriquant"
     ><app-bikes-manufacturer-list

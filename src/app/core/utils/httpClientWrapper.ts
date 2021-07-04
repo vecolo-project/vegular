@@ -7,7 +7,6 @@ export class HttpClientWrapper {
   constructor(private http: HttpClient, private sessionQuery: SessionQuery) {}
 
   async get<T>(url: string): Promise<T> {
-    console.log(await this.getHeaders());
     return await this.http.get<T>(url, await this.getHeaders()).toPromise();
   }
 
