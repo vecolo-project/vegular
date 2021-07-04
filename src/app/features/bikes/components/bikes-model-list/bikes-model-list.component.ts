@@ -30,17 +30,51 @@ export class BikesModelListComponent implements OnInit {
   displayedColumns = [
     'id',
     'name',
-    'manufacturer',
-    'battery capacity',
+    'bikeManufacturer',
+    'batteryCapacity',
     'weight',
-    'max power',
-    'max speed',
-    'max distance',
+    'maxPower',
+    'maxSpeed',
+    'maxDistance',
     'description',
-    'image',
-    'icon',
-    'creation date',
-    'update date',
+  ];
+  tableDef: Array<any> = [
+    {
+      key: 'id',
+      header: 'id',
+    },
+    {
+      key: 'name',
+      header: 'Name',
+    },
+    {
+      key: 'bikeManufacturer',
+      header: 'manufacturer',
+    },
+    {
+      key: 'batteryCapacity',
+      header: 'Battery capacity',
+    },
+    {
+      key: 'weight',
+      header: 'Poids',
+    },
+    {
+      key: 'maxPower',
+      header: 'Max power',
+    },
+    {
+      key: 'maxSpeed',
+      header: 'Max speed',
+    },
+    {
+      key: 'maxDistance',
+      header: 'Max distance',
+    },
+    {
+      key: 'description',
+      header: 'Description',
+    },
   ];
 
   ngOnInit(): void {
