@@ -82,7 +82,6 @@ export class StationsService {
         'La station a été supprimé'
       );
     } catch (e) {
-      console.log(e);
       this.stationsStore.update({viewStation: undefined});
       this.snackBar.warnning(
         'Erreur lors de la suppression d\'une station : ' + e.error.error
@@ -155,7 +154,7 @@ export class StationsService {
       this.snackBar.success("Station mis à jour");
     } catch (e) {
       this.snackBar.warnning(
-        'Erreur lors de la création d\'une station : ' + e.error.error
+        'Erreur lors de la mise à jour d\'une station : ' + e.error.error
       );
     } finally {
       this.stationsStore.setLoading(false);

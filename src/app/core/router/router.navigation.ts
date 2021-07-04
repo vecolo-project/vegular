@@ -43,6 +43,9 @@ export class RouterNavigation {
   gotoStationList(): void {
     this.router.navigate([routesPath.stations]);
   }
+  gotoSubscriptionList(): void {
+    this.router.navigate([routesPath.subscriptions]);
+  }
 
   gotoStationView(stationId: number): void {
     this.router.navigate([routesPath.stationView + '/' + stationId]);

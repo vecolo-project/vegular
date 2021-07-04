@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {SubscriptionComponent} from '../user-subscription/containers/subscription/subscription.component';
+import {SubscriptionsComponent} from "./containers/subscriptions/subscriptions.component";
 
 const subscriptionsRoutes: Routes = [
-  {path: '', component: SubscriptionComponent}
+  {path: '', component: SubscriptionsComponent}
 ];
 
 @NgModule({
