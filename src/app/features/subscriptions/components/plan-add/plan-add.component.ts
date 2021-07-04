@@ -22,9 +22,9 @@ export class PlanAddComponent implements OnInit {
   constructor(@Inject(FormBuilder) fb) {
     this.planForm = fb.group({
       NAME: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      PRICE: ['', [Validators.required, Validators.min(0)]],
-      RIDE_PRICE: ['', [Validators.required, Validators.min(0)]],
-      UNLIMITED: ['', Validators.required]
+      PRICE: [0, [Validators.required, Validators.min(0)]],
+      RIDE_PRICE: [0, [Validators.required, Validators.min(0)]],
+      UNLIMITED: [false, Validators.required]
     })
 
   }
