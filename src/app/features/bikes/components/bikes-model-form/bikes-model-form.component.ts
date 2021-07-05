@@ -30,7 +30,7 @@ export class BikesModelFormComponent implements OnInit {
   postModel = new EventEmitter<BikeModelProps>();
 
   @Output()
-  putModel = new EventEmitter<BikeModel>();
+  putModel = new EventEmitter<BikeModelProps>();
 
   @Output()
   retrieveEditModel = new EventEmitter<number>();
@@ -90,15 +90,26 @@ export class BikesModelFormComponent implements OnInit {
 
   private patchValues(): void {
     this.form.controls.fieldName.patchValue(this.editModel.name);
-    // this.form.controls.fieldManufacturer.patchValue(
-    //   this.editModel.bikeManufacturer
-    // );
+    if (this.editModel.bikeManufacturer) {
+      const optionMatchedByBikeManufacturer = this.getSelectedOption(
+        this.editModel.bikeManufacturer
+      );
+      this.form.controls.fieldManufacturer.patchValue(
+        optionMatchedByBikeManufacturer
+      );
+    }
     this.form.controls.fieldBattery.patchValue(this.editModel.batteryCapacity);
     this.form.controls.fieldWeight.patchValue(this.editModel.weight);
     this.form.controls.fieldMaxPower.patchValue(this.editModel.maxPower);
     this.form.controls.fieldMaxSpeed.patchValue(this.editModel.maxSpeed);
     this.form.controls.fieldDistance.patchValue(this.editModel.maxDistance);
     this.form.controls.fieldDescription.patchValue(this.editModel.description);
+  }
+
+  getSelectedOption(bikeManufacturer: BikeManufacturer): string {
+    return this.options.filter(
+      (option) => bikeManufacturer.name === option.name
+    )[0];
   }
 
   displayAutocomplete(manufacturer: BikeManufacturer): string {
@@ -124,7 +135,7 @@ export class BikesModelFormComponent implements OnInit {
 
   save(): void {
     const model = {
-      id: null,
+      id: this.editModel.id ? this.editModel.id : null,
       name: this.form.value.fieldName,
       bikeManufacturer: this.form.value.fieldManufacturer.id,
       batteryCapacity: this.form.value.fieldBattery,
@@ -134,7 +145,11 @@ export class BikesModelFormComponent implements OnInit {
       maxDistance: this.form.value.fieldDistance,
       description: this.form.value.fieldDescription,
     };
-    this.postModel.emit(model);
+    if (this.editModel) {
+      this.putModel.emit(model);
+    } else {
+      this.postModel.emit(model);
+    }
   }
 
   changeImage(event: any): void {

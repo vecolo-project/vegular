@@ -5,6 +5,7 @@ import {
   BikeManufacturer,
   BikeManufacturerProps,
   BikeModel,
+  BikeModelProps,
 } from 'src/app/shared/models';
 import { BikeManufacturerQuery } from '../../store/manufacturer/manufacturer.query';
 import { BikeManufacturerService } from '../../store/manufacturer/manufacturer.service';
@@ -110,12 +111,12 @@ export class BikesComponent implements OnInit {
     this.bikeModelService.getModel(id);
   }
 
-  postModel(model: BikeModel): void {
+  postModel(model: BikeModelProps): void {
     delete model.id;
     this.bikeModelService.postModel(model);
   }
 
-  putModel(model: BikeModel): void {
+  putModel(model: BikeModelProps): void {
     const id = model.id;
     delete model.id;
     this.bikeModelService.putModel(model, id);

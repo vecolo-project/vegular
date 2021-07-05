@@ -73,8 +73,21 @@ export class BikeModelService {
     });
   }
 
-  async putModel(model: BikeModel, id: number): Promise<never> {
-    throw new Error('Method not implemented.');
+  async putModel(model: BikeModelProps, id: number): Promise<void> {
+    this.bikeModelStore.setLoading(true);
+    try {
+      const response = await this.http.put<BikeModel>(
+        API_RESSOURCE_URI.BASE_MODELS + id,
+        model
+      );
+      this.bikeModelStore.update({ editModel: response });
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la modification du modèle : ' + e.error.error
+      );
+    } finally {
+      this.bikeModelStore.setLoading(false);
+    }
   }
 
   async deleteModel(id: number): Promise<void> {
