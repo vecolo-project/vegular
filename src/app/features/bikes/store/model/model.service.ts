@@ -33,8 +33,21 @@ export class BikeModelService {
     }
   }
 
-  getModel(id: number): Promise<never> {
-    throw new Error('Method not implemented.');
+  async getModel(id: number): Promise<void> {
+    this.bikeModelStore.setLoading(true);
+    try {
+      const response = await this.http.get<BikeModel>(
+        API_RESSOURCE_URI.BASE_MODELS + id
+      );
+      this.bikeModelStore.update({ editModel: response });
+    } catch (e) {
+      this.bikeModelStore.set({ editModel: null });
+      this.snackBar.warnning(
+        'Erreur lors de la récupération du modèle : ' + e.error.error
+      );
+    } finally {
+      this.bikeModelStore.setLoading(false);
+    }
   }
 
   async postModel(model: BikeModelProps) {

@@ -128,4 +128,8 @@ export class BikesComponent implements OnInit {
   deleteModel(id: number): void {
     this.bikeModelService.deleteModel(id);
   }
+
+  setEditModel(id: number): void {
+    this.bikeModelQuery.setEditModel(id);
+  }
 }

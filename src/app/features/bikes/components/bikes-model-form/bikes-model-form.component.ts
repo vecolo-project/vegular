@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import {
@@ -43,7 +44,7 @@ export class BikesModelFormComponent implements OnInit {
   options = [];
   filteredOptions: Observable<BikeManufacturer[]>;
 
-  constructor(private fp: FormBuilder) {
+  constructor(private fp: FormBuilder, private route: ActivatedRoute) {
     this.form = this.fp.group({
       fieldName: ['', [Validators.required]],
       fieldManufacturer: ['', [Validators.required]],
@@ -64,6 +65,17 @@ export class BikesModelFormComponent implements OnInit {
     } else {
       this.getManufacturers.emit();
     }
+    if (!this.editModel) {
+      setTimeout(() => {
+        const id = Number.parseInt(this.route.snapshot.params.id);
+        this.retrieveEditModel.emit(id);
+      });
+    } else {
+      this.patchValues();
+    }
+    if (!this.isEditMode) {
+      this.form.reset();
+    }
   }
 
   ngOnChanges(): void {
@@ -71,6 +83,22 @@ export class BikesModelFormComponent implements OnInit {
       this.options = this.manufacturers;
       this._setFilters();
     }
+    if (this.editModel) {
+      this.patchValues();
+    }
+  }
+
+  private patchValues(): void {
+    this.form.controls.fieldName.patchValue(this.editModel.name);
+    // this.form.controls.fieldManufacturer.patchValue(
+    //   this.editModel.bikeManufacturer
+    // );
+    this.form.controls.fieldBattery.patchValue(this.editModel.batteryCapacity);
+    this.form.controls.fieldWeight.patchValue(this.editModel.weight);
+    this.form.controls.fieldMaxPower.patchValue(this.editModel.maxPower);
+    this.form.controls.fieldMaxSpeed.patchValue(this.editModel.maxSpeed);
+    this.form.controls.fieldDistance.patchValue(this.editModel.maxDistance);
+    this.form.controls.fieldDescription.patchValue(this.editModel.description);
   }
 
   displayAutocomplete(manufacturer: BikeManufacturer): string {
