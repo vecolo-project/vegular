@@ -27,9 +27,13 @@
               <mat-icon>delete</mat-icon>
             </button>
           </div>
-          <ng-container *ngIf="def.key !== 'action'">{{
-            element[def.key]
+          <ng-container *ngIf="def.key === 'bikeManufacturer'">{{
+            element[def.key].name
           }}</ng-container>
+          <ng-container
+            *ngIf="def.key !== 'action' && def.key !== 'bikeManufacturer'"
+            >{{ element[def.key] }}</ng-container
+          >
         </td>
       </ng-container>
     </ng-container>

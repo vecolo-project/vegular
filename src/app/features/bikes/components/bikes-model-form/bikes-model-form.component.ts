@@ -65,16 +65,16 @@ export class BikesModelFormComponent implements OnInit {
     } else {
       this.getManufacturers.emit();
     }
-    if (!this.editModel) {
+    if (this.editModel && !this.editModel) {
       setTimeout(() => {
         const id = Number.parseInt(this.route.snapshot.params.id);
         this.retrieveEditModel.emit(id);
       });
-    } else {
-      this.patchValues();
     }
     if (!this.isEditMode) {
       this.form.reset();
+    } else {
+      this.patchValues();
     }
   }
 
@@ -83,7 +83,7 @@ export class BikesModelFormComponent implements OnInit {
       this.options = this.manufacturers;
       this._setFilters();
     }
-    if (this.editModel) {
+    if (this.isEditMode && this.editModel) {
       this.patchValues();
     }
   }
@@ -135,7 +135,7 @@ export class BikesModelFormComponent implements OnInit {
 
   save(): void {
     const model = {
-      id: this.editModel.id ? this.editModel.id : null,
+      id: this.editModel && this.editModel.id ? this.editModel.id : null,
       name: this.form.value.fieldName,
       bikeManufacturer: this.form.value.fieldManufacturer.id,
       batteryCapacity: this.form.value.fieldBattery,
@@ -145,7 +145,7 @@ export class BikesModelFormComponent implements OnInit {
       maxDistance: this.form.value.fieldDistance,
       description: this.form.value.fieldDescription,
     };
-    if (this.editModel) {
+    if (this.isEditMode && this.editModel) {
       this.putModel.emit(model);
     } else {
       this.postModel.emit(model);
