@@ -56,6 +56,7 @@ export class StationChartComponent implements OnInit, OnChanges {
           fontSize: 14,
           // stepSize: 1,
           beginAtZero: true,
+          stepSize:1
         }
       }],
       xAxes: [{
