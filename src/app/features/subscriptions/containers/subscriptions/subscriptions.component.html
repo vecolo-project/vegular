@@ -1,1 +1,46 @@
-<p>subscriptions works!</p>
+<div class="mt-4">
+
+  <mat-tab-group mat-align-tabs="center" *ngIf="isListMode()">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">local_offer</mat-icon>&nbsp;Forfaits
+      </ng-template>
+      <app-plan-list
+        [planCount]="planCount | async"
+        [planList]="planList | async"
+        [isAdmin]="sessionQuery.isAdmin$ | async"
+        (getPlans)="getPlans($event.limit,$event.offset)"
+        (viewPlan)="onViewPlan($event)"
+      ></app-plan-list>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">card_membership</mat-icon>&nbsp;Abonnements
+      </ng-template>
+      <app-subscription-list
+        [subscriptionCount]="subscriptionCount | async"
+        [subscriptionList]="subscriptionList | async"
+        (getSubscriptions)="getSubscriptions($event.limit,$event.offset)"
+        (viewSubscription)="onViewSubscription($event)"
+      ></app-subscription-list>
+    </mat-tab>
+  </mat-tab-group>
+  <app-plan-view *ngIf="isPlanViewMode()"
+
+                 [isStaff]="sessionQuery.isStaff$ | async"
+                 [isAdmin]="sessionQuery.isAdmin$ | async"
+                 [plan]="viewPlan | async"
+                 (submit)="onUpdatePlan($event)"
+                 (deletePlan)="onDeletePlan($event)"
+  ></app-plan-view>
+  <app-plan-add *ngIf="isPlanAddMode()"
+                (submit)="onCreatePlan($event)"
+  ></app-plan-add>
+  <app-subscription-view *ngIf="isSubscriptionViewMode()"
+                         [subscription]="viewSubscription | async"
+                         [plans]="planList | async"
+                         (retrievePlans)="getPlans(100,0)"
+                         (deleteSubscription)="onDeleteSubscription($event)"
+                         (submit)="onUpdateSubscription($event)"
+  ></app-subscription-view>
+</div>

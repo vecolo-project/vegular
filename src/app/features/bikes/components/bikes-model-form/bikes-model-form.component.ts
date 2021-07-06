@@ -1,8 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import {BikeManufacturer, BikeModel, BikeModelProps,} from 'src/app/shared/models';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import {
+  BikeManufacturer,
+  BikeModel,
+  BikeModelProps,
+} from 'src/app/shared/models';
 
 @Component({
   selector: 'app-bikes-model-form',
@@ -33,6 +37,9 @@ export class BikesModelFormComponent implements OnInit {
   @Output()
   getManufacturers = new EventEmitter();
 
+  @Output()
+  uploadModelImage = new EventEmitter();
+
   options = [];
   filteredOptions: Observable<BikeManufacturer[]>;
 
@@ -40,12 +47,13 @@ export class BikesModelFormComponent implements OnInit {
     this.form = this.fp.group({
       fieldName: ['', [Validators.required]],
       fieldManufacturer: ['', [Validators.required]],
-      fieldBattery: ['', [Validators.required]],
-      fieldWeight: ['', [Validators.required]],
-      fieldMaxPower: ['', [Validators.required]],
-      fieldMaxSpeed: ['', [Validators.required]],
-      fieldDistance: ['', [Validators.required]],
+      fieldBattery: ['', [Validators.required, Validators.min(0)]],
+      fieldWeight: ['', [Validators.required, Validators.min(0)]],
+      fieldMaxPower: ['', [Validators.required, Validators.min(0)]],
+      fieldMaxSpeed: ['', [Validators.required, Validators.min(0)]],
+      fieldDistance: ['', [Validators.required, Validators.min(0)]],
       fieldDescription: ['', [Validators.required]],
+      fieldImage: [''],
     });
   }
 
@@ -54,7 +62,6 @@ export class BikesModelFormComponent implements OnInit {
       this.options = this.manufacturers;
       this._setFilters();
     } else {
-      console.log('getManufacturers');
       this.getManufacturers.emit();
     }
   }
@@ -87,11 +94,11 @@ export class BikesModelFormComponent implements OnInit {
     );
   }
 
-  save() {
+  save(): void {
     const model = {
       id: null,
       name: this.form.value.fieldName,
-      batter: this.form.value.fieldManufacturer,
+      bikeManufacturer: this.form.value.fieldManufacturer.id,
       batteryCapacity: this.form.value.fieldBattery,
       weight: this.form.value.fieldWeight,
       maxPower: this.form.value.fieldMaxPower,
@@ -100,5 +107,15 @@ export class BikesModelFormComponent implements OnInit {
       description: this.form.value.fieldDescription,
     };
     this.postModel.emit(model);
+  }
+
+  changeImage(event: any): void {
+    let fileList: FileList = event.target.files;
+    if (fileList.length) {
+      const file = fileList[0];
+      const formData = new FormData();
+      formData.append('bikeModelImage', file, file.name);
+      this.uploadModelImage.emit(formData);
+    }
   }
 }

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {OsmSearchResponse} from "../../../../shared/models/osmSearchResponse.model";
+import {OsmSearchResponse} from "../../../../shared/models";
 import {Station} from "../../../../shared/models";
 
 @Component({
@@ -29,7 +29,6 @@ export class StationCreateComponent implements OnInit {
   }
 
   onAddressInputSearch() {
-    console.log('search')
     this.stationForm.controls.STREET_NUMBER.patchValue(null);
     this.stationForm.controls.STREET_NAME.patchValue(null);
     this.stationForm.controls.CITY.patchValue(null);

@@ -1,10 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {BikeManufacturer, BikeManufacturerProps, BikeModel,} from 'src/app/shared/models';
-import {BikeManufacturerQuery} from '../../store/manufacturer/manufacturer.query';
-import {BikeManufacturerService} from '../../store/manufacturer/manufacturer.service';
-import {BikeModelService} from '../../store/model/model.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import {
+  BikeManufacturer,
+  BikeManufacturerProps,
+  BikeModel,
+} from 'src/app/shared/models';
+import { BikeManufacturerQuery } from '../../store/manufacturer/manufacturer.query';
+import { BikeManufacturerService } from '../../store/manufacturer/manufacturer.service';
+import { BikeModelQuery } from '../../store/model/model.query';
+import { BikeModelService } from '../../store/model/model.service';
 
 @Component({
   selector: 'app-bikes',
@@ -17,16 +22,27 @@ export class BikesComponent implements OnInit {
   manufacturerLoading: Observable<boolean>;
   editManufacturer: Observable<BikeManufacturer>;
 
+  models: Observable<BikeModel[]>;
+  modelsCount: Observable<number>;
+  modelLoading: Observable<boolean>;
+  editModel: Observable<BikeModel>;
+
   constructor(
     private router: Router,
     private manufacturerService: BikeManufacturerService,
     private manufacturerQuery: BikeManufacturerQuery,
-    private bikeModelService: BikeModelService
+    private bikeModelService: BikeModelService,
+    private bikeModelQuery: BikeModelQuery
   ) {
     this.manufacturers = this.manufacturerQuery.selectAll();
     this.manufacturersCount = this.manufacturerQuery.selectCount$;
     this.manufacturerLoading = this.manufacturerQuery.isLoading$;
     this.editManufacturer = this.manufacturerQuery.selectEditManufacturer$;
+
+    this.models = this.bikeModelQuery.selectAll();
+    this.modelsCount = this.bikeModelQuery.selectCount$;
+    this.modelLoading = this.bikeModelQuery.isLoading$;
+    this.editModel = this.bikeModelQuery.selectEditModel$;
   }
 
   ngOnInit(): void {}
@@ -103,5 +119,9 @@ export class BikesComponent implements OnInit {
     const id = model.id;
     delete model.id;
     this.bikeModelService.putModel(model, id);
+  }
+
+  uploadModelImage(formData: FormData): void {
+    this.bikeModelService.uploadImage(formData);
   }
 }

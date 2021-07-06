@@ -39,44 +39,24 @@
       </mat-autocomplete>
     </mat-form-field>
     <mat-form-field class="w-full">
-      <input
-        matInput
-        formControlName="fieldBattery"
-        placeholder="Batterie capacity"
-        type=" number"
-      />
+      <mat-label>Batterie capacity</mat-label>
+      <input matInput min="0" formControlName="fieldBattery" type=" number" />
     </mat-form-field>
     <mat-form-field class="w-full">
-      <input
-        matInput
-        formControlName="fieldWeight"
-        placeholder="Poids"
-        type=" number"
-      />
+      <mat-label>Poids</mat-label>
+      <input matInput min="0" formControlName="fieldWeight" type=" number" />
     </mat-form-field>
     <mat-form-field class="w-full">
-      <input
-        matInput
-        formControlName="fieldMaxPower"
-        placeholder="Max Power"
-        type=" number"
-      />
+      <mat-label>Max Power</mat-label>
+      <input matInput min="0" formControlName="fieldMaxPower" type=" number" />
     </mat-form-field>
     <mat-form-field class="w-full">
-      <input
-        matInput
-        formControlName="fieldMaxSpeed"
-        placeholder="Vitesse maximal"
-        type=" number"
-      />
+      <mat-label>Vitesse maximal</mat-label>
+      <input matInput min="0" formControlName="fieldMaxSpeed" type=" number" />
     </mat-form-field>
     <mat-form-field class="w-full">
-      <input
-        matInput
-        formControlName="fieldDistance"
-        placeholder="Distance maximal"
-        type=" number"
-      />
+      <mat-label>Distance maximal</mat-label>
+      <input matInput min="0" formControlName="fieldDistance" type=" number" />
     </mat-form-field>
     <mat-form-field class="w-full">
       <textarea
@@ -85,6 +65,17 @@
         placeholder="Description"
       ></textarea>
     </mat-form-field>
+    <div class="w-full mb-3">
+      <input
+        type="file"
+        (change)="changeImage($event)"
+        formControlName="fieldImage"
+        placeholder="upload image"
+        accept="png, jpeg"
+        id="model-image"
+      />
+    </div>
+
     <p class="text-center">
       <button mat-button (click)="save()" class="bg-indigo-500">
         enregister

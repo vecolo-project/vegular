@@ -35,10 +35,6 @@ export class StationsListComponent implements OnInit {
     this.getStationsF(10,0)
   }
 
-  onSelect(value: any) {
-    console.log(value);
-  }
-
   onViewStation(station: Station) {
     this.viewStation.emit(station.id);
   }
