@@ -5,9 +5,9 @@ export type Subscription = {
   startDate: Date;
   monthDuration: number;
   autoRenew: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
   plan: Plan;
   user: User;
-  invoices: Invoice[];
+  invoices?: Invoice[];
 }

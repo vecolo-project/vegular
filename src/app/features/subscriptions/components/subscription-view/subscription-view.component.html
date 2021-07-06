@@ -9,7 +9,7 @@
       <div class="space-y-4">
         <div class="text-lg">Date de début : {{subscription?.startDate | date:'dd/MM/yyyy'}}</div>
         <div class="text-lg">Durée de l'abonnement : {{subscription?.monthDuration}} mois</div>
-        <div class="text-lg">Renouvellement automatique : {{subscription?.autoRenew ? 'Oui':'Non'}}</div>
+        <div class="text-lg">Renouvellement automatique : {{subscription?.autoRenew ? 'Oui' : 'Non'}}</div>
         <div class="text-lg">Forfait : {{subscription?.plan?.name}}</div>
       </div>
     </mat-card-content>
@@ -28,4 +28,48 @@
       </button>
     </mat-card-actions>
   </mat-card>
+  <mat-card class="col-span-2 lg:col-span-1" *ngIf="editMode">
+    <mat-card-header>
+      <mat-card-title> Abonnement de {{subscription?.user?.email}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+      <ng-lottie [options]="lottieMoneyOptions"></ng-lottie>
+      <form [formGroup]="subscriptionForm" class="mt-2">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Forfait</mat-label>
+          <mat-select formControlName="PLAN">
+            <mat-option *ngFor="let plan of plans" [value]="plan">
+              {{plan.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Date de début</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="START_DATE">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Durée (mois)</mat-label>
+          <input matInput type="number" min="1" formControlName="DURATION">
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions class="flex justify-end space-x-4">
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="editMode = false;"
+      >Annuler
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="subscriptionForm.invalid"
+        (click)="onSubmit()"
+      >Modifier
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
 </div>
