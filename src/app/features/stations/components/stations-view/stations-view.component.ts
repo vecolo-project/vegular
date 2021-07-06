@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmDialogComponent} from "../../../../shared/confirm-dialog/confirm-dialog.component";
 import {RouterNavigation} from "../../../../core/router/router.navigation";
+import {endOfDay, startOfDay, subDays} from "date-fns";
 
 @Component({
   selector: 'app-stations-view',
@@ -26,7 +27,7 @@ export class StationsViewComponent implements OnInit {
   deleteStation = new EventEmitter<number>();
 
   @Output()
-  getMonitoring = new EventEmitter<{ stationId: number, nbDays: number; }>();
+  getMonitoring = new EventEmitter<{ stationId: number, start: Date, end: Date }>();
 
   @Output()
   getToken = new EventEmitter<number>();
@@ -86,6 +87,8 @@ export class StationsViewComponent implements OnInit {
     path: 'assets/lottie/solarPanel2.json',
   }
 
+  dateRange: FormGroup;
+
   constructor(@Inject(FormBuilder) fb, private dialog: MatDialog, private routerNavigation: RouterNavigation) {
     this.stationForm = fb.group({
       BATTERY_CAPACITY: ['', [Validators.required, Validators.min(1)]],
@@ -97,7 +100,12 @@ export class StationsViewComponent implements OnInit {
       COORDINATE_Y: ['', [Validators.required]],
       COORDINATE_X: ['', [Validators.required]]
     })
+    const today = new Date();
 
+    this.dateRange = fb.group({
+      start: [subDays(today, 3),Validators.required],
+      end: [today,Validators.required]
+    })
   }
 
   ngOnInit(): void {
@@ -109,7 +117,7 @@ export class StationsViewComponent implements OnInit {
       });
     timer(2000)
       .subscribe(() => {
-        this.retrieveMonitoring(3);
+        this.retrieveMonitoring();
         this.onGetBikes(10, 0);
         this.onGetRides(10, 0);
       })
@@ -147,9 +155,13 @@ export class StationsViewComponent implements OnInit {
     }
   }
 
-  retrieveMonitoring(nbDays: number) {
-    if (this.station) {
-      this.getMonitoring.emit({stationId: this.station?.id, nbDays: nbDays});
+  retrieveMonitoring() {
+    if (this.station && this.dateRange.valid) {
+      this.getMonitoring.emit({
+        stationId: this.station?.id,
+        start: startOfDay(this.dateRange.value.start),
+        end: endOfDay(this.dateRange.value.end)
+      });
     }
   }
 

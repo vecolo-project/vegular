@@ -54,14 +54,13 @@ export class StationsComponent implements OnInit {
     if (this.isViewMode()) {
       const stationId = Number.parseInt(this.route.snapshot.params.id);
       this.stationsService.getStation(stationId);
-      this.retrieveMonitoring(stationId, 3);
+      const now = new Date();
+      this.retrieveMonitoring(stationId, now, subDays(now, 3));
     }
   }
 
-  retrieveMonitoring(stationId: number, nbDays: number) {
-    const now = new Date();
-    const dayAgo = subDays(now, nbDays);
-    this.stationsService.getStationMonitoring(stationId, dayAgo, now);
+  retrieveMonitoring(stationId: number, start: Date, end: Date) {
+    this.stationsService.getStationMonitoring(stationId, start, end);
   }
 
   isViewMode(): boolean {
