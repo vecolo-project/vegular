@@ -43,7 +43,8 @@ export class PlanViewComponent implements OnInit {
       NAME: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       PRICE: ['', [Validators.required, Validators.min(0)]],
       RIDE_PRICE: ['', [Validators.required, Validators.min(0)]],
-      UNLIMITED: ['', Validators.required]
+      FREE_MINUTES: ['', [Validators.required, Validators.min(0)]],
+      ACTIVE: ['', Validators.required]
     })
   }
 
@@ -55,7 +56,8 @@ export class PlanViewComponent implements OnInit {
     this.planForm.controls.NAME.patchValue(this.plan.name);
     this.planForm.controls.PRICE.patchValue(this.plan.price);
     this.planForm.controls.RIDE_PRICE.patchValue(this.plan.costPerMinute);
-    this.planForm.controls.UNLIMITED.patchValue(this.plan.isUnlimited);
+    this.planForm.controls.ACTIVE.patchValue(this.plan.isActive);
+    this.planForm.controls.FREE_MINUTES.patchValue(this.plan.freeMinutes);
     this.editMode = true
   }
 
@@ -65,7 +67,8 @@ export class PlanViewComponent implements OnInit {
       name: this.planForm.value.NAME,
       price: this.planForm.value.PRICE,
       costPerMinute: this.planForm.value.RIDE_PRICE,
-      isUnlimited: this.planForm.value.UNLIMITED
+      freeMinutes: this.planForm.value.FREE_MINUTES,
+      isActive: this.planForm.value.ACTIVE
     }
     this.submit.emit(plan);
     this.editMode = false;

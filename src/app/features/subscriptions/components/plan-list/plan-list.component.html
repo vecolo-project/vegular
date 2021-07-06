@@ -24,16 +24,22 @@
           {{element.price}}€ / mois
         </td>
       </ng-container>
+      <ng-container matColumnDef="freeMinutes">
+        <th mat-header-cell *matHeaderCellDef>Minutes gratuites par courses</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.freeMinutes | number:'.0'}}
+        </td>
+      </ng-container>
       <ng-container matColumnDef="priceRide">
         <th mat-header-cell *matHeaderCellDef>Prix à la minute</th>
         <td mat-cell *matCellDef="let element">
           {{element.costPerMinute}}€ ({{element.costPerMinute*30}}€ / 30min)
         </td>
       </ng-container>
-      <ng-container matColumnDef="unlimited">
-        <th mat-header-cell *matHeaderCellDef>Forfait illimité</th>
+      <ng-container matColumnDef="active">
+        <th mat-header-cell *matHeaderCellDef>Forfait Actif</th>
         <td mat-cell *matCellDef="let element">
-          {{element.isUnlimited ? 'Oui':'Non'}}
+          {{element.isActive ? 'Oui':'Non'}}
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

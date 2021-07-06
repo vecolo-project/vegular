@@ -24,7 +24,8 @@ export class PlanAddComponent implements OnInit {
       NAME: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       PRICE: [0, [Validators.required, Validators.min(0)]],
       RIDE_PRICE: [0, [Validators.required, Validators.min(0)]],
-      UNLIMITED: [false, Validators.required]
+      FREE_MINUTES: [0, [Validators.required, Validators.min(0)]],
+      ACTIVE: [false, Validators.required]
     })
 
   }
@@ -37,7 +38,8 @@ export class PlanAddComponent implements OnInit {
       name: this.planForm.value.NAME,
       price: this.planForm.value.PRICE,
       costPerMinute: this.planForm.value.RIDE_PRICE,
-      isUnlimited: this.planForm.value.UNLIMITED
+      freeMinutes: this.planForm.value.FREE_MINUTES,
+      isActive: this.planForm.value.ACTIVE
     }
     this.submit.emit(plan);
   }

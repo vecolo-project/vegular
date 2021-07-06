@@ -30,8 +30,15 @@
           {{planForm.value.RIDE_PRICE * 30}}€ / 30min)
         </mat-hint>
       </mat-form-field>
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Minutes gratuites par course</mat-label>
+        <input matInput
+               formControlName="FREE_MINUTES"
+               step="1"
+               type="number">
+      </mat-form-field>
       <mat-checkbox
-        formControlName="UNLIMITED">Illimité</mat-checkbox>
+        formControlName="ACTIVE">Actif</mat-checkbox>
     </form>
   </mat-card-content>
   <mat-card-actions class="flex justify-end space-x-4">

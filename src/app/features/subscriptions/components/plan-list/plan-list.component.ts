@@ -27,8 +27,9 @@ export class PlanListComponent implements OnInit {
     'id',
     'name',
     'priceMonth',
+    'freeMinutes',
     'priceRide',
-    'unlimited'
+    'active'
   ]
 
   constructor() {

@@ -6,9 +6,10 @@
     <mat-card-content class="grid grid-cols-1 lg:grid-cols-2 gap-2">
       <ng-lottie [options]="lottieBikeOptions"></ng-lottie>
       <div class="space-y-4">
-        <div class="text-lg">Prix mensuel : {{plan?.price}}</div>
+        <div class="text-lg">Prix mensuel : {{plan?.price}}€</div>
         <div class="text-lg">Prix à la minute : {{plan?.costPerMinute}}€ ({{plan?.costPerMinute * 30}}€ / 30min)</div>
-        <div class="text-lg">Illimité : {{plan?.isUnlimited ? 'Oui' : 'Non'}}</div>
+        <div class="text-lg">Minutes gratuites : {{plan?.freeMinutes | number:'.0'}}</div>
+        <div class="text-lg">Actif : {{plan?.isActive ? 'Oui' : 'Non'}}</div>
       </div>
     </mat-card-content>
     <mat-card-actions *ngIf="isStaff" class="flex justify-end space-x-2">
@@ -59,8 +60,17 @@
             {{planForm.value.RIDE_PRICE * 30}}€ / 30min)
           </mat-hint>
         </mat-form-field>
-          <mat-checkbox
-            formControlName="UNLIMITED">Illimité</mat-checkbox>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Minutes gratuites par course</mat-label>
+          <input matInput
+                 formControlName="FREE_MINUTES"
+                 step="1"
+                 type="number">
+        </mat-form-field>
+
+        <mat-checkbox
+          formControlName="ACTIVE">Actif
+        </mat-checkbox>
       </form>
     </mat-card-content>
     <mat-card-actions class="flex justify-end space-x-4">

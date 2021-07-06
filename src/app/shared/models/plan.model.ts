@@ -5,7 +5,8 @@ export type Plan = {
   name: string;
   price: number;
   costPerMinute: number;
-  isUnlimited: boolean;
+  freeMinutes: number;
+  isActive: boolean;
   createdAt?: Date;
   updatedAt?: Date;
   subscriptions?: Subscription[];
