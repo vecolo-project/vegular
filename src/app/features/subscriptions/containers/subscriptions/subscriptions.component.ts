@@ -55,12 +55,17 @@ export class SubscriptionsComponent implements OnInit {
   isPlanViewMode(): boolean {
     return this.router.isActive('/subscriptions/plan/view', false);
   }
+
   isPlanAddMode(): boolean {
     return this.router.isActive('/subscriptions/plan/add', true);
   }
 
   isSubscriptionViewMode(): boolean {
     return this.router.isActive('/subscriptions/view', false);
+  }
+
+  isSubscriptionAddMode(): boolean {
+    return this.router.isActive('/subscriptions/add', true);
   }
 
   getPlans(limit: number, offset: number): void {
@@ -99,6 +104,10 @@ export class SubscriptionsComponent implements OnInit {
 
   onUpdateSubscription(subscription: Subscription): void {
     this.subscriptionService.putSubscription(subscription);
+  }
+
+  onDeleteSubscription(id: number): void {
+    this.subscriptionService.deleteSubscription(id);
   }
 
 }
