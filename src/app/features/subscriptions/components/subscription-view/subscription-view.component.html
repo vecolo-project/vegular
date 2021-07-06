@@ -1,1 +1,31 @@
-<p>subscription-view works!</p>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+  <mat-card class="col-span-2 lg:col-span-1" *ngIf="!editMode">
+    <mat-card-header>
+      <mat-card-title> Abonnement de {{subscription?.user?.email}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+      <ng-lottie [options]="lottieMoneyOptions"></ng-lottie>
+      <div class="space-y-4">
+        <div class="text-lg">Date de début : {{subscription?.startDate | date:'dd/MM/yyyy'}}</div>
+        <div class="text-lg">Durée de l'abonnement : {{subscription?.monthDuration}} mois</div>
+        <div class="text-lg">Renouvellement automatique : {{subscription?.autoRenew ? 'Oui':'Non'}}</div>
+        <div class="text-lg">Forfait : {{subscription?.plan?.name}}</div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions class="flex justify-end space-x-2">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onEdit()"
+      >Modifier
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="onDelete()"
+      >Supprimer
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

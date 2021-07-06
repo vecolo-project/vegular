@@ -38,7 +38,7 @@ export class PlanViewComponent implements OnInit {
   }
 
 
-  constructor(@Inject(FormBuilder) fb, private dialog: MatDialog, private routerNavigation: RouterNavigation) {
+  constructor(@Inject(FormBuilder) fb, private dialog: MatDialog) {
     this.planForm = fb.group({
       NAME: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       PRICE: ['', [Validators.required, Validators.min(0)]],

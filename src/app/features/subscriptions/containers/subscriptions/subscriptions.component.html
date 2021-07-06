@@ -36,5 +36,8 @@
   <app-plan-add *ngIf="isPlanAddMode()"
                 (submit)="onCreatePlan($event)"
   ></app-plan-add>
-  <app-subscription-view *ngIf="isSubscriptionViewMode()"></app-subscription-view>
+  <app-subscription-view *ngIf="isSubscriptionViewMode()"
+                         [subscription]="viewSubscription | async"
+                         (submit)="onUpdateSubscription($event)"
+  ></app-subscription-view>
 </div>

@@ -45,6 +45,9 @@ export class SubscriptionsComponent implements OnInit {
     if (this.isPlanViewMode()) {
       const planId = Number.parseInt(this.route.snapshot.params.id);
       this.planService.getPlan(planId);
+    }else if (this.isSubscriptionViewMode()) {
+      const subscriptionId = Number.parseInt(this.route.snapshot.params.id);
+      this.subscriptionService.getSubscription(subscriptionId);
     }
   }
 
