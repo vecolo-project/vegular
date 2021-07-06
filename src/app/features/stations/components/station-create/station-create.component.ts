@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {OsmSearchResponse} from "../../../../shared/models/osmSearchResponse.model";
+import {OsmSearchResponse} from "../../../../shared/models";
 import {Station} from "../../../../shared/models";
 
 @Component({

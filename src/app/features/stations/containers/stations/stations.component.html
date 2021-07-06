@@ -17,7 +17,7 @@
                      [rideCount]="rideCount | async"
                      [rides]="rideList | async"
                      (getToken)="getStationToken($event)"
-                     (getMonitoring)="retrieveMonitoring($event.stationId,$event.nbDays)"
+                     (getMonitoring)="retrieveMonitoring($event.stationId,$event.start,$event.end)"
                      (getBikes)="getBikes($event.stationId,$event.limit,$event.offset)"
                      (getRides)="getRides($event.stationId,$event.limit,$event.offset)"
                      (getStation)="stationsService.getStation($event)"
