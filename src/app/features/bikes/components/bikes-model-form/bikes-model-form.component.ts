@@ -1,3 +1,4 @@
+import { OnChanges } from '@angular/core';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -8,13 +9,14 @@ import {
   BikeModel,
   BikeModelProps,
 } from 'src/app/shared/models';
+import { Snackbar } from 'src/app/shared/snackbar/snakbar';
 
 @Component({
   selector: 'app-bikes-model-form',
   templateUrl: './bikes-model-form.component.html',
   styleUrls: ['./bikes-model-form.component.scss'],
 })
-export class BikesModelFormComponent implements OnInit {
+export class BikesModelFormComponent implements OnInit, OnChanges {
   form: FormGroup;
 
   @Input()
@@ -44,7 +46,11 @@ export class BikesModelFormComponent implements OnInit {
   options = [];
   filteredOptions: Observable<BikeManufacturer[]>;
 
-  constructor(private fp: FormBuilder, private route: ActivatedRoute) {
+  constructor(
+    private fp: FormBuilder,
+    private route: ActivatedRoute,
+    private snackBar: Snackbar
+  ) {
     this.form = this.fp.group({
       fieldName: ['', [Validators.required]],
       fieldManufacturer: ['', [Validators.required]],
@@ -116,7 +122,7 @@ export class BikesModelFormComponent implements OnInit {
     return manufacturer && manufacturer.name ? manufacturer.name : '';
   }
 
-  private _setFilters() {
+  private _setFilters(): void {
     this.filteredOptions =
       this.form.controls.fieldManufacturer.valueChanges.pipe(
         startWith(''),
@@ -150,6 +156,7 @@ export class BikesModelFormComponent implements OnInit {
     } else {
       this.postModel.emit(model);
     }
+    this.snackBar.success('Enregistré');
   }
 
   changeImage(event: any): void {

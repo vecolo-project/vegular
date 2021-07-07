@@ -34,6 +34,8 @@
   [isEditBike]="isEditModelForm()"
   [models]="models | async"
   (getModels)="getModels()"
+  [stations]="stations | async"
+  (getStations)="getStations()"
   (postBike)="postBike($event)"
   (putBike)="putBike($event)"
   [editBike]="editBike | async"

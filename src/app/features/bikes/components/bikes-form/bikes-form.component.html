@@ -23,24 +23,40 @@
         matInput
         formControlName="fieldStation"
         placeholder="Borne"
+        [matAutocomplete]="auto"
         type=" text"
       />
-    </mat-form-field>
-    <mat-form-field class="w-full">
-      <mat-slide-toggle
-        formControlName="fieldRecharging"
-        class="example-margin"
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="displayAutocompleteStation"
       >
-        En charge
-      </mat-slide-toggle>
+        <mat-option
+          *ngFor="let option of filteredOptionsStation | async"
+          [value]="option"
+        >
+          {{ option.name }}
+        </mat-option></mat-autocomplete
+      >
     </mat-form-field>
     <mat-form-field class="w-full">
       <input
         matInput
         formControlName="fieldModel"
         placeholder="Model"
+        [matAutocomplete]="auto"
         type=" text"
       />
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="displayAutocompleteModel"
+      >
+        <mat-option
+          *ngFor="let option of filteredOptionsModel | async"
+          [value]="option"
+        >
+          {{ option.name }}
+        </mat-option></mat-autocomplete
+      >
     </mat-form-field>
     <mat-form-field class="w-full">
       <input
@@ -50,7 +66,15 @@
         type=" text"
       />
     </mat-form-field>
-
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-slide-toggle
+        formControlName="fieldRecharging"
+        class="example-margin"
+      >
+        En charge
+      </mat-slide-toggle>
+      <textarea matInput hidden></textarea>
+    </mat-form-field>
     <p class="text-center">
       <button mat-button (click)="save()" class="bg-indigo-500">
         enregister

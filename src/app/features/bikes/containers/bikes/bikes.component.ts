@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { StationsQuery } from 'src/app/features/stations/store/stations.query';
+import { StationsService } from 'src/app/features/stations/store/stations.service';
 import {
+  Bike,
   BikeManufacturer,
   BikeManufacturerProps,
   BikeModel,
   BikeModelProps,
+  Station,
 } from 'src/app/shared/models';
+import { BikeQuery } from '../../store/bike/bike.query';
+import { BikeService } from '../../store/bike/bike.service';
 import { BikeManufacturerQuery } from '../../store/manufacturer/manufacturer.query';
 import { BikeManufacturerService } from '../../store/manufacturer/manufacturer.service';
 import { BikeModelQuery } from '../../store/model/model.query';
@@ -28,12 +34,23 @@ export class BikesComponent implements OnInit {
   modelLoading: Observable<boolean>;
   editModel: Observable<BikeModel>;
 
+  bikes: Observable<Bike[]>;
+  bikesCount: Observable<number>;
+  bikeLoading: Observable<boolean>;
+  editBike: Observable<Bike>;
+
+  stations: Observable<Station[]>;
+
   constructor(
     private router: Router,
     private manufacturerService: BikeManufacturerService,
     private manufacturerQuery: BikeManufacturerQuery,
     private bikeModelService: BikeModelService,
-    private bikeModelQuery: BikeModelQuery
+    private bikeModelQuery: BikeModelQuery,
+    private bikeService: BikeService,
+    private bikeQuery: BikeQuery,
+    private stationsQuery: StationsQuery,
+    private stationsService: StationsService
   ) {
     this.manufacturers = this.manufacturerQuery.selectAll();
     this.manufacturersCount = this.manufacturerQuery.selectCount$;
@@ -44,6 +61,13 @@ export class BikesComponent implements OnInit {
     this.modelsCount = this.bikeModelQuery.selectCount$;
     this.modelLoading = this.bikeModelQuery.isLoading$;
     this.editModel = this.bikeModelQuery.selectEditModel$;
+
+    this.bikes = this.bikeQuery.selectAll();
+    this.bikesCount = this.bikeQuery.selectCount$;
+    this.bikeLoading = this.bikeQuery.isLoading$;
+    this.editBike = this.bikeQuery.selectEditBike$;
+
+    this.stations = this.stationsQuery.selectAll();
   }
 
   ngOnInit(): void {}
@@ -132,5 +156,9 @@ export class BikesComponent implements OnInit {
 
   setEditModel(id: number): void {
     this.bikeModelQuery.setEditModel(id);
+  }
+
+  getStations() {
+    this.stationsService.getStations(10000, 0);
   }
 }
