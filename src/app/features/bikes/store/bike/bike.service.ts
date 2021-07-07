@@ -24,7 +24,6 @@ export class BikeService {
       );
       this.bikeStore.set(response);
       this.bikeStore.update({ count: response.length });
-      console.log(response);
     } catch (e) {
       this.bikeStore.set([]);
       this.snackBar.warnning(

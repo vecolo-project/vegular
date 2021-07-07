@@ -34,23 +34,19 @@ export class BikesListComponent implements OnInit, OnChanges {
 
   displayedColumns = [
     'id',
-    'matricule',
-    'station',
+    'matriculate', // TODO change headers from data to name this matricule (french)
     'battery percent',
     'recharging',
-    'model',
     'status',
-    'creation date',
-    'update date',
   ];
   constructor() {}
 
   ngOnInit(): void {
     this.getUsersWithPagination(10, 0);
   }
-  ngOnChanges(): void {
-    console.log(this.bikes);
-  }
+
+  ngOnChanges(): void {}
+
   getUsersWithPagination(limit: number, offset: number) {
     setTimeout(() => this.getBikes.emit({ limit, offset }));
   }
