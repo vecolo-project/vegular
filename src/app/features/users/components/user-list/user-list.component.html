@@ -5,6 +5,10 @@
   </button>
 </p>
 <div class="flex flex-col my-2">
+  <mat-form-field>
+    <mat-label>Rechercher</mat-label>
+    <input [formControl]="searchQuery" type="text" matInput (keydown.enter)="onSearch()"/>
+  </mat-form-field>
   <mat-spinner *ngIf="loading"></mat-spinner>
   <table mat-table [dataSource]="userListArray" class="mat-elevation-z8">
     <mat-text-column name="id"></mat-text-column>
@@ -42,9 +46,10 @@
   </table>
   <mat-paginator
     [length]="usersCount"
-    [pageSize]="10"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
     [pageSizeOptions]="[5, 10, 20]"
-    (page)="getUsersF($event.pageSize, $event.pageIndex * $event.pageSize)"
+    (page)="getUsersF()"
     showFirstLastButtons
   ></mat-paginator>
 </div>

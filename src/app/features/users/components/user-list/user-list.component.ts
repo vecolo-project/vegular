@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {User} from '../../../../shared/models/user.model';
+import {User} from '../../../../shared/models';
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-user-list',
@@ -20,7 +21,7 @@ export class UserListComponent implements OnInit {
   isAdmin: boolean;
 
   @Output()
-  getUsers = new EventEmitter<{ limit: number; offset: number }>();
+  getUsers = new EventEmitter<{ limit: number; offset: number, searchQuery: string }>();
 
   @Output()
   deleteUser = new EventEmitter<number>();
@@ -37,15 +38,28 @@ export class UserListComponent implements OnInit {
     'actions',
   ];
 
-  constructor() {}
+  pageIndex: number;
+  pageSize: number
+  searchQuery: FormControl;
 
-  ngOnInit(): void {
-    this.getUsersF(10, 1);
+  constructor() {
+    this.searchQuery = new FormControl('');
   }
 
-  getUsersF(limit: number, offset: number): void {
+  ngOnInit(): void {
+    this.pageIndex = 0;
+    this.pageSize = 10;
+    this.getUsersF();
+  }
+
+  getUsersF(): void {
     setTimeout(() => {
-      this.getUsers.emit({ limit, offset });
+      this.getUsers.emit({limit: this.pageSize, offset: this.pageIndex, searchQuery: this.searchQuery.value});
     });
+  }
+
+  onSearch(): void {
+    this.pageIndex = 0;
+    this.getUsersF();
   }
 }
