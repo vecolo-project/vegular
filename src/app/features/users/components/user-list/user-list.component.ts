@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {User} from '../../../../shared/models/user.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { User } from '../../../../shared/models/user.model';
 
 @Component({
   selector: 'app-user-list',
@@ -40,7 +40,7 @@ export class UserListComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.getUsersF(10, 1);
+    this.getUsersF(10, 0);
   }
 
   getUsersF(limit: number, offset: number): void {

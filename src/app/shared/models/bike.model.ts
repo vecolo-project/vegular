@@ -1,4 +1,4 @@
-import {BikeMaintenanceThread, BikeModel, Ride, Station} from ".";
+import { BikeMaintenanceThread, BikeModel, Ride, Station } from '.';
 
 export type Bike = {
   id: number;
@@ -12,7 +12,16 @@ export type Bike = {
   bikeMaintenanceThread: BikeMaintenanceThread[];
   updatedAt: Date;
   createdAt: Date;
-}
+};
+
+export type BikeProps = {
+  id?: number;
+  matriculate: string;
+  station: number; // use of id
+  recharging: boolean;
+  model: number; // use of id
+  status: BikeStatus;
+};
 
 export enum BikeStatus {
   OFF = 'OFF',

@@ -6,10 +6,16 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { Bike, BikeModel, Station } from 'src/app/shared/models';
+import {
+  Bike,
+  BikeModel,
+  BikeProps,
+  BikeStatus,
+  Station,
+} from 'src/app/shared/models';
 import { Snackbar } from 'src/app/shared/snackbar/snakbar';
 
 @Component({
@@ -19,6 +25,10 @@ import { Snackbar } from 'src/app/shared/snackbar/snakbar';
 })
 export class BikesFormComponent implements OnInit, OnChanges {
   form: FormGroup;
+
+  @Input()
+  isEditMode: boolean;
+
   @Input()
   editBike: Bike;
 
@@ -29,10 +39,10 @@ export class BikesFormComponent implements OnInit, OnChanges {
   stations: Station[];
 
   @Output()
-  postBike = new EventEmitter();
+  postBike = new EventEmitter<BikeProps>();
 
   @Output()
-  putBike = new EventEmitter<number>();
+  putBike = new EventEmitter<BikeProps>();
 
   @Output()
   retrieveEditBike = new EventEmitter<number>();
@@ -51,10 +61,10 @@ export class BikesFormComponent implements OnInit, OnChanges {
 
   constructor(private fp: FormBuilder, private snackBar: Snackbar) {
     this.form = this.fp.group({
-      fieldMatricule: [''],
+      fieldMatricule: ['', [Validators.required]],
       fieldStation: [''],
       fieldRecharging: [''],
-      fieldModel: [''],
+      fieldModel: ['', [Validators.required]],
       fieldStatus: [''],
     });
   }
@@ -120,11 +130,25 @@ export class BikesFormComponent implements OnInit, OnChanges {
   }
 
   save(): void {
+    const bike = {
+      matriculate: String(this.form.value.fieldMatricule),
+      station: this.form.value.fieldStation.id,
+      recharging: this.form.value.fieldRecharging === 'true',
+      model: this.form.value.fieldModel.id,
+      status: BikeStatus[this.form.value.fieldStatus],
+    };
+    if (this.editBike && this.editBike.id) {
+      bike['id'] = this.editBike.id;
+    }
+    if (this.isEditMode) {
+      this.putBike.emit(bike);
+    } else {
+      this.postBike.emit(bike);
+    }
     this.snackBar.success('Enregistré');
   }
 
   displayAutocompleteStation(station: Station): string {
-    console.log(station);
     return station && station.streetName ? station.streetName : '';
   }
 

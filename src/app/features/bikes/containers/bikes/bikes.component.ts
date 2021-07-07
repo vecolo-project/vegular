@@ -9,6 +9,7 @@ import {
   BikeManufacturerProps,
   BikeModel,
   BikeModelProps,
+  BikeProps,
   Station,
 } from 'src/app/shared/models';
 import { BikeQuery } from '../../store/bike/bike.query';
@@ -158,7 +159,28 @@ export class BikesComponent implements OnInit {
     this.bikeModelQuery.setEditModel(id);
   }
 
-  getStations() {
+  getStations(): void {
     this.stationsService.getStations(10000, 0);
+  }
+
+  getBikes(limit: number, offset: number): void {
+    this.bikeService.getBikes(limit, offset);
+  }
+
+  getBike(id: number): void {
+    this.bikeService.getBike(id);
+  }
+
+  postBike(bike: BikeProps): void {
+    const bikeWithBatteryPercent = { ...bike, batteryPercent: 100 };
+    this.bikeService.postBike(bikeWithBatteryPercent);
+  }
+
+  putBike(bike: BikeProps): void {
+    this.bikeService.putBike(bike, bike.id);
+  }
+
+  deleteBike(id: number): void {
+    this.bikeService.deleteBike(id);
   }
 }

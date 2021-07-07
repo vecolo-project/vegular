@@ -1,56 +1,128 @@
-import {Injectable} from '@angular/core';
-import {HttpClientWrapper} from 'src/app/core/utils/httpClientWrapper';
-import {Bike} from 'src/app/shared/models';
-import {Snackbar} from 'src/app/shared/snackbar/snakbar';
-import {BikeQuery} from './bike.query';
-import {BikeStore} from './bike.store';
-import {API_RESSOURCE_URI} from "../../../../shared/api-ressource-uri/api-ressource-uri";
-import {HttpTools} from "../../../../shared/http-tools/http-tools";
+import { Injectable } from '@angular/core';
+import { HttpClientWrapper } from 'src/app/core/utils/httpClientWrapper';
+import { Bike, BikeProps } from 'src/app/shared/models';
+import { Snackbar } from 'src/app/shared/snackbar/snakbar';
+import { BikeQuery } from './bike.query';
+import { BikeStore } from './bike.store';
+import { API_RESSOURCE_URI } from '../../../../shared/api-ressource-uri/api-ressource-uri';
+import { HttpTools } from '../../../../shared/http-tools/http-tools';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class BikeService {
   constructor(
     private bikeStore: BikeStore,
     private http: HttpClientWrapper,
     private snackBar: Snackbar,
     private bikeQuery: BikeQuery
-  ) {
-  }
+  ) {}
 
-  async getBikes(): Promise<never> {
-    throw new Error('Method not implemented.');
-  }
-
-  async getBike(id: number): Promise<never> {
-    throw new Error('Method not implemented.');
-  }
-
-  async postBikes(): Promise<never> {
-    throw new Error('Method not implemented.');
-  }
-
-  async putBike(bike: Bike, id: number): Promise<never> {
-    throw new Error('Method not implemented.');
-  }
-
-  async deleteBike(id: number): Promise<never> {
-    throw new Error('Method not implemented.');
-  }
-
-  async getBikeFromStation(stationId: number, limit: number, offset: number): Promise<void> {
+  async getBikes(limit: number, offset: number): Promise<void> {
     this.bikeStore.setLoading(true);
-    this.bikeStore.set([])
     try {
-      const response = await this.http.get<{ bikes: Bike[], count: number }>(
-        API_RESSOURCE_URI.BIKE_STATION + stationId + '?' +
-        HttpTools.ObjectToHttpParams({limit, offset})
-      )
-      this.bikeStore.set(response.bikes);
-      this.bikeStore.update({count: response.count})
+      const response = await this.http.get<Bike[]>(
+        API_RESSOURCE_URI.BASE_BIKE + `?limit=${limit}&offset=${offset}`
+      );
+      this.bikeStore.set(response);
+      this.bikeStore.update({ count: response.length });
+      console.log(response);
     } catch (e) {
-      this.snackBar.warnning('Erreur lors de la récupération des vélos de la station : ' + e.error.error);
+      this.bikeStore.set([]);
+      this.snackBar.warnning(
+        'Erreur lors de la récupération des vélos : ' + e.error.error
+      );
     } finally {
-      this.bikeStore.setLoading(false)
+      this.bikeStore.setLoading(false);
+    }
+  }
+
+  async getBike(id: number): Promise<void> {
+    this.bikeStore.setLoading(true);
+    try {
+      const response = await this.http.get<Bike>(
+        API_RESSOURCE_URI.BASE_BIKE + id
+      );
+      this.bikeStore.update({ editManufacturer: response });
+    } catch (e) {
+      this.bikeStore.set({ editManufacturer: null });
+      this.snackBar.warnning(
+        'Erreur lors de la récupération du vélo : ' + e.error.error
+      );
+    } finally {
+      this.bikeStore.setLoading(false);
+    }
+  }
+
+  async postBike(bike: BikeProps): Promise<void> {
+    this.bikeStore.setLoading(true);
+    try {
+      const response = await this.http.post<Bike>(
+        API_RESSOURCE_URI.BASE_BIKE,
+        bike
+      );
+      this.bikeStore.update({ editBike: response });
+    } catch (err) {
+      this.snackBar.warnning(
+        "Erreur lors de l'ajout d'un vélo : " + err.error.error
+      );
+    } finally {
+      this.bikeStore.setLoading(false);
+    }
+  }
+
+  async putBike(bike: BikeProps, id: number): Promise<void> {
+    this.bikeStore.setLoading(true);
+    try {
+      const response = await this.http.put<Bike>(
+        API_RESSOURCE_URI.PUT_MANUFACTURER + id,
+        bike
+      );
+      this.bikeStore.update({ editBike: response });
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la modification du vélo : ' + e.error.error
+      );
+    } finally {
+      this.bikeStore.setLoading(false);
+    }
+  }
+
+  async deleteBike(id: number): Promise<void> {
+    this.bikeStore.setLoading(true);
+    try {
+      await this.http.delete(API_RESSOURCE_URI.BASE_BIKE + id);
+      this.bikeStore.remove(id);
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la suppression du vélo : ' + e.error.error
+      );
+    } finally {
+      this.bikeStore.setLoading(false);
+    }
+  }
+
+  async getBikeFromStation(
+    stationId: number,
+    limit: number,
+    offset: number
+  ): Promise<void> {
+    this.bikeStore.setLoading(true);
+    this.bikeStore.set([]);
+    try {
+      const response = await this.http.get<{ bikes: Bike[]; count: number }>(
+        API_RESSOURCE_URI.BIKE_STATION +
+          stationId +
+          '?' +
+          HttpTools.ObjectToHttpParams({ limit, offset })
+      );
+      this.bikeStore.set(response.bikes);
+      this.bikeStore.update({ count: response.count });
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la récupération des vélos de la station : ' +
+          e.error.error
+      );
+    } finally {
+      this.bikeStore.setLoading(false);
     }
   }
 }
