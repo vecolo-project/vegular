@@ -71,7 +71,7 @@ export class BikesModelFormComponent implements OnInit, OnChanges {
     } else {
       this.getManufacturers.emit();
     }
-    if (this.editModel && !this.editModel) {
+    if (this.isEditMode && !this.editModel) {
       setTimeout(() => {
         const id = Number.parseInt(this.route.snapshot.params.id);
         this.retrieveEditModel.emit(id);
@@ -79,8 +79,6 @@ export class BikesModelFormComponent implements OnInit, OnChanges {
     }
     if (!this.isEditMode) {
       this.form.reset();
-    } else {
-      this.patchValues();
     }
   }
 
@@ -165,6 +163,7 @@ export class BikesModelFormComponent implements OnInit, OnChanges {
       const file = fileList[0];
       const formData = new FormData();
       formData.append('bikeModelImage', file, file.name);
+      formData.append('id', String(this.editModel.id));
       this.uploadModelImage.emit(formData);
     }
   }
