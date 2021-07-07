@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {OsmSearchResponse} from "../models/osmSearchResponse.model";
+import {OsmSearchResponse} from "../models";
 import {FormControl, Validators} from "@angular/forms";
 import {Observable} from "rxjs";
 import {StationsService} from "../../features/stations/store/stations.service";
@@ -15,10 +15,10 @@ export class AddressSearchComponent implements OnInit {
   addressSearchResults: Observable<OsmSearchResponse[]>;
 
   @Input()
-  initialAdressValue: string
+  initialAddressValue: string
 
   @Output()
-  searchEvent = new EventEmitter<string>()
+  searchEvent = new EventEmitter<string>();
 
   @Output()
   addressSelectEvent = new EventEmitter<OsmSearchResponse>();
@@ -31,7 +31,7 @@ export class AddressSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.inputSearchControl.patchValue(this.initialAdressValue);
+    this.inputSearchControl.patchValue(this.initialAddressValue);
   }
 
   search() {
