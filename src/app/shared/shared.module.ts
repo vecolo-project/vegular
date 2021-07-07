@@ -6,27 +6,29 @@ import player from 'lottie-web';
 import {ChartsModule} from "ng2-charts";
 import {AddressSearchComponent} from "./address-search/address-search.component";
 import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
+import { UserSearchComponent } from './user-search/user-search.component';
 
 export function playerFactory() {
   return player;
 }
 
 @NgModule({
-  declarations: [AddressSearchComponent, ConfirmDialogComponent],
+  declarations: [AddressSearchComponent, ConfirmDialogComponent, UserSearchComponent],
   imports: [
     CommonModule,
     MaterialModule,
     LottieModule.forRoot({player: playerFactory}),
     ChartsModule
   ],
-  exports: [
-    CommonModule,
-    MaterialModule,
-    LottieModule,
-    ChartsModule,
-    AddressSearchComponent,
-    ConfirmDialogComponent
-  ]
+    exports: [
+        CommonModule,
+        MaterialModule,
+        LottieModule,
+        ChartsModule,
+        AddressSearchComponent,
+        ConfirmDialogComponent,
+        UserSearchComponent
+    ]
 })
 export class SharedModule {
 }

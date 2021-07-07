@@ -73,7 +73,7 @@
                  type="number">
         </mat-form-field>
         <app-address-search
-          initialAdressValue="{{station?.streetNumber}} {{station?.streetName}} {{station?.city.toUpperCase()}} ({{station?.zipcode}})"
+                initialAddressValue="{{station?.streetNumber}} {{station?.streetName}} {{station?.city.toUpperCase()}} ({{station?.zipcode}})"
           (searchEvent)="onAddressInputSearch()"
           (addressSelectEvent)="onSelectAdress($event)"
         ></app-address-search>

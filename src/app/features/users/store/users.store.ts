@@ -1,5 +1,5 @@
 import {EntityState, EntityStore, StoreConfig} from '@datorama/akita';
-import {User} from '../../../shared/models/user.model';
+import {User} from '../../../shared/models';
 import {Injectable} from '@angular/core';
 
 export interface UsersState extends EntityState<User, number> {

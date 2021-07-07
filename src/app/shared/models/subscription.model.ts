@@ -1,7 +1,7 @@
 import {Invoice, Plan, User} from "./index";
 
 export type Subscription = {
-  id: number;
+  id?: number;
   startDate: Date;
   monthDuration: number;
   autoRenew: boolean;

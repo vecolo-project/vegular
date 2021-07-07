@@ -31,7 +31,8 @@ export class UsersComponent implements OnInit {
     this.editUser = this.usersQuery.selectEditUsers$;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   isListMode(): boolean {
     return this.router.isActive('/users', true);
@@ -45,8 +46,8 @@ export class UsersComponent implements OnInit {
     return this.router.isActive('/users/add', true);
   }
 
-  getUsers(limit: number, offset: number): void {
-    this.usersService.getUsers(limit, offset);
+  getUsers(limit: number, offset: number, searchQuery: string): void {
+    this.usersService.getUsers(limit, offset, searchQuery);
   }
 
   deleteUser(userId: number): void {

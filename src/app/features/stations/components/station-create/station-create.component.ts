@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {OsmSearchResponse} from "../../../../shared/models";
-import {Station} from "../../../../shared/models";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {OsmSearchResponse, Station} from '../../../../shared/models';
 
 @Component({
   selector: 'app-station-create',
@@ -25,10 +24,10 @@ export class StationCreateComponent implements OnInit {
       ZIPCODE: ['', [Validators.required]],
       COORDINATE_Y: ['', [Validators.required]],
       COORDINATE_X: ['', [Validators.required]]
-    })
+    });
   }
 
-  onAddressInputSearch() {
+  onAddressInputSearch(): void {
     this.stationForm.controls.STREET_NUMBER.patchValue(null);
     this.stationForm.controls.STREET_NAME.patchValue(null);
     this.stationForm.controls.CITY.patchValue(null);
@@ -37,7 +36,7 @@ export class StationCreateComponent implements OnInit {
     this.stationForm.controls.COORDINATE_X.patchValue(null);
   }
 
-  onSelectAdress(address: OsmSearchResponse) {
+  onSelectAdress(address: OsmSearchResponse): void {
     this.stationForm.controls.STREET_NUMBER.patchValue(address.address.house_number || 0);
     this.stationForm.controls.STREET_NAME.patchValue(address.address.road);
     this.stationForm.controls.CITY.patchValue(address.address.city || address.address.town);
@@ -59,7 +58,7 @@ export class StationCreateComponent implements OnInit {
       zipcode: this.stationForm.value.ZIPCODE,
       coordinateX: this.stationForm.value.COORDINATE_X,
       coordinateY: this.stationForm.value.COORDINATE_Y
-    }
+    };
     this.submit.emit(station);
   }
 
