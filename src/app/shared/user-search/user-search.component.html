@@ -1,0 +1,13 @@
+<mat-form-field class="w-full">
+  <mat-label>Utilisateur</mat-label>
+  <input matInput
+         (input)="search()"
+         [formControl]="inputSearchControl"
+         [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelect($event.option.value)">
+    <mat-option *ngFor="let option of userSearchResults | async" [value]="option">
+      {{option.firstName}} - {{option.lastName}} - {{option.email}}
+    </mat-option>
+  </mat-autocomplete>
+  <mat-hint>Rechercher un utilisateur</mat-hint>
+</mat-form-field>
