@@ -1,5 +1,7 @@
+import { OnChanges } from '@angular/core';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import {
@@ -7,13 +9,14 @@ import {
   BikeModel,
   BikeModelProps,
 } from 'src/app/shared/models';
+import { Snackbar } from 'src/app/shared/snackbar/snakbar';
 
 @Component({
   selector: 'app-bikes-model-form',
   templateUrl: './bikes-model-form.component.html',
   styleUrls: ['./bikes-model-form.component.scss'],
 })
-export class BikesModelFormComponent implements OnInit {
+export class BikesModelFormComponent implements OnInit, OnChanges {
   form: FormGroup;
 
   @Input()
@@ -29,7 +32,7 @@ export class BikesModelFormComponent implements OnInit {
   postModel = new EventEmitter<BikeModelProps>();
 
   @Output()
-  putModel = new EventEmitter<BikeModel>();
+  putModel = new EventEmitter<BikeModelProps>();
 
   @Output()
   retrieveEditModel = new EventEmitter<number>();
@@ -43,7 +46,11 @@ export class BikesModelFormComponent implements OnInit {
   options = [];
   filteredOptions: Observable<BikeManufacturer[]>;
 
-  constructor(private fp: FormBuilder) {
+  constructor(
+    private fp: FormBuilder,
+    private route: ActivatedRoute,
+    private snackBar: Snackbar
+  ) {
     this.form = this.fp.group({
       fieldName: ['', [Validators.required]],
       fieldManufacturer: ['', [Validators.required]],
@@ -64,6 +71,17 @@ export class BikesModelFormComponent implements OnInit {
     } else {
       this.getManufacturers.emit();
     }
+    if (this.editModel && !this.editModel) {
+      setTimeout(() => {
+        const id = Number.parseInt(this.route.snapshot.params.id);
+        this.retrieveEditModel.emit(id);
+      });
+    }
+    if (!this.isEditMode) {
+      this.form.reset();
+    } else {
+      this.patchValues();
+    }
   }
 
   ngOnChanges(): void {
@@ -71,13 +89,40 @@ export class BikesModelFormComponent implements OnInit {
       this.options = this.manufacturers;
       this._setFilters();
     }
+    if (this.isEditMode && this.editModel) {
+      this.patchValues();
+    }
+  }
+
+  private patchValues(): void {
+    this.form.controls.fieldName.patchValue(this.editModel.name);
+    if (this.editModel.bikeManufacturer) {
+      const optionMatchedByBikeManufacturer = this.getSelectedOption(
+        this.editModel.bikeManufacturer
+      );
+      this.form.controls.fieldManufacturer.patchValue(
+        optionMatchedByBikeManufacturer
+      );
+    }
+    this.form.controls.fieldBattery.patchValue(this.editModel.batteryCapacity);
+    this.form.controls.fieldWeight.patchValue(this.editModel.weight);
+    this.form.controls.fieldMaxPower.patchValue(this.editModel.maxPower);
+    this.form.controls.fieldMaxSpeed.patchValue(this.editModel.maxSpeed);
+    this.form.controls.fieldDistance.patchValue(this.editModel.maxDistance);
+    this.form.controls.fieldDescription.patchValue(this.editModel.description);
+  }
+
+  getSelectedOption(bikeManufacturer: BikeManufacturer): string {
+    return this.options.filter(
+      (option) => bikeManufacturer.name === option.name
+    )[0];
   }
 
   displayAutocomplete(manufacturer: BikeManufacturer): string {
     return manufacturer && manufacturer.name ? manufacturer.name : '';
   }
 
-  private _setFilters() {
+  private _setFilters(): void {
     this.filteredOptions =
       this.form.controls.fieldManufacturer.valueChanges.pipe(
         startWith(''),
@@ -96,7 +141,7 @@ export class BikesModelFormComponent implements OnInit {
 
   save(): void {
     const model = {
-      id: null,
+      id: this.editModel && this.editModel.id ? this.editModel.id : null,
       name: this.form.value.fieldName,
       bikeManufacturer: this.form.value.fieldManufacturer.id,
       batteryCapacity: this.form.value.fieldBattery,
@@ -106,7 +151,12 @@ export class BikesModelFormComponent implements OnInit {
       maxDistance: this.form.value.fieldDistance,
       description: this.form.value.fieldDescription,
     };
-    this.postModel.emit(model);
+    if (this.isEditMode && this.editModel) {
+      this.putModel.emit(model);
+    } else {
+      this.postModel.emit(model);
+    }
+    this.snackBar.success('Enregistré');
   }
 
   changeImage(event: any): void {

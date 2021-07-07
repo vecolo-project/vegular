@@ -36,7 +36,7 @@ export class BikesModelListComponent implements OnInit {
     'maxPower',
     'maxSpeed',
     'maxDistance',
-    'description',
+    'action',
   ];
   tableDef: Array<any> = [
     {
@@ -72,8 +72,8 @@ export class BikesModelListComponent implements OnInit {
       header: 'Max distance',
     },
     {
-      key: 'description',
-      header: 'Description',
+      key: 'action',
+      header: 'Action',
     },
   ];
 

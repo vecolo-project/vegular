@@ -10,56 +10,68 @@
 <form [formGroup]="form" action="" class="mb-3">
   <mat-card>
     <mat-form-field class="w-full">
-      <input
-        matInput
-        formControlName="fieldMatricule"
-        placeholder="Matricule"
-        type=" text"
-      />
+      <mat-label>Matricule</mat-label>
+      <input matInput formControlName="fieldMatricule" type=" text" />
       <mat-error>Ce champs et requis</mat-error>
     </mat-form-field>
     <mat-form-field class="w-full">
+      <mat-label>Borne</mat-label>
       <input
         matInput
         formControlName="fieldStation"
-        placeholder="Borne"
+        [matAutocomplete]="autoStation"
         type=" text"
       />
+      <mat-autocomplete
+        #autoStation="matAutocomplete"
+        [displayWith]="displayAutocompleteStation"
+      >
+        <mat-option
+          *ngFor="let option of filteredOptionsStation | async"
+          [value]="option"
+        >
+          {{ option.streetName }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
     <mat-form-field class="w-full">
+      <mat-label>Modèle</mat-label>
       <input
-        matInput
-        formControlName="fieldBattery"
-        placeholder="Batterie percent"
         type=" text"
+        matInput
+        formControlName="fieldModel"
+        [matAutocomplete]="autoModel"
       />
+      <mat-autocomplete
+        #autoModel="matAutocomplete"
+        [displayWith]="displayAutocompleteModel"
+      >
+        <mat-option
+          *ngFor="let option of filteredOptionsModel | async"
+          [value]="option"
+        >
+          {{ option.name }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
     <mat-form-field class="w-full">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="fieldStatus">
+        <mat-option value="OFF">OFF</mat-option>
+        <mat-option value="MAINTAINING">MAINTAINING</mat-option>
+        <mat-option value="IN_RIDE">IN_RIDE</mat-option>
+        <mat-option value="RECHARGING">RECHARGING</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="outline">
       <mat-slide-toggle
         formControlName="fieldRecharging"
         class="example-margin"
       >
         En charge
       </mat-slide-toggle>
-      <!-- SWITCH RECHARGING -->
+      <textarea matInput hidden></textarea>
     </mat-form-field>
-    <mat-form-field class="w-full">
-      <input
-        matInput
-        formControlName="fieldModel"
-        placeholder="Model"
-        type=" text"
-      />
-    </mat-form-field>
-    <mat-form-field class="w-full">
-      <input
-        matInput
-        formControlName="fieldStatus"
-        placeholder="Status"
-        type=" text"
-      />
-    </mat-form-field>
-
     <p class="text-center">
       <button mat-button (click)="save()" class="bg-indigo-500">
         enregister

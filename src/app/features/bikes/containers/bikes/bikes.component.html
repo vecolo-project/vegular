@@ -29,7 +29,18 @@
   [editManufacturer]="editManufacturer | async"
   (retrieveEditManufacturer)="getSingleManufacturer($event)"
 ></app-bikes-manufacturer-form>
-<app-bikes-form *ngIf="isAddBikeForm() || isEditBikeForm()"></app-bikes-form>
+<app-bikes-form
+  *ngIf="isAddBikeForm() || isEditBikeForm()"
+  [isEditBike]="isEditModelForm()"
+  [models]="models | async"
+  (getModels)="getModels()"
+  [stations]="stations | async"
+  (getStations)="getStations()"
+  (postBike)="postBike($event)"
+  (putBike)="putBike($event)"
+  [editBike]="editBike | async"
+  (retrieveEditBike)="getSingleBike($event)"
+></app-bikes-form>
 <app-bikes-model-form
   *ngIf="isAddModelForm() || isEditModelForm()"
   [isEditMode]="isEditModelForm()"
