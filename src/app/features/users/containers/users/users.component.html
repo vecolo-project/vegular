@@ -4,7 +4,7 @@
   [usersCount]="userCount | async"
   [loading]="usersLoading | async"
   [isAdmin]="sessionQuery.isAdmin$ | async"
-  (getUsers)="getUsers($event.limit, $event.offset)"
+  (getUsers)="getUsers($event.limit, $event.offset,$event.searchQuery)"
   (deleteUser)="deleteUser($event)"
   (setEditUser)="setEditUser($event)"
 ></app-user-list>
