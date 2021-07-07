@@ -67,10 +67,10 @@ export class BikeModelService {
     }
   }
 
-  async uploadImage(image: FormData, idModel: number): Promise<void> {
+  async uploadImage(formData: FormData, id: number): Promise<void> {
     await this.http.post(
-      `${API_RESSOURCE_URI.BASE_MODELS}add-image/${idModel}`,
-      image,
+      API_RESSOURCE_URI.BASE_MODELS + 'add-image/' + id,
+      formData,
       {
         'Content-Type': 'multipart/form-data',
       }

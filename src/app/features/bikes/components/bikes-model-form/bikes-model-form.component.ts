@@ -41,7 +41,7 @@ export class BikesModelFormComponent implements OnInit, OnChanges {
   getManufacturers = new EventEmitter();
 
   @Output()
-  uploadModelImage = new EventEmitter();
+  uploadModelImage = new EventEmitter<{ formData: FormData; id: number }>();
 
   options = [];
   filteredOptions: Observable<BikeManufacturer[]>;
@@ -161,10 +161,10 @@ export class BikesModelFormComponent implements OnInit, OnChanges {
     let fileList: FileList = event.target.files;
     if (fileList.length) {
       const file = fileList[0];
+      const id = this.editModel.id;
       const formData = new FormData();
       formData.append('bikeModelImage', file, file.name);
-      formData.append('id', String(this.editModel.id));
-      this.uploadModelImage.emit(formData);
+      this.uploadModelImage.emit({ formData, id });
     }
   }
 }
