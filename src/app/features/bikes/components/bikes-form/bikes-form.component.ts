@@ -124,6 +124,7 @@ export class BikesFormComponent implements OnInit, OnChanges {
   }
 
   displayAutocompleteStation(station: Station): string {
+    console.log(station);
     return station && station.streetName ? station.streetName : '';
   }
 
