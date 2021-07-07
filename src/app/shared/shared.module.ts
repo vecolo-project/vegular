@@ -20,14 +20,15 @@ export function playerFactory() {
     LottieModule.forRoot({player: playerFactory}),
     ChartsModule
   ],
-  exports: [
-    CommonModule,
-    MaterialModule,
-    LottieModule,
-    ChartsModule,
-    AddressSearchComponent,
-    ConfirmDialogComponent
-  ]
+    exports: [
+        CommonModule,
+        MaterialModule,
+        LottieModule,
+        ChartsModule,
+        AddressSearchComponent,
+        ConfirmDialogComponent,
+        UserSearchComponent
+    ]
 })
 export class SharedModule {
 }
