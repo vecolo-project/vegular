@@ -7,6 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -63,7 +64,8 @@ export class BikesFormComponent implements OnInit, OnChanges {
   constructor(
     private fp: FormBuilder,
     private snackBar: Snackbar,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.form = this.fp.group({
       fieldMatricule: ['', [Validators.required]],
@@ -108,6 +110,7 @@ export class BikesFormComponent implements OnInit, OnChanges {
     if (
       this.isEditMode &&
       this.editBike &&
+      this.editBike.station &&
       this.stationOption.length &&
       this.modelOption.length
     ) {
@@ -186,6 +189,7 @@ export class BikesFormComponent implements OnInit, OnChanges {
       this.postBike.emit(bike);
     }
     this.snackBar.success('Enregistré');
+    this.router.navigate(['/bikes']);
   }
 
   displayAutocompleteStation(station: Station): string {
