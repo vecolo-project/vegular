@@ -76,7 +76,7 @@
       />
     </div>
     <img
-      *ngIf="isEditMode"
+      *ngIf="isEditMode && editModel.image"
       [src]="displayImage()"
       class="w-full mb-2"
       alt="vélo"
