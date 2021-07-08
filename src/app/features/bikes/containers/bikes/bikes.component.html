@@ -5,7 +5,6 @@
       [bikesCount]="bikesCount | async"
       [loading]="manufacturerLoading | async"
       (getBikes)="getBikes($event.limit, $event.offset)"
-      (setEditBike)="setEditBike($event)"
       (deleteBike)="deleteBike($event)"
     ></app-bikes-list>
   </mat-tab>

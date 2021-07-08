@@ -38,7 +38,7 @@ export class BikeService {
     this.bikeStore.setLoading(true);
     try {
       const response = await this.http.get<Bike>(
-        API_RESSOURCE_URI.BASE_BIKE + id
+        API_RESSOURCE_URI.BIKE_WITH_STATION_AND_MODEL + id
       );
       this.bikeStore.update({ editBike: response });
     } catch (e) {
@@ -72,7 +72,7 @@ export class BikeService {
     this.bikeStore.setLoading(true);
     try {
       const response = await this.http.put<Bike>(
-        API_RESSOURCE_URI.PUT_MANUFACTURER + id,
+        API_RESSOURCE_URI.BASE_BIKE + id,
         bike
       );
       this.bikeStore.update({ editBike: response });

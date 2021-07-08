@@ -29,9 +29,6 @@ export class BikesListComponent implements OnInit, OnChanges {
   @Output()
   deleteBike = new EventEmitter<number>();
 
-  @Output()
-  setEditBike = new EventEmitter<number>();
-
   displayedColumns = [
     'id',
     'matriculate',

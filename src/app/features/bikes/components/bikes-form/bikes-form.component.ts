@@ -87,14 +87,11 @@ export class BikesFormComponent implements OnInit, OnChanges {
       this.stationOption = this.stations;
       this.setFilterForStation();
     }
-    if (this.isEditMode && !this.editBike) {
+    if (this.isEditMode) {
       setTimeout(() => {
         const id = Number.parseInt(this.route.snapshot.params.id);
         this.retrieveEditBike.emit(id);
       });
-    }
-    if (!this.isEditMode) {
-      this.form.reset();
     }
     this.form.reset();
   }
@@ -108,28 +105,34 @@ export class BikesFormComponent implements OnInit, OnChanges {
       this.stationOption = this.stations;
       this.setFilterForStation();
     }
-    if (this.isEditMode && this.editBike) {
+    if (
+      this.isEditMode &&
+      this.editBike &&
+      this.stationOption.length &&
+      this.modelOption.length
+    ) {
       this.patchValues();
     }
   }
 
   private patchValues(): void {
+    const stationOption = this.getOptionForStation(this.editBike.station);
+    const modelOption = this.getOptionForModel(this.editBike.model);
     this.form.controls.fieldMatricule.patchValue(this.editBike.matriculate);
-    // this.form.controls.fieldStation.patchValue(this.editBike.station);
+    this.form.controls.fieldStation.patchValue(stationOption);
     this.form.controls.fieldRecharging.patchValue(this.editBike.recharging);
-    // this.form.controls.fieldModel.patchValue(this.editBike.matriculate);
+    this.form.controls.fieldModel.patchValue(modelOption);
     this.form.controls.fieldStatus.patchValue(this.editBike.status);
   }
 
-  /********************************
-   * TODO request bike with station and model and get the good option
-   */
   private getOptionForStation(station: Station): string {
-    return '';
+    return this.stationOption.find(
+      (option) => option.streetName === station.streetName
+    );
   }
 
   private getOptionForModel(model: BikeModel): string {
-    return '';
+    return this.modelOption.find((option) => option.name === model.name);
   }
 
   private setFilterForStation(): void {
@@ -175,6 +178,7 @@ export class BikesFormComponent implements OnInit, OnChanges {
     };
     if (this.isEditMode && this.editBike.id) {
       bike['id'] = this.editBike.id;
+      bike['batteryPercent'] = this.editBike.batteryPercent;
     }
     if (this.isEditMode) {
       this.putBike.emit(bike);

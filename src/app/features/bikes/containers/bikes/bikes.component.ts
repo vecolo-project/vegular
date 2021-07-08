@@ -183,8 +183,4 @@ export class BikesComponent implements OnInit {
   deleteBike(id: number): void {
     this.bikeService.deleteBike(id);
   }
-
-  setEditBike(id: number): void {
-    this.bikeQuery.setEditBike(id);
-  }
 }

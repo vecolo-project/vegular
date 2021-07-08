@@ -17,9 +17,9 @@ export type Bike = {
 export type BikeProps = {
   id?: number;
   matriculate: string;
-  station: number; // use of id
+  station: number; // use id
   recharging: boolean;
-  model: number; // use of id
+  model: number; // use id
   status: BikeStatus;
 };
 

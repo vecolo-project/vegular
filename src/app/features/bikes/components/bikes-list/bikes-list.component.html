@@ -13,7 +13,6 @@
           <div *ngIf="def.key === 'action'" class="flex items-center gap-2">
             <button
               [routerLink]="['/bikes/edit/', element.id]"
-              (click)="setEditBike.emit(element.id)"
               mat-button
               class="bg-blue-700 min-w-min px-2"
             >
