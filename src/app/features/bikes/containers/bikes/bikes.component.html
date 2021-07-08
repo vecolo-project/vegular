@@ -40,7 +40,7 @@
 ></app-bikes-manufacturer-form>
 <app-bikes-form
   *ngIf="isAddBikeForm() || isEditBikeForm()"
-  [isEditBike]="isEditModelForm()"
+  [isEditMode]="isEditBikeForm()"
   [models]="models | async"
   (getModels)="getModels()"
   [stations]="stations | async"
@@ -48,7 +48,7 @@
   (postBike)="postBike($event)"
   (putBike)="putBike($event)"
   [editBike]="editBike | async"
-  (retrieveEditBike)="getSingleBike($event)"
+  (retrieveEditBike)="getBike($event)"
 ></app-bikes-form>
 <app-bikes-model-form
   *ngIf="isAddModelForm() || isEditModelForm()"

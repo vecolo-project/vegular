@@ -111,7 +111,7 @@ export class BikesModelFormComponent implements OnInit, OnChanges {
     this.form.controls.fieldDescription.patchValue(this.editModel.description);
   }
 
-  getSelectedOption(bikeManufacturer: BikeManufacturer): string {
+  private getSelectedOption(bikeManufacturer: BikeManufacturer): string {
     return this.options.filter(
       (option) => bikeManufacturer.name === option.name
     )[0];

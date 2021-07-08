@@ -40,9 +40,9 @@ export class BikeService {
       const response = await this.http.get<Bike>(
         API_RESSOURCE_URI.BASE_BIKE + id
       );
-      this.bikeStore.update({ editManufacturer: response });
+      this.bikeStore.update({ editBike: response });
     } catch (e) {
-      this.bikeStore.set({ editManufacturer: null });
+      this.bikeStore.set({ editBike: null });
       this.snackBar.warnning(
         'Erreur lors de la récupération du vélo : ' + e.error.error
       );

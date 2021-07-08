@@ -7,6 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import {
@@ -59,13 +60,17 @@ export class BikesFormComponent implements OnInit, OnChanges {
   modelOption = [];
   filteredOptionsModel: Observable<BikeModel[]>;
 
-  constructor(private fp: FormBuilder, private snackBar: Snackbar) {
+  constructor(
+    private fp: FormBuilder,
+    private snackBar: Snackbar,
+    private route: ActivatedRoute
+  ) {
     this.form = this.fp.group({
       fieldMatricule: ['', [Validators.required]],
       fieldStation: [''],
       fieldRecharging: [''],
       fieldModel: ['', [Validators.required]],
-      fieldStatus: [''],
+      fieldStatus: ['', [Validators.required]],
     });
   }
 
@@ -82,6 +87,15 @@ export class BikesFormComponent implements OnInit, OnChanges {
       this.stationOption = this.stations;
       this.setFilterForStation();
     }
+    if (this.isEditMode && !this.editBike) {
+      setTimeout(() => {
+        const id = Number.parseInt(this.route.snapshot.params.id);
+        this.retrieveEditBike.emit(id);
+      });
+    }
+    if (!this.isEditMode) {
+      this.form.reset();
+    }
     this.form.reset();
   }
 
@@ -94,6 +108,28 @@ export class BikesFormComponent implements OnInit, OnChanges {
       this.stationOption = this.stations;
       this.setFilterForStation();
     }
+    if (this.isEditMode && this.editBike) {
+      this.patchValues();
+    }
+  }
+
+  private patchValues(): void {
+    this.form.controls.fieldMatricule.patchValue(this.editBike.matriculate);
+    // this.form.controls.fieldStation.patchValue(this.editBike.station);
+    this.form.controls.fieldRecharging.patchValue(this.editBike.recharging);
+    // this.form.controls.fieldModel.patchValue(this.editBike.matriculate);
+    this.form.controls.fieldStatus.patchValue(this.editBike.status);
+  }
+
+  /********************************
+   * TODO request bike with station and model and get the good option
+   */
+  private getOptionForStation(station: Station): string {
+    return '';
+  }
+
+  private getOptionForModel(model: BikeModel): string {
+    return '';
   }
 
   private setFilterForStation(): void {
