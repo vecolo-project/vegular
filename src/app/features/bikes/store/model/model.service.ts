@@ -68,7 +68,6 @@ export class BikeModelService {
   }
 
   async uploadImage(formData: FormData, id: number): Promise<void> {
-    formData.forEach((item) => console.log(item));
     try {
       await this.http.upload(
         API_RESSOURCE_URI.BASE_MODELS + 'add-image/' + id,
