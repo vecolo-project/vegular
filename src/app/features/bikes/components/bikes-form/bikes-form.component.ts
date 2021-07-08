@@ -173,7 +173,7 @@ export class BikesFormComponent implements OnInit, OnChanges {
       model: this.form.value.fieldModel.id,
       status: BikeStatus[this.form.value.fieldStatus],
     };
-    if (this.editBike && this.editBike.id) {
+    if (this.isEditMode && this.editBike.id) {
       bike['id'] = this.editBike.id;
     }
     if (this.isEditMode) {
