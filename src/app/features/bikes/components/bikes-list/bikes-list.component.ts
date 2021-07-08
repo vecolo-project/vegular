@@ -34,10 +34,38 @@ export class BikesListComponent implements OnInit, OnChanges {
 
   displayedColumns = [
     'id',
-    'matriculate', // TODO change headers from data to name this matricule (french)
-    'battery percent',
+    'matriculate',
+    'batteryPercent',
     'recharging',
     'status',
+    'action',
+  ];
+
+  tableDef: Array<any> = [
+    {
+      key: 'id',
+      header: 'id',
+    },
+    {
+      key: 'matriculate',
+      header: 'matricule',
+    },
+    {
+      key: 'batteryPercent',
+      header: 'battery percent',
+    },
+    {
+      key: 'recharging',
+      header: 'en charge',
+    },
+    {
+      key: 'status',
+      header: 'status',
+    },
+    {
+      key: 'action',
+      header: 'Action',
+    },
   ];
   constructor() {}
 
