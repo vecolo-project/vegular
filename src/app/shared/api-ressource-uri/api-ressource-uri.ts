@@ -29,6 +29,7 @@ export const API_RESSOURCE_URI = {
   PUT_MANUFACTURER: environment.API_URL + '/bike-manufacturer/',
   // MODELS
   BASE_MODELS: environment.API_URL + '/bike-model/',
+  UPLOAD_IMAGE_MODEL: environment.API_URL + '/uploads/bike-model/',
   // PLAN
   BASE_PLAN: environment.API_URL + '/plan/',
   // SUBSCRIPTION

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { API_RESSOURCE_URI } from 'src/app/shared/api-ressource-uri/api-ressource-uri';
 import {
   BikeManufacturer,
   BikeModel,
@@ -166,6 +167,14 @@ export class BikesModelFormComponent implements OnInit, OnChanges {
       formData.append('bikeModelImage', file, file.name);
       console.log(formData.get('bikeModelImage'));
       this.uploadModelImage.emit({ formData, id });
+    }
+  }
+
+  displayImage() {
+    if (this.editModel.image.includes('http')) {
+      return this.editModel.image;
+    } else {
+      return API_RESSOURCE_URI.UPLOAD_IMAGE_MODEL + this.editModel.image;
     }
   }
 }
