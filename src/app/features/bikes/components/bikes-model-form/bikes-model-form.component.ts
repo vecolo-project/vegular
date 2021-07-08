@@ -164,6 +164,7 @@ export class BikesModelFormComponent implements OnInit, OnChanges {
       const id = this.editModel.id;
       const formData = new FormData();
       formData.append('bikeModelImage', file, file.name);
+      console.log(formData.get('bikeModelImage'));
       this.uploadModelImage.emit({ formData, id });
     }
   }

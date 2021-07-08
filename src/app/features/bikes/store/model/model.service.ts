@@ -68,13 +68,16 @@ export class BikeModelService {
   }
 
   async uploadImage(formData: FormData, id: number): Promise<void> {
-    await this.http.post(
-      API_RESSOURCE_URI.BASE_MODELS + 'add-image/' + id,
-      formData,
-      {
-        'Content-Type': 'multipart/form-data',
-      }
-    );
+    formData.forEach((item) => console.log(item));
+    try {
+      await this.http.upload(
+        API_RESSOURCE_URI.BASE_MODELS + 'add-image/' + id,
+        formData
+      );
+      this.snackBar.success('Le fichier a bien été envoyer');
+    } catch (e) {
+      this.snackBar.warnning(e.error.error);
+    }
   }
 
   async putModel(model: BikeModelProps, id: number): Promise<void> {

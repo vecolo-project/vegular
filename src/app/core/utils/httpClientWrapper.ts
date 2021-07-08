@@ -16,11 +16,17 @@ export class HttpClientWrapper {
 
   async post<T>(
     url: string,
-    body: object,
+    body: any,
     additionalHeader?: { [key: string]: string }
   ): Promise<T> {
     return await this.http
       .post<T>(url, body, await this.getHeaders(additionalHeader))
+      .toPromise();
+  }
+
+  async upload<T>(url: string, body: any): Promise<T> {
+    return await this.http
+      .post<T>(url, body, await this.getHeadersForUpload())
       .toPromise();
   }
 
@@ -34,6 +40,12 @@ export class HttpClientWrapper {
     return await this.http
       .patch<T>(url, body, await this.getHeaders())
       .toPromise();
+  }
+
+  private async getHeadersForUpload(): Promise<object> {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', await this.getAuthToken());
+    return { headers };
   }
 
   private async getHeaders(additionalHeader?: {
