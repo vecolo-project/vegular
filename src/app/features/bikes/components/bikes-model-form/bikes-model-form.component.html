@@ -65,7 +65,7 @@
         placeholder="Description"
       ></textarea>
     </mat-form-field>
-    <div class="w-full mb-3">
+    <div *ngIf="isEditMode" class="w-full mb-3">
       <input
         type="file"
         (change)="changeImage($event)"
@@ -75,7 +75,12 @@
         id="model-image"
       />
     </div>
-
+    <img
+      *ngIf="isEditMode && editModel.image"
+      [src]="displayImage()"
+      class="w-full mb-2"
+      alt="vélo"
+    />
     <p class="text-center">
       <button mat-button (click)="save()" class="bg-indigo-500">
         enregister

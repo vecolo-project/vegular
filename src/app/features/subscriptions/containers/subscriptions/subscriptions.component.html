@@ -43,4 +43,9 @@
                          (deleteSubscription)="onDeleteSubscription($event)"
                          (submit)="onUpdateSubscription($event)"
   ></app-subscription-view>
+  <app-subscription-add *ngIf="isSubscriptionAddMode()"
+                        [plans]="planList | async"
+                        (submit)="onCreateSubscription($event)"
+                        (retrievePlans)="getPlans(100,0)"
+  ></app-subscription-add>
 </div>

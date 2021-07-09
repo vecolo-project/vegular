@@ -17,6 +17,7 @@ export const API_RESSOURCE_URI = {
   STATION_MONITORING: environment.API_URL + '/station-monitoring/',
   //BIKE
   BASE_BIKE: environment.API_URL + '/bike/',
+  BIKE_WITH_STATION_AND_MODEL: environment.API_URL + '/bike/full/',
   BIKE_STATION: environment.API_URL + '/bike/station/',
   //RIDE
   BASE_RIDE: environment.API_URL + '/ride/',
@@ -29,6 +30,7 @@ export const API_RESSOURCE_URI = {
   PUT_MANUFACTURER: environment.API_URL + '/bike-manufacturer/',
   // MODELS
   BASE_MODELS: environment.API_URL + '/bike-model/',
+  UPLOAD_IMAGE_MODEL: environment.API_URL + '/uploads/bike-model/',
   // PLAN
   BASE_PLAN: environment.API_URL + '/plan/',
   // SUBSCRIPTION

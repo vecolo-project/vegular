@@ -33,8 +33,21 @@ export class BikeModelService {
     }
   }
 
-  getModel(id: number): Promise<never> {
-    throw new Error('Method not implemented.');
+  async getModel(id: number): Promise<void> {
+    this.bikeModelStore.setLoading(true);
+    try {
+      const response = await this.http.get<BikeModel>(
+        API_RESSOURCE_URI.BASE_MODELS + id
+      );
+      this.bikeModelStore.update({ editModel: response });
+    } catch (e) {
+      this.bikeModelStore.set({ editModel: null });
+      this.snackBar.warnning(
+        'Erreur lors de la récupération du modèle : ' + e.error.error
+      );
+    } finally {
+      this.bikeModelStore.setLoading(false);
+    }
   }
 
   async postModel(model: BikeModelProps) {
@@ -54,17 +67,47 @@ export class BikeModelService {
     }
   }
 
-  async uploadImage(image: FormData) {
-    await this.http.post(API_RESSOURCE_URI.BASE_MODELS + 'add-image', image, {
-      'Content-Type': 'multipart/form-data',
-    });
+  async uploadImage(formData: FormData, id: number): Promise<void> {
+    try {
+      await this.http.upload(
+        API_RESSOURCE_URI.BASE_MODELS + 'add-image/' + id,
+        formData
+      );
+      this.snackBar.success('Le fichier a bien été envoyer');
+    } catch (e) {
+      this.snackBar.warnning(e.error.error);
+    }
   }
 
-  async putModel(model: BikeModel, id: number): Promise<never> {
-    throw new Error('Method not implemented.');
+  async putModel(model: BikeModelProps, id: number): Promise<void> {
+    this.bikeModelStore.setLoading(true);
+    try {
+      const response = await this.http.put<BikeModel>(
+        API_RESSOURCE_URI.BASE_MODELS + id,
+        model
+      );
+      this.bikeModelStore.update({ editModel: response });
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la modification du modèle : ' + e.error.error
+      );
+    } finally {
+      this.bikeModelStore.setLoading(false);
+    }
   }
 
-  async deleteModel(id: number): Promise<never> {
-    throw new Error('Method not implemented.');
+  async deleteModel(id: number): Promise<void> {
+    this.bikeModelStore.setLoading(true);
+    try {
+      console.log(API_RESSOURCE_URI.BASE_MODELS + id);
+      await this.http.delete(API_RESSOURCE_URI.BASE_MODELS + id);
+      this.bikeModelStore.remove(id);
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la suppression du model : ' + e.error.error
+      );
+    } finally {
+      this.bikeModelStore.setLoading(false);
+    }
   }
 }

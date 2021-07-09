@@ -1,11 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { StationsQuery } from 'src/app/features/stations/store/stations.query';
+import { StationsService } from 'src/app/features/stations/store/stations.service';
 import {
+  Bike,
   BikeManufacturer,
   BikeManufacturerProps,
   BikeModel,
+  BikeModelProps,
+  BikeProps,
+  Station,
 } from 'src/app/shared/models';
+import { BikeQuery } from '../../store/bike/bike.query';
+import { BikeService } from '../../store/bike/bike.service';
 import { BikeManufacturerQuery } from '../../store/manufacturer/manufacturer.query';
 import { BikeManufacturerService } from '../../store/manufacturer/manufacturer.service';
 import { BikeModelQuery } from '../../store/model/model.query';
@@ -27,12 +35,23 @@ export class BikesComponent implements OnInit {
   modelLoading: Observable<boolean>;
   editModel: Observable<BikeModel>;
 
+  bikes: Observable<Bike[]>;
+  bikesCount: Observable<number>;
+  bikeLoading: Observable<boolean>;
+  editBike: Observable<Bike>;
+
+  stations: Observable<Station[]>;
+
   constructor(
     private router: Router,
     private manufacturerService: BikeManufacturerService,
     private manufacturerQuery: BikeManufacturerQuery,
     private bikeModelService: BikeModelService,
-    private bikeModelQuery: BikeModelQuery
+    private bikeModelQuery: BikeModelQuery,
+    private bikeService: BikeService,
+    private bikeQuery: BikeQuery,
+    private stationsQuery: StationsQuery,
+    private stationsService: StationsService
   ) {
     this.manufacturers = this.manufacturerQuery.selectAll();
     this.manufacturersCount = this.manufacturerQuery.selectCount$;
@@ -43,6 +62,13 @@ export class BikesComponent implements OnInit {
     this.modelsCount = this.bikeModelQuery.selectCount$;
     this.modelLoading = this.bikeModelQuery.isLoading$;
     this.editModel = this.bikeModelQuery.selectEditModel$;
+
+    this.bikes = this.bikeQuery.selectAll();
+    this.bikesCount = this.bikeQuery.selectCount$;
+    this.bikeLoading = this.bikeQuery.isLoading$;
+    this.editBike = this.bikeQuery.selectEditBike$;
+
+    this.stations = this.stationsQuery.selectAll();
   }
 
   ngOnInit(): void {}
@@ -110,18 +136,51 @@ export class BikesComponent implements OnInit {
     this.bikeModelService.getModel(id);
   }
 
-  postModel(model: BikeModel): void {
+  postModel(model: BikeModelProps): void {
     delete model.id;
     this.bikeModelService.postModel(model);
   }
 
-  putModel(model: BikeModel): void {
+  putModel(model: BikeModelProps): void {
     const id = model.id;
     delete model.id;
     this.bikeModelService.putModel(model, id);
   }
 
-  uploadModelImage(formData: FormData): void {
-    this.bikeModelService.uploadImage(formData);
+  uploadModelImage(formData: FormData, id: number): void {
+    this.bikeModelService.uploadImage(formData, id);
+  }
+
+  deleteModel(id: number): void {
+    this.bikeModelService.deleteModel(id);
+  }
+
+  setEditModel(id: number): void {
+    this.bikeModelQuery.setEditModel(id);
+  }
+
+  getStations(): void {
+    this.stationsService.getStations(10000, 0);
+  }
+
+  getBikes(limit: number, offset: number): void {
+    this.bikeService.getBikes(limit, offset);
+  }
+
+  getBike(id: number): void {
+    this.bikeService.getBike(id);
+  }
+
+  postBike(bike: BikeProps): void {
+    const bikeWithBatteryPercent = { ...bike, batteryPercent: 100 };
+    this.bikeService.postBike(bikeWithBatteryPercent);
+  }
+
+  putBike(bike: BikeProps): void {
+    this.bikeService.putBike(bike, bike.id);
+  }
+
+  deleteBike(id: number): void {
+    this.bikeService.deleteBike(id);
   }
 }
