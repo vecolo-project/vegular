@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {UsersStore} from './users.store';
 import {HttpClientWrapper} from '../../../core/utils/httpClientWrapper';
 import {Snackbar} from '../../../shared/snackbar/snakbar';
-import {PutUser, RegisterUser, User} from '../../../shared/models/user.model';
+import {PutUser, RegisterUser, User} from '../../../shared/models';
 import {API_RESSOURCE_URI} from '../../../shared/api-ressource-uri/api-ressource-uri';
 import {UsersQuery} from './users.query';
-import {HttpTools} from "../../../shared/http-tools/http-tools";
+import {HttpTools} from '../../../shared/http-tools/http-tools';
 
 @Injectable({providedIn: 'root'})
 export class UsersService {
@@ -44,7 +44,7 @@ export class UsersService {
       this.usersStore.update({editUser: response.user});
     } catch (e) {
       this.snackBar.warnning(
-        "Erreur lors de la récupération de l'utilisateur : " + e.error.error
+        'Erreur lors de la récupération de l\'utilisateur : ' + e.error.error
       );
     } finally {
       this.usersStore.setLoading(false);
@@ -58,7 +58,7 @@ export class UsersService {
       this.usersStore.remove(userId);
     } catch (e) {
       this.snackBar.warnning(
-        "Erreur lors de la suppréssion de l'utilisateur : " + e.error.error
+        'Erreur lors de la suppréssion de l\'utilisateur : ' + e.error.error
       );
     } finally {
       this.usersStore.setLoading(false);
@@ -75,7 +75,7 @@ export class UsersService {
       this.usersStore.update({editUser: response});
     } catch (e) {
       this.snackBar.warnning(
-        "Erreur lors de la modification de l'utilisateur : " + e.error.error
+        'Erreur lors de la modification de l\'utilisateur : ' + e.error.error
       );
     } finally {
       this.usersStore.setLoading(false);
@@ -92,7 +92,7 @@ export class UsersService {
       this.usersStore.update({editUser: response});
     } catch (e) {
       this.snackBar.warnning(
-        "Erreur lors de l'ajout de l'utilisateur : " + e.error.error
+        'Erreur lors de l\'ajout de l\'utilisateur : ' + e.error.error
       );
     } finally {
       this.usersStore.setLoading(false);

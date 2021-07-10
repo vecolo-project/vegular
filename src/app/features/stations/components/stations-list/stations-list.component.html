@@ -2,7 +2,12 @@
   <div class="justify-self-end">
     <button routerLink="/stations/add" mat-raised-button color="primary">Ajouter une station</button>
   </div>
-  <div>
+  <div  class="flex flex-col my-2">
+    <mat-form-field>
+      <mat-label>Rechercher</mat-label>
+      <input [formControl]="searchQuery" type="text" matInput (keydown.enter)="onSearch()"/>
+    </mat-form-field>
+
     <table mat-table [dataSource]="stationList" style="width: 100%">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -44,7 +49,7 @@
       [length]="stationCount"
       [pageSize]="10"
       [pageSizeOptions]="[5, 10, 20]"
-      (page)="getStationsF($event.pageSize, $event.pageIndex * $event.pageSize)"
+      (page)="getStationsF($event.pageIndex, $event.pageSize)"
       showFirstLastButtons
     ></mat-paginator>
   </div>

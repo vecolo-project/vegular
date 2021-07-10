@@ -2,11 +2,10 @@ import {Injectable} from '@angular/core';
 import {StationsStore} from './stations.store';
 import {HttpClientWrapper} from '../../../core/utils/httpClientWrapper';
 import {Snackbar} from '../../../shared/snackbar/snakbar';
-import {Ride, Station, StationMonitoring} from '../../../shared/models';
+import {OsmSearchResponse, Ride, Station, StationMonitoring} from '../../../shared/models';
 import {API_RESSOURCE_URI} from '../../../shared/api-ressource-uri/api-ressource-uri';
-import {HttpTools} from "../../../shared/http-tools/http-tools";
-import {OsmSearchResponse} from "../../../shared/models/osmSearchResponse.model";
-import {RouterNavigation} from "../../../core/router/router.navigation";
+import {HttpTools} from '../../../shared/http-tools/http-tools';
+import {RouterNavigation} from '../../../core/router/router.navigation';
 
 @Injectable({providedIn: 'root'})
 export class StationsService {
@@ -18,12 +17,12 @@ export class StationsService {
   ) {
   }
 
-  async getStations(limit: number, offset: number): Promise<void> {
+  async getStations(limit: number, offset: number, searchQuery?: string): Promise<void> {
     this.stationsStore.setLoading(true);
     this.stationsStore.set([]);
     try {
       const response = await this.http.get<{ stations: Station[], count: number }>(
-        API_RESSOURCE_URI.BASE_STATIONS + `?limit=${limit}&offset=${offset}`
+        API_RESSOURCE_URI.BASE_STATIONS + '?' + HttpTools.ObjectToHttpParams({limit, offset, searchQuery}),
       );
       this.stationsStore.set(response.stations);
       this.stationsStore.update({count: response.count});
@@ -111,7 +110,7 @@ export class StationsService {
 
   async searchAddress(address: string): Promise<void> {
     this.stationsStore.setLoading(true);
-    this.stationsStore.update({addressAutocomplete: []})
+    this.stationsStore.update({addressAutocomplete: []});
     const response = await this.http.get<OsmSearchResponse[]>(API_RESSOURCE_URI.OSM_SEARCH_ADDRESS +
       HttpTools.ObjectToHttpParams({
         q: address,
@@ -151,7 +150,7 @@ export class StationsService {
       response.stationMonitoring = [];
       this.stationsStore.update(station.id, station);
       this.stationsStore.update({viewStation: station});
-      this.snackBar.success("Station mis à jour");
+      this.snackBar.success('Station mis à jour');
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de la mise à jour d\'une station : ' + e.error.error

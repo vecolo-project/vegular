@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BikeModel } from 'src/app/shared/models';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {BikeModel} from 'src/app/shared/models';
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmDialogComponent} from '../../../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-bikes-model-list',
@@ -25,8 +27,6 @@ export class BikesModelListComponent implements OnInit {
   @Output()
   deleteModel = new EventEmitter<number>();
 
-  constructor() {}
-
   displayedColumns = [
     'id',
     'name',
@@ -38,6 +38,7 @@ export class BikesModelListComponent implements OnInit {
     'maxDistance',
     'action',
   ];
+
   tableDef: Array<any> = [
     {
       key: 'id',
@@ -77,7 +78,25 @@ export class BikesModelListComponent implements OnInit {
     },
   ];
 
+  constructor(private dialog: MatDialog) {
+  }
+
   ngOnInit(): void {
     setTimeout(() => this.getModels.emit());
   }
+
+  onDelete(id: number): void {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Suppression d\'un modèle de vélo',
+        message: 'Êtes vous sûr de vouloir supprimer ce modèle de vélo ?'
+      }
+    });
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.deleteModel.emit(id);
+      }
+    });
+  }
+
 }

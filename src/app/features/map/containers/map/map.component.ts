@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Station} from "../../../../shared/models";
-import {Observable} from "rxjs";
-import {StationsQuery} from "../../../stations/store/stations.query";
-import {StationsService} from "../../../stations/store/stations.service";
+import {Station} from '../../../../shared/models';
+import {Observable} from 'rxjs';
+import {StationsQuery} from '../../../stations/store/stations.query';
+import {StationsService} from '../../../stations/store/stations.service';
 
 @Component({
   selector: 'app-map',
@@ -11,7 +11,7 @@ import {StationsService} from "../../../stations/store/stations.service";
 })
 export class MapComponent implements OnInit {
 
-  stations: Observable<Station[]>
+  stations: Observable<Station[]>;
 
   constructor(private stationsService: StationsService,
               private stationsQuery: StationsQuery) {
@@ -19,7 +19,7 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.stationsService.getStations(100, 0);
+    this.stationsService.getStations(300, 0);
   }
 
 }

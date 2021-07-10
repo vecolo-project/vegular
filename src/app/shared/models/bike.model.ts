@@ -1,17 +1,17 @@
 import { BikeMaintenanceThread, BikeModel, Ride, Station } from '.';
 
 export type Bike = {
-  id: number;
+  id?: number;
   matriculate: string;
-  station: Station;
+  station?: Station;
   batteryPercent: number;
   recharging: boolean;
   model: BikeModel;
   status: BikeStatus;
-  ride: Ride[];
-  bikeMaintenanceThread: BikeMaintenanceThread[];
-  updatedAt: Date;
-  createdAt: Date;
+  ride?: Ride[];
+  bikeMaintenanceThread?: BikeMaintenanceThread[];
+  updatedAt?: Date;
+  createdAt?: Date;
 };
 
 export type BikeProps = {

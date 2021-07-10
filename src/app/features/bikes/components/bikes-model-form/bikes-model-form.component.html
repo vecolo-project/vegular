@@ -14,49 +14,39 @@
         matInput
         formControlName="fieldName"
         placeholder="Nom"
-        type=" text"
+        type="text"
       />
       <mat-error>Ce champs et requis</mat-error>
     </mat-form-field>
     <mat-form-field class="w-full">
-      <mat-label>Assignee</mat-label>
-      <input
-        type="text"
-        matInput
-        formControlName="fieldManufacturer"
-        [matAutocomplete]="auto"
-      />
-      <mat-autocomplete
-        #auto="matAutocomplete"
-        [displayWith]="displayAutocomplete"
-      >
-        <mat-option
-          *ngFor="let option of filteredOptions | async"
-          [value]="option"
-        >
+      <mat-label>Fabriquant</mat-label>
+      <mat-select formControlName="fieldManufacturer">
+        <mat-option *ngFor="let option of filteredOptions | async"
+                    [value]="option">
           {{ option.name }}
         </mat-option>
-      </mat-autocomplete>
+      </mat-select>
+
     </mat-form-field>
     <mat-form-field class="w-full">
-      <mat-label>Batterie capacity</mat-label>
-      <input matInput min="0" formControlName="fieldBattery" type=" number" />
+      <mat-label>Capacité Batterie</mat-label>
+      <input matInput min="0" formControlName="fieldBattery" type="number" step="1"/>
     </mat-form-field>
     <mat-form-field class="w-full">
       <mat-label>Poids</mat-label>
-      <input matInput min="0" formControlName="fieldWeight" type=" number" />
+      <input matInput min="0" formControlName="fieldWeight" type="number" step="0.5"/>
     </mat-form-field>
     <mat-form-field class="w-full">
-      <mat-label>Max Power</mat-label>
-      <input matInput min="0" formControlName="fieldMaxPower" type=" number" />
+      <mat-label>Puissance Maximale</mat-label>
+      <input matInput min="0" formControlName="fieldMaxPower" type="number" step="0.5"/>
     </mat-form-field>
     <mat-form-field class="w-full">
       <mat-label>Vitesse maximal</mat-label>
-      <input matInput min="0" formControlName="fieldMaxSpeed" type=" number" />
+      <input matInput min="0" formControlName="fieldMaxSpeed" type="number" step="1"/>
     </mat-form-field>
     <mat-form-field class="w-full">
       <mat-label>Distance maximal</mat-label>
-      <input matInput min="0" formControlName="fieldDistance" type=" number" />
+      <input matInput min="0" formControlName="fieldDistance" type="number" step="1"/>
     </mat-form-field>
     <mat-form-field class="w-full">
       <textarea
@@ -76,14 +66,14 @@
       />
     </div>
     <img
-      *ngIf="isEditMode && editModel.image"
+      *ngIf="isEditMode && editModel?.image"
       [src]="displayImage()"
       class="w-full mb-2"
       alt="vélo"
     />
     <p class="text-center">
-      <button mat-button (click)="save()" class="bg-indigo-500">
-        enregister
+      <button mat-button [disabled]="form.invalid" (click)="save()" class="bg-indigo-500">
+        Enregister
       </button>
     </p>
   </mat-card>
