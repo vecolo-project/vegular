@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Station} from '../../../../shared/models';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-stations-list',
@@ -15,7 +16,7 @@ export class StationsListComponent implements OnInit {
   stationCount: number;
 
   @Output()
-  getSations = new EventEmitter<{ limit: number, offset: number }>();
+  getSations = new EventEmitter<{ limit: number, offset: number, searchQuery?: string }>();
 
   @Output()
   viewStation = new EventEmitter<number>();
@@ -28,20 +29,34 @@ export class StationsListComponent implements OnInit {
     'bikes'
   ];
 
+  pageIndex: number;
+  pageSize: number;
+  searchQuery: FormControl;
+
+
   constructor() {
+    this.searchQuery = new FormControl('');
   }
 
   ngOnInit(): void {
-    this.getStationsF(10, 0);
+    this.getStationsF(  0, 10);
   }
 
   onViewStation(station: Station): void {
     this.viewStation.emit(station.id);
   }
 
-  getStationsF(limit: number, offset: number): void {
+  onSearch(): void {
+    this.pageIndex = 0;
+    this.getStationsF(this.pageIndex, this.pageSize);
+  }
+
+
+  getStationsF(pageIndex: number, pageSize: number): void {
+    this.pageIndex = pageIndex;
+    this.pageSize = pageSize;
     setTimeout(() => {
-      this.getSations.emit({limit, offset});
+      this.getSations.emit({limit: this.pageSize, offset: this.pageIndex * this.pageSize, searchQuery: this.searchQuery.value});
     });
   }
 }

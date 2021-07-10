@@ -3,7 +3,7 @@
                      [stationList]="stationList | async"
                      [stationCount]="stationCount | async"
                      (viewStation)="onViewStation($event)"
-                     (getSations)="this.getStations($event.limit,$event.offset)"
+                     (getSations)="this.getStations($event.limit,$event.offset,$event.searchQuery)"
   ></app-stations-list>
 
   <app-stations-view *ngIf="isViewMode()"
