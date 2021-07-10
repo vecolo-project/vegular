@@ -31,7 +31,7 @@
           </button>
           <button
             *ngIf="isAdmin"
-            (click)="deleteUser.emit(element.id)"
+            (click)="onDelete(element.id)"
             mat-button
             class="bg-red-700 min-w-min px-2"
           >
@@ -49,7 +49,7 @@
     [pageSize]="pageSize"
     [pageIndex]="pageIndex"
     [pageSizeOptions]="[5, 10, 20]"
-    (page)="getUsersF()"
+    (page)="getUsersF($event.pageIndex,$event.pageSize)"
     showFirstLastButtons
   ></mat-paginator>
 </div>
