@@ -1,12 +1,7 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  OnChanges,
-  Output,
-} from '@angular/core';
-import { Bike } from 'src/app/shared/models';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output,} from '@angular/core';
+import {Bike} from 'src/app/shared/models';
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmDialogComponent} from '../../../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-bikes-list',
@@ -64,15 +59,32 @@ export class BikesListComponent implements OnInit, OnChanges {
       header: 'Action',
     },
   ];
-  constructor() {}
+
+  constructor(private dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.getUsersWithPagination(10, 0);
   }
 
-  ngOnChanges(): void {}
+  ngOnChanges(): void {
+  }
 
-  getUsersWithPagination(limit: number, offset: number) {
-    setTimeout(() => this.getBikes.emit({ limit, offset }));
+  getUsersWithPagination(limit: number, offset: number): void {
+    setTimeout(() => this.getBikes.emit({limit, offset}));
+  }
+
+  onDelete(id: number): void {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Suppression d\'un vélo',
+        message: 'Êtes vous sûr de vouloir supprimer ce vélo ?'
+      }
+    });
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.deleteBike.emit(id);
+      }
+    });
   }
 }
