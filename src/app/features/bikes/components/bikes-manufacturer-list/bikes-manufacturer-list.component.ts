@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BikeManufacturer} from 'src/app/shared/models';
+import {ConfirmDialogComponent} from '../../../../shared/confirm-dialog/confirm-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-bikes-manufacturer-list',
@@ -25,12 +27,29 @@ export class BikesManufacturerListComponent implements OnInit {
   @Output()
   setEditManufacturer = new EventEmitter<number>();
 
-  displayedColumns = ['id', 'name', 'phone', 'address', 'actions'];
-  constructor() {}
+  displayedColumns = ['id', 'name', 'phone', 'address', 'action'];
+
+  constructor(private dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     setTimeout(() => {
       this.getManufacturers.emit();
     });
   }
+
+  onDelete(id: number): void {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Suppression d\'un constructeur de vélo',
+        message: 'Êtes vous sûr de vouloir supprimer ce constructeur ?'
+      }
+    });
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.deleteManufacturer.emit(id);
+      }
+    });
+  }
+
 }
