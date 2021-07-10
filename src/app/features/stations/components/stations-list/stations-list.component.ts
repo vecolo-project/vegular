@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Station} from "../../../../shared/models";
+import {Station} from '../../../../shared/models';
 
 @Component({
   selector: 'app-stations-list',
@@ -15,7 +15,7 @@ export class StationsListComponent implements OnInit {
   stationCount: number;
 
   @Output()
-  getSations = new EventEmitter<{ limit: number, offset: number }>()
+  getSations = new EventEmitter<{ limit: number, offset: number }>();
 
   @Output()
   viewStation = new EventEmitter<number>();
@@ -26,16 +26,16 @@ export class StationsListComponent implements OnInit {
     'status',
     'battery',
     'bikes'
-]
+  ];
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.getStationsF(10,0)
+    this.getStationsF(10, 0);
   }
 
-  onViewStation(station: Station) {
+  onViewStation(station: Station): void {
     this.viewStation.emit(station.id);
   }
 
