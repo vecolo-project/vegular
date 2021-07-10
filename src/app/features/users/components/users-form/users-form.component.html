@@ -49,8 +49,9 @@
         type="password"
       />
       <mat-error
-        >Ce champs doit faire au moins 7 characters et correspondre a la
-        confirmation</mat-error
+      >Ce champs doit faire au moins 7 characters et correspondre a la
+        confirmation
+      </mat-error
       >
     </mat-form-field>
     <mat-form-field class="w-full">
@@ -81,10 +82,11 @@
     <p class="text-center">
       <button
         mat-button
+        [disabled]="form.invalid"
         (click)="save()"
         class="bg-indigo-500"
       >
-        enregister
+        Enregistrer
       </button>
     </p>
   </mat-card>

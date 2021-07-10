@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output,} from '@angular/core';
-import {FormBuilder, FormGroup, Validators,} from '@angular/forms';
+import {Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User, UserFormData} from 'src/app/shared/models/user.model';
 import {ActivatedRoute} from '@angular/router';
-import {PasswordValidator} from 'src/app/shared/validator/password';
 import {FormStatus} from 'src/app/shared/form/FormStatus';
 import {format} from 'date-fns';
 import {Snackbar} from 'src/app/shared/snackbar/snakbar';
+import {matchPassword} from '../../../../shared/validator/password';
 
 @Component({
   selector: 'app-users-form',
@@ -30,8 +30,8 @@ export class UsersFormComponent implements OnInit, OnChanges {
   @Output()
   public putUser = new EventEmitter<UserFormData>();
 
-  constructor(private fp: FormBuilder, private route: ActivatedRoute, private snackBar: Snackbar) {
-    this.form = this.fp.group(
+  constructor(@Inject(FormBuilder) fb, private route: ActivatedRoute, private snackBar: Snackbar) {
+    this.form = fb.group(
       {
         fieldEmail: ['', [Validators.required, Validators.email]],
         fieldFirstName: ['', [Validators.required]],
@@ -43,7 +43,9 @@ export class UsersFormComponent implements OnInit, OnChanges {
         fieldRole: ['', [Validators.required]],
         fieldNewsletter: ['', [Validators.required]],
       },
-      { validators: PasswordValidator.confirmPasswordValidator }
+      {
+        validator: matchPassword('fieldPassword', 'fieldConfirmPassword')
+      }
     );
   }
 
@@ -87,12 +89,12 @@ export class UsersFormComponent implements OnInit, OnChanges {
       firstName: String(this.form.value.fieldFirstName),
       lastName: String(this.form.value.fieldLastName),
       password: String(this.form.value.fieldPassword),
-      birthDate: format(birthDate, "yyyy-LL-dd"),
+      birthDate: format(birthDate, 'yyyy-LL-dd'),
       pseudo: String(this.form.value.fieldPseudo),
       role: String(this.form.value.fieldRole),
       newsletter: String(this.form.value.fieldNewsletter),
       isActive: 'true',
-    }
+    };
 
     if (this.isAddMode && this.form.status === FormStatus.VALID) {
       this.saveForAdd(user);
