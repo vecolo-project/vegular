@@ -6,7 +6,8 @@
          [matAutocomplete]="auto">
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectAdress($event.option.value)">
     <mat-option *ngFor="let option of addressSearchResults | async" [value]="option">
-      {{option.address.house_number}} {{option.address.road}} - {{option.address.city || option.address.town}} ({{option.address.postcode}})
+      {{option.address.house_number}} {{option.address.road}} - {{option.address.city || option.address.town}}
+      ({{option.address.postcode}})
     </mat-option>
   </mat-autocomplete>
   <mat-hint>Rechercher une adresse</mat-hint>

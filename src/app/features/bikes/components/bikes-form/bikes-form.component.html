@@ -14,31 +14,17 @@
       <input matInput formControlName="fieldMatricule" type="text"/>
       <mat-error>Ce champs et requis</mat-error>
     </mat-form-field>
-    <mat-form-field class="w-full">
-      <mat-label>Borne</mat-label>
-      <input
-        matInput
-        formControlName="fieldStation"
-        [matAutocomplete]="autoStation"
-        type="text"
-      />
-      <mat-autocomplete
-        #autoStation="matAutocomplete"
-        [displayWith]="displayAutocompleteStation"
-      >
-        <mat-option
-          *ngFor="let option of filteredOptionsStation | async"
-          [value]="option"
-        >
-          {{ option.streetName }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+
+    <app-station-search
+      [initialValue]="isEditMode? editBike?.station : null"
+      (searchEvent)="onStationSearch()"
+      (stationSelectEvent)="onStationSelect($event)"
+    ></app-station-search>
     <mat-form-field class="w-full">
       <mat-label>Modèle</mat-label>
 
       <mat-select formControlName="fieldModel">
-        <mat-option *ngFor="let option of filteredOptionsModel | async"
+        <mat-option *ngFor="let option of models"
                     [value]="option">
           {{ option.name }}
         </mat-option>
