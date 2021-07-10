@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output,} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {Bike} from 'src/app/shared/models';
 import {MatDialog} from '@angular/material/dialog';
 import {ConfirmDialogComponent} from '../../../../shared/confirm-dialog/confirm-dialog.component';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-bikes-list',
@@ -19,7 +20,7 @@ export class BikesListComponent implements OnInit, OnChanges {
   loading: boolean;
 
   @Output()
-  getBikes = new EventEmitter();
+  getBikes = new EventEmitter<{ limit: number; offset: number, searchQuery: string }>();
 
   @Output()
   deleteBike = new EventEmitter<number>();
@@ -33,46 +34,37 @@ export class BikesListComponent implements OnInit, OnChanges {
     'action',
   ];
 
-  tableDef: Array<any> = [
-    {
-      key: 'id',
-      header: 'id',
-    },
-    {
-      key: 'matriculate',
-      header: 'matricule',
-    },
-    {
-      key: 'batteryPercent',
-      header: 'battery percent',
-    },
-    {
-      key: 'recharging',
-      header: 'en charge',
-    },
-    {
-      key: 'status',
-      header: 'status',
-    },
-    {
-      key: 'action',
-      header: 'Action',
-    },
-  ];
+  pageIndex: number;
+  pageSize: number;
+  searchQuery: FormControl;
 
   constructor(private dialog: MatDialog) {
+    this.searchQuery = new FormControl('');
   }
 
   ngOnInit(): void {
-    this.getUsersWithPagination(10, 0);
+    this.getBikesF(0, 10);
   }
 
   ngOnChanges(): void {
   }
 
-  getUsersWithPagination(limit: number, offset: number): void {
-    setTimeout(() => this.getBikes.emit({limit, offset}));
+  getBikesF(pageIndex: number, pageSize: number): void {
+    this.pageIndex = pageIndex;
+    this.pageSize = pageSize;
+
+    setTimeout(() => this.getBikes.emit({
+      limit: this.pageSize,
+      offset: this.pageIndex * this.pageSize,
+      searchQuery: this.searchQuery.value
+    }));
   }
+
+  onSearch(): void {
+    this.pageIndex = 0;
+    this.getBikesF(this.pageIndex, this.pageSize);
+  }
+
 
   onDelete(id: number): void {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {

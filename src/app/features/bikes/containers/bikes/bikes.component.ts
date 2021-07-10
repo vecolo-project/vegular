@@ -1,23 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { StationsQuery } from 'src/app/features/stations/store/stations.query';
-import { StationsService } from 'src/app/features/stations/store/stations.service';
-import {
-  Bike,
-  BikeManufacturer,
-  BikeManufacturerProps,
-  BikeModel,
-  BikeModelProps,
-  BikeProps,
-  Station,
-} from 'src/app/shared/models';
-import { BikeQuery } from '../../store/bike/bike.query';
-import { BikeService } from '../../store/bike/bike.service';
-import { BikeManufacturerQuery } from '../../store/manufacturer/manufacturer.query';
-import { BikeManufacturerService } from '../../store/manufacturer/manufacturer.service';
-import { BikeModelQuery } from '../../store/model/model.query';
-import { BikeModelService } from '../../store/model/model.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {StationsQuery} from 'src/app/features/stations/store/stations.query';
+import {StationsService} from 'src/app/features/stations/store/stations.service';
+import {Bike, BikeManufacturer, BikeManufacturerProps, BikeModel, BikeModelProps, BikeProps, Station,} from 'src/app/shared/models';
+import {BikeQuery} from '../../store/bike/bike.query';
+import {BikeService} from '../../store/bike/bike.service';
+import {BikeManufacturerQuery} from '../../store/manufacturer/manufacturer.query';
+import {BikeManufacturerService} from '../../store/manufacturer/manufacturer.service';
+import {BikeModelQuery} from '../../store/model/model.query';
+import {BikeModelService} from '../../store/model/model.service';
 
 @Component({
   selector: 'app-bikes',
@@ -71,7 +63,8 @@ export class BikesComponent implements OnInit {
     this.stations = this.stationsQuery.selectAll();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   isRoot(): boolean {
     return this.router.isActive('bikes', true);
@@ -163,8 +156,8 @@ export class BikesComponent implements OnInit {
     this.stationsService.getStations(10000, 0);
   }
 
-  getBikes(limit: number, offset: number): void {
-    this.bikeService.getBikes(limit, offset);
+  getBikes(limit: number, offset: number, searchQuery?: string): void {
+    this.bikeService.getBikes(limit, offset, searchQuery);
   }
 
   getBike(id: number): void {
@@ -172,7 +165,7 @@ export class BikesComponent implements OnInit {
   }
 
   postBike(bike: BikeProps): void {
-    const bikeWithBatteryPercent = { ...bike, batteryPercent: 100 };
+    const bikeWithBatteryPercent = {...bike, batteryPercent: 100};
     this.bikeService.postBike(bikeWithBatteryPercent);
   }
 
