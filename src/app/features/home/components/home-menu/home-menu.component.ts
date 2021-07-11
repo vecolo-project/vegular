@@ -9,7 +9,7 @@ export class HomeMenuComponent implements OnInit {
   constructor() {}
 
   @Output()
-  goToContainer = new EventEmitter<void>();
+  goToContact = new EventEmitter<void>();
 
   ngOnInit(): void {
     const menuDesktop = document.querySelector('.menu');

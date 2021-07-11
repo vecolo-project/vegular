@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
       el: document.querySelector('[data-scroll-container]'),
       smooth: true,
       direction: 'horizontal',
+      getDirection: true,
     });
   }
 
