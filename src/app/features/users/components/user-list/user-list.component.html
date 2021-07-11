@@ -9,7 +9,7 @@
     <mat-label>Rechercher</mat-label>
     <input [formControl]="searchQuery" type="text" matInput (keydown.enter)="onSearch()"/>
   </mat-form-field>
-  <mat-spinner *ngIf="loading"></mat-spinner>
+  <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
   <table mat-table [dataSource]="userListArray" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -48,6 +48,14 @@
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let element">
         <div class="flex items-center gap-2">
+          <button
+            (click)="onViewUser(element)"
+            mat-button
+            class="bg-green-700 min-w-min px-2"
+          >
+            <mat-icon>visibility</mat-icon>
+          </button>
+
           <button
             [routerLink]="['/users/edit/', element.id]"
             (click)="setEditUser.emit(element.id)"

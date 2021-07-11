@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {User, UserFormData} from '../../../../shared/models/user.model';
+import {User, UserFormData} from '../../../../shared/models';
 import {UsersQuery} from '../../store/users.query';
 import {UsersService} from '../../store/users.service';
 import {SessionQuery} from '../../../../core/store/session.query';
 import {ActivatedRoute, Router} from '@angular/router';
-import {buildPostUserFromUserFormData, buildPutUserFromUserFormData,} from '../../userTypeAdapter';
+import {buildPostUserFromUserFormData, buildPutUserFromUserFormData} from '../../userTypeAdapter';
+import {RouterNavigation} from '../../../../core/router/router.navigation';
 
 @Component({
   selector: 'app-user',
@@ -23,7 +24,8 @@ export class UsersComponent implements OnInit {
     private usersService: UsersService,
     public sessionQuery: SessionQuery,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private routerNavigation: RouterNavigation
   ) {
     this.users = this.usersQuery.selectAll();
     this.userCount = this.usersQuery.selectCount$;
@@ -32,6 +34,10 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.isViewMode()) {
+      const userId = Number.parseInt(this.route.snapshot.params.id, 10);
+      this.usersService.retrieveEditUser(userId);
+    }
   }
 
   isListMode(): boolean {
@@ -40,6 +46,10 @@ export class UsersComponent implements OnInit {
 
   isEditMode(): boolean {
     return this.router.isActive('/users/edit', false);
+  }
+
+  isViewMode(): boolean {
+    return this.router.isActive('/users/view', false);
   }
 
   isAddMode(): boolean {
@@ -69,8 +79,13 @@ export class UsersComponent implements OnInit {
     this.usersService.putUser(putUser, id);
   }
 
-  postUser(user: UserFormData) {
+  postUser(user: UserFormData): void {
     const postUser = buildPostUserFromUserFormData(user);
     this.usersService.postUser(postUser);
+  }
+
+  onViewUser(userId: number): void {
+    this.usersQuery.setEditUser(userId);
+    this.routerNavigation.gotoUserView(userId);
   }
 }

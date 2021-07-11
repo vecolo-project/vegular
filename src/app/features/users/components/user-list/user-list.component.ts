@@ -31,6 +31,9 @@ export class UserListComponent implements OnInit {
   @Output()
   setEditUser = new EventEmitter<number>();
 
+  @Output()
+  viewUser = new EventEmitter<number>();
+
   displayedColumns = [
     'id',
     'firstName',
@@ -77,6 +80,10 @@ export class UserListComponent implements OnInit {
         this.deleteUser.emit(id);
       }
     });
+  }
+
+  onViewUser(user: User): void {
+    this.viewUser.emit(user.id);
   }
 
 }

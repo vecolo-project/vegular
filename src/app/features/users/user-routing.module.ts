@@ -5,6 +5,7 @@ import {UsersComponent} from './containers/users/users.component';
 const usersRoutes: Routes = [
   { path: '', component: UsersComponent },
   { path: 'edit/:id', component: UsersComponent },
+  { path: 'view/:id', component: UsersComponent },
   { path: 'add', component: UsersComponent },
 ];
 

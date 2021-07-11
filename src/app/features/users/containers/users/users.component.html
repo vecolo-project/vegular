@@ -7,6 +7,7 @@
   (getUsers)="getUsers($event.limit, $event.offset,$event.searchQuery)"
   (deleteUser)="deleteUser($event)"
   (setEditUser)="setEditUser($event)"
+  (viewUser)="onViewUser($event)"
 ></app-user-list>
 <app-users-form
   *ngIf="isEditMode() || isAddMode()"
@@ -16,3 +17,6 @@
   (postUser)="postUser($event)"
   [isAddMode]="isAddMode()"
 ></app-users-form>
+<app-user-view *ngIf="isViewMode()"
+               [user]="editUser | async"
+></app-user-view>
