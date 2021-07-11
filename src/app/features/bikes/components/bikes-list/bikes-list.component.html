@@ -40,6 +40,12 @@
         {{element.status}}
       </td>
     </ng-container>
+    <ng-container matColumnDef="model">
+      <th mat-header-cell *matHeaderCellDef>Modèle</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.model?.name}} - {{element.model?.bikeManufacturer?.name}}
+      </td>
+    </ng-container>
 
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Action</th>

@@ -34,6 +34,7 @@ export class BikesListComponent implements OnInit, OnChanges {
     'batteryPercent',
     'recharging',
     'status',
+    'model',
     'action',
   ];
 
