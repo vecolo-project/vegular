@@ -38,10 +38,10 @@ export class UsersService {
   async retrieveEditUser(id: number): Promise<void> {
     this.usersStore.setLoading(true);
     try {
-      const response = await this.http.get<{ user: User }>(
-        API_RESSOURCE_URI.GET_CURRENT_USER
+      const response = await this.http.get<User>(
+        API_RESSOURCE_URI.GET_USERS + id
       );
-      this.usersStore.update({editUser: response.user});
+      this.usersStore.update({editUser: response});
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de la récupération de l\'utilisateur : ' + e.error.error
@@ -65,7 +65,7 @@ export class UsersService {
     }
   }
 
-  async putUser(user: PutUser, id: number) {
+  async putUser(user: PutUser, id: number): Promise<void> {
     this.usersStore.setLoading(true);
     try {
       const response = await this.http.put<User>(
@@ -82,7 +82,7 @@ export class UsersService {
     }
   }
 
-  async postUser(user: RegisterUser) {
+  async postUser(user: RegisterUser): Promise<void> {
     this.usersStore.setLoading(true);
     try {
       const response = await this.http.post<User>(
