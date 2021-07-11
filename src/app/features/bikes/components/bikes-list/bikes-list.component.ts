@@ -25,6 +25,9 @@ export class BikesListComponent implements OnInit, OnChanges {
   @Output()
   deleteBike = new EventEmitter<number>();
 
+  @Output()
+  viewBike = new EventEmitter<number>();
+
   displayedColumns = [
     'id',
     'matriculate',
@@ -63,6 +66,10 @@ export class BikesListComponent implements OnInit, OnChanges {
   onSearch(): void {
     this.pageIndex = 0;
     this.getBikesF(this.pageIndex, this.pageSize);
+  }
+
+  onViewBike(bike: Bike): void {
+    this.viewBike.emit(bike.id);
   }
 
 

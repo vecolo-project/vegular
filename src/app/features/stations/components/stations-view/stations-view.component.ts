@@ -115,7 +115,10 @@ export class StationsViewComponent implements OnInit {
           this.getStation.emit(this.station?.id);
         }
       });
-    timer(2000)
+    const today = new Date();
+    this.dateRange.controls.start.patchValue(subDays(today, 3));
+    this.dateRange.controls.end.patchValue(today);
+    timer(500)
       .subscribe(() => {
         this.retrieveMonitoring();
         this.onGetBikes(10, 0);
@@ -139,7 +142,7 @@ export class StationsViewComponent implements OnInit {
 
   onViewBike(bike: Bike): void {
     if (this.isStaff) {
-      this.routerNavigation.gotoBikeEdit(bike.id);
+      this.routerNavigation.gotoBikeView(bike.id);
     }
   }
 

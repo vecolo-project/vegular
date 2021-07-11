@@ -2,7 +2,8 @@
   <mat-card-header>
     <mat-card-title>Ajouter un abonnement</mat-card-title>
   </mat-card-header>
-  <mat-card-content>
+  <mat-card-content class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+    <ng-lottie [options]="lottieMoneyOptions"></ng-lottie>
     <form [formGroup]="subscriptionForm">
       <mat-form-field class="w-full" appearance="outline">
         <mat-label>Forfait</mat-label>

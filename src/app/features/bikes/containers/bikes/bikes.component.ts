@@ -1,15 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {StationsQuery} from 'src/app/features/stations/store/stations.query';
-import {StationsService} from 'src/app/features/stations/store/stations.service';
-import {Bike, BikeManufacturer, BikeManufacturerProps, BikeModel, BikeModelProps, BikeProps, Station,} from 'src/app/shared/models';
+import {Bike, BikeManufacturer, BikeManufacturerProps, BikeModel, BikeModelProps, BikeProps, Station} from 'src/app/shared/models';
 import {BikeQuery} from '../../store/bike/bike.query';
 import {BikeService} from '../../store/bike/bike.service';
 import {BikeManufacturerQuery} from '../../store/manufacturer/manufacturer.query';
 import {BikeManufacturerService} from '../../store/manufacturer/manufacturer.service';
 import {BikeModelQuery} from '../../store/model/model.query';
 import {BikeModelService} from '../../store/model/model.service';
+import {RouterNavigation} from '../../../../core/router/router.navigation';
+import {SessionQuery} from '../../../../core/store/session.query';
 
 @Component({
   selector: 'app-bikes',
@@ -36,6 +37,7 @@ export class BikesComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private manufacturerService: BikeManufacturerService,
     private manufacturerQuery: BikeManufacturerQuery,
     private bikeModelService: BikeModelService,
@@ -43,7 +45,8 @@ export class BikesComponent implements OnInit {
     private bikeService: BikeService,
     private bikeQuery: BikeQuery,
     private stationsQuery: StationsQuery,
-    private stationsService: StationsService
+    public sessionQuery: SessionQuery,
+    private routerNavigation: RouterNavigation
   ) {
     this.manufacturers = this.manufacturerQuery.selectAll();
     this.manufacturersCount = this.manufacturerQuery.selectCount$;
@@ -64,6 +67,10 @@ export class BikesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.isViewBike()) {
+      const bikeId = Number.parseInt(this.route.snapshot.params.id, 10);
+      this.bikeService.getBike(bikeId);
+    }
   }
 
   isRoot(): boolean {
@@ -92,6 +99,10 @@ export class BikesComponent implements OnInit {
 
   isEditBikeForm(): boolean {
     return this.router.isActive('bikes/edit', false);
+  }
+
+  isViewBike(): boolean {
+    return this.router.isActive('bikes/view', false);
   }
 
   getManufacturers(): void {
@@ -152,10 +163,6 @@ export class BikesComponent implements OnInit {
     this.bikeModelQuery.setEditModel(id);
   }
 
-  getStations(): void {
-    this.stationsService.getStations(10000, 0);
-  }
-
   getBikes(limit: number, offset: number, searchQuery?: string): void {
     this.bikeService.getBikes(limit, offset, searchQuery);
   }
@@ -176,4 +183,10 @@ export class BikesComponent implements OnInit {
   deleteBike(id: number): void {
     this.bikeService.deleteBike(id);
   }
+
+  onViewBike(bikeId: number): void {
+    this.bikeQuery.setEditBike(bikeId);
+    this.routerNavigation.gotoBikeView(bikeId);
+  }
+
 }

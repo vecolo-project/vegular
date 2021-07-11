@@ -159,7 +159,9 @@
         </mat-form-field>
       </mat-card-subtitle>
     </mat-card-header>
-    <app-station-battery-chart [stationMonitorings]="stationMonitorings"></app-station-battery-chart>
+    <mat-card-content>
+      <app-station-battery-chart [stationMonitorings]="stationMonitorings"></app-station-battery-chart>
+    </mat-card-content>
   </mat-card>
   <mat-card *ngIf="isStaff" class="col-span-2">
     <mat-card-header>

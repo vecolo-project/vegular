@@ -6,10 +6,10 @@
       [loading]="manufacturerLoading | async"
       (getBikes)="getBikes($event.limit, $event.offset, $event.searchQuery)"
       (deleteBike)="deleteBike($event)"
+      (viewBike)="onViewBike($event)"
     ></app-bikes-list>
   </mat-tab>
-  <mat-tab label="Modèle"
-  >
+  <mat-tab label="Modèle">
     <app-bikes-model-list
       [models]="models | async"
       [modelsCount]="modelsCount | async"
@@ -20,8 +20,7 @@
     ></app-bikes-model-list
     >
   </mat-tab>
-  <mat-tab label="Fabriquant"
-  >
+  <mat-tab label="Fabriquant">
     <app-bikes-manufacturer-list
       [manufacturers]="manufacturers | async"
       [manufacturersCount]="manufacturersCount | async"
@@ -46,13 +45,15 @@
   [isEditMode]="isEditBikeForm()"
   [models]="models | async"
   (getModels)="getModels()"
-  [stations]="stations | async"
-  (getStations)="getStations()"
   (postBike)="postBike($event)"
   (putBike)="putBike($event)"
   [editBike]="editBike | async"
   (retrieveEditBike)="getBike($event)"
 ></app-bikes-form>
+<app-bike-view *ngIf="isViewBike()"
+               [isStaff]="sessionQuery.isStaff$ | async"
+               [bike]="editBike | async"
+></app-bike-view>
 <app-bikes-model-form
   *ngIf="isAddModelForm() || isEditModelForm()"
   [isEditMode]="isEditModelForm()"

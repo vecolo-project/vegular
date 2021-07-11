@@ -92,6 +92,7 @@ export class StationsService {
   }
 
   async getStationMonitoring(stationId: number, start: Date, end: Date): Promise<void> {
+    this.stationsStore.update({stationMonitoring: []});
     this.stationsStore.setLoading(true);
     try {
       const response = await this.http.get<StationMonitoring[]>(
@@ -99,7 +100,6 @@ export class StationsService {
       );
       this.stationsStore.update({stationMonitoring: response});
     } catch (e) {
-      this.stationsStore.update({stationMonitoring: []});
       this.snackBar.warnning(
         'Erreur lors de la récupération des métriques d\'une station : ' + e.error.error
       );
