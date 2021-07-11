@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Bike} from '../../../../shared/models';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Bike, Ride} from '../../../../shared/models';
 import {AnimationOptions} from 'ngx-lottie';
 import {API_RESSOURCE_URI} from '../../../../shared/api-ressource-uri/api-ressource-uri';
+import {timer} from 'rxjs';
 
 @Component({
   selector: 'app-bike-view',
@@ -14,29 +15,52 @@ export class BikeViewComponent implements OnInit {
   bike: Bike;
 
   @Input()
+  rides: Ride[];
+
+  @Input()
+  rideCount: number;
+
+  @Output()
+  getRides = new EventEmitter<{ bikeId: number, limit: number, offset: number; }>();
+
+  @Input()
   isStaff: boolean;
 
   lottieBikeOptions: AnimationOptions = {
     path: 'assets/lottie/bike_3.json',
   };
 
+  rideDisplayedColumns = [
+    'start',
+    'end',
+    'duration-length',
+    'invoice',
+    'matricule',
+    'user'
+  ];
+
+
   constructor() {
   }
 
   ngOnInit(): void {
+    timer(500)
+      .subscribe(() => {
+        this.onGetRides(10, 0);
+      });
   }
 
-  onEdit(): void {
-
-  }
-
-  onDelete(): void {
-
-  }
 
   getBikeModelImgSrc(): string {
     return API_RESSOURCE_URI.UPLOAD_IMAGE_MODEL + this.bike?.model?.image;
   }
+
+  onGetRides(limit: number, offset: number): void {
+    if (this.bike && this.isStaff) {
+      this.getRides.emit({bikeId: this.bike?.id, limit, offset});
+    }
+  }
+
 
   getProgressColorClass(): string {
     if (this.bike?.batteryPercent < 15) {

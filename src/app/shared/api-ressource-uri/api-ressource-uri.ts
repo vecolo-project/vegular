@@ -1,4 +1,4 @@
-import { environment } from '../../../environments/environment';
+import {environment} from '../../../environments/environment';
 
 export const API_RESSOURCE_URI = {
   // Auth
@@ -22,6 +22,7 @@ export const API_RESSOURCE_URI = {
   //RIDE
   BASE_RIDE: environment.API_URL + '/ride/',
   RIDE_STATION: environment.API_URL + '/ride/station/',
+  RIDE_BIKE: environment.API_URL + '/ride/bike/',
   // MANUFACTURER
   POST_BIKE_MANUFACTURER: environment.API_URL + '/bike-manufacturer',
   GET_BIKE_MANUFACTURERS: environment.API_URL + '/bike-manufacturer',

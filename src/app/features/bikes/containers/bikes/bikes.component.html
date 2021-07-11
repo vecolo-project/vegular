@@ -53,6 +53,9 @@
 <app-bike-view *ngIf="isViewBike()"
                [isStaff]="sessionQuery.isStaff$ | async"
                [bike]="editBike | async"
+               [rides]="rideList | async"
+               [rideCount]="rideCount | async"
+               (getRides)="getRides($event.bikeId,$event.limit, $event.offset)"
 ></app-bike-view>
 <app-bikes-model-form
   *ngIf="isAddModelForm() || isEditModelForm()"

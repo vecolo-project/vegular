@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {StationsQuery} from 'src/app/features/stations/store/stations.query';
-import {Bike, BikeManufacturer, BikeManufacturerProps, BikeModel, BikeModelProps, BikeProps, Station} from 'src/app/shared/models';
+import {Bike, BikeManufacturer, BikeManufacturerProps, BikeModel, BikeModelProps, BikeProps, Ride, Station} from 'src/app/shared/models';
 import {BikeQuery} from '../../store/bike/bike.query';
 import {BikeService} from '../../store/bike/bike.service';
 import {BikeManufacturerQuery} from '../../store/manufacturer/manufacturer.query';
@@ -32,6 +32,9 @@ export class BikesComponent implements OnInit {
   bikesCount: Observable<number>;
   bikeLoading: Observable<boolean>;
   editBike: Observable<Bike>;
+
+  rideList: Observable<Ride[]>;
+  rideCount: Observable<number>;
 
   stations: Observable<Station[]>;
 
@@ -64,6 +67,9 @@ export class BikesComponent implements OnInit {
     this.editBike = this.bikeQuery.selectEditBike$;
 
     this.stations = this.stationsQuery.selectAll();
+
+    this.rideList = this.bikeQuery.selectViewBikeRides$;
+    this.rideCount = this.bikeQuery.selectViewBikeRidesCount$;
   }
 
   ngOnInit(): void {
@@ -169,6 +175,10 @@ export class BikesComponent implements OnInit {
 
   getBike(id: number): void {
     this.bikeService.getBike(id);
+  }
+
+  getRides(bikeId: number, limit: number, offset: number): void {
+    this.bikeService.getRides(bikeId, limit, offset);
   }
 
   postBike(bike: BikeProps): void {
