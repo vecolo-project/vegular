@@ -17,6 +17,7 @@ export const routesPath = {
   issue: 'issue',
   home: 'home',
   users: 'users',
+  userView: 'users/view',
   bikes: 'bikes',
   bikesView: 'bikes/view',
   finances: 'finances',
@@ -80,4 +81,9 @@ export class RouterNavigation {
   gotoBikeEdit(stationId: number): void {
     this.router.navigate([routesPath.bikes + '/edit/' + stationId]);
   }
+
+  gotoUserView(userId: number): void {
+    this.router.navigate([routesPath.userView + '/' + userId]);
+  }
+
 }
