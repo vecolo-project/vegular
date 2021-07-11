@@ -10,9 +10,15 @@
       <li class="menu__item menu__item--active">
         <a href="#">Présentation</a>
       </li>
-      <li class="menu__item"><a href="#">Actualités</a></li>
-      <li class="menu__item"><a href="#">Tarif</a></li>
-      <li class="menu__item"><a href="#">Contact</a></li>
+      <li class="menu__item">
+        <span (click)="goToContact.emit()">Actualités</span>
+      </li>
+      <li class="menu__item">
+        <span (click)="goToContact.emit()">Tarif</span>
+      </li>
+      <li class="menu__item">
+        <span (click)="goToContact.emit()">Contact</span>
+      </li>
     </ul>
   </div>
 </nav>

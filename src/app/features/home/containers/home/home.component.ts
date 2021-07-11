@@ -23,4 +23,9 @@ export class HomeComponent implements OnInit {
       direction: 'horizontal',
     });
   }
+
+  goToContact(): void {
+    const target = document.querySelector('#contact');
+    this.scroll.scrollTo(target);
+  }
 }

@@ -101,19 +101,19 @@
     outline: none;
   }
 
-  .menu__item a:hover {
+  .menu__item span:hover {
     color: inherit;
   }
 
-  .menu__item > a:focus-visible {
+  .menu__item > span:focus-visible {
     box-shadow: var(--shadow-applet-3), var(--shadow-two-pixel-border);
   }
 
-  .menu__item.menu__item--active > a:focus-visible {
+  .menu__item.menu__item--active > span:focus-visible {
     box-shadow: 0px 0px 0px 2px #222222;
   }
 
-  .menu__item details a:focus-visible {
+  .menu__item details span:focus-visible {
     color: var(--c-black);
   }
 
