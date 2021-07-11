@@ -159,7 +159,9 @@
         </mat-form-field>
       </mat-card-subtitle>
     </mat-card-header>
-    <app-station-battery-chart [stationMonitorings]="stationMonitorings"></app-station-battery-chart>
+    <mat-card-content>
+      <app-station-battery-chart [stationMonitorings]="stationMonitorings"></app-station-battery-chart>
+    </mat-card-content>
   </mat-card>
   <mat-card *ngIf="isStaff" class="col-span-2">
     <mat-card-header>
@@ -207,7 +209,7 @@
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="rideDisplayedColumns"></tr>
         <tr mat-row
-            (click)="onViewRide(row)"
+            (click)="onViewRideBike(row)"
             *matRowDef="let row; columns: rideDisplayedColumns"></tr>
       </table>
       <mat-paginator

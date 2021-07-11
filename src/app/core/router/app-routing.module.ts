@@ -52,8 +52,7 @@ const routes: Routes = [
   },
   {
     path: routesPath.bikes,
-    loadChildren: () => import('../../features/bikes/bikes.module').then(m => m.BikesModule),
-    canActivate: [StaffGuardService]
+    loadChildren: () => import('../../features/bikes/bikes.module').then(m => m.BikesModule)
   },
   {
     path: routesPath.subscriptions,
