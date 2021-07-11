@@ -4,7 +4,20 @@
 @import "tailwindcss/utilities";
 @import "~leaflet/dist/leaflet.css";
 @import "~leaflet.markercluster/dist/MarkerCluster.Default.css";
-
+:root {
+  --c-alpha-grey: rgba(245, 245, 245, 0.92);
+  --c-alpha-grey-matte: rgba(245, 245, 245, 0.98);
+  --c-black-10: rgba(64, 64, 76, 0.1);
+  --shadow-applet-2: 0px 4px 24px rgba(0, 0, 0, 0.14),
+    0px 2px 12px rgba(0, 0, 0, 0.06);
+  --shadow-applet-3: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  --backdrop-blur-radius: 8px;
+  --fw-h1: 600;
+  --fs-xsmall: 16px;
+  --c-black: #505050;
+  --c-white-bright: #fdfdfd;
+  --shadow-two-pixel-border: 0px 0px 0px 2px var(--c-black);
+}
 html,
 body {
   height: 100vh;

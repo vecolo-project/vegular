@@ -4,12 +4,16 @@ import {HomeComponent} from './containers/home/home.component';
 import {HomeRoutingModule} from './home-routing.module';
 import {SharedModule} from '../../shared/shared.module';
 import {UserCardComponent} from './components/user-card/user-card.component';
+import { PresentationSectionComponent } from './components/presentation-section/presentation-section.component';
+import { HomeMenuComponent } from './components/home-menu/home-menu.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    UserCardComponent
+    UserCardComponent,
+    PresentationSectionComponent,
+    HomeMenuComponent
   ],
   imports: [
     HomeRoutingModule,
