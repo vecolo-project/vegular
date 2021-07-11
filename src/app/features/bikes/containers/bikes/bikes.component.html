@@ -1,15 +1,16 @@
-<mat-tab-group *ngIf="isRoot()">
+<mat-tab-group *ngIf="isRoot()" mat-align-tabs="center">
   <mat-tab label="Vélo">
     <app-bikes-list
       [bikes]="bikes | async"
       [bikesCount]="bikesCount | async"
       [loading]="manufacturerLoading | async"
-      (getBikes)="getBikes($event.limit, $event.offset)"
+      (getBikes)="getBikes($event.limit, $event.offset, $event.searchQuery)"
       (deleteBike)="deleteBike($event)"
+      (viewBike)="onViewBike($event)"
     ></app-bikes-list>
   </mat-tab>
-  <mat-tab label="Modèle"
-    ><app-bikes-model-list
+  <mat-tab label="Modèle">
+    <app-bikes-model-list
       [models]="models | async"
       [modelsCount]="modelsCount | async"
       [loading]="manufacturerLoading | async"
@@ -17,9 +18,10 @@
       (setEditModel)="setEditModel($event)"
       (deleteModel)="deleteModel($event)"
     ></app-bikes-model-list
-  ></mat-tab>
-  <mat-tab label="Fabriquant"
-    ><app-bikes-manufacturer-list
+    >
+  </mat-tab>
+  <mat-tab label="Fabriquant">
+    <app-bikes-manufacturer-list
       [manufacturers]="manufacturers | async"
       [manufacturersCount]="manufacturersCount | async"
       (getManufacturers)="getManufacturers()"
@@ -27,7 +29,8 @@
       (deleteManufacturer)="deleteManufacturer($event)"
       (setEditManufacturer)="setEditManufacturer($event)"
     ></app-bikes-manufacturer-list
-  ></mat-tab>
+    >
+  </mat-tab>
 </mat-tab-group>
 <app-bikes-manufacturer-form
   *ngIf="isAddManufacturerForm() || isEditManufacturerForm()"
@@ -42,13 +45,18 @@
   [isEditMode]="isEditBikeForm()"
   [models]="models | async"
   (getModels)="getModels()"
-  [stations]="stations | async"
-  (getStations)="getStations()"
   (postBike)="postBike($event)"
   (putBike)="putBike($event)"
   [editBike]="editBike | async"
   (retrieveEditBike)="getBike($event)"
 ></app-bikes-form>
+<app-bike-view *ngIf="isViewBike()"
+               [isStaff]="sessionQuery.isStaff$ | async"
+               [bike]="editBike | async"
+               [rides]="rideList | async"
+               [rideCount]="rideCount | async"
+               (getRides)="getRides($event.bikeId,$event.limit, $event.offset)"
+></app-bike-view>
 <app-bikes-model-form
   *ngIf="isAddModelForm() || isEditModelForm()"
   [isEditMode]="isEditModelForm()"

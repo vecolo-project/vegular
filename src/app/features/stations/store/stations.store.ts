@@ -1,15 +1,14 @@
 import {EntityState, EntityStore, StoreConfig} from '@datorama/akita';
-import {Ride, Station, StationMonitoring} from '../../../shared/models';
+import {OsmSearchResponse, Ride, Station, StationMonitoring} from '../../../shared/models';
 import {Injectable} from '@angular/core';
-import {OsmSearchResponse} from "../../../shared/models";
 
 export interface StationsState extends EntityState<Station, number> {
   count: number;
   viewStation: Station;
   viewStationToken: string;
-  stationRides: Ride[],
-  stationRidesCount: number,
-  stationMonitoring: StationMonitoring[],
+  stationRides: Ride[];
+  stationRidesCount: number;
+  stationMonitoring: StationMonitoring[];
   addressAutocomplete: OsmSearchResponse[];
 }
 

@@ -1,0 +1,13 @@
+<mat-form-field class="w-full my-2">
+  <mat-label>Borne</mat-label>
+  <input matInput
+         (input)="search()"
+         [formControl]="inputSearchControl"
+         [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectStation($event.option.value)">
+    <mat-option *ngFor="let station of stationSearchResult | async" [value]="station">
+      Station {{station.id}}: {{station?.streetNumber}} {{station?.streetName}} {{station?.city.toUpperCase()}})
+      ({{station?.zipcode}})    </mat-option>
+  </mat-autocomplete>
+  <mat-hint>Rechercher une borne</mat-hint>
+</mat-form-field>

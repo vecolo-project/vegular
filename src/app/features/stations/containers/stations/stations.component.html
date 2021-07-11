@@ -3,7 +3,7 @@
                      [stationList]="stationList | async"
                      [stationCount]="stationCount | async"
                      (viewStation)="onViewStation($event)"
-                     (getSations)="this.getStations($event.limit,$event.offset)"
+                     (getSations)="this.getStations($event.limit,$event.offset,$event.searchQuery)"
   ></app-stations-list>
 
   <app-stations-view *ngIf="isViewMode()"
@@ -21,7 +21,7 @@
                      (getBikes)="getBikes($event.stationId,$event.limit,$event.offset)"
                      (getRides)="getRides($event.stationId,$event.limit,$event.offset)"
                      (getStation)="stationsService.getStation($event)"
-                     (submit)="onUpdateStationSubmit($event)"
+                     (submitStation)="onUpdateStationSubmit($event)"
                      (deleteStation)="onDeleteStationSubmit($event)"
   ></app-stations-view>
 

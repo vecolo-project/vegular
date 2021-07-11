@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {Plan, Subscription, User} from '../../../../shared/models';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AnimationOptions} from 'ngx-lottie';
 
 @Component({
   selector: 'app-subscription-add',
@@ -19,6 +20,12 @@ export class SubscriptionAddComponent implements OnInit {
   submit = new EventEmitter<Subscription>();
 
   subscriptionForm: FormGroup;
+
+
+  lottieMoneyOptions: AnimationOptions = {
+    path: 'assets/lottie/money.json',
+  };
+
 
   constructor(@Inject(FormBuilder) fb) {
     this.subscriptionForm = fb.group({

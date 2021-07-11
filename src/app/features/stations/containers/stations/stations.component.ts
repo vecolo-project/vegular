@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {Observable} from "rxjs";
-import {Bike, OsmSearchResponse, Ride, Station, StationMonitoring} from "../../../../shared/models";
-import {StationsQuery} from "../../store/stations.query";
-import {StationsService} from "../../store/stations.service";
-import {subDays} from "date-fns";
-import {RouterNavigation} from "../../../../core/router/router.navigation";
-import {SessionQuery} from "../../../../core/store/session.query";
-import {BikeService} from "../../../bikes/store/bike/bike.service";
-import {BikeQuery} from "../../../bikes/store/bike/bike.query";
+import {ActivatedRoute, Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {Bike, OsmSearchResponse, Ride, Station, StationMonitoring} from '../../../../shared/models';
+import {StationsQuery} from '../../store/stations.query';
+import {StationsService} from '../../store/stations.service';
+import {subDays} from 'date-fns';
+import {RouterNavigation} from '../../../../core/router/router.navigation';
+import {SessionQuery} from '../../../../core/store/session.query';
+import {BikeService} from '../../../bikes/store/bike/bike.service';
+import {BikeQuery} from '../../../bikes/store/bike/bike.query';
 
 @Component({
   selector: 'app-stations',
@@ -19,8 +19,8 @@ export class StationsComponent implements OnInit {
 
   viewStation: Observable<Station>;
   viewStationToken: Observable<string>;
-  viewStationBikes: Observable<Bike[]>
-  viewStationBikesCount: Observable<number>
+  viewStationBikes: Observable<Bike[]>;
+  viewStationBikesCount: Observable<number>;
   stationList: Observable<Station[]>;
   stationCount: Observable<number>;
   rideList: Observable<Ride[]>;
@@ -52,14 +52,14 @@ export class StationsComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.isViewMode()) {
-      const stationId = Number.parseInt(this.route.snapshot.params.id);
+      const stationId = Number.parseInt(this.route.snapshot.params.id, 10);
       this.stationsService.getStation(stationId);
       const now = new Date();
       this.retrieveMonitoring(stationId, now, subDays(now, 3));
     }
   }
 
-  retrieveMonitoring(stationId: number, start: Date, end: Date) {
+  retrieveMonitoring(stationId: number, start: Date, end: Date): void {
     this.stationsService.getStationMonitoring(stationId, start, end);
   }
 
@@ -75,8 +75,8 @@ export class StationsComponent implements OnInit {
     return this.router.isActive('/stations', true);
   }
 
-  getStations(limit: number, offset: number): void {
-    this.stationsService.getStations(limit, offset);
+  getStations(limit: number, offset: number, searchQuery?: string): void {
+    this.stationsService.getStations(limit, offset, searchQuery);
   }
 
   getBikes(stationId: number, limit: number, offset: number): void {
@@ -87,24 +87,24 @@ export class StationsComponent implements OnInit {
     this.stationsService.getRides(stationId, limit, offset);
   }
 
-  onViewStation(stationId: number) {
+  onViewStation(stationId: number): void {
     this.stationsQuery.setViewStation(stationId);
     this.routerNavigation.gotoStationView(stationId);
   }
 
-  onCreateStationSubmit(station: Station) {
+  onCreateStationSubmit(station: Station): void {
     this.stationsService.createStation(station);
   }
 
-  onUpdateStationSubmit(station: Station) {
+  onUpdateStationSubmit(station: Station): void {
     this.stationsService.updateStation(station);
   }
 
-  onDeleteStationSubmit(stationId: number) {
+  onDeleteStationSubmit(stationId: number): void {
     this.stationsService.deleteStation(stationId);
   }
 
-  getStationToken(stationId: number) {
+  getStationToken(stationId: number): void {
     this.stationsService.getStationToken(stationId);
   }
 
