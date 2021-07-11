@@ -6,6 +6,7 @@ import {SharedModule} from '../../shared/shared.module';
 import {UserCardComponent} from './components/user-card/user-card.component';
 import { PresentationSectionComponent } from './components/presentation-section/presentation-section.component';
 import { HomeMenuComponent } from './components/home-menu/home-menu.component';
+import { ContactSectionComponent } from './components/contact-section/contact-section.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { HomeMenuComponent } from './components/home-menu/home-menu.component';
     HomeComponent,
     UserCardComponent,
     PresentationSectionComponent,
-    HomeMenuComponent
+    HomeMenuComponent,
+    ContactSectionComponent
   ],
   imports: [
     HomeRoutingModule,
