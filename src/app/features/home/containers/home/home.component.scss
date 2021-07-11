@@ -1,1 +1,5 @@
 @import "~locomotive-scroll/dist/locomotive-scroll.css";
+main {
+  display: flex;
+  flex-direction: row;
+}
