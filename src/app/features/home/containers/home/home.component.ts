@@ -25,6 +25,21 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  goToPresentation(): void {
+    const target = document.querySelector('#presentation');
+    this.scroll.scrollTo(target);
+  }
+
+  goToActu(): void {
+    const target = document.querySelector('#actu');
+    this.scroll.scrollTo(target);
+  }
+
+  goToTarif(): void {
+    const target = document.querySelector('#tarif');
+    this.scroll.scrollTo(target);
+  }
+
   goToContact(): void {
     const target = document.querySelector('#contact');
     this.scroll.scrollTo(target);

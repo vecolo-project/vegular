@@ -8,13 +8,13 @@
     <!--  TODO position of pill at start on active and with of active ... -->
     <ul class="menu__items">
       <li class="menu__item menu__item--active">
-        <span>Présentation</span>
+        <span (click)="goToPresentation.emit()">Présentation</span>
       </li>
       <li class="menu__item">
-        <span (click)="goToContact.emit()">Actualités</span>
+        <span (click)="goToActu.emit()">Actualités</span>
       </li>
       <li class="menu__item">
-        <span (click)="goToContact.emit()">Tarif</span>
+        <span (click)="goToTarif.emit()">Tarif</span>
       </li>
       <li class="menu__item">
         <span (click)="goToContact.emit()">Contact</span>

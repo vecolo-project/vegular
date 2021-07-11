@@ -11,6 +11,15 @@ export class HomeMenuComponent implements OnInit {
   @Output()
   goToContact = new EventEmitter<void>();
 
+  @Output()
+  goToActu = new EventEmitter<void>();
+
+  @Output()
+  goToPresentation = new EventEmitter<void>();
+
+  @Output()
+  goToTarif = new EventEmitter<void>();
+
   ngOnInit(): void {
     const menuDesktop = document.querySelector('.menu');
     const menuDesktopRect = menuDesktop.getBoundingClientRect();
