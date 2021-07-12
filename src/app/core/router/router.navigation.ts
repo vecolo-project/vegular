@@ -85,5 +85,8 @@ export class RouterNavigation {
   gotoUserView(userId: number): void {
     this.router.navigate([routesPath.userView + '/' + userId]);
   }
+  gotoUserList(): void {
+    this.router.navigate([routesPath.users]);
+  }
 
 }

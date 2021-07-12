@@ -6,6 +6,7 @@ import {Invoice, PutUser, RegisterUser, Ride, Subscription, User} from '../../..
 import {API_RESSOURCE_URI} from '../../../shared/api-ressource-uri/api-ressource-uri';
 import {UsersQuery} from './users.query';
 import {HttpTools} from '../../../shared/http-tools/http-tools';
+import {RouterNavigation} from '../../../core/router/router.navigation';
 
 @Injectable({providedIn: 'root'})
 export class UsersService {
@@ -13,7 +14,8 @@ export class UsersService {
     private usersStore: UsersStore,
     private http: HttpClientWrapper,
     private snackBar: Snackbar,
-    private usersQuery: UsersQuery
+    private usersQuery: UsersQuery,
+    private routerNavigation: RouterNavigation
   ) {
   }
 
@@ -117,6 +119,7 @@ export class UsersService {
       this.usersStore.setLoading(false);
     }
   }
+
   async getUserInvoices(userId: number, limit: number, offset: number): Promise<void> {
     this.usersStore.setLoading(true);
     this.usersStore.update({viewUserInvoices: []});
@@ -135,6 +138,7 @@ export class UsersService {
       this.usersStore.setLoading(false);
     }
   }
+
   async getUserRides(userId: number, limit: number, offset: number): Promise<void> {
     this.usersStore.setLoading(true);
     this.usersStore.update({viewUserRides: []});
@@ -148,6 +152,46 @@ export class UsersService {
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de la récupération des trajets de l\'utilisateur : ' + e.error.error
+      );
+    } finally {
+      this.usersStore.setLoading(false);
+    }
+  }
+
+  async sendUserMail(userId: number, subject: string, content: string): Promise<void> {
+    try {
+      await this.http.post(
+        API_RESSOURCE_URI.EMAIL_USER,
+        {
+          userId,
+          subject,
+          content
+        }
+      );
+      this.snackBar.success('L\'email a bien été envoyé');
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de l\'envoie du mail : ' + e.error.error
+      );
+    } finally {
+      this.usersStore.setLoading(false);
+    }
+  }
+
+  async sendNewsletterMail(subject: string, content: string): Promise<void> {
+    try {
+      await this.http.post(
+        API_RESSOURCE_URI.EMAIL_NEWSLETTER,
+        {
+          subject,
+          content
+        }
+      );
+      this.snackBar.success('La newsletter a bien été envoyé');
+      this.routerNavigation.gotoUserList();
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la newsletter : ' + e.error.error
       );
     } finally {
       this.usersStore.setLoading(false);

@@ -73,6 +73,10 @@ export class UsersComponent implements OnInit {
     return this.router.isActive('/users/add', true);
   }
 
+  isNewsletterMode(): boolean {
+    return this.router.isActive('/users/newsletter', true);
+  }
+
   getUsers(limit: number, offset: number, searchQuery: string): void {
     this.usersService.getUsers(limit, offset, searchQuery);
   }
@@ -116,5 +120,13 @@ export class UsersComponent implements OnInit {
   onViewUser(userId: number): void {
     this.usersQuery.setEditUser(userId);
     this.routerNavigation.gotoUserView(userId);
+  }
+
+  onSendUserEmail(userId: number, subject: string, content: string): void {
+    this.usersService.sendUserMail(userId, subject, content);
+  }
+
+  onSendNewsletterEmail(subject: string, content: string): void {
+    this.usersService.sendNewsletterMail(subject, content);
   }
 }
