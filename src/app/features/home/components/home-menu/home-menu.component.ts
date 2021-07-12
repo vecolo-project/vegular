@@ -25,8 +25,6 @@ export class HomeMenuComponent implements OnInit {
     const menuDesktopRect = menuDesktop.getBoundingClientRect();
     const menuDesktopItem = document.querySelectorAll('.menu__item');
     const menuPill: HTMLElement = document.querySelector('.menu__pill');
-    const menuToggle = document.querySelector('.menu__toggle');
-    const menuDesktopItems = document.querySelector('.menu__items');
 
     function removeClassToAll(items: NodeListOf<Element>, className: string) {
       items.forEach((item) => item.classList.remove(className));
@@ -41,10 +39,6 @@ export class HomeMenuComponent implements OnInit {
         removeClassToAll(menuDesktopItem, 'menu__item--active');
         item.classList.add('menu__item--active');
       });
-    });
-
-    menuToggle.addEventListener('click', (e) => {
-      menuDesktopItems.classList.toggle('menu__mobile-isdisplay');
     });
   }
 }

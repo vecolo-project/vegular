@@ -11,37 +11,31 @@ import LocomotiveScroll from 'locomotive-scroll';
 })
 export class HomeComponent implements OnInit {
   user: Observable<User>;
-  scroll;
+  main: HTMLElement;
 
   constructor(private sessionQuery: SessionQuery) {}
 
   ngOnInit(): void {
     this.user = this.sessionQuery.selectUser$;
-    this.scroll = new LocomotiveScroll({
-      el: document.querySelector('[data-scroll-container]'),
-      smooth: true,
-      direction: 'horizontal',
-      getDirection: true,
-    });
   }
 
   goToPresentation(): void {
     const target = document.querySelector('#presentation');
-    this.scroll.scrollTo(target);
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   goToActu(): void {
     const target = document.querySelector('#actu');
-    this.scroll.scrollTo(target);
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   goToTarif(): void {
     const target = document.querySelector('#tarif');
-    this.scroll.scrollTo(target);
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   goToContact(): void {
     const target = document.querySelector('#contact');
-    this.scroll.scrollTo(target);
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 }
