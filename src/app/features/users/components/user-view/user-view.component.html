@@ -58,12 +58,14 @@
           <input matInput
                  formControlName="subject"
                  type="text">
+          <mat-error>Ce champs est requis</mat-error>
         </mat-form-field>
         <mat-form-field class="w-full" appearance="outline">
           <mat-label>Contenu</mat-label>
           <textarea matInput
-                 formControlName="content"
+                    formControlName="content"
                     type="text"></textarea>
+          <mat-error>Ce champs est requis</mat-error>
         </mat-form-field>
       </form>
     </mat-card-content>

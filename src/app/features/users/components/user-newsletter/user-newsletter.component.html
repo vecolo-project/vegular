@@ -5,12 +5,13 @@
   </mat-card-header>
   <mat-card-content class="grid grid-cols-1 lg:grid-cols-2 gap-2">
     <ng-lottie [options]="lottieNewsletterOptions"></ng-lottie>
-    <form [formGroup]="emailForm">
+    <form [formGroup]="emailForm" class="flex flex-col gap-4">
       <mat-form-field class="w-full" appearance="outline">
         <mat-label>Sujet</mat-label>
         <input matInput
                formControlName="subject"
                type="text">
+        <mat-error>Ce champs est requis</mat-error>
       </mat-form-field>
       <mat-form-field class="w-full" appearance="outline">
         <mat-label>Contenu</mat-label>
@@ -18,6 +19,7 @@
                   formControlName="content"
                   rows="10"
                   type="text"></textarea>
+        <mat-error>Ce champs est requis</mat-error>
       </mat-form-field>
     </form>
   </mat-card-content>
