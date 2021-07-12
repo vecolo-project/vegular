@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {Invoice, Ride, Subscription, User} from '../../../../shared/models';
 import {AnimationOptions} from 'ngx-lottie';
 import {addMonths} from 'date-fns';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-user-view',
@@ -40,6 +41,10 @@ export class UserViewComponent implements OnInit {
   @Output()
   getUserInvoices = new EventEmitter<{ userId: number, limit: number, offset: number; }>();
 
+  @Output()
+  sendUserMail = new EventEmitter<{ userId: number, subject: string, content: string }>();
+  sendingEmailMode: boolean;
+  emailForm: FormGroup;
 
   lottieUserOptions: AnimationOptions = {
     path: 'assets/lottie/user.json',
@@ -66,10 +71,15 @@ export class UserViewComponent implements OnInit {
     'matricule',
   ];
 
-  constructor() {
+  constructor(@Inject(FormBuilder) fb) {
+    this.emailForm = fb.group({
+      subject: ['', [Validators.required]],
+      content: ['', [Validators.required]],
+    });
   }
 
   ngOnInit(): void {
+    this.sendingEmailMode = false;
   }
 
   onGetUserSubscriptions(limit: number, offset: number): void {
@@ -90,5 +100,20 @@ export class UserViewComponent implements OnInit {
 
   addMonth(date: Date, month: number): Date {
     return addMonths(new Date(date), month);
+  }
+
+  onSendingEmailMode(): void {
+    this.sendingEmailMode = true;
+    this.emailForm.controls.subject.patchValue(null);
+    this.emailForm.controls.content.patchValue(null);
+  }
+
+  onSendEmail(): void {
+    this.sendingEmailMode = false;
+    this.sendUserMail.emit({
+      userId: this.user?.id,
+      subject: this.emailForm.value.subject,
+      content: this.emailForm.value.content,
+    });
   }
 }

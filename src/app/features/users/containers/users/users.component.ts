@@ -117,4 +117,8 @@ export class UsersComponent implements OnInit {
     this.usersQuery.setEditUser(userId);
     this.routerNavigation.gotoUserView(userId);
   }
+
+  onSendUserEmail(userId: number, subject: string, content: string): void {
+    this.usersService.sendUserMail(userId, subject, content);
+  }
 }

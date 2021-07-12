@@ -28,4 +28,5 @@
                (getUserInvoices)="getUserInvoices($event.userId,$event.limit,$event.offset)"
                (getUserRides)="getUserRides($event.userId,$event.limit,$event.offset)"
                (getUserSubscriptions)="getUserSubscriptions($event.userId,$event.limit,$event.offset)"
+               (sendUserMail)="onSendUserEmail($event.userId,$event.subject,$event.content)"
 ></app-user-view>
