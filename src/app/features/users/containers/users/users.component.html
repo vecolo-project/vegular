@@ -30,3 +30,6 @@
                (getUserSubscriptions)="getUserSubscriptions($event.userId,$event.limit,$event.offset)"
                (sendUserMail)="onSendUserEmail($event.userId,$event.subject,$event.content)"
 ></app-user-view>
+<app-user-newsletter *ngIf="isNewsletterMode()"
+                     (sendUserMail)="onSendNewsletterEmail($event.subject,$event.content)"
+></app-user-newsletter>

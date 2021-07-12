@@ -6,6 +6,7 @@ import {Invoice, PutUser, RegisterUser, Ride, Subscription, User} from '../../..
 import {API_RESSOURCE_URI} from '../../../shared/api-ressource-uri/api-ressource-uri';
 import {UsersQuery} from './users.query';
 import {HttpTools} from '../../../shared/http-tools/http-tools';
+import {RouterNavigation} from '../../../core/router/router.navigation';
 
 @Injectable({providedIn: 'root'})
 export class UsersService {
@@ -13,7 +14,8 @@ export class UsersService {
     private usersStore: UsersStore,
     private http: HttpClientWrapper,
     private snackBar: Snackbar,
-    private usersQuery: UsersQuery
+    private usersQuery: UsersQuery,
+    private routerNavigation: RouterNavigation
   ) {
   }
 
@@ -186,6 +188,7 @@ export class UsersService {
         }
       );
       this.snackBar.success('La newsletter a bien été envoyé');
+      this.routerNavigation.gotoUserList();
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de la newsletter : ' + e.error.error

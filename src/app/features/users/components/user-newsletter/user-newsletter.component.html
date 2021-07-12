@@ -1,0 +1,35 @@
+<div class="mt-6 flex justify-center">
+<mat-card class="col-span-2 lg:col-span-1">
+  <mat-card-header>
+    <mat-card-title>Envoyer une Newsletter</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+    <ng-lottie [options]="lottieNewsletterOptions"></ng-lottie>
+    <form [formGroup]="emailForm">
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Sujet</mat-label>
+        <input matInput
+               formControlName="subject"
+               type="text">
+      </mat-form-field>
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Contenu</mat-label>
+        <textarea matInput
+                  formControlName="content"
+                  rows="10"
+                  type="text"></textarea>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions class="flex justify-end space-x-2">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="onSendEmail()"
+      [disabled]="emailForm.invalid"
+    >
+      <mat-icon>send</mat-icon>&nbsp;Envoyer
+    </button>
+  </mat-card-actions>
+</mat-card>
+</div>
