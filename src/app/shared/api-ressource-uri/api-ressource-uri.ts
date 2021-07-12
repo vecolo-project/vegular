@@ -1,4 +1,4 @@
-import { environment } from '../../../environments/environment';
+import {environment} from '../../../environments/environment';
 
 export const API_RESSOURCE_URI = {
   // Auth
@@ -13,15 +13,17 @@ export const API_RESSOURCE_URI = {
   BASE_STATIONS: environment.API_URL + '/station/',
   // MAP
   OSM_SEARCH_ADDRESS: 'https://nominatim.openstreetmap.org/search.php?',
-  //Station monitoring
+  // Station monitoring
   STATION_MONITORING: environment.API_URL + '/station-monitoring/',
-  //BIKE
+  // BIKE
   BASE_BIKE: environment.API_URL + '/bike/',
   BIKE_WITH_STATION_AND_MODEL: environment.API_URL + '/bike/full/',
   BIKE_STATION: environment.API_URL + '/bike/station/',
-  //RIDE
+  // RIDE
   BASE_RIDE: environment.API_URL + '/ride/',
   RIDE_STATION: environment.API_URL + '/ride/station/',
+  RIDE_BIKE: environment.API_URL + '/ride/bike/',
+  RIDE_USER: environment.API_URL + '/ride/user/',
   // MANUFACTURER
   POST_BIKE_MANUFACTURER: environment.API_URL + '/bike-manufacturer',
   GET_BIKE_MANUFACTURERS: environment.API_URL + '/bike-manufacturer',
@@ -35,4 +37,8 @@ export const API_RESSOURCE_URI = {
   BASE_PLAN: environment.API_URL + '/plan/',
   // SUBSCRIPTION
   BASE_SUBSCRIPTION: environment.API_URL + '/subscription/',
+  USER_SUBSCRIPTION: environment.API_URL + '/subscription/user/',
+  // INVOICE
+  BASE_INVOICE: environment.API_URL + '/invoice/',
+  USER_INVOICE: environment.API_URL + '/invoice/user/'
 };

@@ -1,3 +1,5 @@
+import {Subscription} from './subscription.model';
+
 export type User = {
   id: number;
   firstName: string;
@@ -7,6 +9,9 @@ export type User = {
   pseudo: string;
   newsletter: boolean;
   role: Role;
+  isActive: boolean;
+  subscriptions: Subscription[];
+  createdAt: Date;
 };
 
 export type UserFormData = {

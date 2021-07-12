@@ -7,6 +7,7 @@
   (getUsers)="getUsers($event.limit, $event.offset,$event.searchQuery)"
   (deleteUser)="deleteUser($event)"
   (setEditUser)="setEditUser($event)"
+  (viewUser)="onViewUser($event)"
 ></app-user-list>
 <app-users-form
   *ngIf="isEditMode() || isAddMode()"
@@ -16,3 +17,15 @@
   (postUser)="postUser($event)"
   [isAddMode]="isAddMode()"
 ></app-users-form>
+<app-user-view *ngIf="isViewMode()"
+               [user]="editUser | async"
+               [userInvoices]="viewUserInvoices | async"
+               [userRides]="viewUserRides | async"
+               [userSubscriptions]="viewUserSubscriptions | async"
+               [userInvoicesCount]="viewUserInvoicesCount | async"
+               [userRidesCount]="viewUserRidesCount | async"
+               [userSubscriptionsCount]="viewUserSubscriptionsCount | async"
+               (getUserInvoices)="getUserInvoices($event.userId,$event.limit,$event.offset)"
+               (getUserRides)="getUserRides($event.userId,$event.limit,$event.offset)"
+               (getUserSubscriptions)="getUserSubscriptions($event.userId,$event.limit,$event.offset)"
+></app-user-view>

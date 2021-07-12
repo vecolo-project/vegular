@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClientWrapper} from 'src/app/core/utils/httpClientWrapper';
-import {Bike, BikeProps} from 'src/app/shared/models';
+import {Bike, BikeProps, Ride} from 'src/app/shared/models';
 import {Snackbar} from 'src/app/shared/snackbar/snakbar';
 import {BikeQuery} from './bike.query';
 import {BikeStore} from './bike.store';
@@ -126,4 +126,20 @@ export class BikeService {
       this.bikeStore.setLoading(false);
     }
   }
+
+  async getRides(bikeId: number, limit: number, offset: number): Promise<void> {
+    this.bikeStore.update({bikeRides: []});
+    try {
+      const response = await this.http.get<{ rides: Ride[], count: number }>(
+        API_RESSOURCE_URI.RIDE_BIKE + bikeId + `?limit=${limit}&offset=${offset}`
+      );
+      this.bikeStore.update({bikeRides: response.rides});
+      this.bikeStore.update({bikeRidesCount: response.count});
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la récupération des courses d\'un vélo : ' + e.error.error
+      );
+    }
+  }
+
 }
