@@ -1,40 +1,10 @@
-@media (max-width: 1200px) {
+@media (max-width: 998px) {
   .menu {
-    position: fixed;
-    bottom: 5%;
-    left: 90%;
-  }
-
-  .menu__inner {
-    display: flex;
-    flex-direction: column-reverse;
-  }
-
-  .menu__pill {
     display: none;
-  }
-
-  .menu__items {
-    display: none;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  .menu__item,
-  .menu__toggle {
-    padding: 0.2rem 0.7rem;
-    background-color: white;
-    border-radius: 0.3rem;
-    margin: 10px 0;
-    cursor: pointer;
-  }
-
-  .menu__mobile-isdisplay {
-    display: block;
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 998px) {
   .menu {
     position: fixed;
     bottom: 0;

@@ -1,41 +1,346 @@
 <section class="w-screen" id="tarif">
-  <!-- Header -->
-  <div class="py-24 bg-gray-50 sm:py-32">
-    <div
-      class="
-        max-w-md
-        mx-auto
-        pl-4
-        pr-8
-        sm:max-w-lg sm:px-6
-        lg:max-w-7xl lg:px-8
-      "
-    >
-      <h1
+  <!-- This example requires Tailwind CSS v2.0+ -->
+  <div class="bg-white">
+    <div class="max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8">
+      <div class="sm:flex sm:flex-col sm:align-center">
+        <h1 class="text-5xl font-extrabold text-gray-900 sm:text-center">
+          Pricing Plans
+        </h1>
+        <p class="mt-5 text-xl text-gray-500 sm:text-center">
+          Start building for free, then add a site plan to go live. Account
+          plans unlock additional features.
+        </p>
+      </div>
+      <div
         class="
-          text-4xl
-          leading-10
-          font-extrabold
-          tracking-tight
-          text-gray-900 text-center
-          sm:text-5xl sm:leading-none
-          lg:text-6xl
+          mt-12
+          space-y-4
+          sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6
+          lg:max-w-4xl lg:mx-auto
+          xl:max-w-none xl:mx-0 xl:grid-cols-3
         "
       >
-        Tarif
-      </h1>
-      <p
-        class="
-          mt-6
-          max-w-3xl
-          mx-auto
-          text-xl
-          leading-normal
-          text-gray-500 text-center
-        "
-      >
-        Page de Présentation des tarifs de vécolo
-      </p>
+        <div
+          class="
+            border border-gray-200
+            rounded-lg
+            shadow-sm
+            divide-y divide-gray-200
+          "
+        >
+          <div class="p-6">
+            <h2 class="text-lg leading-6 font-medium text-gray-900">
+              Véco-Free
+            </h2>
+            <p class="mt-4 text-sm text-gray-500">
+              Pas de frais mensuel, on paye a l'utilisation !
+            </p>
+            <p class="mt-8">
+              <span class="text-4xl font-extrabold text-gray-900">0.00€</span>
+              <span class="text-base font-medium text-gray-500">/mo</span>
+            </p>
+            <a
+              href="#"
+              class="
+                mt-8
+                block
+                w-full
+                bg-gray-800
+                border border-gray-800
+                rounded-md
+                py-2
+                text-sm
+                font-semibold
+                text-white text-center
+                hover:bg-gray-900
+              "
+              >Buy Véco-Free</a
+            >
+          </div>
+          <div class="pt-6 pb-8 px-6">
+            <h3
+              class="text-xs font-medium text-gray-900 tracking-wide uppercase"
+            >
+              What's included
+            </h3>
+            <ul class="mt-6 space-y-4">
+              <li class="flex space-x-3">
+                <!-- Heroicon name: solid/check -->
+                <svg
+                  class="flex-shrink-0 h-5 w-5 text-green-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-sm text-gray-500"
+                  >Potenti felis, in cras at at ligula nunc.</span
+                >
+              </li>
+
+              <li class="flex space-x-3">
+                <!-- Heroicon name: solid/check -->
+                <svg
+                  class="flex-shrink-0 h-5 w-5 text-green-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-sm text-gray-500"
+                  >Orci neque eget pellentesque.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="
+            border border-gray-200
+            rounded-lg
+            shadow-sm
+            divide-y divide-gray-200
+          "
+        >
+          <div class="p-6">
+            <h2 class="text-lg leading-6 font-medium text-gray-900">
+              Véco-Plus
+            </h2>
+            <p class="mt-4 text-sm text-gray-500">
+              Le basic pour se déplacer a Paris
+            </p>
+            <p class="mt-8">
+              <span class="text-4xl font-extrabold text-gray-900">24€</span>
+              <span class="text-base font-medium text-gray-500">/mo</span>
+            </p>
+            <a
+              href="#"
+              class="
+                mt-8
+                block
+                w-full
+                bg-gray-800
+                border border-gray-800
+                rounded-md
+                py-2
+                text-sm
+                font-semibold
+                text-white text-center
+                hover:bg-gray-900
+              "
+              >Buy Véco-Plus</a
+            >
+          </div>
+          <div class="pt-6 pb-8 px-6">
+            <h3
+              class="text-xs font-medium text-gray-900 tracking-wide uppercase"
+            >
+              What's included
+            </h3>
+            <ul class="mt-6 space-y-4">
+              <li class="flex space-x-3">
+                <!-- Heroicon name: solid/check -->
+                <svg
+                  class="flex-shrink-0 h-5 w-5 text-green-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-sm text-gray-500"
+                  >Potenti felis, in cras at at ligula nunc.
+                </span>
+              </li>
+
+              <li class="flex space-x-3">
+                <!-- Heroicon name: solid/check -->
+                <svg
+                  class="flex-shrink-0 h-5 w-5 text-green-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-sm text-gray-500"
+                  >Orci neque eget pellentesque.</span
+                >
+              </li>
+
+              <li class="flex space-x-3">
+                <!-- Heroicon name: solid/check -->
+                <svg
+                  class="flex-shrink-0 h-5 w-5 text-green-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-sm text-gray-500"
+                  >Donec mauris sit in eu tincidunt etiam.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="
+            border border-gray-200
+            rounded-lg
+            shadow-sm
+            divide-y divide-gray-200
+          "
+        >
+          <div class="p-6">
+            <h2 class="text-lg leading-6 font-medium text-gray-900">
+              Véco-L'eau
+            </h2>
+            <p class="mt-4 text-sm text-gray-500">
+              Pour les aventiriers du perif confirmé
+            </p>
+            <p class="mt-8">
+              <span class="text-4xl font-extrabold text-gray-900">32€</span>
+              <span class="text-base font-medium text-gray-500">/mo</span>
+            </p>
+            <a
+              href="#"
+              class="
+                mt-8
+                block
+                w-full
+                bg-gray-800
+                border border-gray-800
+                rounded-md
+                py-2
+                text-sm
+                font-semibold
+                text-white text-center
+                hover:bg-gray-900
+              "
+              >Buy Véco-L'eau</a
+            >
+          </div>
+          <div class="pt-6 pb-8 px-6">
+            <h3
+              class="text-xs font-medium text-gray-900 tracking-wide uppercase"
+            >
+              What's included
+            </h3>
+            <ul class="mt-6 space-y-4">
+              <li class="flex space-x-3">
+                <!-- Heroicon name: solid/check -->
+                <svg
+                  class="flex-shrink-0 h-5 w-5 text-green-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-sm text-gray-500"
+                  >Potenti felis, in cras at at ligula nunc.
+                </span>
+              </li>
+
+              <li class="flex space-x-3">
+                <!-- Heroicon name: solid/check -->
+                <svg
+                  class="flex-shrink-0 h-5 w-5 text-green-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-sm text-gray-500"
+                  >Orci neque eget pellentesque.</span
+                >
+              </li>
+
+              <li class="flex space-x-3">
+                <!-- Heroicon name: solid/check -->
+                <svg
+                  class="flex-shrink-0 h-5 w-5 text-green-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-sm text-gray-500"
+                  >Donec mauris sit in eu tincidunt etiam.</span
+                >
+              </li>
+
+              <li class="flex space-x-3">
+                <!-- Heroicon name: solid/check -->
+                <svg
+                  class="flex-shrink-0 h-5 w-5 text-green-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-sm text-gray-500"
+                  >Faucibus volutpat magna.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
