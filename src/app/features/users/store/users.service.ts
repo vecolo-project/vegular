@@ -141,7 +141,7 @@ export class UsersService {
     this.usersStore.update({viewUserRidesCount: 0});
     try {
       const response = await this.http.get<{ rides: Ride[], count: number }>(
-        API_RESSOURCE_URI.USER_SUBSCRIPTION + userId + '?' + HttpTools.ObjectToHttpParams({limit, offset})
+        API_RESSOURCE_URI.RIDE_USER + userId + '?' + HttpTools.ObjectToHttpParams({limit, offset})
       );
       this.usersStore.update({viewUserRides: response.rides});
       this.usersStore.update({viewUserRidesCount: response.count});

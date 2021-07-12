@@ -43,6 +43,7 @@
             <strong>Distance Max : </strong> {{bike?.model?.maxDistance}} KM
           </span>
           <span *ngIf="bike?.station">
+            <mat-divider></mat-divider>
             <strong>Attaché à la station {{bike?.station?.id}} : </strong>
             <button mat-icon-button color="primary" [routerLink]="['/stations/view/'+bike?.station?.id]"><mat-icon>visibility</mat-icon></button>
           </span>

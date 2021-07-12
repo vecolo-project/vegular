@@ -49,8 +49,11 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.isViewMode()) {
+      this.retrieveEditUser();
       const userId = Number.parseInt(this.route.snapshot.params.id, 10);
-      this.usersService.retrieveEditUser(userId);
+      this.getUserSubscriptions(userId, 10, 0);
+      this.getUserRides(userId, 10, 0);
+      this.getUserInvoices(userId, 10, 0);
     }
   }
 
@@ -83,8 +86,20 @@ export class UsersComponent implements OnInit {
   }
 
   retrieveEditUser(): void {
-    const id = Number(this.route.snapshot.params.id);
+    const id = Number.parseInt(this.route.snapshot.params.id, 10);
     this.usersService.retrieveEditUser(id);
+  }
+
+  getUserSubscriptions(userId: number, limit: number, offset: number): void {
+    this.usersService.getUserSubscriptions(userId, limit, offset);
+  }
+
+  getUserRides(userId: number, limit: number, offset: number): void {
+    this.usersService.getUserRides(userId, limit, offset);
+  }
+
+  getUserInvoices(userId: number, limit: number, offset: number): void {
+    this.usersService.getUserInvoices(userId, limit, offset);
   }
 
   putUser(user: UserFormData): void {
