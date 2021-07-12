@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {User, UserFormData} from '../../../../shared/models';
+import {Invoice, Ride, Subscription, User, UserFormData} from '../../../../shared/models';
 import {UsersQuery} from '../../store/users.query';
 import {UsersService} from '../../store/users.service';
 import {SessionQuery} from '../../../../core/store/session.query';
@@ -18,6 +18,13 @@ export class UsersComponent implements OnInit {
   userCount: Observable<number>;
   editUser: Observable<User>;
   usersLoading: Observable<boolean>;
+  viewUserRides: Observable<Ride[]>;
+  viewUserSubscriptions: Observable<Subscription[]>;
+  viewUserInvoices: Observable<Invoice[]>;
+  viewUserRidesCount: Observable<number>;
+  viewUserSubscriptionsCount: Observable<number>;
+  viewUserInvoicesCount: Observable<number>;
+
 
   constructor(
     public usersQuery: UsersQuery,
@@ -31,6 +38,13 @@ export class UsersComponent implements OnInit {
     this.userCount = this.usersQuery.selectCount$;
     this.usersLoading = this.usersQuery.isLoading$;
     this.editUser = this.usersQuery.selectEditUsers$;
+
+    this.viewUserRides = this.usersQuery.selectViewUserRides$;
+    this.viewUserSubscriptions = this.usersQuery.selectViewUserSubscriptions$;
+    this.viewUserInvoices = this.usersQuery.selectViewUserInvoices$;
+    this.viewUserRidesCount = this.usersQuery.selectViewUserRidesCount$;
+    this.viewUserSubscriptionsCount = this.usersQuery.selectViewUserSubscriptionsCount$;
+    this.viewUserInvoicesCount = this.usersQuery.selectViewUserInvoicesCount$;
   }
 
   ngOnInit(): void {
