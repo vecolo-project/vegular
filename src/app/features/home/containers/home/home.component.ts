@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { SessionQuery } from '../../../../core/store/session.query';
 import { User } from '../../../../shared/models/user.model';
 import { Observable } from 'rxjs';
-import LocomotiveScroll from 'locomotive-scroll';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +16,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.sessionQuery.selectUser$;
+    const main = document.querySelector('main');
+    const observer = new IntersectionObserver((entries) => {
+      console.log(entries);
+    });
+    observer.observe(main);
   }
 
   goToPresentation(): void {

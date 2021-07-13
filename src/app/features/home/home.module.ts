@@ -9,6 +9,7 @@ import { HomeMenuComponent } from './components/home-menu/home-menu.component';
 import { ContactSectionComponent } from './components/contact-section/contact-section.component';
 import { TarifSectionComponent } from './components/tarif-section/tarif-section.component';
 import { ActuSectionComponent } from './components/actu-section/actu-section.component';
+import { TarifCardComponent } from './components/tarif-card/tarif-card.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ActuSectionComponent } from './components/actu-section/actu-section.com
     HomeMenuComponent,
     ContactSectionComponent,
     TarifSectionComponent,
-    ActuSectionComponent
+    ActuSectionComponent,
+    TarifCardComponent
   ],
   imports: [
     HomeRoutingModule,
