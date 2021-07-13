@@ -7,17 +7,15 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ActuCardComponent implements OnInit {
   @Input()
-  publishDate: any;
-  @Input()
-  lectureTime: number;
-  @Input()
-  imgUrl: string;
-  @Input()
-  category: string;
-  @Input()
-  title: string;
-  @Input()
-  author: string;
+  card: {
+    title: string;
+    publishDate: string;
+    imgUrl: string;
+    category: string;
+    author: string;
+    lectureTime: number;
+    profileUrl: string;
+  };
   constructor() {}
   ngOnInit(): void {}
 }
