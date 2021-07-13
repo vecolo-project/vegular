@@ -7,7 +7,7 @@ import { AnimationOptions } from 'ngx-lottie';
   styleUrls: ['./presentation-section.component.scss'],
 })
 export class PresentationSectionComponent implements OnInit {
-  lottieMoneyOptions: AnimationOptions = {
+  lottieIdeaOptions: AnimationOptions = {
     path: 'assets/lottie/idea.json',
   };
   constructor() {}
