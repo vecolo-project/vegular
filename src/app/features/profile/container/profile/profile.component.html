@@ -3,9 +3,12 @@
     (changeCurrentPage)="changeCurrentPage($event)"
     [currentPage]="currentPage"
   ></app-vertical-nav>
-  <main [ngSwitch]="currentPage">
+  <main [ngSwitch]="currentPage" class="container md:mr-5">
     <p *ngSwitchCase="'dashboard'">ICI LA USER VIEW</p>
-    <app-edit-profile *ngSwitchCase="'edit'"></app-edit-profile>
+    <app-edit-profile
+      [user]="user | async"
+      *ngSwitchCase="'edit'"
+    ></app-edit-profile>
     <app-subscription *ngSwitchCase="'subscription'"></app-subscription>
   </main>
 </div>
