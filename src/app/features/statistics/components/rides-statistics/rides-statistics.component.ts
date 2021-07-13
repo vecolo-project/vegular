@@ -5,6 +5,7 @@ import {MatDatepicker} from '@angular/material/datepicker';
 import {getMonth, getYear, startOfMonth} from 'date-fns';
 import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Color, Label, PluginServiceGlobalRegistrationAndOptions} from 'ng2-charts';
+import {AnimationOptions} from 'ngx-lottie';
 
 @Component({
   selector: 'app-rides-statistics',
@@ -62,6 +63,10 @@ export class RidesStatisticsComponent implements OnInit, OnChanges {
   lineChartType: ChartType = 'line';
 
   date = new FormControl(startOfMonth(new Date()));
+
+  lottieBikeOptions: AnimationOptions = {
+    path: 'assets/lottie/bike_4.json',
+  };
 
   constructor() {
   }

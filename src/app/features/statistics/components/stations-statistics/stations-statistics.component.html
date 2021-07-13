@@ -1,8 +1,11 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>Stations</mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="flex flex-col gap-4">
+<!--  <mat-card-header>-->
+    <mat-card-title class="flex items-center justify-center gap-4">
+      <ng-lottie mat-card-avatar [options]="lottieStationOptions"></ng-lottie>
+      Stations
+    </mat-card-title>
+<!--  </mat-card-header>-->
+  <mat-card-content class="flex flex-col gap-4 mt-4">
     <span>
       <strong>Nombre de stations actives</strong> {{statistics?.total || 0}}
     </span>

@@ -1,7 +1,12 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>Trajets</mat-card-title>
-  </mat-card-header>
+<!--  <mat-card-header>-->
+    <mat-card-title class="flex items-center justify-center">
+      <ng-lottie [options]="lottieBikeOptions" height="80px"></ng-lottie>
+      <span>
+        Trajets
+      </span>
+    </mat-card-title>
+<!--  </mat-card-header>-->
   <mat-card-content>
       <mat-form-field>
         <mat-hint>Année et mois</mat-hint>

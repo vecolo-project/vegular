@@ -3,6 +3,7 @@ import {IncomeStatistics} from '../../../../shared/models';
 import {getMonth, getYear, startOfMonth} from 'date-fns';
 import {FormControl} from '@angular/forms';
 import {MatDatepicker} from '@angular/material/datepicker';
+import {AnimationOptions} from 'ngx-lottie';
 
 @Component({
   selector: 'app-incomes-statistics',
@@ -18,6 +19,10 @@ export class IncomesStatisticsComponent implements OnInit {
   retrieveStatistics = new EventEmitter<{ month: number, year: number }>();
 
   date = new FormControl(startOfMonth(new Date()));
+
+  lottieMoneyOptions: AnimationOptions = {
+    path: 'assets/lottie/money_2.json',
+  };
 
   constructor() {
   }
