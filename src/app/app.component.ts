@@ -14,8 +14,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  isNotHomePage(): string {
-    if (!this.router.isActive('/home', false)) {
+  getClass(): string {
+    if (
+      !this.router.isActive('/home', false) &&
+      !this.router.isActive('/profile', false)
+    ) {
       return 'container mx-auto px-2';
     }
   }
