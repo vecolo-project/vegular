@@ -10,6 +10,8 @@ import { ContactSectionComponent } from './components/contact-section/contact-se
 import { TarifSectionComponent } from './components/tarif-section/tarif-section.component';
 import { ActuSectionComponent } from './components/actu-section/actu-section.component';
 import { TarifCardComponent } from './components/tarif-card/tarif-card.component';
+import { ActuCardComponent } from './components/actu-card/actu-card.component';
+import { HeaderCaptionComponent } from './components/header-caption/header-caption.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { TarifCardComponent } from './components/tarif-card/tarif-card.component
     ContactSectionComponent,
     TarifSectionComponent,
     ActuSectionComponent,
-    TarifCardComponent
+    TarifCardComponent,
+    ActuCardComponent,
+    HeaderCaptionComponent
   ],
   imports: [
     HomeRoutingModule,
