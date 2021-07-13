@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {StationMonitoring} from "../../../../shared/models";
-import {ChartDataSets, ChartOptions, ChartType} from "chart.js";
-import {Color, Label, PluginServiceGlobalRegistrationAndOptions,} from "ng2-charts";
+import {StationMonitoring} from '../../../../shared/models';
+import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
+import {Color, Label, PluginServiceGlobalRegistrationAndOptions,} from 'ng2-charts';
 import {format} from 'date-fns';
 
 @Component({
@@ -24,7 +24,7 @@ export class StationChartComponent implements OnInit, OnChanges {
     scales: {
       yAxes: [{
         ticks: {
-          fontColor: "#fefefe",
+          fontColor: '#fefefe',
           fontSize: 14,
           // stepSize: 1,
           beginAtZero: true,
@@ -33,7 +33,7 @@ export class StationChartComponent implements OnInit, OnChanges {
       }],
       xAxes: [{
         ticks: {
-          fontColor: "#fefefe",
+          fontColor: '#fefefe',
           fontSize: 14,
           // stepSize: 1,
           beginAtZero: true
@@ -52,16 +52,16 @@ export class StationChartComponent implements OnInit, OnChanges {
     scales: {
       yAxes: [{
         ticks: {
-          fontColor: "#fefefe",
+          fontColor: '#fefefe',
           fontSize: 14,
           // stepSize: 1,
           beginAtZero: true,
-          stepSize:1
+          stepSize: 1
         }
       }],
       xAxes: [{
         ticks: {
-          fontColor: "#fefefe",
+          fontColor: '#fefefe',
           fontSize: 14,
           // stepSize: 1,
           beginAtZero: true
@@ -108,7 +108,7 @@ export class StationChartComponent implements OnInit, OnChanges {
         label: 'Batterie de la station',
         spanGaps: true,
       }
-    ]
+    ];
     this.lineChartBatteryLabels = this.stationMonitorings?.filter((value, index) => index % moduloFilter === 0).map(m => format(new Date(m.createdAt), 'yyyy-MM-dd HH:mm:ss'));
   }
 
@@ -120,7 +120,7 @@ export class StationChartComponent implements OnInit, OnChanges {
         label: 'Vélos disponibles',
         spanGaps: true,
       }
-    ]
+    ];
     this.lineChartBikeLabels = this.stationMonitorings?.filter((value, index) => index % moduloFilter === 0).map(m => format(new Date(m.createdAt), 'yyyy-MM-dd HH:mm:ss'));
   }
 }
