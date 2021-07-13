@@ -100,27 +100,31 @@ export class StationChartComponent implements OnInit, OnChanges {
   }
 
 
-  private computeBatteryChart() {
+  private computeBatteryChart(): void {
     const moduloFilter = this.stationMonitorings?.length > 500 ? Math.round(this.stationMonitorings.length / 500) : 1;
     this.lineChartBatteryData = [
       {
-        data: this.stationMonitorings?.filter((value, index) => index % moduloFilter === 0).map(m => m.batteryPercent),
+        data: this.stationMonitorings
+          ?.filter((value, index) => index % moduloFilter === 0).map(m => m.batteryPercent),
         label: 'Batterie de la station',
         spanGaps: true,
       }
     ];
-    this.lineChartBatteryLabels = this.stationMonitorings?.filter((value, index) => index % moduloFilter === 0).map(m => format(new Date(m.createdAt), 'yyyy-MM-dd HH:mm:ss'));
+    this.lineChartBatteryLabels = this.stationMonitorings
+      ?.filter((value, index) => index % moduloFilter === 0).map(m => format(new Date(m.createdAt), 'yyyy-MM-dd HH:mm:ss'));
   }
 
-  private computeBikeChart() {
+  private computeBikeChart(): void {
     const moduloFilter = this.stationMonitorings?.length > 100 ? Math.round(this.stationMonitorings?.length / 100) : 1;
     this.lineChartBikeData = [
       {
-        data: this.stationMonitorings?.filter((value, index) => index % moduloFilter === 0).map(m => m.usedBikeSlot),
+        data: this.stationMonitorings
+          ?.filter((value, index) => index % moduloFilter === 0).map(m => m.usedBikeSlot),
         label: 'Vélos disponibles',
         spanGaps: true,
       }
     ];
-    this.lineChartBikeLabels = this.stationMonitorings?.filter((value, index) => index % moduloFilter === 0).map(m => format(new Date(m.createdAt), 'yyyy-MM-dd HH:mm:ss'));
+    this.lineChartBikeLabels = this.stationMonitorings
+      ?.filter((value, index) => index % moduloFilter === 0).map(m => format(new Date(m.createdAt), 'yyyy-MM-dd HH:mm:ss'));
   }
 }

@@ -13,6 +13,7 @@ export type RidesStatistics = {
   totalRide: number;
   day: number;
   totalLength: number;
+  totalDuration: number;
 };
 
 export type StationsStatistics = {
@@ -22,5 +23,10 @@ export type StationsStatistics = {
 
 export type BikesStatistics = {
   status: string;
+  total: number;
+};
+
+export type UserSubscriptionsStatistics = {
+  monthCount: string;
   total: number;
 };

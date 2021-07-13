@@ -2,7 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {StatisticsService} from '../../store/statistics.service';
 import {StatisticsQuery} from '../../store/statistics.query';
 import {Observable} from 'rxjs';
-import {BikesStatistics, IncomeStatistics, RidesStatistics, StationsStatistics, SubscriptionStatistics} from '../../../../shared/models';
+import {
+  BikesStatistics,
+  IncomeStatistics,
+  RidesStatistics,
+  StationsStatistics,
+  SubscriptionStatistics,
+  UserSubscriptionsStatistics
+} from '../../../../shared/models';
 import {getMonth, getYear} from 'date-fns';
 
 @Component({
@@ -14,7 +21,7 @@ export class StatisticsComponent implements OnInit {
 
   subscriptions: Observable<SubscriptionStatistics[]>;
   incomes: Observable<IncomeStatistics>;
-  userSubscriptions: Observable<number>;
+  userSubscriptions: Observable<UserSubscriptionsStatistics>;
   rides: Observable<RidesStatistics[]>;
   stations: Observable<StationsStatistics>;
   bikes: Observable<BikesStatistics[]>;

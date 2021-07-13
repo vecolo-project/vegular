@@ -1,1 +1,18 @@
-<p>subscriptions-statistics works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Abonnements ({{subscriptionCount}})</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <canvas baseChart
+            [data]="pieChartData"
+            [labels]="pieChartLabels"
+            [colors]="pieChartColors"
+            [chartType]="chartType"
+            [options]="pieChartOptions"
+            [legend]="pieChartLegend">
+    </canvas>
+  </mat-card-content>
+  <mat-card-actions class="flex justify-end">
+    <button mat-icon-button (click)="retrieveStatistics.emit()"><mat-icon>refresh</mat-icon></button>
+  </mat-card-actions>
+</mat-card>

@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {MatDatepicker} from '@angular/material/datepicker';
+import {getMonth, getYear, startOfMonth} from 'date-fns';
+import {FormControl} from '@angular/forms';
+import {UserSubscriptionsStatistics} from '../../../../shared/models';
 
 @Component({
   selector: 'app-user-subscriptions-statistics',
@@ -7,9 +11,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserSubscriptionsStatisticsComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  statistics: UserSubscriptionsStatistics;
+
+  @Output()
+  retrieveStatistics = new EventEmitter<{ month: number, year: number }>();
+
+  date = new FormControl(startOfMonth(new Date()));
+
+  constructor() {
+  }
 
   ngOnInit(): void {
+  }
+
+  onRetrieveStatistics(): void {
+    this.retrieveStatistics.emit();
+  }
+
+  chosenMonthHandler(date: Date, datePicker: MatDatepicker<any>): void {
+    this.retrieveStatistics.emit({
+      month: getMonth(date) + 1,
+      year: getYear(date)
+    });
+    datePicker.close();
   }
 
 }

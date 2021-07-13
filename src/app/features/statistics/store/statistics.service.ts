@@ -2,7 +2,14 @@ import {Injectable} from '@angular/core';
 import {StatisticsStore} from './statistics.store';
 import {HttpClientWrapper} from '../../../core/utils/httpClientWrapper';
 import {Snackbar} from '../../../shared/snackbar/snakbar';
-import {BikesStatistics, IncomeStatistics, RidesStatistics, StationsStatistics, SubscriptionStatistics} from '../../../shared/models';
+import {
+  BikesStatistics,
+  IncomeStatistics,
+  RidesStatistics,
+  StationsStatistics,
+  SubscriptionStatistics,
+  UserSubscriptionsStatistics
+} from '../../../shared/models';
 import {API_RESSOURCE_URI} from '../../../shared/api-ressource-uri/api-ressource-uri';
 import {HttpTools} from '../../../shared/http-tools/http-tools';
 
@@ -44,9 +51,9 @@ export class StatisticsService {
   }
 
   async getMonthUsersSubscriptionsStatistics(month: number, year: number): Promise<void> {
-    this.statisticsStore.update({usersSubscriptions: 0});
+    this.statisticsStore.update({usersSubscriptions: undefined});
     try {
-      const response = await this.http.get<number>(
+      const response = await this.http.get<UserSubscriptionsStatistics>(
         API_RESSOURCE_URI.STATISTICS_USER_SUBSCRIPTIONS + HttpTools.ObjectToHttpParams({month, year})
       );
       this.statisticsStore.update({usersSubscriptions: response});

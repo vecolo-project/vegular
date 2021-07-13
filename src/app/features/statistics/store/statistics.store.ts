@@ -1,11 +1,18 @@
 import {Store, StoreConfig} from '@datorama/akita';
 import {Injectable} from '@angular/core';
-import {BikesStatistics, IncomeStatistics, RidesStatistics, StationsStatistics, SubscriptionStatistics} from '../../../shared/models';
+import {
+  BikesStatistics,
+  IncomeStatistics,
+  RidesStatistics,
+  StationsStatistics,
+  SubscriptionStatistics,
+  UserSubscriptionsStatistics
+} from '../../../shared/models';
 
 export interface StatisticsState {
   subscriptions: SubscriptionStatistics[];
   incomes: IncomeStatistics;
-  usersSubscriptions: number;
+  usersSubscriptions: UserSubscriptionsStatistics;
   rides: RidesStatistics[];
   stations: StationsStatistics;
   bikes: BikesStatistics[];
@@ -15,7 +22,7 @@ export function createInitialState(): StatisticsState {
   return {
     subscriptions: [],
     incomes: undefined,
-    usersSubscriptions: 0,
+    usersSubscriptions: undefined,
     rides: [],
     stations: undefined,
     bikes: []

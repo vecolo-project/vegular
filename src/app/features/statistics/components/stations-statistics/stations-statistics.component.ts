@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {StationsStatistics} from '../../../../shared/models';
 
 @Component({
   selector: 'app-stations-statistics',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StationsStatisticsComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  statistics: StationsStatistics;
+
+  @Output()
+  refreshData = new EventEmitter<void>();
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
