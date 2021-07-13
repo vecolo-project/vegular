@@ -7,19 +7,15 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TarifCardComponent implements OnInit {
   @Input()
-  title: string;
-  @Input()
-  exergue: string;
-  @Input()
-  buttonLabel: string;
-  @Input()
-  price: number;
-  @Input()
-  includes: string[];
+  card: {
+    title: string;
+    price: number;
+    includes: string[];
+    exergue: string;
+    buttonLabel: string;
+  };
 
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.title);
-  }
+  ngOnInit(): void {}
 }

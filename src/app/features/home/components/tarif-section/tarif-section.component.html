@@ -1,16 +1,10 @@
 <section class="w-screen" id="tarif">
-  <!-- This example requires Tailwind CSS v2.0+ -->
+  <app-header-caption
+    [title]="'Tarif'"
+    [exergue]="'Votre abonnement au juste prix'"
+  ></app-header-caption>
   <div class="bg-white">
-    <div class="max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8">
-      <div class="sm:flex sm:flex-col sm:align-center">
-        <h1 class="text-5xl font-extrabold text-gray-900 sm:text-center">
-          Pricing Plans
-        </h1>
-        <p class="mt-5 text-xl text-gray-500 sm:text-center">
-          Start building for free, then add a site plan to go live. Account
-          plans unlock additional features.
-        </p>
-      </div>
+    <div class="max-w-7xl mx-auto pt-5 pb-24 px-4 sm:px-6 lg:px-8">
       <div
         class="
           mt-12
@@ -20,16 +14,9 @@
           xl:max-w-none xl:mx-0 xl:grid-cols-3
         "
       >
-        <ng-template *ngFor="let card of cards">
-          <p class="text-black">{{ card.title }}</p>
-          <app-tarif-card
-            [title]="card.title"
-            [price]="card.price"
-            [exergue]="card.exergue"
-            [buttonLabel]="card.buttonLabel"
-            [includes]="card.includes"
-          ></app-tarif-card>
-        </ng-template>
+        <div *ngFor="let card of cards">
+          <app-tarif-card [card]="card"></app-tarif-card>
+        </div>
       </div>
     </div>
   </div>

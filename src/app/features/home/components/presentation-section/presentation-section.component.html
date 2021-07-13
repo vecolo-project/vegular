@@ -1,5 +1,9 @@
 <section class="w-screen" id="presentation">
   <!-- Header -->
+  <app-header-caption
+    [title]="'Présentation'"
+    [exergue]="'Page de présentation de Vécolo'"
+  ></app-header-caption>
   <div class="py-24 h-full bg-gray-50 sm:py-32">
     <div
       class="
@@ -11,31 +15,6 @@
         lg:max-w-7xl lg:px-8
       "
     >
-      <h1
-        class="
-          text-4xl
-          leading-10
-          font-extrabold
-          tracking-tight
-          text-gray-900 text-center
-          sm:text-5xl sm:leading-none
-          lg:text-6xl
-        "
-      >
-        Présentation
-      </h1>
-      <p
-        class="
-          mt-6
-          max-w-3xl
-          mx-auto
-          text-xl
-          leading-normal
-          text-gray-500 text-center
-        "
-      >
-        Page de Présentation de vécolo
-      </p>
       <ng-lottie [options]="lottieMoneyOptions"></ng-lottie>
     </div>
   </div>

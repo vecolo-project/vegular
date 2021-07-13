@@ -2,12 +2,16 @@
   class="border border-gray-200 rounded-lg shadow-sm divide-y divide-gray-200"
 >
   <div class="p-6">
-    <h2 class="text-lg leading-6 font-medium text-gray-900">{{ title }}</h2>
+    <h2 class="text-lg leading-6 font-medium text-gray-900">
+      {{ card.title }}
+    </h2>
     <p class="mt-4 text-sm text-gray-500">
-      {{ exergue }}
+      {{ card.exergue }}
     </p>
     <p class="mt-8">
-      <span class="text-4xl font-extrabold text-gray-900">{{ price }}€</span>
+      <span class="text-4xl font-extrabold text-gray-900"
+        >{{ card.price }}€</span
+      >
       <span class="text-base font-medium text-gray-500">/mo</span>
     </p>
     <a
@@ -25,7 +29,7 @@
         text-white text-center
         hover:bg-gray-900
       "
-      >{{ buttonLabel }}</a
+      >{{ card.buttonLabel }}</a
     >
   </div>
   <div class="pt-6 pb-8 px-6">
@@ -33,7 +37,7 @@
       Qu'est ce qui est inclus ?
     </h3>
     <ul class="mt-6 space-y-4">
-      <li *ngFor="let element of includes" class="flex space-x-3">
+      <li *ngFor="let element of card.includes" class="flex space-x-3">
         <!-- Heroicon name: solid/check -->
         <svg
           class="flex-shrink-0 h-5 w-5 text-green-500"
