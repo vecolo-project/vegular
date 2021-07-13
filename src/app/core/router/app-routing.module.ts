@@ -60,8 +60,8 @@ const routes: Routes = [
     canActivate: [StaffGuardService]
   },
   {
-    path: routesPath.finances,
-    loadChildren: () => import('../../features/finances/finances.module').then(m => m.FinancesModule),
+    path: routesPath.statistics,
+    loadChildren: () => import('../../features/statistics/statistics.module').then(m => m.StatisticsModule),
     canActivate: [StaffGuardService]
   },
   {

@@ -1,0 +1,24 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Revenus</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="flex flex-col gap-4">
+    <mat-form-field>
+      <mat-hint>Année et mois</mat-hint>
+      <input matInput [matDatepicker]="dp" [formControl]="date">
+      <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+      <mat-datepicker #dp
+                      startView="multi-year"
+                      (monthSelected)="chosenMonthHandler($event,dp)"
+                      panelClass="example-month-picker">
+      </mat-datepicker>
+    </mat-form-field>
+    <span>
+      <strong>Revenus générés par les abonnements</strong> {{statistics?.totalSubscription || 0}} €
+    </span>
+    <span>
+      <strong>Revenus générés par les courses</strong> {{statistics?.totalRide || 0}} €
+    </span>
+
+  </mat-card-content>
+</mat-card>
