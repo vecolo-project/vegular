@@ -1,8 +1,8 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {icon, latLng, marker, MarkerClusterGroupOptions, tileLayer} from "leaflet";
-import "leaflet.markercluster"
-import {Station, StationMonitoringStatus} from "../../../../shared/models";
-import {routesPath} from "../../../../core/router/router.navigation";
+import {icon, latLng, marker, MarkerClusterGroupOptions, tileLayer} from 'leaflet';
+import 'leaflet.markercluster';
+import {Station, StationMonitoringStatus} from '../../../../shared/models';
+import {routesPath} from '../../../../core/router/router.navigation';
 
 @Component({
   selector: 'app-stations-map',
@@ -19,7 +19,7 @@ export class StationsMapComponent implements OnInit, OnChanges {
     layers: [
       tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
-          minZoom:11,
+          minZoom: 11,
           maxZoom: 19,
           attribution: 'Vecolo',
         })
@@ -32,12 +32,12 @@ export class StationsMapComponent implements OnInit, OnChanges {
     {
       showCoverageOnHover: true,
       removeOutsideVisibleBounds: true,
-      maxClusterRadius: 100,
-      animate:true,
-      animateAddingMarkers:true
-    }
+      maxClusterRadius: 80,
+      animate: true,
+      animateAddingMarkers: true
+    };
 
-  layers = []
+  layers = [];
 
   constructor() {
   }
@@ -69,7 +69,7 @@ export class StationsMapComponent implements OnInit, OnChanges {
                 <li>Batterie : ${station.stationMonitoring[0]?.batteryPercent.toFixed(2)}%</li>
                 <li>État : ${station.stationMonitoring[0]?.status.toUpperCase()}</li>
         `
-      )
+      );
   }
 
 }
