@@ -1,6 +1,5 @@
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
   <div class="flex flex-col gap-4">
-
     <app-user-subscriptions-statistics
       [statistics]="userSubscriptions | async"
       (retrieveStatistics)="onGetUserSubscriptionsStatistics($event.month,$event.year)"
@@ -9,21 +8,23 @@
       [statistics]="stations | async"
       (refreshData)="onGetStationStatistics()"
     ></app-stations-statistics>
+    <app-bikes-statistics
+      [statistics]="bikes | async"
+      (retrieveStatistics)="onGetBikesStatistics()"
+    ></app-bikes-statistics>
   </div>
-  <app-incomes-statistics
-    [statistics]="incomes | async"
-    (retrieveStatistics)="onGetIncomesStatistics($event.month,$event.year)"
-  ></app-incomes-statistics>
-  <app-bikes-statistics
-    [statistics]="bikes | async"
-    (retrieveStatistics)="onGetBikesStatistics()"
-  ></app-bikes-statistics>
-  <app-rides-statistics
-    [statistics]="rides | async"
-    (retrieveStatistics)="onGetRidersStatistics($event.month,$event.year)"
-  ></app-rides-statistics>
-  <app-subscriptions-statistics
-    [statistics]="subscriptions | async"
-    (retrieveStatistics)="onGetSubscriptionsStatistics()"
-  ></app-subscriptions-statistics>
+  <div class="flex flex-col gap-4">
+    <app-incomes-statistics
+      [statistics]="incomes | async"
+      (retrieveStatistics)="onGetIncomesStatistics($event.month,$event.year)"
+    ></app-incomes-statistics>
+    <app-rides-statistics
+      [statistics]="rides | async"
+      (retrieveStatistics)="onGetRidersStatistics($event.month,$event.year)"
+    ></app-rides-statistics>
+    <app-subscriptions-statistics
+      [statistics]="subscriptions | async"
+      (retrieveStatistics)="onGetSubscriptionsStatistics()"
+    ></app-subscriptions-statistics>
+  </div>
 </div>
