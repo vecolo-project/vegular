@@ -2,10 +2,11 @@ import {Injectable} from '@angular/core';
 import {UsersStore} from './users.store';
 import {HttpClientWrapper} from '../../../core/utils/httpClientWrapper';
 import {Snackbar} from '../../../shared/snackbar/snakbar';
-import {PutUser, RegisterUser, User} from '../../../shared/models';
+import {Invoice, PutUser, RegisterUser, Ride, Subscription, User} from '../../../shared/models';
 import {API_RESSOURCE_URI} from '../../../shared/api-ressource-uri/api-ressource-uri';
 import {UsersQuery} from './users.query';
 import {HttpTools} from '../../../shared/http-tools/http-tools';
+import {RouterNavigation} from '../../../core/router/router.navigation';
 
 @Injectable({providedIn: 'root'})
 export class UsersService {
@@ -13,7 +14,8 @@ export class UsersService {
     private usersStore: UsersStore,
     private http: HttpClientWrapper,
     private snackBar: Snackbar,
-    private usersQuery: UsersQuery
+    private usersQuery: UsersQuery,
+    private routerNavigation: RouterNavigation
   ) {
   }
 
@@ -93,6 +95,103 @@ export class UsersService {
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de l\'ajout de l\'utilisateur : ' + e.error.error
+      );
+    } finally {
+      this.usersStore.setLoading(false);
+    }
+  }
+
+  async getUserSubscriptions(userId: number, limit: number, offset: number): Promise<void> {
+    this.usersStore.setLoading(true);
+    this.usersStore.update({viewUserSubscriptions: []});
+    this.usersStore.update({viewUserSubscriptionsCount: 0});
+    try {
+      const response = await this.http.get<{ subscriptions: Subscription[], count: number }>(
+        API_RESSOURCE_URI.USER_SUBSCRIPTION + userId + '?' + HttpTools.ObjectToHttpParams({limit, offset})
+      );
+      this.usersStore.update({viewUserSubscriptions: response.subscriptions});
+      this.usersStore.update({viewUserSubscriptionsCount: response.count});
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la récupération des abonnements de l\'utilisateur : ' + e.error.error
+      );
+    } finally {
+      this.usersStore.setLoading(false);
+    }
+  }
+
+  async getUserInvoices(userId: number, limit: number, offset: number): Promise<void> {
+    this.usersStore.setLoading(true);
+    this.usersStore.update({viewUserInvoices: []});
+    this.usersStore.update({viewUserInvoicesCount: 0});
+    try {
+      const response = await this.http.get<{ invoices: Invoice[], count: number }>(
+        API_RESSOURCE_URI.USER_INVOICE + userId + '?' + HttpTools.ObjectToHttpParams({limit, offset})
+      );
+      this.usersStore.update({viewUserInvoices: response.invoices});
+      this.usersStore.update({viewUserInvoicesCount: response.count});
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la récupération des factures de l\'utilisateur : ' + e.error.error
+      );
+    } finally {
+      this.usersStore.setLoading(false);
+    }
+  }
+
+  async getUserRides(userId: number, limit: number, offset: number): Promise<void> {
+    this.usersStore.setLoading(true);
+    this.usersStore.update({viewUserRides: []});
+    this.usersStore.update({viewUserRidesCount: 0});
+    try {
+      const response = await this.http.get<{ rides: Ride[], count: number }>(
+        API_RESSOURCE_URI.RIDE_USER + userId + '?' + HttpTools.ObjectToHttpParams({limit, offset})
+      );
+      this.usersStore.update({viewUserRides: response.rides});
+      this.usersStore.update({viewUserRidesCount: response.count});
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la récupération des trajets de l\'utilisateur : ' + e.error.error
+      );
+    } finally {
+      this.usersStore.setLoading(false);
+    }
+  }
+
+  async sendUserMail(userId: number, subject: string, content: string): Promise<void> {
+    try {
+      await this.http.post(
+        API_RESSOURCE_URI.EMAIL_USER,
+        {
+          userId,
+          subject,
+          content
+        }
+      );
+      this.snackBar.success('L\'email a bien été envoyé');
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de l\'envoie du mail : ' + e.error.error
+      );
+    } finally {
+      this.usersStore.setLoading(false);
+    }
+  }
+
+  async sendNewsletterMail(subject: string, content: string): Promise<void> {
+    try {
+      await this.http.post(
+        API_RESSOURCE_URI.EMAIL_NEWSLETTER,
+        {
+          subject,
+          content
+        }
+      );
+      this.snackBar.success('La newsletter a bien été envoyé');
+      this.routerNavigation.gotoUserList();
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la newsletter : ' + e.error.error
       );
     } finally {
       this.usersStore.setLoading(false);

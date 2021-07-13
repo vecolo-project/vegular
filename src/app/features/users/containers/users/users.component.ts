@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {User, UserFormData} from '../../../../shared/models';
+import {Invoice, Ride, Subscription, User, UserFormData} from '../../../../shared/models';
 import {UsersQuery} from '../../store/users.query';
 import {UsersService} from '../../store/users.service';
 import {SessionQuery} from '../../../../core/store/session.query';
@@ -18,6 +18,13 @@ export class UsersComponent implements OnInit {
   userCount: Observable<number>;
   editUser: Observable<User>;
   usersLoading: Observable<boolean>;
+  viewUserRides: Observable<Ride[]>;
+  viewUserSubscriptions: Observable<Subscription[]>;
+  viewUserInvoices: Observable<Invoice[]>;
+  viewUserRidesCount: Observable<number>;
+  viewUserSubscriptionsCount: Observable<number>;
+  viewUserInvoicesCount: Observable<number>;
+
 
   constructor(
     public usersQuery: UsersQuery,
@@ -31,12 +38,22 @@ export class UsersComponent implements OnInit {
     this.userCount = this.usersQuery.selectCount$;
     this.usersLoading = this.usersQuery.isLoading$;
     this.editUser = this.usersQuery.selectEditUsers$;
+
+    this.viewUserRides = this.usersQuery.selectViewUserRides$;
+    this.viewUserSubscriptions = this.usersQuery.selectViewUserSubscriptions$;
+    this.viewUserInvoices = this.usersQuery.selectViewUserInvoices$;
+    this.viewUserRidesCount = this.usersQuery.selectViewUserRidesCount$;
+    this.viewUserSubscriptionsCount = this.usersQuery.selectViewUserSubscriptionsCount$;
+    this.viewUserInvoicesCount = this.usersQuery.selectViewUserInvoicesCount$;
   }
 
   ngOnInit(): void {
     if (this.isViewMode()) {
+      this.retrieveEditUser();
       const userId = Number.parseInt(this.route.snapshot.params.id, 10);
-      this.usersService.retrieveEditUser(userId);
+      this.getUserSubscriptions(userId, 10, 0);
+      this.getUserRides(userId, 10, 0);
+      this.getUserInvoices(userId, 10, 0);
     }
   }
 
@@ -56,6 +73,10 @@ export class UsersComponent implements OnInit {
     return this.router.isActive('/users/add', true);
   }
 
+  isNewsletterMode(): boolean {
+    return this.router.isActive('/users/newsletter', true);
+  }
+
   getUsers(limit: number, offset: number, searchQuery: string): void {
     this.usersService.getUsers(limit, offset, searchQuery);
   }
@@ -69,8 +90,20 @@ export class UsersComponent implements OnInit {
   }
 
   retrieveEditUser(): void {
-    const id = Number(this.route.snapshot.params.id);
+    const id = Number.parseInt(this.route.snapshot.params.id, 10);
     this.usersService.retrieveEditUser(id);
+  }
+
+  getUserSubscriptions(userId: number, limit: number, offset: number): void {
+    this.usersService.getUserSubscriptions(userId, limit, offset);
+  }
+
+  getUserRides(userId: number, limit: number, offset: number): void {
+    this.usersService.getUserRides(userId, limit, offset);
+  }
+
+  getUserInvoices(userId: number, limit: number, offset: number): void {
+    this.usersService.getUserInvoices(userId, limit, offset);
   }
 
   putUser(user: UserFormData): void {
@@ -87,5 +120,13 @@ export class UsersComponent implements OnInit {
   onViewUser(userId: number): void {
     this.usersQuery.setEditUser(userId);
     this.routerNavigation.gotoUserView(userId);
+  }
+
+  onSendUserEmail(userId: number, subject: string, content: string): void {
+    this.usersService.sendUserMail(userId, subject, content);
+  }
+
+  onSendNewsletterEmail(subject: string, content: string): void {
+    this.usersService.sendNewsletterMail(subject, content);
   }
 }

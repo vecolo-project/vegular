@@ -8,7 +8,7 @@ import { SessionQuery } from './core/store/session.query';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'Vecolo back office App';
+  title = 'Vecolo';
 
   constructor(private sessionQuery: SessionQuery, private router: Router) {}
 

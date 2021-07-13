@@ -8,6 +8,9 @@ export interface UsersState extends EntityState<User, number> {
   viewUserRides: Ride[];
   viewUserSubscriptions: Subscription[];
   viewUserInvoices: Invoice[];
+  viewUserRidesCount: number;
+  viewUserSubscriptionsCount: number;
+  viewUserInvoicesCount: number;
 }
 
 export function createInitialState(): UsersState {
@@ -16,7 +19,10 @@ export function createInitialState(): UsersState {
     editUser: undefined,
     viewUserRides: [],
     viewUserSubscriptions: [],
-    viewUserInvoices: []
+    viewUserInvoices: [],
+    viewUserRidesCount: 0,
+    viewUserSubscriptionsCount: 0,
+    viewUserInvoicesCount: 0
   };
 }
 

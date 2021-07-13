@@ -40,5 +40,17 @@ export const API_RESSOURCE_URI = {
   USER_SUBSCRIPTION: environment.API_URL + '/subscription/user/',
   // INVOICE
   BASE_INVOICE: environment.API_URL + '/invoice/',
-  USER_INVOICE: environment.API_URL + '/invoice/user/'
+  USER_INVOICE: environment.API_URL + '/invoice/user/',
+  // EMAIL
+  BASE_EMAIL: environment.API_URL + '/email/',
+  EMAIL_USER: environment.API_URL + '/email/simple',
+  EMAIL_NEWSLETTER: environment.API_URL + '/email/newsletter',
+
+  // STATISTICS
+  STATISTICS_SUBSCRIPTIONS: environment.API_URL + '/statistics/subscriptions',
+  STATISTICS_INCOMES: environment.API_URL + '/statistics/incomes?',
+  STATISTICS_USER_SUBSCRIPTIONS: environment.API_URL + '/statistics/user-subscriptions?',
+  STATISTICS_RIDES: environment.API_URL + '/statistics/rides?',
+  STATISTICS_STATIONS: environment.API_URL + '/statistics/stations',
+  STATISTICS_BIKES: environment.API_URL + '/statistics/bikes',
 };

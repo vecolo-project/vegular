@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Stations</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="flex flex-col gap-4">
+    <span>
+      <strong>Nombre de stations actives</strong> {{statistics?.total || 0}}
+    </span>
+    <span>
+      <strong>Puissance totale générée</strong> {{(statistics?.power | number: '1.0-2') || 0}} VA
+    </span>
+  </mat-card-content>
+  <mat-card-actions class="flex justify-end">
+    <button mat-icon-button (click)="refreshData.emit()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
