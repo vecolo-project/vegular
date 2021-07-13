@@ -1,5 +1,11 @@
 <nav class="space-y-1 bg-white rounded flex-1 ml-5">
-  <div class="link-container active"><button>Dashboard</button></div>
-  <div class="link-container"><button>Edition</button></div>
-  <div class="link-container"><button>Abonnement</button></div>
+  <div class="link-container active" (click)="changePage('dashboard')">
+    <button>Dashboard</button>
+  </div>
+  <div class="link-container" (click)="changePage('edit')">
+    <button>Edition</button>
+  </div>
+  <div class="link-container" (click)="changePage('subscription')">
+    <button>Abonnement</button>
+  </div>
 </nav>
