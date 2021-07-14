@@ -1,4 +1,4 @@
-<div class="mt-10 sm:mt-0">
+<div class="mt-10 sm:mt-0 mb-5">
   <div class="mt-5 md:mt-0 md:col-span-2">
     <form [formGroup]="form">
       <div class="shadow overflow-hidden sm:rounded-md">
@@ -33,27 +33,41 @@
           </div>
         </div>
         <div class="px-4 py-3 bg-red-600 text-right sm:px-6">
+          <button type="submit" class="save-button" (click)="onSubmitProfile()">
+            Enregistrer
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="mt-10 sm:mt-0">
+  <div class="mt-5 md:mt-0 md:col-span-2">
+    <form [formGroup]="formPassword">
+      <div class="shadow overflow-hidden sm:rounded-md">
+        <div class="px-4 py-5 bg-pink-900 sm:p-6">
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label class="text-gray-200">Actual Password</mat-label>
+            <input matInput type="password" formControlName="ACTUAL_PASSWORD" />
+          </mat-form-field>
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label class="text-gray-200">New password</mat-label>
+            <input matInput type="password" formControlName="NEW_PASSWORD" />
+          </mat-form-field>
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label class="text-gray-200">confirm new password</mat-label>
+            <input
+              matInput
+              type="password"
+              formControlName="CONFIRM_NEW_PASSWORD"
+            />
+          </mat-form-field>
+        </div>
+        <div class="px-4 py-3 bg-red-600 text-right sm:px-6">
           <button
             type="submit"
-            class="
-              inline-flex
-              justify-center
-              py-2
-              px-4
-              border border-transparent
-              shadow-sm
-              text-sm
-              font-medium
-              rounded-md
-              text-white
-              bg-purple-600
-              hover:bg-purple-700
-              focus:outline-none
-              focus:ring-2
-              focus:ring-offset-2
-              focus:ring-purple-500
-            "
-            (click)="onSubmit()"
+            class="save-button"
+            (click)="onSubmitPassword()"
           >
             Enregistrer
           </button>

@@ -68,3 +68,9 @@ export enum Role {
   STAFF = 'STAFF',
   CLIENT = 'CLIENT',
 }
+
+export type editedPassword = {
+  actualPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+};

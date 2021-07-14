@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SessionQuery } from 'src/app/core/store/session.query';
-import { EditUser, User } from 'src/app/shared/models';
+import { editedPassword, EditUser, User } from 'src/app/shared/models';
 import { ProfileService } from '../../store/profile.service';
 
 @Component({
@@ -27,5 +27,9 @@ export class ProfileComponent implements OnInit {
 
   editUser(user: EditUser): void {
     this.profileService.editUser(user);
+  }
+
+  changePassword(editedPassword: editedPassword): void {
+    this.profileService.editPassword(editedPassword);
   }
 }

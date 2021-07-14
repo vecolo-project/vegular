@@ -8,6 +8,7 @@
     <app-edit-profile
       [user]="user | async"
       (editUser)="editUser($event)"
+      (changePassword)="changePassword($event)"
       *ngSwitchCase="'edit'"
     ></app-edit-profile>
     <app-subscription *ngSwitchCase="'subscription'"></app-subscription>

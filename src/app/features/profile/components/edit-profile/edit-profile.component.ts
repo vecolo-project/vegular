@@ -1,7 +1,8 @@
 import { EventEmitter, Output } from '@angular/core';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EditUser, User } from 'src/app/shared/models';
+import { editedPassword, EditUser, User } from 'src/app/shared/models';
+import { matchPassword } from 'src/app/shared/validator/password';
 
 @Component({
   selector: 'app-edit-profile',
@@ -10,12 +11,16 @@ import { EditUser, User } from 'src/app/shared/models';
 })
 export class EditProfileComponent implements OnInit {
   form: FormGroup;
+  formPassword: FormGroup;
 
   @Input()
   user: User;
 
   @Output()
   editUser = new EventEmitter<EditUser>();
+
+  @Output()
+  changePassword = new EventEmitter<editedPassword>();
 
   constructor(@Inject(FormBuilder) fb) {
     this.form = fb.group({
@@ -24,6 +29,19 @@ export class EditProfileComponent implements OnInit {
       EMAIL: ['', [Validators.required]],
       PSEUDO: ['', [Validators.required]],
     });
+    this.formPassword = fb.group(
+      {
+        ACTUAL_PASSWORD: ['', [Validators.required, Validators.minLength(4)]],
+        NEW_PASSWORD: ['', [Validators.required, Validators.minLength(4)]],
+        CONFIRM_NEW_PASSWORD: [
+          '',
+          [Validators.required, Validators.minLength(4)],
+        ],
+      },
+      {
+        validator: matchPassword('NEW_PASSWORD', 'CONFIRM_NEW_PASSWORD'),
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -32,13 +50,23 @@ export class EditProfileComponent implements OnInit {
     this.form.controls.EMAIL.patchValue(this.user.email);
     this.form.controls.PSEUDO.patchValue(this.user.pseudo);
   }
-  onSubmit(): void {
+
+  onSubmitProfile(): void {
     const editedUser = {
-      firstName: this.form.value.FIRST_NAME,
-      lastName: this.form.value.LAST_NAME,
-      email: this.form.value.EMAIL,
-      pseudo: this.form.value.PSEUDO,
+      firstName: String(this.form.value.FIRST_NAME),
+      lastName: String(this.form.value.LAST_NAME),
+      email: String(this.form.value.EMAIL),
+      pseudo: String(this.form.value.PSEUDO),
     };
     this.editUser.emit(editedUser);
+  }
+
+  onSubmitPassword(): void {
+    const editedPassword = {
+      actualPassword: String(this.form.value.ACTUAL_PASSWORD),
+      newPassword: String(this.form.value.NEW_PASSWORD),
+      confirmNewPassword: String(this.form.value.CONFIRM_NEW_PASSWORD),
+    };
+    this.changePassword.emit(editedPassword);
   }
 }
