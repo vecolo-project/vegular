@@ -25,6 +25,7 @@
                [userInvoicesCount]="viewUserInvoicesCount | async"
                [userRidesCount]="viewUserRidesCount | async"
                [userSubscriptionsCount]="viewUserSubscriptionsCount | async"
+               [isStaff]="true"
                (getUserInvoices)="getUserInvoices($event.userId,$event.limit,$event.offset)"
                (getUserRides)="getUserRides($event.userId,$event.limit,$event.offset)"
                (getUserSubscriptions)="getUserSubscriptions($event.userId,$event.limit,$event.offset)"

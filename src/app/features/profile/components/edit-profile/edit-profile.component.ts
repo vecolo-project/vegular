@@ -1,7 +1,7 @@
 import { EventEmitter, Output } from '@angular/core';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { editedPassword, EditUser, User } from 'src/app/shared/models';
+import { EditedPassword, EditUser, User } from 'src/app/shared/models';
 import { matchPassword } from 'src/app/shared/validator/password';
 
 @Component({
@@ -20,7 +20,7 @@ export class EditProfileComponent implements OnInit {
   editUser = new EventEmitter<EditUser>();
 
   @Output()
-  changePassword = new EventEmitter<editedPassword>();
+  changePassword = new EventEmitter<EditedPassword>();
 
   constructor(@Inject(FormBuilder) fb) {
     this.form = fb.group({

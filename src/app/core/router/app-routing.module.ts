@@ -20,18 +20,8 @@ const routes: Routes = [
   },
   // Auth
   {
-    path: routesPath.subscription,
-    loadChildren: () => import('../../features/user-subscription/user-subscription.module').then(m => m.UserSubscriptionModule),
-    canActivate: [AuthGuardService]
-  },
-  {
     path: routesPath.userRides,
     loadChildren: () => import('../../features/user-rides/user-rides.module').then(m => m.UserRidesModule),
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: routesPath.issue,
-    loadChildren: () => import('../../features/user-issues/user-issues.module').then(m => m.UserIssuesModule),
     canActivate: [AuthGuardService]
   },
   {

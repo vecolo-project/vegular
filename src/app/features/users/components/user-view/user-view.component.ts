@@ -15,6 +15,9 @@ export class UserViewComponent implements OnInit {
   user: User;
 
   @Input()
+  isStaff: boolean;
+
+  @Input()
   userSubscriptions: Subscription[];
 
   @Input()
@@ -95,7 +98,7 @@ export class UserViewComponent implements OnInit {
   }
 
   hasSubscriptions(): boolean {
-    return this.user?.subscriptions.length > 0;
+    return this.user?.subscriptions?.length > 0;
   }
 
   addMonth(date: Date, month: number): Date {
