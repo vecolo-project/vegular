@@ -54,5 +54,12 @@ export class ProfileService {
     this.profileStore.set(plans.plans);
   }
 
-  async takeSubscription(subscription: Subscription): Promise<void> {}
+  async subscribeToAPlan(sub: { plan: Plan; renew: boolean }): Promise<void> {
+    const res = await this.http.post<Subscription>(
+      API_RESSOURCE_URI.ADD_SUBSCRIPTION,
+      sub
+    );
+    this.profileStore.update({ userPlan: res.id });
+  }
+  async getUserPlan(): Promise<void> {}
 }

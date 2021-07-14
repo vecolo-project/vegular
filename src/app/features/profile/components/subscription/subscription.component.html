@@ -1,6 +1,11 @@
 <!-- 
   Reprendre la tarif card et la mettre en avant quand elle est "active"
 -->
-<div *ngFor="let plan of plans">
-  <p>{{ plan.name }}</p>
+<div class="grid grid-cols-3 gap-4 mt-10">
+  <div *ngFor="let plan of plans" class="mb-10 col-span-3 sm:col-span-1">
+    <app-subsribe-card
+      (subscribeToPlan)="subscribe($event)"
+      [plan]="plan"
+    ></app-subsribe-card>
+  </div>
 </div>

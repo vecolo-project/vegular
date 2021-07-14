@@ -1,0 +1,28 @@
+<mat-card class="bg-gray-600">
+  <h2>{{ plan.name }}</h2>
+  <div class="grid grid-cols-2 gap-2">
+    <div>
+      <div class="border border-yellow-200 p-4 rounded mb-4 text-center">
+        <mat-label>Renouveler automatiquement ?</mat-label>
+        <mat-slide-toggle
+          (click)="toggleRenew()"
+          color="warn"
+        ></mat-slide-toggle>
+      </div>
+      <button
+        (click)="onSubscribe()"
+        mat-button
+        class="text-blue-900 bg-yellow-200"
+      >
+        S'abonner
+      </button>
+    </div>
+    <div class="col-span-2 sm:col-span-1 text-right">
+      <p class="font-semibold text-xl">
+        <strong>Prix mensuel : </strong>{{ plan.price }} €
+      </p>
+      <p><strong>Coût par minutes : </strong>{{ plan.costPerMinute }}</p>
+      <p><strong>Minutes gratuites : </strong>{{ plan.freeMinutes }}</p>
+    </div>
+  </div>
+</mat-card>

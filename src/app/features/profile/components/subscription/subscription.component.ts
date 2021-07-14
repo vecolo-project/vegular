@@ -10,6 +10,9 @@ export class SubscriptionComponent implements OnInit {
   @Output()
   getPlans = new EventEmitter<void>();
 
+  @Output()
+  subscribeToPlan = new EventEmitter<{ plan: Plan; autoRenew: boolean }>();
+
   @Input()
   plans: Plan[];
 
@@ -17,5 +20,8 @@ export class SubscriptionComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPlans.emit();
+  }
+  subscribe(plan: { plan: Plan; autoRenew: boolean }): void {
+    this.subscribeToPlan.emit(plan);
   }
 }

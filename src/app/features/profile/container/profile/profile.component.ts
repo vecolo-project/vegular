@@ -42,4 +42,9 @@ export class ProfileComponent implements OnInit {
   getActivePlans(): void {
     this.profileService.getActivePlans();
   }
+
+  subscribeToPlan(sub: { plan: Plan; renew: boolean }): void {
+    console.log(sub);
+    this.profileService.subscribeToAPlan(sub);
+  }
 }

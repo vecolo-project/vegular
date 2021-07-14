@@ -7,7 +7,7 @@
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>
-      <mat-icon>edit</mat-icon>&nbsp;Edité mon profile
+      <mat-icon>edit</mat-icon>&nbsp;Editer mon profile
     </ng-template>
     <app-edit-profile
       [user]="user | async"
@@ -21,6 +21,7 @@
     </ng-template>
     <app-subscription
       [plans]="plans | async"
+      (subscribeToPlan)="subscribeToPlan($event)"
       (getPlans)="getActivePlans()"
     ></app-subscription>
   </mat-tab>
