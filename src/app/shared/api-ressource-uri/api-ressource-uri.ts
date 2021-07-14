@@ -46,6 +46,7 @@ export const API_RESSOURCE_URI = {
   // EMAIL
   BASE_EMAIL: environment.API_URL + '/email/',
   EMAIL_USER: environment.API_URL + '/email/simple',
+  EMAIL_CONTACT: environment.API_URL + '/email/contact',
   EMAIL_NEWSLETTER: environment.API_URL + '/email/newsletter',
 
   // STATISTICS
