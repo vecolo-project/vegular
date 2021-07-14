@@ -1,7 +1,0 @@
-.link-container {
-  @apply flex items-center px-3 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-900 text-sm font-medium rounded-md;
-}
-
-.link-container.active {
-  @apply bg-purple-200 rounded-b-none;
-}

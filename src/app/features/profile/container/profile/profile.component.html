@@ -1,16 +1,24 @@
-<div class="flex justify-between flex-col sm:flex-row">
-  <app-vertical-nav
-    (changeCurrentPage)="changeCurrentPage($event)"
-    [currentPage]="currentPage"
-  ></app-vertical-nav>
-  <main [ngSwitch]="currentPage" class="container md:mr-5">
-    <p *ngSwitchCase="'dashboard'">ICI LA USER VIEW</p>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>local_offer</mat-icon>&nbsp;Mes infos
+    </ng-template>
+    <p>ICI LA USER VIEW</p>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>local_offer</mat-icon>&nbsp;Edité mon profile
+    </ng-template>
     <app-edit-profile
       [user]="user | async"
       (editUser)="editUser($event)"
       (changePassword)="changePassword($event)"
-      *ngSwitchCase="'edit'"
     ></app-edit-profile>
-    <app-subscription *ngSwitchCase="'subscription'"></app-subscription>
-  </main>
-</div>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>local_offer</mat-icon>&nbsp;Abonnement
+    </ng-template>
+    <app-subscription></app-subscription>
+  </mat-tab>
+</mat-tab-group>

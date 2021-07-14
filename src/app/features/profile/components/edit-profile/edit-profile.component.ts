@@ -63,9 +63,9 @@ export class EditProfileComponent implements OnInit {
 
   onSubmitPassword(): void {
     const editedPassword = {
-      actualPassword: String(this.form.value.ACTUAL_PASSWORD),
-      newPassword: String(this.form.value.NEW_PASSWORD),
-      confirmNewPassword: String(this.form.value.CONFIRM_NEW_PASSWORD),
+      actualPassword: String(this.formPassword.value.ACTUAL_PASSWORD),
+      newPassword: String(this.formPassword.value.NEW_PASSWORD),
+      confirmNewPassword: String(this.formPassword.value.CONFIRM_NEW_PASSWORD),
     };
     this.changePassword.emit(editedPassword);
   }

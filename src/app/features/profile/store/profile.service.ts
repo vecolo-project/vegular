@@ -32,7 +32,10 @@ export class ProfileService {
 
   async editPassword(editedPassword: editedPassword): Promise<void> {
     try {
-      await this.http.patch<User>(API_RESSOURCE_URI.PUT_ME, editedPassword);
+      await this.http.patch<User>(
+        API_RESSOURCE_URI.CHANGE_PASSWORD,
+        editedPassword
+      );
       this.snackBar.success('mot de passe modifier avec succès');
     } catch (e) {
       this.snackBar.warnning(
