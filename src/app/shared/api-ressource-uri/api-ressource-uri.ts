@@ -6,11 +6,11 @@ export const API_RESSOURCE_URI = {
   REGISTER: environment.API_URL + '/auth/register',
   // Users
   GET_USERS: environment.API_URL + '/user/',
-  GET_CURRENT_USER: environment.API_URL + '/user/current',
+  GET_CURRENT_USER: environment.API_URL + '/user/me',
   DELETE_USER: environment.API_URL + '/user/',
   PUT_USER: environment.API_URL + '/user/',
   POST_USER: environment.API_URL + '/user/',
-  PUT_ME: environment.API_URL + '/user/current',
+  PUT_ME: environment.API_URL + '/user/me',
   CHANGE_PASSWORD: environment.API_URL + '/user/password',
   // Stations
   BASE_STATIONS: environment.API_URL + '/station/',

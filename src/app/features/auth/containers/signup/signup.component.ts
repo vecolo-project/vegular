@@ -10,7 +10,6 @@ import { matchPassword } from 'src/app/shared/validator/password';
 })
 export class SignupComponent implements OnInit {
   form: FormGroup;
-  password: string;
 
   constructor(@Inject(FormBuilder) fb, private sessionService: SessionService) {
     this.form = fb.group(
@@ -25,7 +24,7 @@ export class SignupComponent implements OnInit {
         NEWSLETTER: [''],
       },
       {
-        validator: matchPassword('NEW_PASSWORD', 'CONFIRM_NEW_PASSWORD'),
+        validator: matchPassword('PASSWORD', 'CONFIRM_PASSWORD'),
       }
     );
   }
