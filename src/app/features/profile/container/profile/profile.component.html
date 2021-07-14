@@ -19,6 +19,9 @@
     <ng-template mat-tab-label>
       <mat-icon>local_offer</mat-icon>&nbsp;Abonnement
     </ng-template>
-    <app-subscription></app-subscription>
+    <app-subscription
+      [plans]="plans | async"
+      (getPlans)="getActivePlans()"
+    ></app-subscription>
   </mat-tab>
 </mat-tab-group>

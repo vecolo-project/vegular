@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SessionQuery } from 'src/app/core/store/session.query';
-import { editedPassword, EditUser, User } from 'src/app/shared/models';
+import { editedPassword, EditUser, Plan, User } from 'src/app/shared/models';
+import ProfileQuery from '../../store/profile.query';
 import { ProfileService } from '../../store/profile.service';
 
 @Component({
@@ -10,13 +11,18 @@ import { ProfileService } from '../../store/profile.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  constructor(
-    private sessionQuery: SessionQuery,
-    private profileService: ProfileService
-  ) {}
-
   currentPage = 'dashboard';
   user: Observable<User>;
+  plans: Observable<Plan[]>;
+
+  constructor(
+    private sessionQuery: SessionQuery,
+    private profileService: ProfileService,
+    private profileQuery: ProfileQuery
+  ) {
+    this.plans = this.profileQuery.selectPlanArray$;
+  }
+
   ngOnInit(): void {
     this.user = this.sessionQuery.selectUser$;
   }
@@ -31,5 +37,9 @@ export class ProfileComponent implements OnInit {
 
   changePassword(editedPassword: editedPassword): void {
     this.profileService.editPassword(editedPassword);
+  }
+
+  getActivePlans(): void {
+    this.profileService.getActivePlans();
   }
 }

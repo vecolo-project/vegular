@@ -37,6 +37,7 @@ export const API_RESSOURCE_URI = {
   UPLOAD_IMAGE_MODEL: environment.API_URL + '/uploads/bike-model/',
   // PLAN
   BASE_PLAN: environment.API_URL + '/plan/',
+  PLAN_ACTIVE: environment.API_URL + '/plan/active',
   // SUBSCRIPTION
   BASE_SUBSCRIPTION: environment.API_URL + '/subscription/',
   USER_SUBSCRIPTION: environment.API_URL + '/subscription/user/',
