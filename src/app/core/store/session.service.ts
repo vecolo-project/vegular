@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {SessionStore} from './session.store';
-import {RouterNavigation} from '../router/router.navigation';
-import {User} from '../../shared/models/user.model';
-import {HttpClientWrapper} from '../utils/httpClientWrapper';
-import {API_RESSOURCE_URI} from '../../shared/api-ressource-uri/api-ressource-uri';
-import {Snackbar} from '../../shared/snackbar/snakbar';
+import { Injectable } from '@angular/core';
+import { SessionStore } from './session.store';
+import { RouterNavigation } from '../router/router.navigation';
+import { RegisterUser, User } from '../../shared/models';
+import { HttpClientWrapper } from '../utils/httpClientWrapper';
+import { API_RESSOURCE_URI } from '../../shared/api-ressource-uri/api-ressource-uri';
+import { Snackbar } from '../../shared/snackbar/snakbar';
 
 @Injectable({ providedIn: 'root' })
 export class SessionService {
@@ -36,5 +36,17 @@ export class SessionService {
   logout(): void {
     this.sessionStore.logout();
     this.routerNavigation.gotoHome();
+  }
+
+  async register(user: RegisterUser): Promise<void> {
+    try {
+      await this.http.post<User>(API_RESSOURCE_URI.REGISTER, user);
+      this.snackBar.success('Votre compte a bien été crée');
+      this.routerNavigation.gotoAuth();
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur de la création de votre compte : ' + e.error.error
+      );
+    }
   }
 }

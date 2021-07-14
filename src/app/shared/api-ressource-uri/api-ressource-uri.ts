@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 export const API_RESSOURCE_URI = {
   // Auth
   LOGIN: environment.API_URL + '/auth/login/',
+  REGISTER: environment.API_URL + '/auth/register',
   // Users
   GET_USERS: environment.API_URL + '/user/',
   GET_CURRENT_USER: environment.API_URL + '/user/current',

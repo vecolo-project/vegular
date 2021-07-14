@@ -26,7 +26,7 @@ export class EditProfileComponent implements OnInit {
     this.form = fb.group({
       FIRST_NAME: ['', [Validators.required]],
       LAST_NAME: ['', [Validators.required]],
-      EMAIL: ['', [Validators.required]],
+      EMAIL: ['', [Validators.required, Validators.email]],
       PSEUDO: ['', [Validators.required]],
     });
     this.formPassword = fb.group(
