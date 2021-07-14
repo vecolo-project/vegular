@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit {
   currentPage = 'dashboard';
   user: Observable<User>;
   plans: Observable<Plan[]>;
+  userPlan: Observable<number | null>;
 
   constructor(
     private sessionQuery: SessionQuery,
@@ -25,6 +26,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.sessionQuery.selectUser$;
+    this.userPlan = this.profileQuery.selectUserPlan$;
   }
 
   changeCurrentPage(newPage: string): void {
@@ -43,8 +45,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.getActivePlans();
   }
 
-  subscribeToPlan(sub: { plan: Plan; renew: boolean }): void {
-    console.log(sub);
+  subscribeToPlan(sub: { plan: Plan; autoRenew: boolean }): void {
     this.profileService.subscribeToAPlan(sub);
   }
 }

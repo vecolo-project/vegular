@@ -42,6 +42,7 @@ export const API_RESSOURCE_URI = {
   BASE_SUBSCRIPTION: environment.API_URL + '/subscription/',
   USER_SUBSCRIPTION: environment.API_URL + '/subscription/user/',
   ADD_SUBSCRIPTION: environment.API_URL + '/subscription/add',
+  MY_SUBSCRIPTION: environment.API_URL + '/subscription/me',
   // INVOICE
   BASE_INVOICE: environment.API_URL + '/invoice/',
   USER_INVOICE: environment.API_URL + '/invoice/user/',

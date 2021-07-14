@@ -9,6 +9,7 @@ import { ProfileState, ProfileStore } from './profile.store';
 })
 export default class ProfileQuery extends QueryEntity<ProfileState, Plan> {
   selectPlanArray$: Observable<Plan[]> = this.selectAll();
+  selectUserPlan$: Observable<number | null> = this.select('userPlan');
   constructor(protected store: ProfileStore) {
     super(store);
   }
