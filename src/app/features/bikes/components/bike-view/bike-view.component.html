@@ -97,6 +97,7 @@
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="rideDisplayedColumns"></tr>
         <tr mat-row
+            (click)="onViewRideBike(row)"
             *matRowDef="let row; columns: rideDisplayedColumns"></tr>
       </table>
       <mat-paginator

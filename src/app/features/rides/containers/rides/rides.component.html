@@ -1,1 +1,12 @@
-<p>rides works!</p>
+<div class="mt-10">
+  <app-ride-list *ngIf="isListRide()"
+                 [rideCount]="rideCount | async"
+                 [rideList]="rides | async"
+                 (getRides)="onGetRides($event.limit,$event.offset,$event.searchQuery)"
+                 (viewRide)="onViewRide($event)"
+  ></app-ride-list>
+  <app-ride-view *ngIf="isViewRide()"
+  ></app-ride-view>
+  <app-ride-add *ngIf="isAddRide()"
+  ></app-ride-add>
+</div>
