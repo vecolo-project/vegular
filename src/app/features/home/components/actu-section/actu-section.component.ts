@@ -9,7 +9,7 @@ export class ActuSectionComponent implements OnInit {
   constructor() {}
   public cards = [
     {
-      title: 'Comment Vécolo a changer ma manière de jouer a pokemon',
+      title: 'Comment Vécolo a changer ma manière de jouer à pokemon',
       publishDate: '16 Mars, 2021',
       imgUrl:
         'https://images.unsplash.com/photo-1542887486-c0aeb6d2fc46?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80',
@@ -31,7 +31,7 @@ export class ActuSectionComponent implements OnInit {
         'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     },
     {
-      title: 'Comment Vécolo a changer la vie de Frederic',
+      title: 'Comment Vécolo a changé la vie de Frederic',
       publishDate: '12 Février, 1912',
       imgUrl:
         'https://images.unsplash.com/photo-1456934559919-e9195dd7c553?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
