@@ -1,4 +1,4 @@
-import {Bike, Station, User} from ".";
+import {Bike, Station, User} from '.';
 
 export type Ride = {
   id: number;
