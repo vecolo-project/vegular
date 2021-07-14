@@ -69,7 +69,7 @@ export enum Role {
   CLIENT = 'CLIENT',
 }
 
-export type editedPassword = {
+export type EditedPassword = {
   actualPassword: string;
   newPassword: string;
   confirmNewPassword: string;

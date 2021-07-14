@@ -9,8 +9,11 @@ import {UserViewComponent} from './components/user-view/user-view.component';
 import {UserNewsletterComponent} from './components/user-newsletter/user-newsletter.component';
 
 @NgModule({
-  declarations: [UsersComponent, UserListComponent, UsersFormComponent, UserViewComponent, UserNewsletterComponent],
-  imports: [UsersRoutingModule, CommonModule, SharedModule],
+    declarations: [UsersComponent, UserListComponent, UsersFormComponent, UserViewComponent, UserNewsletterComponent],
+    imports: [UsersRoutingModule, CommonModule, SharedModule],
+    exports: [
+        UserViewComponent
+    ]
 })
 export class UsersModule {
 }

@@ -3,7 +3,18 @@
     <ng-template mat-tab-label>
       <mat-icon>dashboard</mat-icon>&nbsp;Mes infos
     </ng-template>
-    <p>ICI LA USER VIEW</p>
+    <app-user-view
+      [user]="user | async"
+      [userRides]="userRides | async"
+      [userSubscriptions]="userSubscriptions | async"
+      [userInvoices]="userInvoices | async"
+      [userRidesCount]="userRidesCount | async"
+      [userSubscriptionsCount]="userSubscriptionsCount | async"
+      [userInvoicesCount]="userInvoicesCount | async"
+      (getUserSubscriptions)="getUserSubscriptions($event.limit,$event.offset)"
+      (getUserRides)="getUserRides($event.limit,$event.offset)"
+      (getUserInvoices)="getUserInvoices($event.limit,$event.offset)"
+    ></app-user-view>
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>
