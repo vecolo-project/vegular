@@ -10,6 +10,7 @@ export const API_RESSOURCE_URI = {
   PUT_USER: environment.API_URL + '/user/',
   POST_USER: environment.API_URL + '/user/',
   PUT_ME: environment.API_URL + '/user/current',
+  CHANGE_PASSWORD: environment.API_URL + '/user/password',
   // Stations
   BASE_STATIONS: environment.API_URL + '/station/',
   // MAP
