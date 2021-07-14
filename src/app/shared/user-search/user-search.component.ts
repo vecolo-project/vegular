@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Observable} from "rxjs";
-import {User} from "../models";
-import {FormControl, Validators} from "@angular/forms";
-import {UsersQuery} from "../../features/users/store/users.query";
-import {UsersService} from "../../features/users/store/users.service";
+import {Observable} from 'rxjs';
+import {User} from '../models';
+import {FormControl, Validators} from '@angular/forms';
+import {UsersQuery} from '../../features/users/store/users.query';
+import {UsersService} from '../../features/users/store/users.service';
 
 @Component({
   selector: 'app-user-search',

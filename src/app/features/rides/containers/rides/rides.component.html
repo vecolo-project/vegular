@@ -8,5 +8,6 @@
   <app-ride-view *ngIf="isViewRide()"
   ></app-ride-view>
   <app-ride-add *ngIf="isAddRide()"
+                (submitRide)="onPostRide($event)"
   ></app-ride-add>
 </div>
