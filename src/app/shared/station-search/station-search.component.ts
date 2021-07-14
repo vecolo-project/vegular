@@ -17,6 +17,9 @@ export class StationSearchComponent implements OnInit, OnChanges {
   @Input()
   initialValue: Station;
 
+  @Input()
+  label: string;
+
   @Output()
   searchEvent = new EventEmitter<string>();
 
