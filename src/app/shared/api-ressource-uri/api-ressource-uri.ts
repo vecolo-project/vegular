@@ -3,13 +3,14 @@ import { environment } from '../../../environments/environment';
 export const API_RESSOURCE_URI = {
   // Auth
   LOGIN: environment.API_URL + '/auth/login/',
+  REGISTER: environment.API_URL + '/auth/register',
   // Users
   GET_USERS: environment.API_URL + '/user/',
-  GET_CURRENT_USER: environment.API_URL + '/user/current',
+  GET_CURRENT_USER: environment.API_URL + '/user/me',
   DELETE_USER: environment.API_URL + '/user/',
   PUT_USER: environment.API_URL + '/user/',
   POST_USER: environment.API_URL + '/user/',
-  PUT_ME: environment.API_URL + '/user/current',
+  PUT_ME: environment.API_URL + '/user/me',
   CHANGE_PASSWORD: environment.API_URL + '/user/password',
   // Stations
   BASE_STATIONS: environment.API_URL + '/station/',
@@ -37,9 +38,12 @@ export const API_RESSOURCE_URI = {
   UPLOAD_IMAGE_MODEL: environment.API_URL + '/uploads/bike-model/',
   // PLAN
   BASE_PLAN: environment.API_URL + '/plan/',
+  PLAN_ACTIVE: environment.API_URL + '/plan/active',
   // SUBSCRIPTION
   BASE_SUBSCRIPTION: environment.API_URL + '/subscription/',
   USER_SUBSCRIPTION: environment.API_URL + '/subscription/user/',
+  ADD_SUBSCRIPTION: environment.API_URL + '/subscription/add',
+  MY_SUBSCRIPTION: environment.API_URL + '/subscription/me',
   // INVOICE
   BASE_INVOICE: environment.API_URL + '/invoice/',
   USER_INVOICE: environment.API_URL + '/invoice/user/',

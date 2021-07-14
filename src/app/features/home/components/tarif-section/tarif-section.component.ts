@@ -11,14 +11,14 @@ export class TarifSectionComponent implements OnInit {
     {
       title: 'Véco-Free',
       price: 0.0,
-      exergue: "Pas de frais mensuel, on paye a l'utilisation !",
+      exergue: "Pas de frais mensuel, on paye à l'utilisation !",
       buttonLabel: 'Acheter Véco-Free',
       includes: ['Orci neque eget pellentesque.'],
     },
     {
       title: 'Véco-Plus',
       price: 24.0,
-      exergue: 'Le basic pour se déplacer a Paris',
+      exergue: 'Le basic pour se déplacer à Paris',
       buttonLabel: 'Acheter Véco-Plus',
       includes: [
         'Orci neque eget pellentesque.',
@@ -28,7 +28,7 @@ export class TarifSectionComponent implements OnInit {
     {
       title: "Véco-L'eau",
       price: 32.0,
-      exergue: 'Pour les aventiriers du perif confirmé',
+      exergue: 'Pour les aventiriers du périf confirmé',
       buttonLabel: "Acheter Véco-L'eau",
       includes: [
         'Orci neque eget pellentesque.',

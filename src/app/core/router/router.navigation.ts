@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 export const routesPath = {
   auth: 'auth',
@@ -24,13 +24,12 @@ export const routesPath = {
   stations: 'stations',
   stationView: 'stations/view',
   rides: 'rides',
-  ridesView: 'rides/view'
+  ridesView: 'rides/view',
 };
 
 @Injectable()
 export class RouterNavigation {
-  constructor(private router: Router) {
-  }
+  constructor(private router: Router) {}
 
   gotoAuth(): void {
     this.router.navigate([routesPath.auth]);
@@ -103,5 +102,4 @@ export class RouterNavigation {
   gotoStatistics(): void {
     this.router.navigate([routesPath.statistics]);
   }
-
 }

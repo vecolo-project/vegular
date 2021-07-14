@@ -5,10 +5,12 @@ import { API_RESSOURCE_URI } from 'src/app/shared/api-ressource-uri/api-ressourc
 import {
   editedPassword,
   EditUser,
+  Plan,
   Subscription,
   User,
 } from 'src/app/shared/models';
 import { Snackbar } from 'src/app/shared/snackbar/snakbar';
+import { ProfileStore } from './profile.store';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +19,8 @@ export class ProfileService {
   constructor(
     private http: HttpClientWrapper,
     private snackBar: Snackbar,
-    private sessionStore: SessionStore
+    private sessionStore: SessionStore,
+    private profileStore: ProfileStore
   ) {}
 
   async editUser(user: EditUser): Promise<void> {
@@ -44,5 +47,26 @@ export class ProfileService {
     }
   }
 
-  async takeSubscription(subscription: Subscription): Promise<void> {}
+  async getActivePlans(): Promise<void> {
+    const plans = await this.http.get<{ plans: Plan[]; count: number }>(
+      API_RESSOURCE_URI.PLAN_ACTIVE
+    );
+    this.profileStore.set(plans.plans);
+  }
+
+  async subscribeToAPlan(sub: {
+    plan: Plan;
+    autoRenew: boolean;
+  }): Promise<void> {
+    const res = await this.http.post<Subscription>(
+      API_RESSOURCE_URI.ADD_SUBSCRIPTION,
+      sub
+    );
+    this.profileStore.update({ userPlan: res.id });
+  }
+  async getUserPlan(): Promise<void> {
+    const res = await this.http.get<any>(API_RESSOURCE_URI.MY_SUBSCRIPTION);
+    console.log(res);
+    this.profileStore.update({ userPlan: res.id });
+  }
 }

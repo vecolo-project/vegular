@@ -46,9 +46,9 @@ export type RegisterUser = {
   birthDate: Date;
   email: string;
   pseudo: string;
-  newsletter: boolean;
-  role: Role;
-  isActive: boolean;
+  newsletter?: boolean;
+  role?: Role;
+  isActive?: boolean;
 };
 
 export type PutUser = {

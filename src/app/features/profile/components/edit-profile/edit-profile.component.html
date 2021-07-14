@@ -33,7 +33,12 @@
           </div>
         </div>
         <div class="px-4 py-3 bg-gray-500 text-right sm:px-6">
-          <button type="submit" class="save-button" (click)="onSubmitProfile()">
+          <button
+            type="submit"
+            class="save-button"
+            (click)="onSubmitProfile()"
+            [disabled]="form.invalid"
+          >
             Enregistrer
           </button>
         </div>
@@ -68,6 +73,7 @@
             type="submit"
             class="save-button"
             (click)="onSubmitPassword()"
+            [disabled]="formPassword.invalid"
           >
             Enregistrer
           </button>
