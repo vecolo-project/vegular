@@ -17,6 +17,7 @@ export class RideAddComponent implements OnInit {
 
   constructor(@Inject(FormBuilder) fb) {
     this.rideForm = fb.group({
+      DATE: [new Date(), [Validators.required]],
       DURATION: [0, [Validators.required, Validators.min(1)]],
       LENGTH: [0, [Validators.required, Validators.min(1)]],
       INVOICE_AMOUNT: [0, [Validators.required, Validators.min(0)]],
@@ -75,6 +76,7 @@ export class RideAddComponent implements OnInit {
       invoiceAmount: this.rideForm.value.INVOICE_AMOUNT,
       startStation: this.rideForm.value.START_STATION,
       endStation: this.rideForm.value.END_STATION,
+      createdAt: this.rideForm.value.DATE
     };
     this.submitRide.emit(ride);
   }

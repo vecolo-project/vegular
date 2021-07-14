@@ -15,7 +15,7 @@ export class UserSearchComponent implements OnInit {
   userSearchResults: Observable<User[]>;
 
   @Input()
-  inititalUserValue: string;
+  inititalUserValue: User;
 
   @Output()
   searchEvent = new EventEmitter<string>();
@@ -31,10 +31,10 @@ export class UserSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.inputSearchControl.patchValue(this.inititalUserValue);
+    this.inputSearchControl.patchValue(`${this.inititalUserValue.firstName} - ${this.inititalUserValue.lastName} - ${this.inititalUserValue.email}`);
   }
 
-  search() {
+  search(): void {
     this.searchEvent.emit(this.inputSearchControl.value);
     clearTimeout(this.searchDebounce);
     this.searchDebounce = setTimeout(() => {

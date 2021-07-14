@@ -22,6 +22,7 @@ export class RideListComponent implements OnInit {
   viewRide = new EventEmitter<number>();
 
   displayedColumns = [
+    'date',
     'start',
     'end',
     'duration-length',

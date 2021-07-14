@@ -6,6 +6,9 @@
                  (viewRide)="onViewRide($event)"
   ></app-ride-list>
   <app-ride-view *ngIf="isViewRide()"
+                 [ride]="viewRide | async"
+                 (updateRide)="onPutRide($event)"
+                 (deleteRide)="onDeleteRide($event)"
   ></app-ride-view>
   <app-ride-add *ngIf="isAddRide()"
                 (submitRide)="onPostRide($event)"

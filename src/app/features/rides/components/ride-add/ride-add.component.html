@@ -6,6 +6,12 @@
     <ng-lottie [options]="lottieBikeOptions" height="600px"></ng-lottie>
     <form [formGroup]="rideForm">
       <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Date</mat-label>
+        <input matInput [ngxMatDatetimePicker]="picker" formControlName="DATE">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+      </mat-form-field>
+      <mat-form-field class="w-full" appearance="outline">
         <mat-label>Durée du trajet (min)</mat-label>
         <input matInput
                min="0"
