@@ -1,4 +1,4 @@
-import {Subscription} from './subscription.model';
+import { Subscription } from './subscription.model';
 
 export type User = {
   id: number;
@@ -12,6 +12,18 @@ export type User = {
   isActive: boolean;
   subscriptions: Subscription[];
   createdAt: Date;
+};
+
+export type EditUser = {
+  id?: number;
+  firstName: string;
+  lastName: string;
+  birthDate?: Date;
+  email: string;
+  pseudo: string;
+  newsletter?: boolean;
+  role?: Role;
+  isActive?: boolean;
 };
 
 export type UserFormData = {
@@ -56,3 +68,9 @@ export enum Role {
   STAFF = 'STAFF',
   CLIENT = 'CLIENT',
 }
+
+export type editedPassword = {
+  actualPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+};

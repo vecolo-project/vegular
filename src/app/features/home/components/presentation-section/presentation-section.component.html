@@ -1,0 +1,65 @@
+<section class="w-screen" id="presentation">
+  <!-- Header -->
+  <app-header-caption
+    [title]="'Présentation'"
+    [exergue]="'Page de présentation de Vécolo'"
+  ></app-header-caption>
+  <div class="h-full bg-gray-50">
+    <div
+      class="
+        max-w-md
+        mx-auto
+        pl-4
+        pr-8
+        sm:max-w-lg sm:px-6
+        lg:max-w-7xl lg:px-8
+      "
+    >
+      <div class="lg:grid lg:grid-cols-2 lg:gap-8 pb-8">
+        <div>
+          <h2
+            class="
+              text-2xl
+              font-extrabold
+              text-gray-900
+              tracking-tight
+              sm:text-3xl
+            "
+          >
+            Vécolo : Une solution éco responsable
+          </h2>
+          <p class="text-lg text-gray-500">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum
+            molestiae, rem ea, delectus pariatur temporibus quasi sit neque iure
+            perspiciatis magni corporis accusamus officia fuga animi ipsa natus!
+            Quam, corrupti.
+          </p>
+        </div>
+        <ng-lottie [options]="lottieIdeaOptions"></ng-lottie>
+      </div>
+
+      <div class="lg:grid lg:grid-cols-2 lg:gap-8 pb-8">
+        <img src="assets/images/map.svg" alt="map" />
+        <div>
+          <h2
+            class="
+              text-2xl
+              font-extrabold
+              text-gray-900
+              tracking-tight
+              sm:text-3xl
+            "
+          >
+            Des stations partouts dans Paris
+          </h2>
+          <p class="text-lg text-gray-500">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum
+            molestiae, rem ea, delectus pariatur temporibus quasi sit neque iure
+            perspiciatis magni corporis accusamus officia fuga animi ipsa natus!
+            Quam, corrupti.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

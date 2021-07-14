@@ -4,12 +4,28 @@ import {HomeComponent} from './containers/home/home.component';
 import {HomeRoutingModule} from './home-routing.module';
 import {SharedModule} from '../../shared/shared.module';
 import {UserCardComponent} from './components/user-card/user-card.component';
+import { PresentationSectionComponent } from './components/presentation-section/presentation-section.component';
+import { HomeMenuComponent } from './components/home-menu/home-menu.component';
+import { ContactSectionComponent } from './components/contact-section/contact-section.component';
+import { TarifSectionComponent } from './components/tarif-section/tarif-section.component';
+import { ActuSectionComponent } from './components/actu-section/actu-section.component';
+import { TarifCardComponent } from './components/tarif-card/tarif-card.component';
+import { ActuCardComponent } from './components/actu-card/actu-card.component';
+import { HeaderCaptionComponent } from './components/header-caption/header-caption.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    UserCardComponent
+    UserCardComponent,
+    PresentationSectionComponent,
+    HomeMenuComponent,
+    ContactSectionComponent,
+    TarifSectionComponent,
+    ActuSectionComponent,
+    TarifCardComponent,
+    ActuCardComponent,
+    HeaderCaptionComponent
   ],
   imports: [
     HomeRoutingModule,
