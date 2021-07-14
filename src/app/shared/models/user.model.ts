@@ -18,11 +18,12 @@ export type EditUser = {
   id?: number;
   firstName: string;
   lastName: string;
-  birthDate: Date;
+  birthDate?: Date;
   email: string;
   pseudo: string;
   newsletter?: boolean;
   role?: Role;
+  isActive?: boolean;
 };
 
 export type UserFormData = {

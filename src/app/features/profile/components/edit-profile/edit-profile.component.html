@@ -2,7 +2,7 @@
   <div class="mt-5 md:mt-0 md:col-span-2">
     <form [formGroup]="form">
       <div class="shadow overflow-hidden sm:rounded-md">
-        <div class="px-4 py-5 bg-yellow-900 sm:p-6">
+        <div class="px-4 py-5 bg-pink-900 sm:p-6">
           <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6 sm:col-span-3">
               <mat-form-field class="w-full" appearance="outline">
@@ -18,7 +18,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-span-6 sm:col-span-4">
+            <div class="col-span-6 sm:col-span-3">
               <mat-form-field class="w-full" appearance="outline">
                 <mat-label class="text-gray-200">Pseudo</mat-label>
                 <input matInput type="text" formControlName="PSEUDO" />
@@ -32,7 +32,7 @@
             </div>
           </div>
         </div>
-        <div class="px-4 py-3 bg-yellow-700 text-right sm:px-6">
+        <div class="px-4 py-3 bg-red-600 text-right sm:px-6">
           <button
             type="submit"
             class="
@@ -46,12 +46,12 @@
               font-medium
               rounded-md
               text-white
-              bg-green-600
-              hover:bg-green-700
+              bg-purple-600
+              hover:bg-purple-700
               focus:outline-none
               focus:ring-2
               focus:ring-offset-2
-              focus:ring-green-500
+              focus:ring-purple-500
             "
             (click)="onSubmit()"
           >

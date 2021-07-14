@@ -1,11 +1,23 @@
 <nav class="space-y-1 bg-white rounded flex-1 mx-5 md:ml-5 mb-3">
-  <div class="link-container active" (click)="changePage('dashboard')">
+  <div
+    class="link-container"
+    [class.active]="currentPage === 'dashboard'"
+    (click)="changePage('dashboard')"
+  >
     <button>Dashboard</button>
   </div>
-  <div class="link-container" (click)="changePage('edit')">
+  <div
+    class="link-container"
+    [class.active]="currentPage === 'edit'"
+    (click)="changePage('edit')"
+  >
     <button>Edition</button>
   </div>
-  <div class="link-container" (click)="changePage('subscription')">
+  <div
+    class="link-container"
+    [class.active]="currentPage === 'subscription'"
+    (click)="changePage('subscription')"
+  >
     <button>Abonnement</button>
   </div>
 </nav>

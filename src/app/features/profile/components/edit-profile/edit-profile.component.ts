@@ -23,7 +23,6 @@ export class EditProfileComponent implements OnInit {
       LAST_NAME: ['', [Validators.required]],
       EMAIL: ['', [Validators.required]],
       PSEUDO: ['', [Validators.required]],
-      BIRTHDATE: ['', [Validators.required]],
     });
   }
 
@@ -39,7 +38,6 @@ export class EditProfileComponent implements OnInit {
       lastName: this.form.value.LAST_NAME,
       email: this.form.value.EMAIL,
       pseudo: this.form.value.PSEUDO,
-      birthDate: this.form.value.BIRTHDATE,
     };
     this.editUser.emit(editedUser);
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SessionQuery } from 'src/app/core/store/session.query';
 import { EditUser, User } from 'src/app/shared/models';
+import { ProfileService } from '../../store/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,7 +10,11 @@ import { EditUser, User } from 'src/app/shared/models';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  constructor(private sessionQuery: SessionQuery) {}
+  constructor(
+    private sessionQuery: SessionQuery,
+    private profileService: ProfileService
+  ) {}
+
   currentPage = 'dashboard';
   user: Observable<User>;
   ngOnInit(): void {
@@ -20,5 +25,7 @@ export class ProfileComponent implements OnInit {
     this.currentPage = newPage;
   }
 
-  editUser(user: EditUser): void {}
+  editUser(user: EditUser): void {
+    this.profileService.editUser(user);
+  }
 }

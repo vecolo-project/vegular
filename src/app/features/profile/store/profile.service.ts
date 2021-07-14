@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SessionStore } from 'src/app/core/store/session.store';
 import { HttpClientWrapper } from 'src/app/core/utils/httpClientWrapper';
-import { Subscription, User } from 'src/app/shared/models';
+import { API_RESSOURCE_URI } from 'src/app/shared/api-ressource-uri/api-ressource-uri';
+import { EditUser, Subscription, User } from 'src/app/shared/models';
 import { Snackbar } from 'src/app/shared/snackbar/snakbar';
 
 @Injectable({
@@ -14,14 +15,14 @@ export class ProfileService {
     private sessionStore: SessionStore
   ) {}
 
-  async editUser(user: User): Promise<void> {
+  async editUser(user: EditUser): Promise<void> {
     try {
-      const userRes = await this.http.put<User>('user/me', user);
+      const userRes = await this.http.put<User>(API_RESSOURCE_URI.PUT_ME, user);
       this.sessionStore.setUser(userRes);
+      this.snackBar.success('Information personnel bien modifier');
     } catch (e) {
-      this.snackBar.warnning(
-        'Erreur lors de la modification ' + e.error.message
-      );
+      console.error(e);
+      this.snackBar.warnning('Erreur lors de la modification ' + e.error.error);
     }
   }
 

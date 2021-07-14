@@ -7,6 +7,7 @@
     <p *ngSwitchCase="'dashboard'">ICI LA USER VIEW</p>
     <app-edit-profile
       [user]="user | async"
+      (editUser)="editUser($event)"
       *ngSwitchCase="'edit'"
     ></app-edit-profile>
     <app-subscription *ngSwitchCase="'subscription'"></app-subscription>
