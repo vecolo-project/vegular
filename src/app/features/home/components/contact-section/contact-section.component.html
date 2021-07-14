@@ -43,37 +43,38 @@
             <div>
               <mat-form-field class="w-full" appearance="outline">
                 <mat-label class="text-gray-200">Prenom</mat-label>
-                <input matInput type="text" formControlName="FIRST_NAME" />
+                <input matInput type="text" formControlName="FIRST_NAME"/>
               </mat-form-field>
             </div>
             <div>
               <mat-form-field class="w-full" appearance="outline">
                 <mat-label class="text-gray-200">Nom</mat-label>
-                <input matInput type="text" formControlName="LAST_NAME" />
+                <input matInput type="text" formControlName="LAST_NAME"/>
               </mat-form-field>
             </div>
             <div class="sm:col-span-2">
               <mat-form-field class="w-full" appearance="outline">
                 <mat-label class="text-gray-200">email</mat-label>
-                <input matInput type="text" formControlName="EMAIL" />
+                <input matInput type="text" formControlName="EMAIL"/>
               </mat-form-field>
             </div>
             <div class="sm:col-span-2">
               <mat-form-field class="w-full" appearance="outline">
                 <mat-label class="text-gray-200">Entreprise</mat-label>
-                <input matInput type="text" formControlName="COMPANY" />
+                <input matInput type="text" formControlName="COMPANY"/>
               </mat-form-field>
             </div>
             <div class="sm:col-span-2">
               <mat-form-field class="w-full" appearance="outline">
                 <mat-label class="text-gray-200">Téléphone</mat-label>
-                <input matInput type="text" formControlName="PHONE" />
+                <input matInput type="text" formControlName="PHONE"/>
               </mat-form-field>
             </div>
             <div class="sm:col-span-2">
               <mat-form-field class="w-full" appearance="outline">
                 <mat-label class="text-gray-200"
-                  >Comment pouvons nous vous aidez ?</mat-label
+                >Comment pouvons nous vous aidez ?
+                </mat-label
                 >
                 <textarea
                   rows="4"
@@ -84,6 +85,8 @@
             </div>
             <div class="text-right sm:col-span-2">
               <button
+                [disabled]="contactForm.invalid"
+                (click)="onSubmit()"
                 type="submit"
                 class="
                   inline-flex
@@ -103,8 +106,7 @@
                   focus:ring-offset-2
                   focus:ring-grape-500
                   bg-yellow-400
-                "
-              >
+                ">
                 Envoyer
               </button>
             </div>

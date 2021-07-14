@@ -41,7 +41,7 @@ export class UsersFormComponent implements OnInit, OnChanges {
         fieldBirthDate: ['', [Validators.required]],
         fieldPseudo: ['', [Validators.required]],
         fieldRole: ['', [Validators.required]],
-        fieldNewsletter: ['', [Validators.required]],
+        fieldNewsletter: [false, [Validators.required]],
       },
       {
         validator: matchPassword('fieldPassword', 'fieldConfirmPassword')

@@ -10,7 +10,7 @@ import {OsmSearchResponse, Station} from '../../../../shared/models';
 export class StationCreateComponent implements OnInit {
 
   @Output()
-  submit = new EventEmitter<Station>();
+  submitStation = new EventEmitter<Station>();
 
   stationForm: FormGroup;
 
@@ -59,7 +59,7 @@ export class StationCreateComponent implements OnInit {
       coordinateX: this.stationForm.value.COORDINATE_X,
       coordinateY: this.stationForm.value.COORDINATE_Y
     };
-    this.submit.emit(station);
+    this.submitStation.emit(station);
   }
 
 }

@@ -37,6 +37,12 @@ import {MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule} from '@angular/ma
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MY_FORMATS} from 'src/app/core/config/date';
+import {
+  NgxMatDateAdapter,
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule
+} from '@angular-material-components/datetime-picker';
 
 @NgModule({
   declarations: [],
@@ -78,7 +84,10 @@ import {MY_FORMATS} from 'src/app/core/config/date';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -116,10 +125,13 @@ import {MY_FORMATS} from 'src/app/core/config/date';
     MatTooltipModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: MY_FORMATS }
+    {provide: MAT_DATE_LOCALE, useValue: MY_FORMATS}
   ]
 })
 export class MaterialModule {

@@ -23,7 +23,8 @@ export const routesPath = {
   statistics: 'statistics',
   stations: 'stations',
   stationView: 'stations/view',
-  rides: 'rides'
+  rides: 'rides',
+  ridesView: 'rides/view'
 };
 
 @Injectable()
@@ -93,6 +94,10 @@ export class RouterNavigation {
 
   gotoRideList(): void {
     this.router.navigate([routesPath.rides]);
+  }
+
+  gotoRideView(id: number): void {
+    this.router.navigate([routesPath.ridesView + '/' + id]);
   }
 
   gotoStatistics(): void {
