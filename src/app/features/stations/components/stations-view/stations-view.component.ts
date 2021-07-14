@@ -141,9 +141,7 @@ export class StationsViewComponent implements OnInit {
   }
 
   onViewBike(bike: Bike): void {
-    if (this.isStaff) {
-      this.routerNavigation.gotoBikeView(bike.id);
-    }
+    this.routerNavigation.gotoBikeView(bike.id);
   }
 
   onGetRides(limit: number, offset: number): void {
