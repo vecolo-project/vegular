@@ -191,17 +191,23 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <table mat-table class="rides" [dataSource]="userRides" style="width:100%">
+      <table mat-table [ngClass]=" isStaff ? 'rides':''" [dataSource]="userRides" style="width:100%">
         <ng-container matColumnDef="start">
           <th mat-header-cell *matHeaderCellDef>Borne de départ</th>
           <td mat-cell *matCellDef="let element">
             {{element.startStation?.streetName}}
+            <button *ngIf="!isStaff" mat-icon-button [routerLink]="['/stations/view/'+element.startStation.id]">
+              <mat-icon>visibility</mat-icon>
+            </button>
           </td>
         </ng-container>
         <ng-container matColumnDef="end">
           <th mat-header-cell *matHeaderCellDef>Borne d'arrivée</th>
           <td mat-cell *matCellDef="let element">
             {{element.endStation?.streetName}}
+            <button *ngIf="!isStaff" mat-icon-button [routerLink]="['/stations/view/'+element.endStation.id]">
+              <mat-icon>visibility</mat-icon>
+            </button>
           </td>
         </ng-container>
         <ng-container matColumnDef="duration-length">
@@ -220,11 +226,14 @@
           <th mat-header-cell *matHeaderCellDef>Vélo</th>
           <td mat-cell *matCellDef="let element">
             {{element.bike?.matriculate}}
+            <button *ngIf="!isStaff" mat-icon-button [routerLink]="['/bikes/view/'+element.bike?.id]">
+              <mat-icon>visibility</mat-icon>
+            </button>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="ridesDisplayedColumns"></tr>
         <tr mat-row
-            [routerLink]="['/rides/view/'+row.id]"
+            (click)="onViewRide(row)"
             *matRowDef="let row; columns: ridesDisplayedColumns"></tr>
       </table>
       <mat-paginator

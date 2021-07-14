@@ -3,6 +3,7 @@ import {Invoice, Ride, Subscription, User} from '../../../../shared/models';
 import {AnimationOptions} from 'ngx-lottie';
 import {addMonths} from 'date-fns';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {RouterNavigation} from '../../../../core/router/router.navigation';
 
 @Component({
   selector: 'app-user-view',
@@ -74,7 +75,7 @@ export class UserViewComponent implements OnInit {
     'matricule',
   ];
 
-  constructor(@Inject(FormBuilder) fb) {
+  constructor(@Inject(FormBuilder) fb, private routerNavigation: RouterNavigation) {
     this.emailForm = fb.group({
       subject: ['', [Validators.required]],
       content: ['', [Validators.required]],
@@ -118,5 +119,11 @@ export class UserViewComponent implements OnInit {
       subject: this.emailForm.value.subject,
       content: this.emailForm.value.content,
     });
+  }
+
+  onViewRide(ride: Ride): void {
+    if (this.isStaff === true) {
+      this.routerNavigation.gotoRideView(ride.id);
+    }
   }
 }
