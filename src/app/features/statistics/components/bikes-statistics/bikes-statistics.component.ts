@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angula
 import {BikesStatistics} from '../../../../shared/models';
 import {ChartOptions, ChartType} from 'chart.js';
 import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
+import {AnimationOptions} from 'ngx-lottie';
 
 @Component({
   selector: 'app-bikes-statistics',
@@ -35,6 +36,10 @@ export class BikesStatisticsComponent implements OnInit, OnChanges {
   }];
 
   bikeCount = 0;
+
+  lottieBikeOptions: AnimationOptions = {
+    path: 'assets/lottie/bike.json',
+  };
 
   constructor() {
     monkeyPatchChartJsTooltip();

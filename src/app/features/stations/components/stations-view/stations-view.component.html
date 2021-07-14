@@ -1,7 +1,7 @@
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
   <mat-card class="col-span-2 lg:col-span-1" *ngIf="!editMode">
     <mat-card-header>
-      <ng-lottie mat-card-avatar [options]="lottieStationOptions"></ng-lottie>
+      <ng-lottie mat-card-avatar [options]="lottieRideOptions"></ng-lottie>
       <mat-card-title>Station {{station?.id}}
         - {{station?.streetNumber}} {{station?.streetName}} {{station?.city.toUpperCase()}} ({{station?.zipcode}})
       </mat-card-title>
@@ -26,7 +26,7 @@
         <button mat-raised-button
                 color="warn"
                 (click)="getToken.emit(station.id)"
-        >Générer le token de la sation
+        >Générer le token de la station
         </button>
         <p>
           <strong class="break-all">{{token}}</strong>
@@ -51,7 +51,7 @@
   </mat-card>
   <mat-card class="col-span-2 lg:col-span-1" *ngIf="editMode">
     <mat-card-header>
-      <ng-lottie mat-card-avatar [options]="lottieStationOptions"></ng-lottie>
+      <ng-lottie mat-card-avatar [options]="lottieRideOptions"></ng-lottie>
       <mat-card-title>Station {{station?.id}}
         - {{station?.streetNumber}} {{station?.streetName}} {{station?.city.toUpperCase()}} ({{station?.zipcode}})
       </mat-card-title>

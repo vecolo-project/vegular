@@ -83,7 +83,7 @@ export class StationsViewComponent implements OnInit {
 
   obs: Subscription;
 
-  lottieStationOptions: AnimationOptions = {
+  lottieRideOptions: AnimationOptions = {
     path: 'assets/lottie/solarPanel2.json',
   };
 

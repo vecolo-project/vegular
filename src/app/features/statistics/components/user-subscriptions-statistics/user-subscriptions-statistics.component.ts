@@ -3,6 +3,7 @@ import {MatDatepicker} from '@angular/material/datepicker';
 import {getMonth, getYear, startOfMonth} from 'date-fns';
 import {FormControl} from '@angular/forms';
 import {UserSubscriptionsStatistics} from '../../../../shared/models';
+import {AnimationOptions} from 'ngx-lottie';
 
 @Component({
   selector: 'app-user-subscriptions-statistics',
@@ -16,6 +17,10 @@ export class UserSubscriptionsStatisticsComponent implements OnInit {
 
   @Output()
   retrieveStatistics = new EventEmitter<{ month: number, year: number }>();
+
+  lottieUserOptions: AnimationOptions = {
+    path: 'assets/lottie/user_2.json',
+  };
 
   date = new FormControl(startOfMonth(new Date()));
 

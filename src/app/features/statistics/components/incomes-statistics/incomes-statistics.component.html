@@ -1,7 +1,10 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>Revenus</mat-card-title>
-  </mat-card-header>
+<!--  <mat-card-header>-->
+    <mat-card-title class="flex items-center justify-center">
+      <ng-lottie mat-card-avatar [options]="lottieMoneyOptions"></ng-lottie>
+      <span>Revenus</span>
+    </mat-card-title>
+<!--  </mat-card-header>-->
   <mat-card-content class="flex flex-col gap-4">
     <mat-form-field>
       <mat-hint>Année et mois</mat-hint>

@@ -1,7 +1,12 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>Vélos ({{bikeCount}})</mat-card-title>
-  </mat-card-header>
+<!--  <mat-card-header>-->
+    <mat-card-title class="flex items-center justify-center">
+      <ng-lottie [options]="lottieBikeOptions" height="50px"></ng-lottie>
+      <span>
+        Vélos ({{bikeCount}})
+      </span>
+    </mat-card-title>
+<!--  </mat-card-header>-->
   <mat-card-content>
     <canvas baseChart
             [data]="pieChartData"
@@ -13,6 +18,8 @@
     </canvas>
   </mat-card-content>
   <mat-card-actions class="flex justify-end">
-    <button mat-icon-button (click)="retrieveStatistics.emit()"><mat-icon>refresh</mat-icon></button>
+    <button mat-icon-button (click)="retrieveStatistics.emit()">
+      <mat-icon>refresh</mat-icon>
+    </button>
   </mat-card-actions>
 </mat-card>
