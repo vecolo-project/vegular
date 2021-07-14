@@ -1,0 +1,144 @@
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+  <mat-card class="col-span-2" *ngIf="!editMode">
+    <mat-card-header>
+      <mat-card-title>Course {{ride?.id}}
+      </mat-card-title>
+      <mat-card-subtitle>{{ride?.createdAt | date:'dd/MM/yyyy hh:mm:ss'}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <ng-lottie [options]="lottieBikeOptions" height="500px"></ng-lottie>
+      <div class="flex flex-col gap-6">
+        <span>
+          <strong>Course du </strong>{{ride?.createdAt | date:'dd/MM/yyyy hh:mm:ss'}}
+        </span>
+        <span>
+            <strong>Durée de la course : </strong>{{ride?.duration}} min
+        </span>
+        <span>
+          <strong>Distance parcourue : </strong>{{ride?.rideLength / 1000}} km
+        </span>
+        <span>
+          <strong>Prix de la course : </strong>{{ride?.invoiceAmount}} €
+        </span>
+        <span>
+          <strong>Vélo utilisé : </strong>{{ride?.bike.matriculate}}
+          - {{ride?.bike.model?.name}} {{ride?.bike.model?.bikeManufacturer?.name | uppercase}}
+          <button color="primary" mat-icon-button (click)="onViewBike(ride?.bike)"><mat-icon>visibility</mat-icon></button>
+
+        </span>
+        <span>
+          <strong>Station de départ : </strong>Station {{ride?.startStation?.id}}
+          - {{ride?.startStation?.streetNumber}} {{ride?.startStation?.streetName}} {{ride?.startStation?.city.toUpperCase()}}
+          ({{ride?.startStation?.zipcode}}) <button color="primary" mat-icon-button
+                                                   (click)="onViewStation(ride?.startStation)"><mat-icon>visibility</mat-icon></button>
+        </span>
+        <span>
+          <strong>Station de d'arrivée : </strong>Station {{ride?.endStation?.id}}
+          - {{ride?.endStation?.streetNumber}} {{ride?.endStation?.streetName}} {{ride?.endStation?.city.toUpperCase()}}
+          ({{ride?.endStation?.zipcode}}) <button color="primary" mat-icon-button
+                                                 (click)="onViewStation(ride?.endStation)"><mat-icon>visibility</mat-icon></button>
+        </span>
+        <span>
+          <strong>Utilisateur : </strong>{{ride?.user?.firstName}} {{ride?.user?.firstName | uppercase}}
+          - {{ride?.user?.email}}
+          <button color="primary" mat-icon-button (click)="onViewUser(ride?.user)"><mat-icon>visibility</mat-icon></button>
+        </span>
+      </div>
+    </mat-card-content>
+    <mat-card-actions class="flex justify-end space-x-2">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onEdit()"
+      >Modifier
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="onDelete()"
+      >Supprimer
+      </button>
+    </mat-card-actions>
+
+  </mat-card>
+  <mat-card class="col-span-2" *ngIf="editMode">
+    <mat-card-header>
+      <mat-card-title>Course {{ride?.id}}
+      </mat-card-title>
+      <mat-card-subtitle>{{ride?.createdAt | date:'dd/MM/yyyy hh:mm:ss'}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <ng-lottie [options]="lottieBikeOptions" height="500px"></ng-lottie>
+      <form [formGroup]="rideForm">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Date</mat-label>
+          <input matInput [ngxMatDatetimePicker]="picker" formControlName="DATE">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+        </mat-form-field>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Durée du trajet (min)</mat-label>
+          <input matInput
+                 min="0"
+                 step="1"
+                 formControlName="DURATION"
+                 type="number">
+        </mat-form-field>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Longueur du trajet (mètres)</mat-label>
+          <input matInput
+                 min="0"
+                 step="1"
+                 formControlName="LENGTH"
+                 type="number">
+        </mat-form-field>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Prix du trajet (€)</mat-label>
+          <input matInput
+                 min="0"
+                 step="0.01"
+                 formControlName="INVOICE_AMOUNT"
+                 type="number">
+        </mat-form-field>
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col">
+            <app-user-search [inititalUserValue]="ride?.user"
+              (searchEvent)="onUserSearch()" (userSelectEvent)="onUserSelect($event)"></app-user-search>
+          </div>
+          <div class="flex flex-col">
+            <app-bike-search [initialValue]="ride?.bike"
+              (searchEvent)="onBikeSearch()" (bikeSelectEvent)="onBikeSelect($event)"></app-bike-search>
+          </div>
+          <div class="flex flex-col">
+            <app-station-search [label]="'Station de départ'"
+                                [initialValue]="ride?.startStation"
+                                (searchEvent)="onStartStationSearch()"
+                                (stationSelectEvent)="onStartStationSelect($event)"></app-station-search>
+          </div>
+          <div class="flex flex-col">
+            <app-station-search [label]="'Station d\'arrivée'"
+                                [initialValue]="ride?.endStation"
+                                (searchEvent)="onEndStationSearch()"
+                                (stationSelectEvent)="onEndStationSelect($event)"></app-station-search>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+    <mat-card-actions class="flex justify-end space-x-2">
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="rideForm.invalid"
+        (click)="onSubmit()"
+      >Modifier
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="editMode = false"
+      >Annuler
+      </button>
+    </mat-card-actions>
+
+  </mat-card>
+</div>

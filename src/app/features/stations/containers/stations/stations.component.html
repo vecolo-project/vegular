@@ -25,6 +25,6 @@
                      (deleteStation)="onDeleteStationSubmit($event)"
   ></app-stations-view>
 
-  <app-station-create *ngIf="isCreateMode()" (submit)="onCreateStationSubmit($event)"
+  <app-station-create *ngIf="isCreateMode()" (submitStation)="onCreateStationSubmit($event)"
   ></app-station-create>
 </div>

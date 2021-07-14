@@ -3,6 +3,7 @@ import {Bike, Ride} from '../../../../shared/models';
 import {AnimationOptions} from 'ngx-lottie';
 import {API_RESSOURCE_URI} from '../../../../shared/api-ressource-uri/api-ressource-uri';
 import {timer} from 'rxjs';
+import {RouterNavigation} from '../../../../core/router/router.navigation';
 
 @Component({
   selector: 'app-bike-view',
@@ -40,7 +41,7 @@ export class BikeViewComponent implements OnInit {
   ];
 
 
-  constructor() {
+  constructor(private routerNavigation: RouterNavigation) {
   }
 
   ngOnInit(): void {
@@ -73,6 +74,12 @@ export class BikeViewComponent implements OnInit {
       return 'battery-good';
     }
     return 'battery-great';
+  }
+
+  onViewRideBike(ride: Ride): void {
+    if (this.isStaff) {
+      this.routerNavigation.gotoRideView(ride.id);
+    }
   }
 
 

@@ -154,7 +154,7 @@ export class StationsViewComponent implements OnInit {
 
   onViewRideBike(ride: Ride): void {
     if (this.isStaff) {
-      this.routerNavigation.gotoBikeView(ride.bike.id);
+      this.routerNavigation.gotoRideView(ride.id);
     }
   }
 
