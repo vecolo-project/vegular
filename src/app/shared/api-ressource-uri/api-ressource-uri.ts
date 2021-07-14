@@ -1,4 +1,4 @@
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 export const API_RESSOURCE_URI = {
   // Auth
@@ -9,6 +9,8 @@ export const API_RESSOURCE_URI = {
   DELETE_USER: environment.API_URL + '/user/',
   PUT_USER: environment.API_URL + '/user/',
   POST_USER: environment.API_URL + '/user/',
+  PUT_ME: environment.API_URL + '/user/current',
+  CHANGE_PASSWORD: environment.API_URL + '/user/password',
   // Stations
   BASE_STATIONS: environment.API_URL + '/station/',
   // MAP
@@ -49,7 +51,8 @@ export const API_RESSOURCE_URI = {
   // STATISTICS
   STATISTICS_SUBSCRIPTIONS: environment.API_URL + '/statistics/subscriptions',
   STATISTICS_INCOMES: environment.API_URL + '/statistics/incomes?',
-  STATISTICS_USER_SUBSCRIPTIONS: environment.API_URL + '/statistics/user-subscriptions?',
+  STATISTICS_USER_SUBSCRIPTIONS:
+    environment.API_URL + '/statistics/user-subscriptions?',
   STATISTICS_RIDES: environment.API_URL + '/statistics/rides?',
   STATISTICS_STATIONS: environment.API_URL + '/statistics/stations',
   STATISTICS_BIKES: environment.API_URL + '/statistics/bikes',

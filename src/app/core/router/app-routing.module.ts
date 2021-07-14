@@ -25,7 +25,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
-    path: routesPath.rides,
+    path: routesPath.userRides,
     loadChildren: () => import('../../features/user-rides/user-rides.module').then(m => m.UserRidesModule),
     canActivate: [AuthGuardService]
   },
@@ -62,6 +62,11 @@ const routes: Routes = [
   {
     path: routesPath.statistics,
     loadChildren: () => import('../../features/statistics/statistics.module').then(m => m.StatisticsModule),
+    canActivate: [StaffGuardService]
+  },
+  {
+    path: routesPath.rides,
+    loadChildren: () => import('../../features/rides/rides.module').then(m => m.RidesModule),
     canActivate: [StaffGuardService]
   },
   {

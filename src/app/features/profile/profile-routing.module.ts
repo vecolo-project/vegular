@@ -1,14 +1,15 @@
-import {RouterModule, Routes} from '@angular/router';
-import {ProfileDashboardComponent} from './components/profile-dashboard/profile-dashboard.component';
-import {NgModule} from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ProfileComponent } from './container/profile/profile.component';
+import { NgModule } from '@angular/core';
 
 const profileRoutes: Routes = [
-  {path: '', component: ProfileDashboardComponent}
+  { path: '', component: ProfileComponent },
+  { path: 'edit', component: ProfileComponent },
+  { path: 'subscription', component: ProfileComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(profileRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ProfileRoutingModule {
-}
+export class ProfileRoutingModule {}

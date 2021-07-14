@@ -1,0 +1,40 @@
+<div class="card flex flex-col rounded-lg shadow-lg overflow-hidden">
+  <div class="flex-shrink-0">
+    <img class="h-48 w-full object-cover" [src]="card.imgUrl" alt="" />
+  </div>
+  <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+    <div class="flex-1">
+      <p class="text-sm font-medium text-indigo-600">
+        <a href="#" class="hover:underline"> {{ card.category }} </a>
+      </p>
+      <a href="#" class="block mt-2">
+        <p class="text-xl font-semibold text-gray-900">
+          {{ card.title }}
+        </p>
+        <p class="mt-3 text-base text-gray-500">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit facilis
+          asperiores porro quaerat doloribus, eveniet dolore. Adipisci tempora
+          aut inventore optio animi., tempore temporibus quo laudantium.
+        </p>
+      </a>
+    </div>
+    <div class="mt-6 flex items-center">
+      <div class="flex-shrink-0">
+        <a href="#">
+          <span class="sr-only">{{ card.author }}</span>
+          <img class="h-10 w-10 rounded-full" [src]="card.profileUrl" alt="" />
+        </a>
+      </div>
+      <div class="ml-3">
+        <p class="text-sm font-medium text-gray-900">
+          <a href="#" class="hover:underline"> {{ card.author }} </a>
+        </p>
+        <div class="flex space-x-1 text-sm text-gray-500">
+          {{ card.publishDate }}
+          <span aria-hidden="true"> &middot; </span>
+          <span> durée de lecture {{ card.lectureTime }} min </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+@media (max-width: 998px) {
+  .menu {
+    display: none;
+  }
+}
+
+@media (min-width: 998px) {
+  .menu {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+  .menu .menu__toggle {
+    display: none;
+  }
+
+  .menu__inner {
+    position: relative;
+    width: fit-content;
+    background-color: var(--c-alpha-grey-matte);
+    border: 0.5px solid var(--c-black-10);
+    border-radius: 2em;
+    backdrop-filter: blur(var(--backdrop-blur-radius));
+    box-shadow: var(--shadow-applet-2);
+  }
+
+  @supports (-webkit-backdrop-filter: blur(8px)) {
+    .menu__inner {
+      background-color: var(--c-alpha-grey);
+      // JUST For linter (remove by scss at pre-process time anyway
+      backdrop-filter: blur(var(--backdrop-blur-radius));
+      -webkit-backdrop-filter: blur(var(--backdrop-blur-radius));
+    }
+  }
+
+  .menu__items {
+    position: relative;
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    font-weight: var(--fw-h1);
+    font-size: var(--fs-xsmall);
+  }
+
+  .menu__item {
+    position: relative;
+    padding: 8px 4px;
+    transition: color 200ms ease-in-out;
+    color: var(--c-black);
+  }
+
+  .menu__item:first-child {
+    padding-left: 8px;
+  }
+
+  .menu__item:last-child {
+    padding-right: 8px;
+  }
+
+  .menu__item--active {
+    color: var(--c-white-bright);
+  }
+
+  .menu__item span {
+    display: block;
+    padding: 12px 32px;
+    border-radius: 999px;
+    outline: none;
+  }
+
+  .menu__item span:hover {
+    color: inherit;
+  }
+
+  .menu__item > span:focus-visible {
+    box-shadow: var(--shadow-applet-3), var(--shadow-two-pixel-border);
+  }
+
+  .menu__item.menu__item--active > span:focus-visible {
+    box-shadow: 0px 0px 0px 2px #222222;
+  }
+
+  .menu__item details span:focus-visible {
+    color: var(--c-black);
+  }
+
+  .menu__pill {
+    display: none;
+    position: absolute;
+    top: 8px;
+    left: 0;
+    width: 40px;
+    height: calc(100% - 16px);
+    border-radius: 999px;
+    background-color: #505050;
+    opacity: 0;
+    transition: opacity 150ms ease;
+    margin-left: -1px;
+  }
+
+  .menu__pill--active {
+    opacity: 1;
+  }
+
+  .menu .menu__pill {
+    display: block;
+    transition: left 200ms ease-in-out, width 200ms ease-in-out;
+  }
+}

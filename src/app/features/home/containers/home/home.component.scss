@@ -1,0 +1,13 @@
+main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  scroll-snap-type: both mandatory;
+  overflow-x: scroll;
+}
+
+main > * {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  height: 100%;
+}

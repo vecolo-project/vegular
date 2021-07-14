@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {RidesComponent} from './containers/rides/rides.component';
 import {NewRideComponent} from './containers/new-ride/new-ride.component';
+import {UserRidesComponent} from './containers/user-rides/user-rides.component';
 
 const userRideRoutes: Routes = [
-  {path: '', component: RidesComponent},
+  {path: '', component: UserRidesComponent},
   {path: 'new', component: NewRideComponent},
 ];
 

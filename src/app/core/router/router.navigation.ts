@@ -11,8 +11,8 @@ export const routesPath = {
   planAdd: 'subscriptions/plan/add',
   planView: 'subscriptions/plan/view',
   subscription: 'subscription',
-  rides: 'rides',
-  newRide: 'rides/new',
+  userRides: 'user-rides',
+  userNewRide: 'user-rides/new',
   map: 'map',
   issue: 'issue',
   home: 'home',
@@ -22,7 +22,8 @@ export const routesPath = {
   bikesView: 'bikes/view',
   statistics: 'statistics',
   stations: 'stations',
-  stationView: 'stations/view'
+  stationView: 'stations/view',
+  rides: 'rides'
 };
 
 @Injectable()
@@ -85,8 +86,13 @@ export class RouterNavigation {
   gotoUserView(userId: number): void {
     this.router.navigate([routesPath.userView + '/' + userId]);
   }
+
   gotoUserList(): void {
     this.router.navigate([routesPath.users]);
+  }
+
+  gotoRideList(): void {
+    this.router.navigate([routesPath.rides]);
   }
 
   gotoStatistics(): void {

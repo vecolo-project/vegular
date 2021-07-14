@@ -1,0 +1,23 @@
+<nav class="menu">
+  <div class="menu__inner">
+    <div
+      class="menu__pill menu__pill--active"
+      style="left: 10px; width: 153px"
+    ></div>
+    <!--  TODO position of pill at start on active and with of active ... -->
+    <ul class="menu__items">
+      <li class="menu__item menu__item--active">
+        <span (click)="goToPresentation.emit()">Présentation</span>
+      </li>
+      <li class="menu__item">
+        <span (click)="goToActu.emit()">Actualités</span>
+      </li>
+      <li class="menu__item">
+        <span (click)="goToTarif.emit()">Tarif</span>
+      </li>
+      <li class="menu__item">
+        <span (click)="goToContact.emit()">Contact</span>
+      </li>
+    </ul>
+  </div>
+</nav>

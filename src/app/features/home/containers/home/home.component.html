@@ -1,5 +1,13 @@
-<div class="grid grid-cols-3">
-  <div *ngIf="user|async">
-    <app-user-card [user]="user|async"></app-user-card>
-  </div>
-</div>
+<main data-scroll-container>
+  <app-presentation-section></app-presentation-section>
+  <app-actu-section></app-actu-section>
+  <app-tarif-section></app-tarif-section>
+  <app-contact-section></app-contact-section>
+</main>
+
+<app-home-menu
+  (goToPresentation)="goToPresentation()"
+  (goToActu)="goToActu()"
+  (goToTarif)="goToTarif()"
+  (goToContact)="goToContact()"
+></app-home-menu>
