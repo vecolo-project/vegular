@@ -46,7 +46,7 @@
     <li>
       <button
         *ngIf="sessionQuery.isLoggedIn()"
-        [routerLink]="[routesPath.rides]"
+        [routerLink]="[routesPath.userRides]"
         routerLinkActive="bg-blue-500"
         class="nav-link"
       >
@@ -91,6 +91,16 @@
         class="nav-link bg-purple-600"
       >
         Vélos
+      </button>
+    </li>
+    <li>
+      <button
+        *ngIf="sessionQuery.isStaff()"
+        [routerLink]="[routesPath.rides]"
+        routerLinkActive="bg-purple-800"
+        class="nav-link bg-purple-600"
+      >
+        Trajets
       </button>
     </li>
     <li>

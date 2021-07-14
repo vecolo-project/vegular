@@ -85,6 +85,16 @@
         <li>
           <button
             *ngIf="sessionQuery.isStaff()"
+            [routerLink]="[routesPath.rides]"
+            routerLinkActive="bg-purple-800"
+            class="nav-link bg-purple-600"
+          >
+            Trajets
+          </button>
+        </li>
+        <li>
+          <button
+            *ngIf="sessionQuery.isStaff()"
             [routerLink]="[routesPath.subscriptions]"
             routerLinkActive="bg-purple-800"
             class="nav-link bg-purple-600"
