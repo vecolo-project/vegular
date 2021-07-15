@@ -30,7 +30,7 @@ export class SessionService {
       this.sessionStore.setUser(response.user);
       this.sessionStore.setToken(response.token);
       this.userRidesService.getCurrentRide();
-      this.routerNavigation.gotoHome();
+      this.routerNavigation.gotoProfile();
       this.snackBar.success('vous êtes maintenant connecté');
     } catch (e) {
       this.snackBar.warnning('Erreur de connexion : ' + e.error.error);
