@@ -20,7 +20,7 @@
     <div class="sm:flex justify-between">
       <p>Nombre de jours restant : <strong>{{ numberOfDaysRemaining }}</strong></p>
       <button
-        (click)="onSubscribe()"
+        (click)="unsubscribe()"
         mat-button
         class="text-blue-900 bg-red-300"
       >
@@ -45,7 +45,6 @@
       <app-subsribe-card
         (subscribeToPlan)="subscribe($event)"
         [plan]="plan"
-        [userPlanId]="subscribtion.plan.id"
       ></app-subsribe-card>
     </div>
   </div>

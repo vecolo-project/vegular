@@ -14,6 +14,9 @@ export class SubscriptionComponent implements OnInit {
   @Output()
   subscribeToPlan = new EventEmitter<{ plan: Plan; autoRenew: boolean }>();
 
+  @Output()
+  cancelSubscription = new EventEmitter<Subscription>();
+
   @Input()
   plans: Plan[];
 
@@ -39,6 +42,10 @@ export class SubscriptionComponent implements OnInit {
 
   isSubscribeUser(): boolean {
     return this.user.subscriptions.length === 1;
+  }
+
+  unsubscribe(): void {
+    this.cancelSubscription.emit(this.subscribtion);
   }
 }
 

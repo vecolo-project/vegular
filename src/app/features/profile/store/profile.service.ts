@@ -63,6 +63,14 @@ export class ProfileService {
     this.sessionStore.update({user: currentUser});
   }
 
+
+  async cancelSubscription(sub: Subscription): Promise<void> {
+    this.http.delete(API_RESSOURCE_URI.CANCEL_SUBSCRIPTION + sub.id);
+    const currentUser = this.sessionStore._value().user;
+    currentUser.subscriptions = [];
+    this.sessionStore.update({user: currentUser});
+  }
+
   async getCurrentUserSubscriptions(limit: number, offset: number): Promise<void> {
     this.profileStore.update({userSubscriptions: []});
     this.profileStore.update({userSubscriptionsCount: 0});
