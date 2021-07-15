@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AuthGuardService} from '../guards/auth-guard.service';
 import {routesPath} from './router.navigation';
 import {StaffGuardService} from '../guards/staff-guard.service';
+import {SubscriptionGuardService} from "../guards/subscription-guard.service";
 
 const routes: Routes = [
   // No Auth
@@ -22,7 +23,7 @@ const routes: Routes = [
   {
     path: routesPath.userRides,
     loadChildren: () => import('../../features/user-rides/user-rides.module').then(m => m.UserRidesModule),
-    canActivate: [AuthGuardService]
+    canActivate: [SubscriptionGuardService]
   },
   {
     path: routesPath.profile,

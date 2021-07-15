@@ -68,7 +68,7 @@ export class ProfileService {
     this.profileStore.update({userSubscriptionsCount: 0});
     try {
       const response = await this.http.get<{ subscriptions: Subscription[], count: number }>(
-        API_RESSOURCE_URI.CURRENT_USER_SUBSCRIPTION +
+        API_RESSOURCE_URI.CURRENT_USER_SUBSCRIPTIONS +
         '?' + HttpTools.ObjectToHttpParams({limit, offset}));
       this.profileStore.update({userSubscriptions: response.subscriptions});
       this.profileStore.update({userSubscriptionsCount: response.count});
@@ -100,7 +100,7 @@ export class ProfileService {
     this.profileStore.update({userRideCount: 0});
     try {
       const response = await this.http.get<{ rides: Ride[], count: number }>(
-        API_RESSOURCE_URI.CURRENT_USER_RIDE + '?' + HttpTools.ObjectToHttpParams({limit, offset})
+        API_RESSOURCE_URI.CURRENT_USER_RIDES + '?' + HttpTools.ObjectToHttpParams({limit, offset})
       );
       this.profileStore.update({userRides: response.rides});
       this.profileStore.update({userRideCount: response.count});

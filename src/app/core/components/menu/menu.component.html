@@ -118,13 +118,13 @@
     <div class="flex gap-3 items-center mr-5">
       <button
         *ngIf="sessionQuery.isLoggedIn()"
-        [routerLink]="[routesPath.newRide]"
+        [routerLink]="[routesPath.userRides]"
         mat-raised-button
-        color="primary"
+        [color]="currentRide ? 'warn':'primary'"
         class="flex-none"
       >
-        <mat-icon aria-label="add" aria-hidden="true">add</mat-icon>
-        New Ride
+        <mat-icon aria-label="add" aria-hidden="true">{{currentRide ? 'done' : 'add'}}</mat-icon>
+        {{currentRide ? 'Terminer mon trajet' : 'Nouveau Trajet'}}
       </button>
       <button
         mat-button
@@ -167,6 +167,6 @@
     </div>
   </nav>
   <div *ngIf="isMobileMenuShow">
-    <app-mobile-menu></app-mobile-menu>
+    <app-mobile-menu [currentRide]="currentRide"></app-mobile-menu>
   </div>
 </header>

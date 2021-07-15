@@ -1,5 +1,5 @@
 <div>
-  <app-menu></app-menu>
+  <app-menu [currentRide]="currentRide | async"></app-menu>
   <div [ngClass]="getClass()">
     <router-outlet></router-outlet>
   </div>
