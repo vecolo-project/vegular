@@ -31,6 +31,7 @@
       <mat-icon>local_offer</mat-icon>&nbsp;Abonnement
     </ng-template>
     <app-subscription
+      [user]="user | async"
       [plans]="plans | async"
       (subscribeToPlan)="subscribeToPlan($event)"
       (getPlans)="getActivePlans()"
