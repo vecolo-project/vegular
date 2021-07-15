@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {RouterNavigation, routesPath} from '../../router/router.navigation';
 import {SessionQuery} from '../../store/session.query';
 import {SessionService} from '../../store/session.service';
 import {Router} from '@angular/router';
+import {Ride} from "../../../shared/models";
 
 @Component({
   selector: 'app-menu',
@@ -13,6 +14,9 @@ export class MenuComponent implements OnInit {
   title = 'Vecolo';
   isMobileMenuShow = false;
   routesPath;
+
+  @Input()
+  currentRide: Ride;
 
   constructor(public routerNavigation: RouterNavigation,
               private router: Router,

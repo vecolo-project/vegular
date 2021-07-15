@@ -5,7 +5,7 @@ export type Ride = {
   duration?: number;
   startStation: Station;
   endStation?: Station;
-  user: User;
+  user?: User;
   bike: Bike;
   rideLength?: number;
   invoiceAmount?: number;

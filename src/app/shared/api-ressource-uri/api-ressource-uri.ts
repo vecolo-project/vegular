@@ -27,7 +27,10 @@ export const API_RESSOURCE_URI = {
   RIDE_STATION: environment.API_URL + '/ride/station/',
   RIDE_BIKE: environment.API_URL + '/ride/bike/',
   RIDE_USER: environment.API_URL + '/ride/user/',
-  CURRENT_USER_RIDE: environment.API_URL + '/ride/me',
+  CURRENT_USER_RIDE: environment.API_URL + '/ride/current',
+  CURRENT_USER_RIDES: environment.API_URL + '/ride/me',
+  USER_START_RIDE: environment.API_URL + '/ride/start',
+  USER_END_RIDE: environment.API_URL + '/ride/end',
   // MANUFACTURER
   POST_BIKE_MANUFACTURER: environment.API_URL + '/bike-manufacturer',
   GET_BIKE_MANUFACTURERS: environment.API_URL + '/bike-manufacturer',
@@ -44,7 +47,8 @@ export const API_RESSOURCE_URI = {
   BASE_SUBSCRIPTION: environment.API_URL + '/subscription/',
   USER_SUBSCRIPTION: environment.API_URL + '/subscription/user/',
   ADD_SUBSCRIPTION: environment.API_URL + '/subscription/add',
-  CURRENT_USER_SUBSCRIPTION: environment.API_URL + '/subscription/me',
+  CURRENT_USER_SUBSCRIPTIONS: environment.API_URL + '/subscription/me',
+  CURRENT_USER_SUBSCRIPTION: environment.API_URL + '/subscription/current',
   // INVOICE
   BASE_INVOICE: environment.API_URL + '/invoice/',
   USER_INVOICE: environment.API_URL + '/invoice/user/',

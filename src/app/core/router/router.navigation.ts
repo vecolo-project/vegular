@@ -12,7 +12,6 @@ export const routesPath = {
   planView: 'subscriptions/plan/view',
   subscription: 'subscription',
   userRides: 'user-rides',
-  userNewRide: 'user-rides/new',
   map: 'map',
   issue: 'issue',
   home: 'home',

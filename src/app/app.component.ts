@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { SessionQuery } from './core/store/session.query';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {SessionQuery} from './core/store/session.query';
+import {Ride} from "./shared/models";
+import {Observable} from "rxjs";
+import UserRideQuery from "./features/user-rides/store/user-ride.query";
+import {UserRideService} from "./features/user-rides/store/user-ride.service";
 
 @Component({
   selector: 'app-root',
@@ -10,9 +14,21 @@ import { SessionQuery } from './core/store/session.query';
 export class AppComponent implements OnInit {
   title = 'Vecolo';
 
-  constructor(private sessionQuery: SessionQuery, private router: Router) {}
+  currentRide: Observable<Ride>
 
-  ngOnInit(): void {}
+  constructor(private sessionQuery: SessionQuery,
+              private userRideService: UserRideService,
+              private userRideQuery: UserRideQuery,
+              private router: Router) {
+    this.currentRide = this.userRideQuery.selectCurrentRide$;
+  }
+
+  ngOnInit(): void {
+    if (this.sessionQuery.isLoggedIn()) {
+      this.userRideService.getCurrentRide();
+    }
+
+  }
 
   getClass(): string {
     if (!this.router.isActive('/home', false)) {

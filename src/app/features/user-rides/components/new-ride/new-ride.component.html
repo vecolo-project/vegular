@@ -1,0 +1,36 @@
+<mat-card>
+  <mat-card-title class="flex items-center justify-center">
+    <ng-lottie [options]="lottieBikeOptions" height="80px"></ng-lottie>
+    <span>
+      Commencer un trajet
+      </span>
+  </mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="rideForm">
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-col">
+          <app-station-search [label]="'Station de départ'"
+                              (searchEvent)="onStartStationSearch()"
+                              (stationSelectEvent)="onSelectStation($event)"></app-station-search>
+        </div>
+        <mat-form-field>
+          <mat-label>Vélo</mat-label>
+          <mat-select formControlName="BIKE">
+            <mat-option *ngFor="let bike of bikes" [value]="bike">
+              {{bike?.matriculate}} - {{bike?.model?.name}} {{bike?.model?.bikeManufacturer?.name | uppercase}}
+            </mat-option>
+          </mat-select>
+          <mat-hint>Sélectionnez d'abord une station</mat-hint>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions class="flex justify-end">
+    <button
+      [disabled]="rideForm.invalid"
+      (click)="onSubmitRide()"
+      mat-raised-button
+      color="primary">Commencer le trajet
+    </button>
+  </mat-card-actions>
+</mat-card>
