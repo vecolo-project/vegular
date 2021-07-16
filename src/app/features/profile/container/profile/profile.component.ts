@@ -28,8 +28,7 @@ export class ProfileComponent implements OnInit {
     private sessionQuery: SessionQuery,
     private sessionService: SessionService,
     private profileService: ProfileService,
-    private profileQuery: ProfileQuery,
-    private routerNavigation: RouterNavigation,
+    private profileQuery: ProfileQuery
   ) {
     this.user = this.sessionQuery.selectUser$;
 
@@ -67,7 +66,6 @@ export class ProfileComponent implements OnInit {
 
   subscribeToPlan(sub: { plan: Plan; autoRenew: boolean }): void {
     this.profileService.subscribeToAPlan(sub);
-    this.routerNavigation.gotoProfile();
   }
 
   cancelSubscription(sub: Subscription): void {
