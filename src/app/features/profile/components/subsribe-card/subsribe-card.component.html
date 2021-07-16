@@ -1,7 +1,7 @@
-<mat-card class="bg-gray-600">
+<mat-card class="bg-gray-600 h-full">
   <h2>{{ plan.name }}</h2>
   <div class="grid grid-cols-2 gap-2">
-    <div>
+    <div class="col-span-2 xl:col-span-1">
       <div class="border border-yellow-200 p-4 rounded mb-4 text-center">
         <mat-label>Renouveler automatiquement ?</mat-label>
         <mat-slide-toggle
@@ -10,6 +10,7 @@
         ></mat-slide-toggle>
       </div>
       <button
+        *ngIf="!userPlanId || userPlanId !== plan.id"
         (click)="onSubscribe()"
         mat-button
         class="text-blue-900 bg-yellow-200"
@@ -17,7 +18,7 @@
         S'abonner
       </button>
     </div>
-    <div class="col-span-2 sm:col-span-1 text-right">
+    <div class="col-span-2 xl:col-span-1 text-right">
       <p class="font-semibold text-xl">
         <strong>Prix mensuel : </strong>{{ plan.price }} €
       </p>

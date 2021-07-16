@@ -32,9 +32,11 @@
       <mat-icon>local_offer</mat-icon>&nbsp;Abonnement
     </ng-template>
     <app-subscription
+      [user]="user | async"
       [plans]="plans | async"
       (subscribeToPlan)="subscribeToPlan($event)"
       (getPlans)="getActivePlans()"
+      (cancelSubscription)="cancelSubscription($event)"
     ></app-subscription>
   </mat-tab>
 </mat-tab-group>

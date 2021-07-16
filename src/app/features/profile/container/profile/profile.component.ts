@@ -69,6 +69,10 @@ export class ProfileComponent implements OnInit {
     this.profileService.subscribeToAPlan(sub);
   }
 
+  cancelSubscription(sub: Subscription): void {
+    this.profileService.cancelSubscription(sub);
+  }
+
   getUserSubscriptions(limit: number, offset: number): void {
     this.profileService.getCurrentUserSubscriptions(limit, offset);
   }

@@ -2,10 +2,11 @@ import {Injectable} from '@angular/core';
 import {SessionStore} from 'src/app/core/store/session.store';
 import {HttpClientWrapper} from 'src/app/core/utils/httpClientWrapper';
 import {API_RESSOURCE_URI} from 'src/app/shared/api-ressource-uri/api-ressource-uri';
-import {EditedPassword, EditUser, Invoice, Plan, Ride, Subscription, User,} from 'src/app/shared/models';
+import {EditedPassword, EditUser, Invoice, Plan, Ride, Subscription, User} from 'src/app/shared/models';
 import {Snackbar} from 'src/app/shared/snackbar/snakbar';
 import {ProfileStore} from './profile.store';
 import {HttpTools} from '../../../shared/http-tools/http-tools';
+import {RouterNavigation} from '../../../core/router/router.navigation';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,8 @@ export class ProfileService {
     private http: HttpClientWrapper,
     private snackBar: Snackbar,
     private sessionStore: SessionStore,
-    private profileStore: ProfileStore
+    private profileStore: ProfileStore,
+    private routerNavigation: RouterNavigation
   ) {
   }
 
@@ -59,8 +61,17 @@ export class ProfileService {
       sub
     );
     const currentUser = this.sessionStore._value().user;
-    currentUser.subscriptions = [res];
-    this.sessionStore.update({user: currentUser});
+    const newUser = {...currentUser, subscriptions: [res]};
+    this.sessionStore.update({user: newUser});
+    this.routerNavigation.gotoProfile();
+  }
+
+
+  async cancelSubscription(sub: Subscription): Promise<void> {
+    await this.http.delete(API_RESSOURCE_URI.CANCEL_SUBSCRIPTION + sub.id);
+    const currentUser = this.sessionStore._value().user;
+    const user = {...currentUser, subscriptions: []};
+    this.sessionStore.update({user});
   }
 
   async getCurrentUserSubscriptions(limit: number, offset: number): Promise<void> {

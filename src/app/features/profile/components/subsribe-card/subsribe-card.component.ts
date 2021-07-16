@@ -14,6 +14,9 @@ export class SubsribeCardComponent implements OnInit {
   @Input()
   subscription?: Subscription;
 
+  @Input()
+  userPlanId?: number;
+
   renew: boolean = false;
 
   @Output()
