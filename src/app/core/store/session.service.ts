@@ -56,12 +56,12 @@ export class SessionService {
 
   async forgotPassword(email: string): Promise<void> {
     try {
-      await this.http.get(API_RESSOURCE_URI.FORGOT_PASSWORD);
+      await this.http.get(API_RESSOURCE_URI.FORGOT_PASSWORD + '?email=' + email);
       this.snackBar.success('Un email de réinitialisation de mot de passe vous a été envoyé', 10000);
       this.routerNavigation.gotoHome();
     } catch (e) {
       this.snackBar.warnning(
-        'Erreur lors de la demande de réinitialisation de mot de passe : ' + e.error.error, 10000
+        'Erreur lors de la demande de réinitialisation de mot de passe : ' + e.error, 10000
       );
     }
   }
@@ -80,7 +80,7 @@ export class SessionService {
       this.routerNavigation.gotoAuth();
     } catch (e) {
       this.snackBar.warnning(
-        'Erreur lors de la réinitialisation de mot de passe : ' + e.error.error, 10000
+        'Erreur lors de la réinitialisation de mot de passe : ' + e.error, 10000
       );
     }
   }
