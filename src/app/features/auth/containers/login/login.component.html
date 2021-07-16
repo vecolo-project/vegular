@@ -13,7 +13,7 @@
           <mat-hint>Saisissez votre email</mat-hint>
           <mat-error> Email invalide </mat-error>
         </mat-form-field>
-        <mat-form-field class="w-full mb-6" appearance="outline">
+        <mat-form-field class="w-full mb-3" appearance="outline">
           <input
             matInput
             formControlName="fieldPassword"
@@ -22,6 +22,9 @@
           />
           <mat-hint>Saisissez votre mot de passe</mat-hint>
         </mat-form-field>
+        <button (click)="gotoForgotPassword()" class="mb-2 text-left text-yellow-200 hover:text-yellow-400 hover:underline">
+          mot de passe oublié ?
+        </button>
         <div class="text-right">
           <button
             mat-raised-button
