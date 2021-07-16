@@ -5,6 +5,7 @@ import {EditedPassword, EditUser, Invoice, Plan, Ride, Subscription, User} from 
 import ProfileQuery from '../../store/profile.query';
 import {ProfileService} from '../../store/profile.service';
 import {SessionService} from '../../../../core/store/session.service';
+import { RouterNavigation } from 'src/app/core/router/router.navigation';
 
 @Component({
   selector: 'app-profile',
@@ -27,7 +28,8 @@ export class ProfileComponent implements OnInit {
     private sessionQuery: SessionQuery,
     private sessionService: SessionService,
     private profileService: ProfileService,
-    private profileQuery: ProfileQuery
+    private profileQuery: ProfileQuery,
+    private routerNavigation: RouterNavigation,
   ) {
     this.user = this.sessionQuery.selectUser$;
 
@@ -65,6 +67,7 @@ export class ProfileComponent implements OnInit {
 
   subscribeToPlan(sub: { plan: Plan; autoRenew: boolean }): void {
     this.profileService.subscribeToAPlan(sub);
+    this.routerNavigation.gotoProfile();
   }
 
   cancelSubscription(sub: Subscription): void {
