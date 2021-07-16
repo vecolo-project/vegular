@@ -4,6 +4,8 @@ export const API_RESSOURCE_URI = {
   // Auth
   LOGIN: environment.API_URL + '/auth/login/',
   REGISTER: environment.API_URL + '/auth/register',
+  FORGOT_PASSWORD: environment.API_URL + '/auth/forgot-password',
+  RESET_PASSWORD: environment.API_URL + '/auth/reset-password',
   // Users
   GET_USERS: environment.API_URL + '/user/',
   GET_CURRENT_USER: environment.API_URL + '/user/me',
