@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { SessionQuery } from '../store/session.query';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {SessionQuery} from '../store/session.query';
+import {saveAs} from 'file-saver';
 
 @Injectable()
 export class HttpClientWrapper {
-  constructor(private http: HttpClient, private sessionQuery: SessionQuery) {}
+  constructor(private http: HttpClient, private sessionQuery: SessionQuery) {
+  }
 
   async get<T>(url: string): Promise<T> {
     return await this.http.get<T>(url, await this.getHeaders()).toPromise();
@@ -12,6 +14,15 @@ export class HttpClientWrapper {
 
   async delete<T>(url: string): Promise<T> {
     return await this.http.delete<T>(url, await this.getHeaders()).toPromise();
+  }
+
+  async getPDF(url: string): Promise<void> {
+    this.http.get(url, await this.getHeadersForPDF()).subscribe(
+      (response: any) => {
+        const blob = new Blob([response], {type: 'application/pdf'});
+        saveAs(blob, 'invoice.pdf');
+      }
+    );
   }
 
   async post<T>(
@@ -45,7 +56,14 @@ export class HttpClientWrapper {
   private async getHeadersForUpload(): Promise<object> {
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', await this.getAuthToken());
-    return { headers };
+    return {headers};
+  }
+
+  private async getHeadersForPDF(): Promise<object> {
+    let headers = new HttpHeaders();
+    headers = headers
+      .set('Authorization', await this.getAuthToken())
+    return {headers, responseType: 'blob'};
   }
 
   private async getHeaders(additionalHeader?: {
@@ -64,7 +82,7 @@ export class HttpClientWrapper {
     lines.forEach((value, key) => {
       headers = headers.set(key, value);
     });
-    return { headers };
+    return {headers};
   }
 
   private async getAuthToken(): Promise<string> {

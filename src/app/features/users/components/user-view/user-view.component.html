@@ -99,7 +99,7 @@
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>N°</th>
           <td mat-cell *matCellDef="let element">
-            {{element.id}}
+            <button mat-icon-button (click)="onExportInvoice(element)"><mat-icon>cloud_download</mat-icon></button> {{element.id}}
           </td>
         </ng-container>
         <ng-container matColumnDef="date">
@@ -245,6 +245,4 @@
       ></mat-paginator>
     </mat-card-content>
   </mat-card>
-
-
 </div>

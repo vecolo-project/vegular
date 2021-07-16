@@ -94,7 +94,7 @@ export class SubscriptionsService {
   async deleteSubscription(id: number): Promise<void> {
     this.subscriptionsStore.setLoading(true);
     try {
-      await this.http.delete<Station>(
+      await this.http.delete<void>(
         API_RESSOURCE_URI.BASE_SUBSCRIPTION + id
       );
       this.subscriptionsStore.remove(id);

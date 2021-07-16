@@ -46,6 +46,9 @@ export class UserViewComponent implements OnInit {
   getUserInvoices = new EventEmitter<{ userId: number, limit: number, offset: number; }>();
 
   @Output()
+  exportInvoice = new EventEmitter<number>();
+
+  @Output()
   sendUserMail = new EventEmitter<{ userId: number, subject: string, content: string }>();
   sendingEmailMode: boolean;
   emailForm: FormGroup;
@@ -125,5 +128,9 @@ export class UserViewComponent implements OnInit {
     if (this.isStaff === true) {
       this.routerNavigation.gotoRideView(ride.id);
     }
+  }
+
+  onExportInvoice(invoice: Invoice): void {
+    this.exportInvoice.emit(invoice.id);
   }
 }

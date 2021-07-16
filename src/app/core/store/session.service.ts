@@ -45,11 +45,42 @@ export class SessionService {
   async register(user: RegisterUser): Promise<void> {
     try {
       await this.http.post<User>(API_RESSOURCE_URI.REGISTER, user);
-      this.snackBar.success('Votre compte a bien été crée');
+      this.snackBar.success('Votre compte a bien été créé');
       this.routerNavigation.gotoAuth();
     } catch (e) {
       this.snackBar.warnning(
         'Erreur de la création de votre compte : ' + e.error.error
+      );
+    }
+  }
+
+  async forgotPassword(email: string): Promise<void> {
+    try {
+      await this.http.get(API_RESSOURCE_URI.FORGOT_PASSWORD + '?email=' + email);
+      this.snackBar.success('Un email de réinitialisation de mot de passe vous a été envoyé', 10000);
+      this.routerNavigation.gotoHome();
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la demande de réinitialisation de mot de passe : ' + e.error, 10000
+      );
+    }
+  }
+
+  async resetPassword(token: string,
+                      newPassword: string,
+                      confirmNewPassword: string): Promise<void> {
+    try {
+      await this.http.post(API_RESSOURCE_URI.RESET_PASSWORD,
+        {
+          token,
+          newPassword,
+          confirmNewPassword
+        });
+      this.snackBar.success('Votre mot de pass a bien été modifié', 10000);
+      this.routerNavigation.gotoAuth();
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de la réinitialisation de mot de passe : ' + e.error, 10000
       );
     }
   }

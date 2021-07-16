@@ -24,6 +24,7 @@ export const routesPath = {
   stationView: 'stations/view',
   rides: 'rides',
   ridesView: 'rides/view',
+  forgotPassword: '/auth/forgot-password',
 };
 
 @Injectable()
@@ -100,5 +101,9 @@ export class RouterNavigation {
 
   gotoStatistics(): void {
     this.router.navigate([routesPath.statistics]);
+  }
+
+  gotoForgotPassword(): void {
+    this.router.navigate([routesPath.forgotPassword]);
   }
 }

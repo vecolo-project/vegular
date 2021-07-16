@@ -4,6 +4,8 @@ export const API_RESSOURCE_URI = {
   // Auth
   LOGIN: environment.API_URL + '/auth/login/',
   REGISTER: environment.API_URL + '/auth/register',
+  FORGOT_PASSWORD: environment.API_URL + '/auth/forgot-password',
+  RESET_PASSWORD: environment.API_URL + '/auth/reset-password',
   // Users
   GET_USERS: environment.API_URL + '/user/',
   GET_CURRENT_USER: environment.API_URL + '/user/me',
@@ -49,10 +51,12 @@ export const API_RESSOURCE_URI = {
   ADD_SUBSCRIPTION: environment.API_URL + '/subscription/add',
   CURRENT_USER_SUBSCRIPTIONS: environment.API_URL + '/subscription/me',
   CURRENT_USER_SUBSCRIPTION: environment.API_URL + '/subscription/current',
+  CANCEL_SUBSCRIPTION: environment.API_URL + '/subscription/cancel/',
   // INVOICE
   BASE_INVOICE: environment.API_URL + '/invoice/',
   USER_INVOICE: environment.API_URL + '/invoice/user/',
   CURRENT_USER_INVOICE: environment.API_URL + '/invoice/me',
+  EXPORT_INVOICE: environment.API_URL + '/invoice/export/',
   // EMAIL
   BASE_EMAIL: environment.API_URL + '/email/',
   EMAIL_USER: environment.API_URL + '/email/simple',
