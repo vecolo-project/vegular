@@ -67,7 +67,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.subscribeToAPlan(sub);
   }
 
-  unsubscribe(sub: Subscription): void {
+  cancelSubscription(sub: Subscription): void {
     this.profileService.cancelSubscription(sub);
   }
 

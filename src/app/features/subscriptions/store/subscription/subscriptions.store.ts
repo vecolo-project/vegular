@@ -1,6 +1,6 @@
 import {EntityState, EntityStore, StoreConfig} from '@datorama/akita';
 import {Injectable} from '@angular/core';
-import {Subscription} from "../../../../shared/models";
+import {Subscription} from '../../../../shared/models';
 
 export interface SubscriptionState
   extends EntityState<Subscription, number> {

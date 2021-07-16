@@ -10,7 +10,7 @@
         ></mat-slide-toggle>
       </div>
       <button
-        *ngIf="userPlanId && userPlanId !== plan.id"
+        *ngIf="!userPlanId || userPlanId !== plan.id"
         (click)="onSubscribe()"
         mat-button
         class="text-blue-900 bg-yellow-200"
