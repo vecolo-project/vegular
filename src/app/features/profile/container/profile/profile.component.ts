@@ -5,6 +5,7 @@ import {EditedPassword, EditUser, Invoice, Plan, Ride, Subscription, User} from 
 import ProfileQuery from '../../store/profile.query';
 import {ProfileService} from '../../store/profile.service';
 import {SessionService} from '../../../../core/store/session.service';
+import {UsersService} from "../../../users/store/users.service";
 
 @Component({
   selector: 'app-profile',
@@ -27,6 +28,7 @@ export class ProfileComponent implements OnInit {
     private sessionQuery: SessionQuery,
     private sessionService: SessionService,
     private profileService: ProfileService,
+    private usersService: UsersService,
     private profileQuery: ProfileQuery
   ) {
     this.user = this.sessionQuery.selectUser$;
@@ -77,6 +79,10 @@ export class ProfileComponent implements OnInit {
 
   getUserInvoices(limit: number, offset: number): void {
     this.profileService.getCurrentUserInvoices(limit, offset);
+  }
+
+  onExportInvoice(invoiceId: number): void {
+    this.usersService.exportInvoice(invoiceId);
   }
 
 }

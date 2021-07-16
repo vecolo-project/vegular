@@ -129,4 +129,8 @@ export class UsersComponent implements OnInit {
   onSendNewsletterEmail(subject: string, content: string): void {
     this.usersService.sendNewsletterMail(subject, content);
   }
+
+  onExportInvoice(invoiceId: number): void {
+    this.usersService.exportInvoice(invoiceId);
+  }
 }
