@@ -53,6 +53,7 @@ export const API_RESSOURCE_URI = {
   BASE_INVOICE: environment.API_URL + '/invoice/',
   USER_INVOICE: environment.API_URL + '/invoice/user/',
   CURRENT_USER_INVOICE: environment.API_URL + '/invoice/me',
+  EXPORT_INVOICE: environment.API_URL + '/invoice/export/',
   // EMAIL
   BASE_EMAIL: environment.API_URL + '/email/',
   EMAIL_USER: environment.API_URL + '/email/simple',

@@ -139,6 +139,18 @@ export class UsersService {
     }
   }
 
+  async exportInvoice(invoiceId:number): Promise<void> {
+    try {
+      await this.http.getPDF(
+        API_RESSOURCE_URI.EXPORT_INVOICE + invoiceId
+      );
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de l\'export de la facture : ' + e.error.error
+      );
+    }
+  }
+
   async getUserRides(userId: number, limit: number, offset: number): Promise<void> {
     this.usersStore.setLoading(true);
     this.usersStore.update({viewUserRides: []});
