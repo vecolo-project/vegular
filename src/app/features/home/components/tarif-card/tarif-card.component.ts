@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { RouterNavigation } from 'src/app/core/router/router.navigation';
 
 @Component({
   selector: 'app-tarif-card',
@@ -15,7 +16,11 @@ export class TarifCardComponent implements OnInit {
     buttonLabel: string;
   };
 
-  constructor() {}
+  constructor(private router: RouterNavigation) {}
 
   ngOnInit(): void {}
+
+  gotoProfile(): void {
+    this.router.gotoProfile();
+  }
 }

@@ -14,8 +14,8 @@
       >
       <span class="text-base font-medium text-gray-500">/mo</span>
     </p>
-    <a
-      href="#"
+    <button
+      (click)="gotoProfile()"
       class="
         mt-8
         block
@@ -29,8 +29,9 @@
         text-white text-center
         hover:bg-gray-900
       "
-      >{{ card.buttonLabel }}</a
     >
+      {{ card.buttonLabel }}
+    </button>
   </div>
   <div class="pt-6 pb-8 px-6">
     <h3 class="text-xs font-medium text-gray-900 tracking-wide uppercase">
@@ -38,7 +39,6 @@
     </h3>
     <ul class="mt-6 space-y-4">
       <li *ngFor="let element of card.includes" class="flex space-x-3">
-        <!-- Heroicon name: solid/check -->
         <svg
           class="flex-shrink-0 h-5 w-5 text-green-500"
           xmlns="http://www.w3.org/2000/svg"
