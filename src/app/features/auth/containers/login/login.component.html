@@ -22,6 +22,10 @@
           />
           <mat-hint>Saisissez votre mot de passe</mat-hint>
         </mat-form-field>
+        <re-captcha class="my-4" (resolved)="resolveCaptcha($event)"
+                    formControlName="CAPTCHA"
+                    [siteKey]="SITE_KEY">
+        </re-captcha>
         <button (click)="gotoForgotPassword()" type="button" class="mb-2 text-left text-yellow-200 hover:text-yellow-400 hover:underline">
           mot de passe oublié ?
         </button>

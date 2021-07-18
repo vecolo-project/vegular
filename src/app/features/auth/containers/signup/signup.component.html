@@ -7,26 +7,26 @@
             <div class="col-span-6 sm:col-span-3">
               <mat-form-field class="w-full" appearance="outline">
                 <mat-label class="text-gray-200">Prenom</mat-label>
-                <input matInput type="text" formControlName="FIRST_NAME" />
+                <input matInput type="text" formControlName="FIRST_NAME"/>
               </mat-form-field>
             </div>
 
             <div class="col-span-6 sm:col-span-3">
               <mat-form-field class="w-full" appearance="outline">
                 <mat-label class="text-gray-200">Nom</mat-label>
-                <input matInput type="text" formControlName="LAST_NAME" />
+                <input matInput type="text" formControlName="LAST_NAME"/>
               </mat-form-field>
             </div>
             <div class="col-span-6">
               <mat-form-field class="w-full" appearance="outline">
                 <mat-label class="text-gray-200">Email</mat-label>
-                <input matInput type="text" formControlName="EMAIL" />
+                <input matInput type="text" formControlName="EMAIL"/>
               </mat-form-field>
             </div>
             <div class="col-span-6 sm:col-span-3">
               <mat-form-field class="w-full" appearance="outline">
                 <mat-label class="text-gray-200">Pseudo</mat-label>
-                <input matInput type="text" formControlName="PSEUDO" />
+                <input matInput type="text" formControlName="PSEUDO"/>
               </mat-form-field>
             </div>
             <div class="col-span-6 sm:col-span-3">
@@ -48,7 +48,7 @@
           <div class="col-span-6">
             <mat-form-field class="w-full" appearance="outline">
               <mat-label class="text-gray-200">New password</mat-label>
-              <input matInput type="password" formControlName="PASSWORD" />
+              <input matInput type="password" formControlName="PASSWORD"/>
             </mat-form-field>
           </div>
           <div class="col-span-6">
@@ -61,15 +61,22 @@
               />
             </mat-form-field>
           </div>
+          <div class="col-span-6">
+            <re-captcha (resolved)="resolveCaptcha($event)"
+                        formControlName="CAPTCHA"
+                        [siteKey]="SITE_KEY">
+            </re-captcha>
+          </div>
         </div>
         <div class="px-4 py-3 bg-gray-500 text-right sm:px-6">
           <button
             type="submit"
             class="save-button"
+            mat-raised-button
             (click)="onSubmit()"
             [disabled]="form.invalid"
           >
-            Crée votre compte
+            Créer votre compte
           </button>
         </div>
       </div>

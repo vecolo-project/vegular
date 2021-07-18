@@ -5,7 +5,7 @@ import {RegisterUser, User} from '../../shared/models';
 import {HttpClientWrapper} from '../utils/httpClientWrapper';
 import {API_RESSOURCE_URI} from '../../shared/api-ressource-uri/api-ressource-uri';
 import {Snackbar} from '../../shared/snackbar/snakbar';
-import {UserRideService} from "../../features/user-rides/store/user-ride.service";
+import {UserRideService} from '../../features/user-rides/store/user-ride.service';
 
 @Injectable({providedIn: 'root'})
 export class SessionService {
@@ -18,13 +18,14 @@ export class SessionService {
   ) {
   }
 
-  async login(email: string, password: string): Promise<void> {
+  async login(email: string, password: string, captcha: string): Promise<void> {
     try {
       const response = await this.http.post<{ user: User; token: string }>(
         API_RESSOURCE_URI.LOGIN,
         {
           email,
           password,
+          captcha
         }
       );
       this.sessionStore.setUser(response.user);
@@ -42,9 +43,9 @@ export class SessionService {
     this.routerNavigation.gotoHome();
   }
 
-  async register(user: RegisterUser): Promise<void> {
+  async register(user: RegisterUser, captcha: string): Promise<void> {
     try {
-      await this.http.post<User>(API_RESSOURCE_URI.REGISTER, user);
+      await this.http.post<User>(API_RESSOURCE_URI.REGISTER, {...user, captcha});
       this.snackBar.success('Votre compte a bien été créé');
       this.routerNavigation.gotoAuth();
     } catch (e) {
