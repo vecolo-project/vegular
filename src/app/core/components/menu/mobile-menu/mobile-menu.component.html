@@ -16,12 +16,8 @@
         <button [routerLink]="[routesPath.home]" mat-menu-item>
           Actualités
         </button>
-        <button [routerLink]="[routesPath.home]" mat-menu-item>
-          Tarif
-        </button>
-        <button [routerLink]="[routesPath.home]" mat-menu-item>
-          Contact
-        </button>
+        <button [routerLink]="[routesPath.home]" mat-menu-item>Tarif</button>
+        <button [routerLink]="[routesPath.home]" mat-menu-item>Contact</button>
       </mat-menu>
     </li>
     <li>
@@ -124,23 +120,7 @@
       </button>
     </li>
     <li>
-      <button
-        *ngIf="sessionQuery.isLoggedIn()"
-        [routerLink]="[routesPath.userRides]"
-        mat-raised-button
-        [color]="currentRide ? 'warn':'primary'"
-        class="flex-none"
-      >
-        <mat-icon aria-label="add" aria-hidden="true">{{currentRide ? 'done' : 'add'}}</mat-icon>
-        {{currentRide ? 'Terminer mon trajet' : 'Nouveau Trajet'}}
-      </button>
-    </li>
-    <li>
-      <button
-        mat-button
-        class="nav-link"
-        [matMenuTriggerFor]="menu"
-      >
+      <button mat-button class="nav-link" [matMenuTriggerFor]="menu">
         Mon compte
       </button>
       <mat-menu #menu="matMenu">
@@ -175,5 +155,4 @@
       </mat-menu>
     </li>
   </ul>
-
 </nav>

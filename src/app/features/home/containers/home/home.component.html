@@ -1,7 +1,7 @@
 <main data-scroll-container>
   <app-presentation-section></app-presentation-section>
   <app-actu-section></app-actu-section>
-  <app-tarif-section></app-tarif-section>
+  <app-tarif-section [planList]="planList | async"></app-tarif-section>
   <app-contact-section></app-contact-section>
 </main>
 
