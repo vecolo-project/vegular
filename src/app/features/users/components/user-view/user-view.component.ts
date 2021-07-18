@@ -3,6 +3,7 @@ import {Invoice, Ride, Subscription, User} from '../../../../shared/models';
 import {AnimationOptions} from 'ngx-lottie';
 import {addMonths} from 'date-fns';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {RouterNavigation} from '../../../../core/router/router.navigation';
 
 @Component({
   selector: 'app-user-view',
@@ -13,6 +14,9 @@ export class UserViewComponent implements OnInit {
 
   @Input()
   user: User;
+
+  @Input()
+  isStaff: boolean;
 
   @Input()
   userSubscriptions: Subscription[];
@@ -40,6 +44,9 @@ export class UserViewComponent implements OnInit {
 
   @Output()
   getUserInvoices = new EventEmitter<{ userId: number, limit: number, offset: number; }>();
+
+  @Output()
+  exportInvoice = new EventEmitter<number>();
 
   @Output()
   sendUserMail = new EventEmitter<{ userId: number, subject: string, content: string }>();
@@ -71,7 +78,7 @@ export class UserViewComponent implements OnInit {
     'matricule',
   ];
 
-  constructor(@Inject(FormBuilder) fb) {
+  constructor(@Inject(FormBuilder) fb, private routerNavigation: RouterNavigation) {
     this.emailForm = fb.group({
       subject: ['', [Validators.required]],
       content: ['', [Validators.required]],
@@ -95,7 +102,7 @@ export class UserViewComponent implements OnInit {
   }
 
   hasSubscriptions(): boolean {
-    return this.user?.subscriptions.length > 0;
+    return this.user?.subscriptions?.length > 0;
   }
 
   addMonth(date: Date, month: number): Date {
@@ -115,5 +122,15 @@ export class UserViewComponent implements OnInit {
       subject: this.emailForm.value.subject,
       content: this.emailForm.value.content,
     });
+  }
+
+  onViewRide(ride: Ride): void {
+    if (this.isStaff === true) {
+      this.routerNavigation.gotoRideView(ride.id);
+    }
+  }
+
+  onExportInvoice(invoice: Invoice): void {
+    this.exportInvoice.emit(invoice.id);
   }
 }

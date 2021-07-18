@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AuthGuardService} from '../guards/auth-guard.service';
 import {routesPath} from './router.navigation';
 import {StaffGuardService} from '../guards/staff-guard.service';
+import {SubscriptionGuardService} from "../guards/subscription-guard.service";
 
 const routes: Routes = [
   // No Auth
@@ -20,19 +21,9 @@ const routes: Routes = [
   },
   // Auth
   {
-    path: routesPath.subscription,
-    loadChildren: () => import('../../features/user-subscription/user-subscription.module').then(m => m.UserSubscriptionModule),
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: routesPath.rides,
+    path: routesPath.userRides,
     loadChildren: () => import('../../features/user-rides/user-rides.module').then(m => m.UserRidesModule),
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: routesPath.issue,
-    loadChildren: () => import('../../features/user-issues/user-issues.module').then(m => m.UserIssuesModule),
-    canActivate: [AuthGuardService]
+    canActivate: [SubscriptionGuardService]
   },
   {
     path: routesPath.profile,
@@ -62,6 +53,11 @@ const routes: Routes = [
   {
     path: routesPath.statistics,
     loadChildren: () => import('../../features/statistics/statistics.module').then(m => m.StatisticsModule),
+    canActivate: [StaffGuardService]
+  },
+  {
+    path: routesPath.rides,
+    loadChildren: () => import('../../features/rides/rides.module').then(m => m.RidesModule),
     canActivate: [StaffGuardService]
   },
   {

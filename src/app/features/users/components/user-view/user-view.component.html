@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 my-4">
   <mat-card class="col-span-2 lg:col-span-1" *ngIf="!sendingEmailMode">
     <mat-card-header>
       <mat-card-title>{{user?.firstName}} {{user?.lastName | uppercase}} ({{user?.email}})</mat-card-title>
@@ -34,7 +34,7 @@
         </span>
       </div>
     </mat-card-content>
-    <mat-card-actions class="flex justify-end space-x-2">
+    <mat-card-actions *ngIf="isStaff" class="flex justify-end space-x-2">
       <button
         mat-raised-button
         color="primary"
@@ -99,7 +99,7 @@
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>N°</th>
           <td mat-cell *matCellDef="let element">
-            {{element.id}}
+            <button mat-icon-button (click)="onExportInvoice(element)"><mat-icon>cloud_download</mat-icon></button> {{element.id}}
           </td>
         </ng-container>
         <ng-container matColumnDef="date">
@@ -191,12 +191,12 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <table mat-table [dataSource]="userRides" style="width:100%">
+      <table mat-table [ngClass]=" isStaff ? 'rides':''" [dataSource]="userRides" style="width:100%">
         <ng-container matColumnDef="start">
           <th mat-header-cell *matHeaderCellDef>Borne de départ</th>
           <td mat-cell *matCellDef="let element">
             {{element.startStation?.streetName}}
-            <button mat-icon-button [routerLink]="['/stations/view/'+element.startStation.id]">
+            <button *ngIf="!isStaff" mat-icon-button [routerLink]="['/stations/view/'+element.startStation.id]">
               <mat-icon>visibility</mat-icon>
             </button>
           </td>
@@ -205,7 +205,7 @@
           <th mat-header-cell *matHeaderCellDef>Borne d'arrivée</th>
           <td mat-cell *matCellDef="let element">
             {{element.endStation?.streetName}}
-            <button mat-icon-button [routerLink]="['/stations/view/'+element.endStation.id]">
+            <button *ngIf="!isStaff" mat-icon-button [routerLink]="['/stations/view/'+element.endStation.id]">
               <mat-icon>visibility</mat-icon>
             </button>
           </td>
@@ -226,13 +226,14 @@
           <th mat-header-cell *matHeaderCellDef>Vélo</th>
           <td mat-cell *matCellDef="let element">
             {{element.bike?.matriculate}}
-            <button mat-icon-button [routerLink]="['/bikes/view/'+element.bike?.id]">
+            <button *ngIf="!isStaff" mat-icon-button [routerLink]="['/bikes/view/'+element.bike?.id]">
               <mat-icon>visibility</mat-icon>
             </button>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="ridesDisplayedColumns"></tr>
         <tr mat-row
+            (click)="onViewRide(row)"
             *matRowDef="let row; columns: ridesDisplayedColumns"></tr>
       </table>
       <mat-paginator
@@ -244,6 +245,4 @@
       ></mat-paginator>
     </mat-card-content>
   </mat-card>
-
-
 </div>

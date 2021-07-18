@@ -1,36 +1,41 @@
-<div>
-  <h1 class="text-center">Vous devez vous conneter</h1>
-  <form [formGroup]="form" class="flex justify-center content-center">
-    <div class="flex flex-grow flex-col max-w-xl">
-      <mat-form-field class="w-full">
-        <input
-          matInput
-          formControlName="fieldEmail"
-          placeholder="Email"
-          type="email"
-        />
-        <mat-hint>Saisissez votre email</mat-hint>
-        <mat-error> Email invalide </mat-error>
-      </mat-form-field>
-      <mat-form-field class="w-full">
-        <input
-          matInput
-          formControlName="fieldPassword"
-          placeholder="Mot de passe"
-          type="password"
-        />
-        <mat-hint>Saisissez votre mot de passe</mat-hint>
-      </mat-form-field>
-      <div class="text-right">
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="login()"
-          [disabled]="form.invalid"
-        >
-          Se connecter
+<div class="my-20 flex justify-center items-center">
+  <div class="bg-gray-600 p-10 rounded">
+    <h1 class="text-center">Vous devez vous conneter</h1>
+    <form [formGroup]="form" class="flex justify-center content-center">
+      <div class="flex flex-grow flex-col max-w-xl">
+        <mat-form-field class="w-full mb-6" appearance="outline">
+          <input
+            matInput
+            formControlName="fieldEmail"
+            placeholder="Email"
+            type="email"
+          />
+          <mat-hint>Saisissez votre email</mat-hint>
+          <mat-error> Email invalide </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full mb-3" appearance="outline">
+          <input
+            matInput
+            formControlName="fieldPassword"
+            placeholder="Mot de passe"
+            type="password"
+          />
+          <mat-hint>Saisissez votre mot de passe</mat-hint>
+        </mat-form-field>
+        <button (click)="gotoForgotPassword()" type="button" class="mb-2 text-left text-yellow-200 hover:text-yellow-400 hover:underline">
+          mot de passe oublié ?
         </button>
+        <div class="text-right">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="login()"
+            [disabled]="form.invalid"
+          >
+            Se connecter
+          </button>
+        </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>

@@ -139,6 +139,18 @@ export class UsersService {
     }
   }
 
+  async exportInvoice(invoiceId:number): Promise<void> {
+    try {
+      await this.http.getPDF(
+        API_RESSOURCE_URI.EXPORT_INVOICE + invoiceId
+      );
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de l\'export de la facture : ' + e.error.error
+      );
+    }
+  }
+
   async getUserRides(userId: number, limit: number, offset: number): Promise<void> {
     this.usersStore.setLoading(true);
     this.usersStore.update({viewUserRides: []});
@@ -173,8 +185,28 @@ export class UsersService {
       this.snackBar.warnning(
         'Erreur lors de l\'envoie du mail : ' + e.error.error
       );
-    } finally {
-      this.usersStore.setLoading(false);
+    }
+  }
+
+  async sendContactForm(firstname: string, lastname: string, content: string,
+                        email: string, phone: string, enterprise?: string): Promise<void> {
+    try {
+      await this.http.post(
+        API_RESSOURCE_URI.EMAIL_CONTACT,
+        {
+          firstname,
+          lastname,
+          content,
+          email,
+          phone,
+          enterprise
+        }
+      );
+      this.snackBar.success('L\'email a bien été envoyé');
+    } catch (e) {
+      this.snackBar.warnning(
+        'Erreur lors de l\'envoie du mail : ' + e.error.error
+      );
     }
   }
 
@@ -193,8 +225,6 @@ export class UsersService {
       this.snackBar.warnning(
         'Erreur lors de la newsletter : ' + e.error.error
       );
-    } finally {
-      this.usersStore.setLoading(false);
     }
   }
 }

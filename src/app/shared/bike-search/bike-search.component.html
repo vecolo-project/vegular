@@ -1,0 +1,13 @@
+<mat-form-field class="w-full my-2">
+  <mat-label>Vélo</mat-label>
+  <mat-hint>Rechercher un vélo par son matricule modèle</mat-hint>
+  <input matInput
+         (input)="search()"
+         [formControl]="inputSearchControl"
+         [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectBike($event.option.value)">
+    <mat-option *ngFor="let bike of bikeSearchResult | async" [value]="bike">
+      Matricule : {{bike.matriculate}} - {{bike.model?.name}} - {{bike.model?.bikeManufacturer?.name.toUpperCase()}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

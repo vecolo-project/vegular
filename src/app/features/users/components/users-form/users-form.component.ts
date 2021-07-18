@@ -41,7 +41,7 @@ export class UsersFormComponent implements OnInit, OnChanges {
         fieldBirthDate: ['', [Validators.required]],
         fieldPseudo: ['', [Validators.required]],
         fieldRole: ['', [Validators.required]],
-        fieldNewsletter: ['', [Validators.required]],
+        fieldNewsletter: [false, [Validators.required]],
       },
       {
         validator: matchPassword('fieldPassword', 'fieldConfirmPassword')
@@ -84,7 +84,7 @@ export class UsersFormComponent implements OnInit, OnChanges {
   save(): void {
     const birthDate = new Date(this.form.value.fieldBirthDate);
     const user = {
-      id: this.user.id ? this.user.id : null,
+      id: this.user?.id ? this.user.id : null,
       email: String(this.form.value.fieldEmail),
       firstName: String(this.form.value.fieldFirstName),
       lastName: String(this.form.value.fieldLastName),

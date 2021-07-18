@@ -1,7 +1,12 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>Inscriptions utilisateurs</mat-card-title>
-  </mat-card-header>
+<!--  <mat-card-header>-->
+    <mat-card-title class="flex items-center justify-center">
+      <ng-lottie [options]="lottieUserOptions" height="60px"></ng-lottie>
+      <span>
+      Inscriptions utilisateurs
+    </span>
+    </mat-card-title>
+<!--  </mat-card-header>-->
   <mat-card-content class="flex flex-col gap-4">
     <mat-form-field>
       <mat-hint>Année et mois</mat-hint>

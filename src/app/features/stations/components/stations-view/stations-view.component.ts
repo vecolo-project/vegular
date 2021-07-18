@@ -83,7 +83,7 @@ export class StationsViewComponent implements OnInit {
 
   obs: Subscription;
 
-  lottieStationOptions: AnimationOptions = {
+  lottieRideOptions: AnimationOptions = {
     path: 'assets/lottie/solarPanel2.json',
   };
 
@@ -141,9 +141,7 @@ export class StationsViewComponent implements OnInit {
   }
 
   onViewBike(bike: Bike): void {
-    if (this.isStaff) {
-      this.routerNavigation.gotoBikeView(bike.id);
-    }
+    this.routerNavigation.gotoBikeView(bike.id);
   }
 
   onGetRides(limit: number, offset: number): void {
@@ -154,7 +152,7 @@ export class StationsViewComponent implements OnInit {
 
   onViewRideBike(ride: Ride): void {
     if (this.isStaff) {
-      this.routerNavigation.gotoBikeView(ride.bike.id);
+      this.routerNavigation.gotoRideView(ride.id);
     }
   }
 

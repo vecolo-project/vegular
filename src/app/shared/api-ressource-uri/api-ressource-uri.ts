@@ -3,12 +3,17 @@ import {environment} from '../../../environments/environment';
 export const API_RESSOURCE_URI = {
   // Auth
   LOGIN: environment.API_URL + '/auth/login/',
+  REGISTER: environment.API_URL + '/auth/register',
+  FORGOT_PASSWORD: environment.API_URL + '/auth/forgot-password',
+  RESET_PASSWORD: environment.API_URL + '/auth/reset-password',
   // Users
   GET_USERS: environment.API_URL + '/user/',
-  GET_CURRENT_USER: environment.API_URL + '/user/current',
+  GET_CURRENT_USER: environment.API_URL + '/user/me',
   DELETE_USER: environment.API_URL + '/user/',
   PUT_USER: environment.API_URL + '/user/',
   POST_USER: environment.API_URL + '/user/',
+  PUT_ME: environment.API_URL + '/user/me',
+  CHANGE_PASSWORD: environment.API_URL + '/user/password',
   // Stations
   BASE_STATIONS: environment.API_URL + '/station/',
   // MAP
@@ -24,6 +29,10 @@ export const API_RESSOURCE_URI = {
   RIDE_STATION: environment.API_URL + '/ride/station/',
   RIDE_BIKE: environment.API_URL + '/ride/bike/',
   RIDE_USER: environment.API_URL + '/ride/user/',
+  CURRENT_USER_RIDE: environment.API_URL + '/ride/current',
+  CURRENT_USER_RIDES: environment.API_URL + '/ride/me',
+  USER_START_RIDE: environment.API_URL + '/ride/start',
+  USER_END_RIDE: environment.API_URL + '/ride/end',
   // MANUFACTURER
   POST_BIKE_MANUFACTURER: environment.API_URL + '/bike-manufacturer',
   GET_BIKE_MANUFACTURERS: environment.API_URL + '/bike-manufacturer',
@@ -35,21 +44,30 @@ export const API_RESSOURCE_URI = {
   UPLOAD_IMAGE_MODEL: environment.API_URL + '/uploads/bike-model/',
   // PLAN
   BASE_PLAN: environment.API_URL + '/plan/',
+  PLAN_ACTIVE: environment.API_URL + '/plan/active',
   // SUBSCRIPTION
   BASE_SUBSCRIPTION: environment.API_URL + '/subscription/',
   USER_SUBSCRIPTION: environment.API_URL + '/subscription/user/',
+  ADD_SUBSCRIPTION: environment.API_URL + '/subscription/add',
+  CURRENT_USER_SUBSCRIPTIONS: environment.API_URL + '/subscription/me',
+  CURRENT_USER_SUBSCRIPTION: environment.API_URL + '/subscription/current',
+  CANCEL_SUBSCRIPTION: environment.API_URL + '/subscription/cancel/',
   // INVOICE
   BASE_INVOICE: environment.API_URL + '/invoice/',
   USER_INVOICE: environment.API_URL + '/invoice/user/',
+  CURRENT_USER_INVOICE: environment.API_URL + '/invoice/me',
+  EXPORT_INVOICE: environment.API_URL + '/invoice/export/',
   // EMAIL
   BASE_EMAIL: environment.API_URL + '/email/',
   EMAIL_USER: environment.API_URL + '/email/simple',
+  EMAIL_CONTACT: environment.API_URL + '/email/contact',
   EMAIL_NEWSLETTER: environment.API_URL + '/email/newsletter',
 
   // STATISTICS
   STATISTICS_SUBSCRIPTIONS: environment.API_URL + '/statistics/subscriptions',
   STATISTICS_INCOMES: environment.API_URL + '/statistics/incomes?',
-  STATISTICS_USER_SUBSCRIPTIONS: environment.API_URL + '/statistics/user-subscriptions?',
+  STATISTICS_USER_SUBSCRIPTIONS:
+    environment.API_URL + '/statistics/user-subscriptions?',
   STATISTICS_RIDES: environment.API_URL + '/statistics/rides?',
   STATISTICS_STATIONS: environment.API_URL + '/statistics/stations',
   STATISTICS_BIKES: environment.API_URL + '/statistics/bikes',
