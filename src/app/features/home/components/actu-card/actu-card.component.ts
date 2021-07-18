@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-actu-card',
@@ -15,7 +15,12 @@ export class ActuCardComponent implements OnInit {
     author: string;
     lectureTime: number;
     profileUrl: string;
+    content: string;
   };
-  constructor() {}
-  ngOnInit(): void {}
+
+  constructor() {
+  }
+
+  ngOnInit(): void {
+  }
 }
