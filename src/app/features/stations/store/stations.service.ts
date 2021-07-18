@@ -131,6 +131,7 @@ export class StationsService {
       response.stationMonitoring = [];
       this.stationsStore.add(response);
       this.routerNavigation.gotoStationList();
+      this.snackBar.success('La station a été ajouté');
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de la création d\'une station : ' + e.error.error

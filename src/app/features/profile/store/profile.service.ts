@@ -25,9 +25,9 @@ export class ProfileService {
     try {
       const userRes = await this.http.put<User>(API_RESSOURCE_URI.PUT_ME, user);
       this.sessionStore.setUser(userRes);
-      this.snackBar.success('Informations personnelles bien modifié');
+      this.snackBar.success('Vos informations personnelles ont bien été modifiés');
     } catch (e) {
-      this.snackBar.warnning('Erreur lors de la modification ' + e.error.error);
+      this.snackBar.warnning('Erreur lors de la modification de vos informations' + e.error.error);
     }
   }
 
@@ -37,7 +37,7 @@ export class ProfileService {
         API_RESSOURCE_URI.CHANGE_PASSWORD,
         editedPassword
       );
-      this.snackBar.success('mot de passe modifié avec succès');
+      this.snackBar.success('Mot de passe modifié avec succès');
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de la modification du mot de passe ' + e.error.error
@@ -64,6 +64,7 @@ export class ProfileService {
     const newUser = {...currentUser, subscriptions: [res]};
     this.sessionStore.update({user: newUser});
     this.routerNavigation.gotoProfile();
+    this.snackBar.success('Votre inscription a été activé avec succès');
   }
 
 
@@ -72,6 +73,8 @@ export class ProfileService {
     const currentUser = this.sessionStore._value().user;
     const user = {...currentUser, subscriptions: []};
     this.sessionStore.update({user});
+    this.snackBar.success('Votre inscription a été annulé avec succès');
+
   }
 
   async getCurrentUserSubscriptions(limit: number, offset: number): Promise<void> {

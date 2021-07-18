@@ -101,7 +101,6 @@ export class UsersFormComponent implements OnInit, OnChanges {
     } else {
       this.saveForEdit(user);
     }
-    this.snackBar.success('Enregisté');
   }
 
   private saveForAdd(user: any): void {

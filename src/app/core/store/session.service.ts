@@ -32,7 +32,7 @@ export class SessionService {
       this.sessionStore.setToken(response.token);
       this.userRidesService.getCurrentRide();
       this.routerNavigation.gotoProfile();
-      this.snackBar.success('vous êtes maintenant connecté');
+      this.snackBar.success('Vous êtes maintenant connecté');
     } catch (e) {
       this.snackBar.warnning('Erreur de connexion : ' + e.error.error);
     }
@@ -77,7 +77,7 @@ export class SessionService {
           newPassword,
           confirmNewPassword
         });
-      this.snackBar.success('Votre mot de pass a bien été modifié', 10000);
+      this.snackBar.success('Votre mot de passe a bien été modifié', 10000);
       this.routerNavigation.gotoAuth();
     } catch (e) {
       this.snackBar.warnning(

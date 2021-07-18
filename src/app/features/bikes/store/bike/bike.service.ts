@@ -61,6 +61,7 @@ export class BikeService {
         bike
       );
       this.bikeStore.add(response);
+      this.snackBar.success('Le vélo a bien été ajouté');
     } catch (err) {
       this.snackBar.warnning(
         'Erreur lors de l\'ajout d\'un vélo : ' + err.error.error
@@ -78,6 +79,7 @@ export class BikeService {
         bike
       );
       this.bikeStore.update(response.id, response);
+      this.snackBar.success('Le vélo a bien été modifié');
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de la modification du vélo : ' + e.error.error
@@ -92,6 +94,7 @@ export class BikeService {
     try {
       await this.http.delete(API_RESSOURCE_URI.BASE_BIKE + id);
       this.bikeStore.remove(id);
+      this.snackBar.success('Le vélo a bien été supprimé');
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de la suppression du vélo : ' + e.error.error

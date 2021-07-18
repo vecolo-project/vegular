@@ -77,6 +77,5 @@ export class BikesManufacturerFormComponent implements OnInit {
     } else {
       this.postManufacturer.emit(manufacturer);
     }
-    this.snackBar.success('Enregistré');
   }
 }

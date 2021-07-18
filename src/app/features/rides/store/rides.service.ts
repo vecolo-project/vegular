@@ -59,9 +59,7 @@ export class RidesService {
         API_RESSOURCE_URI.BASE_RIDE + rideId
       );
       this.rideStore.remove(rideId);
-      this.snackBar.success(
-        'Le trajet a été supprimé'
-      );
+      this.snackBar.success('Le trajet a été supprimé');
     } catch (e) {
       this.rideStore.update({viewRide: undefined});
       this.snackBar.warnning(
@@ -81,6 +79,7 @@ export class RidesService {
         ride
       );
       this.rideStore.add(response);
+      this.snackBar.success('Le trajet a été créé');
       this.routerNavigation.gotoRideList();
     } catch (e) {
       this.snackBar.warnning(
@@ -100,7 +99,7 @@ export class RidesService {
       );
       this.rideStore.update(ride.id, ride);
       this.rideStore.update({viewRide: ride});
-      this.snackBar.success('Trajet mis à jour');
+      this.snackBar.success('Le trajet a été mis à jour');
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de la mise à jour d\'un trajet : ' + e.error.error

@@ -139,7 +139,6 @@ export class BikesFormComponent implements OnInit, OnChanges {
     } else {
       this.postBike.emit(bike);
     }
-    this.snackBar.success('Enregistré');
     this.router.navigate(['/bikes']);
   }
 

@@ -62,6 +62,7 @@ export class SubscriptionsService {
       );
       response.invoices = [];
       this.subscriptionsStore.add(response);
+      this.snackBar.success('L\'abonnement a été ajouté');
       this.routerNavigation.gotoSubscriptionList();
     } catch (e) {
       this.snackBar.warnning(

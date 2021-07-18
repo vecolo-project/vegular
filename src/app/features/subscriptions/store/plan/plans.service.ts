@@ -29,7 +29,7 @@ export class PlansService {
       this.planStore.update({count: response.count});
     } catch (e) {
       this.snackBar.warnning(
-        'Erreur lors de la récupération des forfait : ' + e.error.error
+        'Erreur lors de la récupération des forfaits : ' + e.error.error
       );
     } finally {
       this.planStore.setLoading(false);
@@ -62,6 +62,7 @@ export class PlansService {
       );
       response.subscriptions = [];
       this.planStore.add(response);
+      this.snackBar.success('Le forfait a été ajouté');
       this.routerNavigation.gotoSubscriptionList();
     } catch (e) {
       this.snackBar.warnning(

@@ -6,31 +6,34 @@ import {API_RESSOURCE_URI} from '../../../../shared/api-ressource-uri/api-ressou
 import {BikeManufacturerQuery} from './manufacturer.query';
 import {BikeManufacturerStore} from './manufacturer.store';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class BikeManufacturerService {
   constructor(
     private bikeManufacturerStore: BikeManufacturerStore,
     private http: HttpClientWrapper,
     private snackBar: Snackbar,
     private bikeManufacturerQuery: BikeManufacturerQuery
-  ) {}
+  ) {
+  }
 
-  async postManufacturer(manufacturer: BikeManufacturerProps) {
+  async postManufacturer(manufacturer: BikeManufacturerProps): Promise<void> {
     this.bikeManufacturerStore.setLoading(true);
     try {
       const response = await this.http.post<BikeManufacturer>(
         API_RESSOURCE_URI.POST_BIKE_MANUFACTURER,
         manufacturer
       );
-      this.bikeManufacturerStore.update({ editManufacturer: response });
+      this.bikeManufacturerStore.update({editManufacturer: response});
+      this.snackBar.success('Le fabriquant a bien été ajouté');
     } catch (err) {
       this.snackBar.warnning(
-        "Erreur lors de l'ajout du fabriquant : " + err.error.error
+        'Erreur lors de l\'ajout du fabriquant : ' + err.error.error
       );
     } finally {
       this.bikeManufacturerStore.setLoading(false);
     }
   }
+
   async getManufacturers(): Promise<void> {
     this.bikeManufacturerStore.setLoading(true);
     try {
@@ -38,7 +41,7 @@ export class BikeManufacturerService {
         API_RESSOURCE_URI.GET_BIKE_MANUFACTURERS
       );
       this.bikeManufacturerStore.set(response);
-      this.bikeManufacturerStore.update({ count: response.length });
+      this.bikeManufacturerStore.update({count: response.length});
     } catch (e) {
       this.bikeManufacturerStore.set([]);
       this.snackBar.warnning(
@@ -55,9 +58,9 @@ export class BikeManufacturerService {
       const response = await this.http.get<BikeManufacturer>(
         API_RESSOURCE_URI.GET_BIKE_MANUFACTURER + id
       );
-      this.bikeManufacturerStore.update({ editManufacturer: response });
+      this.bikeManufacturerStore.update({editManufacturer: response});
     } catch (e) {
-      this.bikeManufacturerStore.set({ editManufacturer: null });
+      this.bikeManufacturerStore.set({editManufacturer: null});
       this.snackBar.warnning(
         'Erreur lors de la récupération du fabriquant : ' + e.error.error
       );
@@ -71,6 +74,7 @@ export class BikeManufacturerService {
     try {
       await this.http.delete(API_RESSOURCE_URI.DELETE_MANUFACTURER + id);
       this.bikeManufacturerStore.remove(id);
+      this.snackBar.success('Le fabriquant a bien été supprimé');
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de la suppression du fabriquant : ' + e.error.error
@@ -90,7 +94,8 @@ export class BikeManufacturerService {
         API_RESSOURCE_URI.PUT_MANUFACTURER + id,
         manufacturer
       );
-      this.bikeManufacturerStore.update({ editManufacturer: response });
+      this.bikeManufacturerStore.update({editManufacturer: response});
+      this.snackBar.success('Le fabriquant a bien été modifié');
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de la modification du fabriquant : ' + e.error.error

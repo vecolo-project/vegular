@@ -58,9 +58,10 @@ export class UsersService {
     try {
       await this.http.delete<void>(API_RESSOURCE_URI.DELETE_USER + userId);
       this.usersStore.remove(userId);
+      this.snackBar.success('L\'utilisateur a été supprimé');
     } catch (e) {
       this.snackBar.warnning(
-        'Erreur lors de la suppréssion de l\'utilisateur : ' + e.error.error
+        'Erreur lors de la suppression de l\'utilisateur : ' + e.error.error
       );
     } finally {
       this.usersStore.setLoading(false);
@@ -75,6 +76,7 @@ export class UsersService {
         user
       );
       this.usersStore.update({editUser: response});
+      this.snackBar.success('L\'utilisateur a été modifié');
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de la modification de l\'utilisateur : ' + e.error.error
@@ -92,6 +94,7 @@ export class UsersService {
         user
       );
       this.usersStore.update({editUser: response});
+      this.snackBar.success('L\'utilisateur a été ajouté');
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de l\'ajout de l\'utilisateur : ' + e.error.error
