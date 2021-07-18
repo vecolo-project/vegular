@@ -16,11 +16,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.sessionQuery.selectUser$;
-    const main = document.querySelector('main');
-    const observer = new IntersectionObserver((entries) => {
-      console.log(entries);
-    });
-    observer.observe(main);
   }
 
   goToPresentation(): void {

@@ -20,25 +20,96 @@ export class HomeMenuComponent implements OnInit {
   @Output()
   goToTarif = new EventEmitter<void>();
 
+  menuDesktopItem: Element[];
+
+  menuPill: HTMLElement;
+
+  EXTRA_PADDING = 30;
+  presentationMenu: Element;
+  actuMenu: Element;
+  tarifMenu: Element;
+  contactMenu: Element;
+
+  gotoPresentaitonMenu(): void {
+    const width = this.presentationMenu.getBoundingClientRect().width;
+    this.removeClassToAll(this.menuDesktopItem, 'menu__item--active');
+    this.presentationMenu.classList.add('menu__item--active');
+    this.menuPill.style.left = '10px';
+    this.menuPill.style.width = String(width - this.EXTRA_PADDING) + 'px';
+  }
+
+  gotoActuMenu(): void {
+    const width = this.actuMenu.getBoundingClientRect().width;
+    this.removeClassToAll(this.menuDesktopItem, 'menu__item--active');
+    this.actuMenu.classList.add('menu__item--active');
+    this.menuPill.style.left = '185px';
+    this.menuPill.style.width = String(width - this.EXTRA_PADDING) + 'px';
+  }
+
+  gotoTarifMenu(): void {
+    const width = this.tarifMenu.getBoundingClientRect().width;
+    this.removeClassToAll(this.menuDesktopItem, 'menu__item--active');
+    this.tarifMenu.classList.add('menu__item--active');
+    this.menuPill.style.left = '335px';
+    this.menuPill.style.width = String(width - this.EXTRA_PADDING) + 'px';
+  }
+
+  gotoContactMenu(): void {
+    const width = this.contactMenu.getBoundingClientRect().width;
+    this.removeClassToAll(this.menuDesktopItem, 'menu__item--active');
+    this.contactMenu.classList.add('menu__item--active');
+    this.menuPill.style.left = '445px';
+    this.menuPill.style.width = String(width - this.EXTRA_PADDING) + 'px';
+  }
+
   ngOnInit(): void {
-    const menuDesktop = document.querySelector('.menu');
-    const menuDesktopRect = menuDesktop.getBoundingClientRect();
-    const menuDesktopItem = document.querySelectorAll('.menu__item');
-    const menuPill: HTMLElement = document.querySelector('.menu__pill');
+    this.menuDesktopItem = Array.from(document.querySelectorAll('.menu__item'));
+    this.menuPill = document.querySelector('.menu__pill');
 
-    function removeClassToAll(items: NodeListOf<Element>, className: string) {
-      items.forEach((item) => item.classList.remove(className));
-    }
+    this.presentationMenu = document.querySelector('#presentation-menu');
+    this.actuMenu = document.querySelector('#actu-menu');
+    this.tarifMenu = document.querySelector('#tarif-menu');
+    this.contactMenu = document.querySelector('#contact-menu');
 
-    menuDesktopItem.forEach((item) => {
-      const rect = item.getBoundingClientRect();
-      item.addEventListener('mouseenter', (e) => {
-        menuPill.style.left =
-          String((rect.left - menuDesktopRect.left + 7) * 0.94) + 'px';
-        menuPill.style.width = String(rect.width - 40) + 'px';
-        removeClassToAll(menuDesktopItem, 'menu__item--active');
-        item.classList.add('menu__item--active');
+    this.presentationMenu.addEventListener('mouseenter', () =>
+      this.gotoPresentaitonMenu()
+    );
+    this.actuMenu.addEventListener('mouseenter', () => this.gotoActuMenu());
+    this.tarifMenu.addEventListener('mouseenter', () => this.gotoTarifMenu());
+    this.contactMenu.addEventListener('mouseenter', () =>
+      this.gotoContactMenu()
+    );
+
+    const sections = [
+      {
+        id: '#presentation',
+        func: () => this.gotoPresentaitonMenu(),
+      },
+      {
+        id: '#actu',
+        func: () => this.gotoActuMenu(),
+      },
+      {
+        id: '#tarif',
+        func: () => this.gotoTarifMenu(),
+      },
+      {
+        id: '#contact',
+        func: () => this.gotoContactMenu(),
+      },
+    ];
+    sections.forEach((section) => {
+      const target = document.querySelector(section.id);
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          section.func();
+        }
       });
+      observer.observe(target);
     });
+  }
+
+  private removeClassToAll(items: Array<Element>, className: string) {
+    items.forEach((item) => item.classList.remove(className));
   }
 }
