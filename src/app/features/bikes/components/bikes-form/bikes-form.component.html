@@ -49,8 +49,8 @@
       <textarea matInput hidden></textarea>
     </mat-form-field>
     <p class="text-center">
-      <button mat-button (click)="save()" class="bg-indigo-500">
-        enregister
+      <button mat-button (click)="save()" [disabled]="form.invalid" class="bg-indigo-500">
+        Enregister
       </button>
     </p>
   </mat-card>

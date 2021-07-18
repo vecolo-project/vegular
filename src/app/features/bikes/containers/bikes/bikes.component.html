@@ -1,5 +1,5 @@
 <mat-tab-group *ngIf="isRoot()" mat-align-tabs="center">
-  <mat-tab label="Vélo">
+  <mat-tab label="Vélos">
     <app-bikes-list
       [bikes]="bikes | async"
       [bikesCount]="bikesCount | async"
@@ -9,7 +9,7 @@
       (viewBike)="onViewBike($event)"
     ></app-bikes-list>
   </mat-tab>
-  <mat-tab label="Modèle">
+  <mat-tab label="Modèles">
     <app-bikes-model-list
       [models]="models | async"
       [modelsCount]="modelsCount | async"
@@ -20,7 +20,7 @@
     ></app-bikes-model-list
     >
   </mat-tab>
-  <mat-tab label="Fabriquant">
+  <mat-tab label="Fabriquants">
     <app-bikes-manufacturer-list
       [manufacturers]="manufacturers | async"
       [manufacturersCount]="manufacturersCount | async"
