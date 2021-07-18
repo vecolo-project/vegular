@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from '../../../../shared/models';
-import {FormControl} from "@angular/forms";
+import {FormControl} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmDialogComponent} from '../../../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-user-list',
@@ -29,6 +31,9 @@ export class UserListComponent implements OnInit {
   @Output()
   setEditUser = new EventEmitter<number>();
 
+  @Output()
+  viewUser = new EventEmitter<number>();
+
   displayedColumns = [
     'id',
     'firstName',
@@ -39,27 +44,46 @@ export class UserListComponent implements OnInit {
   ];
 
   pageIndex: number;
-  pageSize: number
+  pageSize: number;
   searchQuery: FormControl;
 
-  constructor() {
+  constructor(private dialog: MatDialog) {
     this.searchQuery = new FormControl('');
   }
 
   ngOnInit(): void {
-    this.pageIndex = 0;
-    this.pageSize = 10;
-    this.getUsersF();
+    this.getUsersF(0, 10);
   }
 
-  getUsersF(): void {
+  getUsersF(pageIndex: number, pageSize: number): void {
+    this.pageIndex = pageIndex;
+    this.pageSize = pageSize;
     setTimeout(() => {
-      this.getUsers.emit({limit: this.pageSize, offset: this.pageIndex, searchQuery: this.searchQuery.value});
+      this.getUsers.emit({limit: this.pageSize, offset: this.pageIndex * this.pageSize, searchQuery: this.searchQuery.value});
     });
   }
 
   onSearch(): void {
     this.pageIndex = 0;
-    this.getUsersF();
+    this.getUsersF(this.pageIndex, this.pageSize);
   }
+
+  onDelete(id: number): void {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Suppression d\'un Utilisateur',
+        message: 'Êtes vous sûr de vouloir supprimer cet utilisateur ?'
+      }
+    });
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.deleteUser.emit(id);
+      }
+    });
+  }
+
+  onViewUser(user: User): void {
+    this.viewUser.emit(user.id);
+  }
+
 }

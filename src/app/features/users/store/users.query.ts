@@ -2,13 +2,19 @@ import {Injectable} from '@angular/core';
 import {UsersState, UsersStore} from './users.store';
 import {HashMap, QueryEntity} from '@datorama/akita';
 import {Observable} from 'rxjs';
-import {User} from '../../../shared/models/user.model';
+import {Invoice, Ride, Subscription, User} from '../../../shared/models';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class UsersQuery extends QueryEntity<UsersState, User> {
   selectUsers$: Observable<HashMap<User>> = this.select('entities');
   selectUsersArray$: Observable<User[]> = this.selectAll();
   selectEditUsers$: Observable<User> = this.select('editUser');
+  selectViewUserRides$: Observable<Ride[]> = this.select('viewUserRides');
+  selectViewUserSubscriptions$: Observable<Subscription[]> = this.select('viewUserSubscriptions');
+  selectViewUserInvoices$: Observable<Invoice[]> = this.select('viewUserInvoices');
+  selectViewUserRidesCount$: Observable<number> = this.select('viewUserRidesCount');
+  selectViewUserSubscriptionsCount$: Observable<number> = this.select('viewUserSubscriptionsCount');
+  selectViewUserInvoicesCount$: Observable<number> = this.select('viewUserInvoicesCount');
   selectIds$: Observable<number[]> = this.select('ids');
   selectCount$: Observable<number> = this.select('count');
   isLoading$: Observable<boolean> = this.select('loading');
@@ -18,6 +24,6 @@ export class UsersQuery extends QueryEntity<UsersState, User> {
   }
 
   setEditUser(id: number): void {
-    this.store.update({ editUser: this.getEntity(id) });
+    this.store.update({editUser: this.getEntity(id)});
   }
 }

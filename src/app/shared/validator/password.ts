@@ -1,13 +1,16 @@
-import {AbstractControl} from '@angular/forms';
+import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 
-export class PasswordValidator {
-  static confirmPasswordValidator(control: AbstractControl): boolean {
-    const password: string = control.get('fieldPassword').value;
-    const confirmPassword: string = control.get('fieldConfirmPassword').value;
-    if (password !== confirmPassword) {
-      control.get('fieldPassword').setErrors({ passwordDidntMatch: true });
-      return false;
+export function matchPassword(firstControl, secondControl): ValidatorFn {
+
+  return (control: AbstractControl): ValidationErrors | null => {
+    const password: AbstractControl = control.get(firstControl);
+    const confirm: AbstractControl = control.get(secondControl);
+
+    if (password.value !== confirm.value) {
+      return {noMatch: true};
     }
-    return true;
-  }
+
+    return null;
+  };
 }
+

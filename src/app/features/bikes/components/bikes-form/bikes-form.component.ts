@@ -1,24 +1,10 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import {
-  Bike,
-  BikeModel,
-  BikeProps,
-  BikeStatus,
-  Station,
-} from 'src/app/shared/models';
-import { Snackbar } from 'src/app/shared/snackbar/snakbar';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import {Bike, BikeModel, BikeProps, BikeStatus, Station,} from 'src/app/shared/models';
+import {Snackbar} from 'src/app/shared/snackbar/snakbar';
 
 @Component({
   selector: 'app-bikes-form',
@@ -37,9 +23,6 @@ export class BikesFormComponent implements OnInit, OnChanges {
   @Input()
   models: BikeModel[];
 
-  @Input()
-  stations: Station[];
-
   @Output()
   postBike = new EventEmitter<BikeProps>();
 
@@ -51,12 +34,6 @@ export class BikesFormComponent implements OnInit, OnChanges {
 
   @Output()
   getModels = new EventEmitter();
-
-  @Output()
-  getStations = new EventEmitter();
-
-  stationOption = [];
-  filteredOptionsStation: Observable<Station[]>;
 
   modelOption = [];
   filteredOptionsModel: Observable<BikeModel[]>;
@@ -83,15 +60,9 @@ export class BikesFormComponent implements OnInit, OnChanges {
       this.modelOption = this.models;
       this.setFilterForModel();
     }
-    if (!this.stations || this.stations.length === 0) {
-      this.getStations.emit();
-    } else {
-      this.stationOption = this.stations;
-      this.setFilterForStation();
-    }
     if (this.isEditMode) {
       setTimeout(() => {
-        const id = Number.parseInt(this.route.snapshot.params.id);
+        const id = Number.parseInt(this.route.snapshot.params.id, 10);
         this.retrieveEditBike.emit(id);
       });
     }
@@ -103,15 +74,10 @@ export class BikesFormComponent implements OnInit, OnChanges {
       this.modelOption = this.models;
       this.setFilterForModel();
     }
-    if (this.stations) {
-      this.stationOption = this.stations;
-      this.setFilterForStation();
-    }
     if (
       this.isEditMode &&
       this.editBike &&
       this.editBike.station &&
-      this.stationOption.length &&
       this.modelOption.length
     ) {
       this.patchValues();
@@ -119,42 +85,25 @@ export class BikesFormComponent implements OnInit, OnChanges {
   }
 
   private patchValues(): void {
-    const stationOption = this.getOptionForStation(this.editBike.station);
     const modelOption = this.getOptionForModel(this.editBike.model);
     this.form.controls.fieldMatricule.patchValue(this.editBike.matriculate);
-    this.form.controls.fieldStation.patchValue(stationOption);
     this.form.controls.fieldRecharging.patchValue(this.editBike.recharging);
     this.form.controls.fieldModel.patchValue(modelOption);
     this.form.controls.fieldStatus.patchValue(this.editBike.status);
   }
 
-  private getOptionForStation(station: Station): string {
-    return this.stationOption.find(
-      (option) => option.streetName === station.streetName
-    );
+  onStationSearch(): void {
+    this.form.controls.fieldStation.patchValue(null);
+  }
+
+  onStationSelect(station: Station): void {
+    this.form.controls.fieldStation.patchValue(station);
   }
 
   private getOptionForModel(model: BikeModel): string {
     return this.modelOption.find((option) => option.name === model.name);
   }
 
-  private setFilterForStation(): void {
-    this.filteredOptionsStation =
-      this.form.controls.fieldStation.valueChanges.pipe(
-        startWith(''),
-        map((value) => (typeof value === 'string' ? value : value.name)),
-        map((name) =>
-          name ? this.filterStation(name) : this.stationOption.slice()
-        )
-      );
-  }
-
-  private filterStation(name: string): Station[] {
-    const filterValue = name.toLowerCase();
-    return this.stationOption.filter((option) =>
-      option.streetName.toLowerCase().includes(filterValue)
-    );
-  }
 
   private setFilterForModel(): void {
     this.filteredOptionsModel = this.form.controls.fieldModel.valueChanges.pipe(
@@ -173,6 +122,8 @@ export class BikesFormComponent implements OnInit, OnChanges {
 
   save(): void {
     const bike = {
+      id: undefined,
+      batteryPercent: undefined,
       matriculate: String(this.form.value.fieldMatricule),
       station: this.form.value.fieldStation.id,
       recharging: this.form.value.fieldRecharging === 'true',
@@ -180,23 +131,15 @@ export class BikesFormComponent implements OnInit, OnChanges {
       status: BikeStatus[this.form.value.fieldStatus],
     };
     if (this.isEditMode && this.editBike.id) {
-      bike['id'] = this.editBike.id;
-      bike['batteryPercent'] = this.editBike.batteryPercent;
+      bike.id = this.editBike.id;
+      bike.batteryPercent = this.editBike.batteryPercent;
     }
     if (this.isEditMode) {
       this.putBike.emit(bike);
     } else {
       this.postBike.emit(bike);
     }
-    this.snackBar.success('Enregistré');
     this.router.navigate(['/bikes']);
   }
 
-  displayAutocompleteStation(station: Station): string {
-    return station && station.streetName ? station.streetName : '';
-  }
-
-  displayAutocompleteModel(model: BikeModel): string {
-    return model && model.name ? model.name : '';
-  }
 }

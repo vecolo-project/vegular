@@ -1,3 +1,5 @@
+import { Subscription } from './subscription.model';
+
 export type User = {
   id: number;
   firstName: string;
@@ -7,6 +9,21 @@ export type User = {
   pseudo: string;
   newsletter: boolean;
   role: Role;
+  isActive: boolean;
+  subscriptions: Subscription[];
+  createdAt: Date;
+};
+
+export type EditUser = {
+  id?: number;
+  firstName: string;
+  lastName: string;
+  birthDate?: Date;
+  email: string;
+  pseudo: string;
+  newsletter?: boolean;
+  role?: Role;
+  isActive?: boolean;
 };
 
 export type UserFormData = {
@@ -29,9 +46,9 @@ export type RegisterUser = {
   birthDate: Date;
   email: string;
   pseudo: string;
-  newsletter: boolean;
-  role: Role;
-  isActive: boolean;
+  newsletter?: boolean;
+  role?: Role;
+  isActive?: boolean;
 };
 
 export type PutUser = {
@@ -51,3 +68,9 @@ export enum Role {
   STAFF = 'STAFF',
   CLIENT = 'CLIENT',
 }
+
+export type EditedPassword = {
+  actualPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+};

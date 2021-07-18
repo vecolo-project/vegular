@@ -3,9 +3,9 @@ import {HttpClientWrapper} from 'src/app/core/utils/httpClientWrapper';
 import {Snackbar} from 'src/app/shared/snackbar/snakbar';
 import {PlansQuery} from './plans.query';
 import {PlansStore} from './plans.store';
-import {Plan, Station} from "../../../../shared/models";
-import {API_RESSOURCE_URI} from "../../../../shared/api-ressource-uri/api-ressource-uri";
-import {RouterNavigation} from "../../../../core/router/router.navigation";
+import {Plan, Station} from '../../../../shared/models';
+import {API_RESSOURCE_URI} from '../../../../shared/api-ressource-uri/api-ressource-uri';
+import {RouterNavigation} from '../../../../core/router/router.navigation';
 
 @Injectable({providedIn: 'root'})
 export class PlansService {
@@ -29,7 +29,7 @@ export class PlansService {
       this.planStore.update({count: response.count});
     } catch (e) {
       this.snackBar.warnning(
-        'Erreur lors de la récupération des forfait : ' + e.error.error
+        'Erreur lors de la récupération des forfaits : ' + e.error.error
       );
     } finally {
       this.planStore.setLoading(false);
@@ -62,6 +62,7 @@ export class PlansService {
       );
       response.subscriptions = [];
       this.planStore.add(response);
+      this.snackBar.success('Le forfait a été ajouté');
       this.routerNavigation.gotoSubscriptionList();
     } catch (e) {
       this.snackBar.warnning(
@@ -81,7 +82,7 @@ export class PlansService {
       );
       this.planStore.update(plan.id, plan);
       this.planStore.update({viewPlan: plan});
-      this.snackBar.success("Forfait mis à jour");
+      this.snackBar.success('Forfait mis à jour');
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de la mise à jour d\'un forfait : ' + e.error.error

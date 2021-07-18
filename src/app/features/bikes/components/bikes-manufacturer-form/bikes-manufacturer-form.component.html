@@ -14,7 +14,7 @@
         matInput
         formControlName="fieldName"
         placeholder="Nom"
-        type=" text"
+        type="text"
       />
       <mat-error>Ce champs et requis</mat-error>
     </mat-form-field>
@@ -23,10 +23,11 @@
         matInput
         formControlName="fieldPhone"
         placeholder="Téléphone"
-        type=" text"
+        type="text"
       />
       <mat-error
-        >Le numéro de téléphone doit faire au moins 10 caractères</mat-error
+      >Le numéro de téléphone doit faire au moins 10 caractères
+      </mat-error
       >
     </mat-form-field>
     <mat-form-field class="w-full">
@@ -34,13 +35,13 @@
         matInput
         formControlName="fieldAddress"
         placeholder="Adresse"
-        type=" textarea"
+        type="textarea"
       ></textarea>
       <mat-error>Ce champs et requis</mat-error>
     </mat-form-field>
     <p class="text-center">
-      <button mat-button (click)="save()" class="bg-indigo-500">
-        enregister
+      <button mat-button (click)="save()" class="bg-indigo-500" [disabled]="form.invalid">
+        Enregister
       </button>
     </p>
   </mat-card>

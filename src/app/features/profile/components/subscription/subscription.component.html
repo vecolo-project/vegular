@@ -1,0 +1,51 @@
+<!--
+  Reprendre la tarif card et la mettre en avant quand elle est "active"
+-->
+<div class="mt-8"></div>
+<div *ngIf="isSubscribeUser()">
+  <div class="mb-4 p-4 bg-gray-600 rounded">
+    <h1>Mon abonnement :</h1>
+    <div class="flex justify-between">
+      <h2>{{ subscribtion.plan.name }}</h2>
+      <p><strong>{{ subscribtion.plan.price }}</strong> €</p>
+    </div>
+    <div class="flex justify-between border border-yellow-200 p-4 rounded mb-4 text-center">
+      <div>Renouvellement automatique : </div>
+      <mat-slide-toggle
+      [checked]="subscribtion.autoRenew"
+      disabled="true"
+      color="warn"
+    ></mat-slide-toggle>
+    </div>
+    <div class="sm:flex justify-between">
+      <p>Nombre de jours restant : <strong>{{ numberOfDaysRemaining }}</strong></p>
+      <button
+        (click)="unsubscribe()"
+        mat-button
+        class="text-blue-900 bg-red-300"
+      >
+        Annuler mon abonnement
+      </button>
+    </div>
+
+  </div>
+  <div class="grid grid-cols-3 gap-4 mt-10">
+    <div *ngFor="let plan of plans" class="mb-10 col-span-3 sm:col-span-1">
+      <app-subsribe-card
+        (subscribeToPlan)="subscribe($event)"
+        [plan]="plan"
+        [userPlanId]="subscribtion.plan.id"
+      ></app-subsribe-card>
+    </div>
+  </div>
+</div>
+<div *ngIf="!isSubscribeUser()">
+  <div class="grid grid-cols-3 gap-4 mt-10">
+    <div *ngFor="let plan of plans" class="mb-10 col-span-3 sm:col-span-1">
+      <app-subsribe-card
+        (subscribeToPlan)="subscribe($event)"
+        [plan]="plan"
+      ></app-subsribe-card>
+    </div>
+  </div>
+</div>

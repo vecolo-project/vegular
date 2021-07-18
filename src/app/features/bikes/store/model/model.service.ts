@@ -1,28 +1,29 @@
-import { Injectable } from '@angular/core';
-import { HttpClientWrapper } from 'src/app/core/utils/httpClientWrapper';
-import { BikeModel, BikeModelProps } from 'src/app/shared/models';
-import { Snackbar } from 'src/app/shared/snackbar/snakbar';
-import { API_RESSOURCE_URI } from '../../../../shared/api-ressource-uri/api-ressource-uri';
-import { BikeModelQuery } from './model.query';
-import { BikeModelStore } from './model.store';
+import {Injectable} from '@angular/core';
+import {HttpClientWrapper} from 'src/app/core/utils/httpClientWrapper';
+import {BikeModel, BikeModelProps} from 'src/app/shared/models';
+import {Snackbar} from 'src/app/shared/snackbar/snakbar';
+import {API_RESSOURCE_URI} from '../../../../shared/api-ressource-uri/api-ressource-uri';
+import {BikeModelQuery} from './model.query';
+import {BikeModelStore} from './model.store';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class BikeModelService {
   constructor(
     private bikeModelStore: BikeModelStore,
     private http: HttpClientWrapper,
     private snackBar: Snackbar,
     private bikeModelQuery: BikeModelQuery
-  ) {}
+  ) {
+  }
 
-  async getModels() {
+  async getModels(): Promise<void> {
     this.bikeModelStore.setLoading(true);
     try {
       const response = await this.http.get<BikeModel[]>(
         API_RESSOURCE_URI.BASE_MODELS
       );
       this.bikeModelStore.set(response);
-      this.bikeModelStore.update({ count: response.length });
+      this.bikeModelStore.update({count: response.length});
     } catch (e) {
       this.bikeModelStore.set([]);
       this.snackBar.warnning(
@@ -39,9 +40,9 @@ export class BikeModelService {
       const response = await this.http.get<BikeModel>(
         API_RESSOURCE_URI.BASE_MODELS + id
       );
-      this.bikeModelStore.update({ editModel: response });
+      this.bikeModelStore.update({editModel: response});
     } catch (e) {
-      this.bikeModelStore.set({ editModel: null });
+      this.bikeModelStore.set({editModel: null});
       this.snackBar.warnning(
         'Erreur lors de la récupération du modèle : ' + e.error.error
       );
@@ -50,17 +51,18 @@ export class BikeModelService {
     }
   }
 
-  async postModel(model: BikeModelProps) {
+  async postModel(model: BikeModelProps): Promise<void> {
     this.bikeModelStore.setLoading(true);
     try {
       const response = await this.http.post<BikeModel>(
         API_RESSOURCE_URI.BASE_MODELS,
         model
       );
-      this.bikeModelStore.update({ editModel: response });
+      this.bikeModelStore.update({editModel: response});
+      this.snackBar.success('Le modèle a bien été ajouté');
     } catch (err) {
       this.snackBar.warnning(
-        "Erreur lors de l'ajout du modèle : " + err.error.error
+        'Erreur lors de l\'ajout du modèle : ' + err.error.error
       );
     } finally {
       this.bikeModelStore.setLoading(false);
@@ -73,7 +75,7 @@ export class BikeModelService {
         API_RESSOURCE_URI.BASE_MODELS + 'add-image/' + id,
         formData
       );
-      this.snackBar.success('Le fichier a bien été envoyer');
+      this.snackBar.success('Le fichier a bien été envoyé');
     } catch (e) {
       this.snackBar.warnning(e.error.error);
     }
@@ -86,7 +88,8 @@ export class BikeModelService {
         API_RESSOURCE_URI.BASE_MODELS + id,
         model
       );
-      this.bikeModelStore.update({ editModel: response });
+      this.bikeModelStore.update({editModel: response});
+      this.snackBar.success('Le modèle a bien été modifié');
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de la modification du modèle : ' + e.error.error
@@ -102,6 +105,7 @@ export class BikeModelService {
       console.log(API_RESSOURCE_URI.BASE_MODELS + id);
       await this.http.delete(API_RESSOURCE_URI.BASE_MODELS + id);
       this.bikeModelStore.remove(id);
+      this.snackBar.success('Le modèle a bien été supprimé');
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de la suppression du model : ' + e.error.error

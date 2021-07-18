@@ -155,7 +155,6 @@ export class BikesModelFormComponent implements OnInit, OnChanges {
     } else {
       this.postModel.emit(model);
     }
-    this.snackBar.success('Enregistré');
   }
 
   changeImage(event: any): void {

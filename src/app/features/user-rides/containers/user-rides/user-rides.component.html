@@ -1,0 +1,11 @@
+<div class="my-10">
+  <app-new-ride *ngIf="!(currentRide | async)"
+                [bikes]="bikes | async"
+                (selectStation)="onSelectStation($event)"
+                (submitRide)="onSubmitStartRide($event)"
+  ></app-new-ride>
+  <app-end-ride *ngIf="currentRide | async"
+                [currentRide]="currentRide | async"
+                (submitRide)="onSubmitEndRide($event)"
+  ></app-end-ride>
+</div>

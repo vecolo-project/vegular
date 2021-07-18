@@ -1,12 +1,8 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  OnChanges,
-  Output,
-} from '@angular/core';
-import { Bike } from 'src/app/shared/models';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {Bike} from 'src/app/shared/models';
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmDialogComponent} from '../../../../shared/confirm-dialog/confirm-dialog.component';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-bikes-list',
@@ -24,10 +20,13 @@ export class BikesListComponent implements OnInit, OnChanges {
   loading: boolean;
 
   @Output()
-  getBikes = new EventEmitter();
+  getBikes = new EventEmitter<{ limit: number; offset: number, searchQuery: string }>();
 
   @Output()
   deleteBike = new EventEmitter<number>();
+
+  @Output()
+  viewBike = new EventEmitter<number>();
 
   displayedColumns = [
     'id',
@@ -35,44 +34,58 @@ export class BikesListComponent implements OnInit, OnChanges {
     'batteryPercent',
     'recharging',
     'status',
+    'model',
+    'station',
     'action',
   ];
 
-  tableDef: Array<any> = [
-    {
-      key: 'id',
-      header: 'id',
-    },
-    {
-      key: 'matriculate',
-      header: 'matricule',
-    },
-    {
-      key: 'batteryPercent',
-      header: 'battery percent',
-    },
-    {
-      key: 'recharging',
-      header: 'en charge',
-    },
-    {
-      key: 'status',
-      header: 'status',
-    },
-    {
-      key: 'action',
-      header: 'Action',
-    },
-  ];
-  constructor() {}
+  pageIndex: number;
+  pageSize: number;
+  searchQuery: FormControl;
 
-  ngOnInit(): void {
-    this.getUsersWithPagination(10, 0);
+  constructor(private dialog: MatDialog) {
+    this.searchQuery = new FormControl('');
   }
 
-  ngOnChanges(): void {}
+  ngOnInit(): void {
+    this.getBikesF(0, 10);
+  }
 
-  getUsersWithPagination(limit: number, offset: number) {
-    setTimeout(() => this.getBikes.emit({ limit, offset }));
+  ngOnChanges(): void {
+  }
+
+  getBikesF(pageIndex: number, pageSize: number): void {
+    this.pageIndex = pageIndex;
+    this.pageSize = pageSize;
+
+    setTimeout(() => this.getBikes.emit({
+      limit: this.pageSize,
+      offset: this.pageIndex * this.pageSize,
+      searchQuery: this.searchQuery.value
+    }));
+  }
+
+  onSearch(): void {
+    this.pageIndex = 0;
+    this.getBikesF(this.pageIndex, this.pageSize);
+  }
+
+  onViewBike(bike: Bike): void {
+    this.viewBike.emit(bike.id);
+  }
+
+
+  onDelete(id: number): void {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Suppression d\'un vélo',
+        message: 'Êtes vous sûr de vouloir supprimer ce vélo ?'
+      }
+    });
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.deleteBike.emit(id);
+      }
+    });
   }
 }

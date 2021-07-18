@@ -1,0 +1,42 @@
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>dashboard</mat-icon>&nbsp;Mes infos
+    </ng-template>
+    <app-user-view
+      [user]="user | async"
+      [userRides]="userRides | async"
+      [userSubscriptions]="userSubscriptions | async"
+      [userInvoices]="userInvoices | async"
+      [userRidesCount]="userRidesCount | async"
+      [userSubscriptionsCount]="userSubscriptionsCount | async"
+      [userInvoicesCount]="userInvoicesCount | async"
+      (getUserSubscriptions)="getUserSubscriptions($event.limit,$event.offset)"
+      (getUserRides)="getUserRides($event.limit,$event.offset)"
+      (getUserInvoices)="getUserInvoices($event.limit,$event.offset)"
+      (exportInvoice)="onExportInvoice($event)"
+    ></app-user-view>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>edit</mat-icon>&nbsp;Editer mon profile
+    </ng-template>
+    <app-edit-profile
+      [user]="user | async"
+      (editUser)="editUser($event)"
+      (changePassword)="changePassword($event)"
+    ></app-edit-profile>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>local_offer</mat-icon>&nbsp;Abonnement
+    </ng-template>
+    <app-subscription
+      [user]="user | async"
+      [plans]="plans | async"
+      (subscribeToPlan)="subscribeToPlan($event)"
+      (getPlans)="getActivePlans()"
+      (cancelSubscription)="cancelSubscription($event)"
+    ></app-subscription>
+  </mat-tab>
+</mat-tab-group>

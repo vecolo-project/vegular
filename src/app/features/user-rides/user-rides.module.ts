@@ -1,18 +1,22 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RidesComponent} from './containers/rides/rides.component';
 import {UserRideRoutingModule} from './user-rides-routing.module';
-import {NewRideComponent} from './containers/new-ride/new-ride.component';
+import {UserRidesComponent} from './containers/user-rides/user-rides.component';
+import {EndRideComponent} from './components/end-ride/end-ride.component';
+import {NewRideComponent} from "./components/new-ride/new-ride.component";
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
   declarations: [
-    RidesComponent,
-    NewRideComponent
+    UserRidesComponent,
+    NewRideComponent,
+    EndRideComponent
   ],
   imports: [
     UserRideRoutingModule,
-    CommonModule
+    CommonModule,
+    SharedModule
   ]
 })
 export class UserRidesModule {

@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClientWrapper} from 'src/app/core/utils/httpClientWrapper';
 import {Snackbar} from 'src/app/shared/snackbar/snakbar';
-import {Plan, Station, Subscription} from "../../../../shared/models";
-import {SubscriptionsStore} from "./subscriptions.store";
-import {SubscriptionsQuery} from "./subscriptions.query";
-import {API_RESSOURCE_URI} from "../../../../shared/api-ressource-uri/api-ressource-uri";
-import {RouterNavigation} from "../../../../core/router/router.navigation";
+import {Station, Subscription} from '../../../../shared/models';
+import {SubscriptionsStore} from './subscriptions.store';
+import {SubscriptionsQuery} from './subscriptions.query';
+import {API_RESSOURCE_URI} from '../../../../shared/api-ressource-uri/api-ressource-uri';
+import {RouterNavigation} from '../../../../core/router/router.navigation';
 
 @Injectable({providedIn: 'root'})
 export class SubscriptionsService {
@@ -62,6 +62,7 @@ export class SubscriptionsService {
       );
       response.invoices = [];
       this.subscriptionsStore.add(response);
+      this.snackBar.success('L\'abonnement a été ajouté');
       this.routerNavigation.gotoSubscriptionList();
     } catch (e) {
       this.snackBar.warnning(
@@ -81,7 +82,7 @@ export class SubscriptionsService {
       );
       this.subscriptionsStore.update(subscription.id, subscription);
       this.subscriptionsStore.update({viewSubscription: subscription});
-      this.snackBar.success("Abonnement mis à jour");
+      this.snackBar.success('Abonnement mis à jour');
     } catch (e) {
       this.snackBar.warnning(
         'Erreur lors de la mise à jour d\'un abonnement : ' + e.error.error
@@ -94,7 +95,7 @@ export class SubscriptionsService {
   async deleteSubscription(id: number): Promise<void> {
     this.subscriptionsStore.setLoading(true);
     try {
-      await this.http.delete<Station>(
+      await this.http.delete<void>(
         API_RESSOURCE_URI.BASE_SUBSCRIPTION + id
       );
       this.subscriptionsStore.remove(id);

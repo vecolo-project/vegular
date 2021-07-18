@@ -10,6 +10,7 @@ import {BikesManufacturerListComponent} from './components/bikes-manufacturer-li
 import {BikesManufacturerFormComponent} from './components/bikes-manufacturer-form/bikes-manufacturer-form.component';
 import {BikesModelFormComponent} from './components/bikes-model-form/bikes-model-form.component';
 import {BikesFormComponent} from './components/bikes-form/bikes-form.component';
+import { BikeViewComponent } from './components/bike-view/bike-view.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {BikesFormComponent} from './components/bikes-form/bikes-form.component';
     BikesManufacturerFormComponent,
     BikesModelFormComponent,
     BikesFormComponent,
+    BikeViewComponent,
   ],
   imports: [CommonModule, BikesRoutingModule, SharedModule],
 })

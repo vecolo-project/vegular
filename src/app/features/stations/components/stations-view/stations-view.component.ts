@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {Bike, OsmSearchResponse, Ride, Station, StationMonitoring} from "../../../../shared/models";
-import {interval, Subscription, timer} from "rxjs";
-import {AnimationOptions} from "ngx-lottie";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MatDialog} from "@angular/material/dialog";
-import {ConfirmDialogComponent} from "../../../../shared/confirm-dialog/confirm-dialog.component";
-import {RouterNavigation} from "../../../../core/router/router.navigation";
-import {endOfDay, startOfDay, subDays} from "date-fns";
+import {Bike, OsmSearchResponse, Ride, Station, StationMonitoring} from '../../../../shared/models';
+import {interval, Subscription, timer} from 'rxjs';
+import {AnimationOptions} from 'ngx-lottie';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmDialogComponent} from '../../../../shared/confirm-dialog/confirm-dialog.component';
+import {RouterNavigation} from '../../../../core/router/router.navigation';
+import {endOfDay, startOfDay, subDays} from 'date-fns';
 
 @Component({
   selector: 'app-stations-view',
@@ -42,7 +42,7 @@ export class StationsViewComponent implements OnInit {
   isStaff: boolean;
 
   @Output()
-  submit = new EventEmitter<Station>();
+  submitStation = new EventEmitter<Station>();
 
   @Input()
   bikes: Bike[];
@@ -67,7 +67,7 @@ export class StationsViewComponent implements OnInit {
     'battery',
     'status',
     'model',
-  ]
+  ];
 
   rideDisplayedColumns = [
     'start',
@@ -76,16 +76,16 @@ export class StationsViewComponent implements OnInit {
     'invoice',
     'matricule',
     'user'
-  ]
+  ];
 
   editMode: boolean;
   stationForm: FormGroup;
 
   obs: Subscription;
 
-  lottieStationOptions: AnimationOptions = {
+  lottieRideOptions: AnimationOptions = {
     path: 'assets/lottie/solarPanel2.json',
-  }
+  };
 
   dateRange: FormGroup;
 
@@ -99,13 +99,13 @@ export class StationsViewComponent implements OnInit {
       ZIPCODE: ['', [Validators.required]],
       COORDINATE_Y: ['', [Validators.required]],
       COORDINATE_X: ['', [Validators.required]]
-    })
+    });
     const today = new Date();
 
     this.dateRange = fb.group({
-      start: [subDays(today, 3),Validators.required],
-      end: [today,Validators.required]
-    })
+      start: [subDays(today, 3), Validators.required],
+      end: [today, Validators.required]
+    });
   }
 
   ngOnInit(): void {
@@ -115,12 +115,15 @@ export class StationsViewComponent implements OnInit {
           this.getStation.emit(this.station?.id);
         }
       });
-    timer(2000)
+    const today = new Date();
+    this.dateRange.controls.start.patchValue(subDays(today, 3));
+    this.dateRange.controls.end.patchValue(today);
+    timer(500)
       .subscribe(() => {
         this.retrieveMonitoring();
         this.onGetBikes(10, 0);
         this.onGetRides(10, 0);
-      })
+      });
     this.editMode = false;
   }
 
@@ -131,31 +134,29 @@ export class StationsViewComponent implements OnInit {
     return undefined;
   }
 
-  onGetBikes(limit: number, offset: number) {
+  onGetBikes(limit: number, offset: number): void {
     if (this.station) {
       this.getBikes.emit({stationId: this.station?.id, limit, offset});
     }
   }
 
-  onViewBike(bike: Bike) {
-    if (this.isStaff) {
-      this.routerNavigation.gotoBikeEdit(bike.id);
-    }
+  onViewBike(bike: Bike): void {
+    this.routerNavigation.gotoBikeView(bike.id);
   }
 
-  onGetRides(limit: number, offset: number) {
+  onGetRides(limit: number, offset: number): void {
     if (this.station && this.isStaff) {
       this.getRides.emit({stationId: this.station?.id, limit, offset});
     }
   }
 
-  onViewRide(ride: Ride) {
+  onViewRideBike(ride: Ride): void {
     if (this.isStaff) {
-      this.routerNavigation.gotoBikeEdit(ride.bike.id);
+      this.routerNavigation.gotoRideView(ride.id);
     }
   }
 
-  retrieveMonitoring() {
+  retrieveMonitoring(): void {
     if (this.station && this.dateRange.valid) {
       this.getMonitoring.emit({
         stationId: this.station?.id,
@@ -167,18 +168,18 @@ export class StationsViewComponent implements OnInit {
 
   getProgressColorClass(): string {
     if (this.getLastMonitoring()?.batteryPercent < 15) {
-      return "battery-low"
+      return 'battery-low';
     }
     if (this.getLastMonitoring()?.batteryPercent < 33) {
-      return "battery-warn"
+      return 'battery-warn';
     }
     if (this.getLastMonitoring()?.batteryPercent < 75) {
-      return "battery-good"
+      return 'battery-good';
     }
-    return "battery-great"
+    return 'battery-great';
   }
 
-  onEdit() {
+  onEdit(): void {
     this.stationForm.controls.BATTERY_CAPACITY.patchValue(this.station.batteryCapacity);
     this.stationForm.controls.BIKE_CAPACITY.patchValue(this.station.bikeCapacity);
     this.stationForm.controls.STREET_NUMBER.patchValue(this.station.streetNumber);
@@ -190,7 +191,7 @@ export class StationsViewComponent implements OnInit {
     this.editMode = true;
   }
 
-  onSubmit() {
+  onSubmit(): void {
     const station: Station = {
       id: this.station.id,
       batteryCapacity: this.stationForm.value.BATTERY_CAPACITY,
@@ -201,13 +202,13 @@ export class StationsViewComponent implements OnInit {
       zipcode: this.stationForm.value.ZIPCODE,
       coordinateX: this.stationForm.value.COORDINATE_X,
       coordinateY: this.stationForm.value.COORDINATE_Y
-    }
-    this.submit.emit(station);
+    };
+    this.submitStation.emit(station);
     this.editMode = false;
   }
 
-  onAddressInputSearch() {
-    console.log('search')
+  onAddressInputSearch(): void {
+    console.log('search');
     this.stationForm.controls.STREET_NUMBER.patchValue(null);
     this.stationForm.controls.STREET_NAME.patchValue(null);
     this.stationForm.controls.CITY.patchValue(null);
@@ -216,7 +217,7 @@ export class StationsViewComponent implements OnInit {
     this.stationForm.controls.COORDINATE_X.patchValue(null);
   }
 
-  onSelectAdress(address: OsmSearchResponse) {
+  onSelectAdress(address: OsmSearchResponse): void {
     this.stationForm.controls.STREET_NUMBER.patchValue(address.address.house_number || 0);
     this.stationForm.controls.STREET_NAME.patchValue(address.address.road);
     this.stationForm.controls.CITY.patchValue(address.address.city || address.address.town);
@@ -237,6 +238,6 @@ export class StationsViewComponent implements OnInit {
         this.obs.unsubscribe();
         this.deleteStation.emit(this.station.id);
       }
-    })
+    });
   }
 }

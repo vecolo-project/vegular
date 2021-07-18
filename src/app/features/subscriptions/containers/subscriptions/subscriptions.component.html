@@ -3,7 +3,7 @@
   <mat-tab-group mat-align-tabs="center" *ngIf="isListMode()">
     <mat-tab>
       <ng-template mat-tab-label>
-        <mat-icon class="example-tab-icon">local_offer</mat-icon>&nbsp;Forfaits
+        <mat-icon>local_offer</mat-icon>&nbsp;Forfaits
       </ng-template>
       <app-plan-list
         [planCount]="planCount | async"
@@ -15,7 +15,7 @@
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
-        <mat-icon class="example-tab-icon">card_membership</mat-icon>&nbsp;Abonnements
+        <mat-icon>card_membership</mat-icon>&nbsp;Abonnements
       </ng-template>
       <app-subscription-list
         [subscriptionCount]="subscriptionCount | async"

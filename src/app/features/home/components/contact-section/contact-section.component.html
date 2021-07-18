@@ -1,0 +1,117 @@
+<section class="w-screen" id="contact">
+  <!-- Header -->
+  <app-header-caption
+    [title]="'Contactez nous'"
+    [exergue]="
+      'Service disponible du lundi au vendredi de 8h à 22h, le samedi de 9h à 22h et le dimanche et jours fériés de 9h à 19h.'
+    "
+  ></app-header-caption>
+
+  <!-- Contact Section -->
+  <div class="relative bg-gray-600">
+    <div class="lg:absolute lg:inset-0">
+      <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+        <img
+          class="h-56 w-full object-cover lg:absolute lg:h-full"
+          src="https://images.pexels.com/photos/2128028/pexels-photo-2128028.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+          alt=""
+        />
+      </div>
+    </div>
+    <div
+      class="
+        relative
+        py-16
+        px-4
+        sm:py-24 sm:px-6
+        lg:px-8 lg:max-w-7xl lg:mx-auto lg:py-32 lg:grid lg:grid-cols-2
+      "
+    >
+      <div class="lg:pr-8">
+        <div class="max-w-md mx-auto sm:max-w-lg lg:mx-0">
+          <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+            Ridons ensemble
+          </h2>
+          <p class="mt-4 text-lg text-gray-200 sm:mt-3">
+            Nous aimerions beaucoup vous entendre, envoyez nous un message en
+            utilisant le formulaire
+          </p>
+          <form
+            [formGroup]="contactForm"
+            class="mt-9 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
+          >
+            <div>
+              <mat-form-field class="w-full" appearance="outline">
+                <mat-label class="text-gray-200">Prénom</mat-label>
+                <input matInput type="text" formControlName="FIRST_NAME"/>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="w-full" appearance="outline">
+                <mat-label class="text-gray-200">Nom</mat-label>
+                <input matInput type="text" formControlName="LAST_NAME"/>
+              </mat-form-field>
+            </div>
+            <div class="sm:col-span-2">
+              <mat-form-field class="w-full" appearance="outline">
+                <mat-label class="text-gray-200">Email</mat-label>
+                <input matInput type="text" formControlName="EMAIL"/>
+              </mat-form-field>
+            </div>
+            <div class="sm:col-span-2">
+              <mat-form-field class="w-full" appearance="outline">
+                <mat-label class="text-gray-200">Entreprise (facultatif)</mat-label>
+                <input matInput type="text" formControlName="COMPANY"/>
+              </mat-form-field>
+            </div>
+            <div class="sm:col-span-2">
+              <mat-form-field class="w-full" appearance="outline">
+                <mat-label class="text-gray-200">Téléphone</mat-label>
+                <input matInput type="text" formControlName="PHONE"/>
+              </mat-form-field>
+            </div>
+            <div class="sm:col-span-2">
+              <mat-form-field class="w-full" appearance="outline">
+                <mat-label class="text-gray-200"
+                >Comment pouvons nous vous aider ?
+                </mat-label
+                >
+                <textarea
+                  rows="4"
+                  matInput
+                  formControlName="CONTENT"
+                ></textarea>
+              </mat-form-field>
+            </div>
+            <div class="sm:col-span-2">
+                <re-captcha (resolved)="resolveCaptcha($event)"
+                            formControlName="CAPTCHA"
+                            [siteKey]="SITE_KEY">
+                </re-captcha>
+            </div>
+            <div class="text-right sm:col-span-2">
+              <button
+                [disabled]="contactForm.invalid"
+                (click)="onSubmit()"
+                mat-raised-button
+                color="primary"
+                type="submit"
+                class="
+                  inline-flex
+                  justify-center
+                  py-2
+                  px-4
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-offset-2
+                  focus:ring-grape-500
+                ">
+                Envoyer
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

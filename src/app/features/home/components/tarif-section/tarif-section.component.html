@@ -1,0 +1,23 @@
+<section class="w-screen" id="tarif">
+  <app-header-caption
+    title="Forfaits"
+    exergue="Votre abonnement prix juste"
+  ></app-header-caption>
+  <div class="bg-white">
+    <div class="max-w-7xl mx-auto pt-5 pb-24 px-4 sm:px-6 lg:px-8">
+      <div
+        class="
+          mt-12
+          space-y-4
+          sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6
+          lg:max-w-4xl lg:mx-auto
+          xl:max-w-none xl:mx-0 xl:grid-cols-3
+        "
+      >
+        <div *ngFor="let card of cards">
+          <app-tarif-card [card]="card"></app-tarif-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -21,7 +21,7 @@
       <ul class="nav-links-list">
         <li>
           <button
-            [matMenuTriggerFor]="matHomeMenu"
+            [routerLink]="[routesPath.home]"
             [ngClass]="isActive(routesPath.home)"
             class="nav-link"
           >
@@ -50,36 +50,6 @@
             class="nav-link"
           >
             Carte <span class="hidden lg:inline">interactive</span>
-          </button>
-        </li>
-        <li>
-          <button
-            *ngIf="sessionQuery.isLoggedIn()"
-            [routerLink]="[routesPath.subscription]"
-            routerLinkActive="bg-blue-500"
-            class="nav-link"
-          >
-            <span class="hidden lg:inline">Mon </span>abonnement
-          </button>
-        </li>
-        <li>
-          <button
-            *ngIf="sessionQuery.isLoggedIn()"
-            [routerLink]="[routesPath.rides]"
-            routerLinkActive="bg-blue-500"
-            class="nav-link"
-          >
-            <span class="hidden lg:inline">Mes </span>courses
-          </button>
-        </li>
-        <li>
-          <button
-            *ngIf="sessionQuery.isLoggedIn()"
-            [routerLink]="[routesPath.issue]"
-            routerLinkActive="bg-blue-500"
-            class="nav-link"
-          >
-            Signalement
           </button>
         </li>
         <li>
@@ -115,6 +85,16 @@
         <li>
           <button
             *ngIf="sessionQuery.isStaff()"
+            [routerLink]="[routesPath.rides]"
+            routerLinkActive="bg-purple-800"
+            class="nav-link bg-purple-600"
+          >
+            Trajets
+          </button>
+        </li>
+        <li>
+          <button
+            *ngIf="sessionQuery.isStaff()"
             [routerLink]="[routesPath.subscriptions]"
             routerLinkActive="bg-purple-800"
             class="nav-link bg-purple-600"
@@ -125,11 +105,11 @@
         <li>
           <button
             *ngIf="sessionQuery.isStaff()"
-            [routerLink]="[routesPath.finances]"
+            [routerLink]="[routesPath.statistics]"
             routerLinkActive="bg-purple-800"
             class="nav-link bg-purple-600"
           >
-            Finances
+            Statistiques
           </button>
         </li>
       </ul>
@@ -138,13 +118,13 @@
     <div class="flex gap-3 items-center mr-5">
       <button
         *ngIf="sessionQuery.isLoggedIn()"
-        [routerLink]="[routesPath.newRide]"
+        [routerLink]="[routesPath.userRides]"
         mat-raised-button
-        color="primary"
+        [color]="currentRide ? 'warn':'primary'"
         class="flex-none"
       >
-        <mat-icon aria-label="add" aria-hidden="true">add</mat-icon>
-        New Ride
+        <mat-icon aria-label="add" aria-hidden="true">{{currentRide ? 'done' : 'add'}}</mat-icon>
+        {{currentRide ? 'Terminer mon trajet' : 'Nouveau Trajet'}}
       </button>
       <button
         mat-button
@@ -187,6 +167,6 @@
     </div>
   </nav>
   <div *ngIf="isMobileMenuShow">
-    <app-mobile-menu></app-mobile-menu>
+    <app-mobile-menu [currentRide]="currentRide"></app-mobile-menu>
   </div>
 </header>

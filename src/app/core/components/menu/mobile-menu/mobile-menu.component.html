@@ -1,9 +1,158 @@
 <nav class="mobile mobile-menu-dropdown md:hidden">
   <ul class="list-none flex flex-col md:flex-row">
-    <li><button class="nav-link active">Dashboard</button></li>
-    <li><button class="nav-link">Map</button></li>
-    <li><button class="nav-link">Issues</button></li>
-    <li><button class="nav-link">My Rides</button></li>
+    <li>
+      <button
+        [matMenuTriggerFor]="matHomeMenu"
+        [ngClass]="isActive(routesPath.home)"
+        class="nav-link"
+      >
+        Accueil
+      </button>
+
+      <mat-menu #matHomeMenu="matMenu">
+        <button [routerLink]="[routesPath.home]" mat-menu-item>
+          Présentation
+        </button>
+        <button [routerLink]="[routesPath.home]" mat-menu-item>
+          Actualités
+        </button>
+        <button [routerLink]="[routesPath.home]" mat-menu-item>Tarif</button>
+        <button [routerLink]="[routesPath.home]" mat-menu-item>Contact</button>
+      </mat-menu>
+    </li>
+    <li>
+      <button
+        [routerLink]="[routesPath.map]"
+        routerLinkActive="bg-blue-500"
+        class="nav-link"
+      >
+        Carte <span class="hidden lg:inline">interactive</span>
+      </button>
+    </li>
+    <li>
+      <button
+        *ngIf="sessionQuery.isLoggedIn()"
+        [routerLink]="[routesPath.subscription]"
+        routerLinkActive="bg-blue-500"
+        class="nav-link"
+      >
+        <span class="hidden lg:inline">Mon </span>abonnement
+      </button>
+    </li>
+    <li>
+      <button
+        *ngIf="sessionQuery.isLoggedIn()"
+        [routerLink]="[routesPath.userRides]"
+        routerLinkActive="bg-blue-500"
+        class="nav-link"
+      >
+        <span class="hidden lg:inline">Mes </span>courses
+      </button>
+    </li>
+    <li>
+      <button
+        *ngIf="sessionQuery.isLoggedIn()"
+        [routerLink]="[routesPath.issue]"
+        routerLinkActive="bg-blue-500"
+        class="nav-link"
+      >
+        Signalement
+      </button>
+    </li>
+    <li>
+      <button
+        *ngIf="sessionQuery.isStaff()"
+        [routerLink]="[routesPath.users]"
+        routerLinkActive="bg-purple-800"
+        class="nav-link bg-purple-600"
+      >
+        Utilisateurs
+      </button>
+    </li>
+    <li>
+      <button
+        *ngIf="sessionQuery.isStaff()"
+        [routerLink]="[routesPath.stations]"
+        routerLinkActive="bg-purple-800"
+        class="nav-link bg-purple-600"
+      >
+        Bornes
+      </button>
+    </li>
+    <li>
+      <button
+        *ngIf="sessionQuery.isStaff()"
+        [routerLink]="[routesPath.bikes]"
+        routerLinkActive="bg-purple-800"
+        class="nav-link bg-purple-600"
+      >
+        Vélos
+      </button>
+    </li>
+    <li>
+      <button
+        *ngIf="sessionQuery.isStaff()"
+        [routerLink]="[routesPath.rides]"
+        routerLinkActive="bg-purple-800"
+        class="nav-link bg-purple-600"
+      >
+        Trajets
+      </button>
+    </li>
+    <li>
+      <button
+        *ngIf="sessionQuery.isStaff()"
+        [routerLink]="[routesPath.subscriptions]"
+        routerLinkActive="bg-purple-800"
+        class="nav-link bg-purple-600"
+      >
+        Abonnements
+      </button>
+    </li>
+    <li>
+      <button
+        *ngIf="sessionQuery.isStaff()"
+        [routerLink]="[routesPath.statistics]"
+        routerLinkActive="bg-purple-800"
+        class="nav-link bg-purple-600"
+      >
+        Statistiques
+      </button>
+    </li>
+    <li>
+      <button mat-button class="nav-link" [matMenuTriggerFor]="menu">
+        Mon compte
+      </button>
+      <mat-menu #menu="matMenu">
+        <button
+          *ngIf="sessionQuery.isLoggedIn()"
+          (click)="routerNavigation.gotoProfile()"
+          mat-menu-item
+        >
+          Mon profil
+        </button>
+        <button
+          mat-menu-item
+          *ngIf="sessionQuery.isLoggedIn()"
+          (click)="sessionService.logout()"
+        >
+          Se déconnecter
+        </button>
+        <button
+          mat-menu-item
+          *ngIf="!sessionQuery.isLoggedIn()"
+          (click)="routerNavigation.gotoSignup()"
+        >
+          S'inscrire
+        </button>
+        <button
+          mat-menu-item
+          *ngIf="!sessionQuery.isLoggedIn()"
+          (click)="routerNavigation.gotoAuth()"
+        >
+          Se connecter
+        </button>
+      </mat-menu>
+    </li>
   </ul>
-  <!-- TODO DROPDOWN SETTINGS CENTER -->
 </nav>
