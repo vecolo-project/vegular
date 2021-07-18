@@ -139,7 +139,7 @@ export class UsersService {
     }
   }
 
-  async exportInvoice(invoiceId:number): Promise<void> {
+  async exportInvoice(invoiceId: number): Promise<void> {
     try {
       await this.http.getPDF(
         API_RESSOURCE_URI.EXPORT_INVOICE + invoiceId
@@ -189,7 +189,7 @@ export class UsersService {
   }
 
   async sendContactForm(firstname: string, lastname: string, content: string,
-                        email: string, phone: string, enterprise?: string): Promise<void> {
+                        email: string, phone: string, captcha: string, enterprise?: string): Promise<void> {
     try {
       await this.http.post(
         API_RESSOURCE_URI.EMAIL_CONTACT,
@@ -199,6 +199,7 @@ export class UsersService {
           content,
           email,
           phone,
+          captcha,
           enterprise
         }
       );

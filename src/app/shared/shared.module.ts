@@ -9,6 +9,7 @@ import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component'
 import {UserSearchComponent} from './user-search/user-search.component';
 import {StationSearchComponent} from './station-search/station-search.component';
 import {BikeSearchComponent} from './bike-search/bike-search.component';
+import {RecaptchaFormsModule, RecaptchaModule} from 'ng-recaptcha';
 
 export function playerFactory(): LottiePlayer {
   return player;
@@ -20,7 +21,10 @@ export function playerFactory(): LottiePlayer {
     CommonModule,
     MaterialModule,
     LottieModule.forRoot({player: playerFactory}),
-    ChartsModule
+    ChartsModule,
+    RecaptchaModule,
+    RecaptchaFormsModule
+
   ],
   exports: [
     CommonModule,
@@ -31,7 +35,9 @@ export function playerFactory(): LottiePlayer {
     ConfirmDialogComponent,
     UserSearchComponent,
     StationSearchComponent,
-    BikeSearchComponent
+    BikeSearchComponent,
+    RecaptchaModule,
+    RecaptchaFormsModule
   ]
 })
 export class SharedModule {
