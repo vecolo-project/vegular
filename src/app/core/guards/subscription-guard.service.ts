@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular/router';
 import {SessionQuery} from '../store/session.query';
 import {RouterNavigation} from '../router/router.navigation';
-import {Snackbar} from "../../shared/snackbar/snakbar";
+import {Snackbar} from '../../shared/snackbar/snakbar';
 
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class SubscriptionGuardService implements CanActivate {
 
   constructor(public routerNavigation: RouterNavigation, public sessionQuery: SessionQuery, private snackBar: Snackbar) {
