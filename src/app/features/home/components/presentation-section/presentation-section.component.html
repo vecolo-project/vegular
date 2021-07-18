@@ -1,8 +1,8 @@
 <section class="w-screen" id="presentation">
   <!-- Header -->
   <app-header-caption
-    [title]="'Présentation'"
-    [exergue]="'Page de présentation de Vécolo'"
+    [title]="'Vécolo'"
+    [exergue]="'Roulez en toute liberté !'"
   ></app-header-caption>
   <div class="h-full bg-gray-50">
     <div
@@ -29,17 +29,30 @@
             Vécolo : Une solution éco responsable
           </h2>
           <p class="text-lg text-gray-500">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum
-            molestiae, rem ea, delectus pariatur temporibus quasi sit neque iure
-            perspiciatis magni corporis accusamus officia fuga animi ipsa natus!
-            Quam, corrupti.
+            Créé en 2021, Vécolo est l'un des premiers services de vélos partagés et exclusivement à assistance
+            électrique dans le monde.<br>
+            C'est également le premier à proposer uniquement des stations de recharge complètement autonome à énergie
+            solaire!
           </p>
+          <p class="text-lg text-gray-500">
+            L'objectif du service Vécolo et de faciliter le développement des nouvelles mobilités à énergie verte dans
+            la métropole du Grand Paris.
+          </p>
+          <div class="text-lg text-gray-500">
+            Vécolo en quelques chiffres :
+            <div class="ml-10">
+              <li><strong>100 stations</strong> à Paris et en Ile-de-France</li>
+              <li><strong>Plus de 1 700 vélos,</strong> tous à assistance électrique</li>
+              <li><strong>Au moins 20 000 trajets</strong> effectués chaque mois</li>
+            </div>
+
+          </div>
         </div>
         <ng-lottie [options]="lottieIdeaOptions"></ng-lottie>
       </div>
 
       <div class="lg:grid lg:grid-cols-2 lg:gap-8 pb-8">
-        <img src="assets/images/map.svg" alt="map" />
+        <img src="assets/images/map.svg" alt="map"/>
         <div>
           <h2
             class="
@@ -50,13 +63,20 @@
               sm:text-3xl
             "
           >
-            Des stations partouts dans Paris
+            Des stations partout dans Paris
           </h2>
           <p class="text-lg text-gray-500">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum
-            molestiae, rem ea, delectus pariatur temporibus quasi sit neque iure
-            perspiciatis magni corporis accusamus officia fuga animi ipsa natus!
-            Quam, corrupti.
+            Avec l’implantation de 100 stations à Paris et dans ses communes de la métropole, le service
+            Vécolo est le plus important système de vélos à assistance électrique en libre-service dans le monde, selon
+            ESGI magazine.
+          </p>
+          <p class="text-lg text-gray-500">
+            Les emplacements des stations Vécolo sont étudiés et choisis par les communes afin d’offrir un maximum
+            d’accessibilité aux utilisateurs et de s’intégrer au mieux dans l’espace public.
+          </p>
+          <p class="text-lg text-gray-500">
+            Parce que le combat écologique est la responsabilité de tous, Vécolo est totalement transparent avec ses
+            clients sur l'état des ses stations; que vous pouvez consulter à tout moment depuis notre <a routerLink="/map" target="_blank" class="text-blue-500">carte interactive</a>
           </p>
         </div>
       </div>
