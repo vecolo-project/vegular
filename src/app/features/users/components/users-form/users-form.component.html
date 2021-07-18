@@ -10,55 +10,55 @@
 <form [formGroup]="form" action="" class="mb-3">
   <mat-card>
     <mat-form-field class="w-full">
+      <mat-label>Email</mat-label>
       <input
         matInput
         formControlName="fieldEmail"
-        placeholder="email"
         type="email"
       />
     </mat-form-field>
     <mat-form-field class="w-full">
-      <mat-label>Role</mat-label>
+      <mat-label>Rôle</mat-label>
       <mat-select formControlName="fieldRole">
-        <mat-option value="ADMIN">ADMIN</mat-option>
-        <mat-option value="STAFF">STAFF</mat-option>
-        <mat-option value="CLIENT">CLIENT</mat-option>
+        <mat-option value="ADMIN">Administrateur</mat-option>
+        <mat-option value="STAFF">Membre du staff</mat-option>
+        <mat-option value="CLIENT">Client</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field class="w-full">
+      <mat-label>Prénom</mat-label>
       <input
         matInput
         formControlName="fieldFirstName"
-        placeholder="first name"
         type="text"
       />
     </mat-form-field>
     <mat-form-field class="w-full">
+      <mat-label>Nom de famille</mat-label>
       <input
         matInput
         formControlName="fieldLastName"
-        placeholder="last name"
         type="text"
       />
     </mat-form-field>
     <mat-form-field class="w-full">
+      <mat-label>Mot de passe</mat-label>
       <input
         matInput
         formControlName="fieldPassword"
-        placeholder="Mot de passe"
         type="password"
       />
       <mat-error
-      >Ce champs doit faire au moins 7 characters et correspondre a la
+      >Ce champs doit faire au moins 6 caractères et correspondre à la
         confirmation
       </mat-error
       >
     </mat-form-field>
     <mat-form-field class="w-full">
+      <mat-label>Confirmation du mot de passe</mat-label>
       <input
         matInput
         formControlName="fieldConfirmPassword"
-        placeholder="Confirmation de mot de passe"
         type="password"
       />
     </mat-form-field>
@@ -77,14 +77,14 @@
       />
     </mat-form-field>
     <mat-slide-toggle formControlName="fieldNewsletter" class="example-margin">
-      Newsletter
+      Abonné à la Newsletter
     </mat-slide-toggle>
     <p class="text-center">
       <button
-        mat-button
-        [disabled]="form.invalid"
-        (click)="save()"
         class="bg-indigo-500"
+        mat-raised-button
+        (click)="save()"
+        [disabled]="form.invalid"
       >
         Enregistrer
       </button>

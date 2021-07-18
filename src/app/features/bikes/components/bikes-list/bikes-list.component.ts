@@ -35,6 +35,7 @@ export class BikesListComponent implements OnInit, OnChanges {
     'recharging',
     'status',
     'model',
+    'station',
     'action',
   ];
 

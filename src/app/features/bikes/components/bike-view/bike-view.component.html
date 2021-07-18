@@ -62,13 +62,13 @@
         <ng-container matColumnDef="start">
           <th mat-header-cell *matHeaderCellDef>Borne de départ</th>
           <td mat-cell *matCellDef="let element">
-            ID: {{element.startStation?.id}} - RUE: {{element.startStation?.streetName}}
+            {{element.startStation?.streetNumber}} {{element.startStation?.streetName}} - {{element.startStation?.zipcode}} ({{element.startStation.city | uppercase}})
           </td>
         </ng-container>
         <ng-container matColumnDef="end">
           <th mat-header-cell *matHeaderCellDef>Borne d'arrivée</th>
           <td mat-cell *matCellDef="let element">
-            ID: {{element.endStation?.id}} - RUE: {{element.endStation?.streetName}}
+            {{element.endStation?.streetNumber}} {{element.endStation?.streetName}} - {{element.endStation?.zipcode}} ({{element.endStation.city | uppercase}})
           </td>
         </ng-container>
         <ng-container matColumnDef="duration-length">

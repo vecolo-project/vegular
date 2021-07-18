@@ -22,8 +22,8 @@
       <p class="font-semibold text-xl">
         <strong>Prix mensuel : </strong>{{ plan.price }} €
       </p>
-      <p><strong>Coût par minutes : </strong>{{ plan.costPerMinute }}</p>
-      <p><strong>Minutes gratuites : </strong>{{ plan.freeMinutes }}</p>
+      <p><strong>Coût par minutes : </strong>{{ plan.costPerMinute }}€/min</p>
+      <p><strong>Minutes gratuites : </strong>{{ plan.freeMinutes | number }} min</p>
     </div>
   </div>
 </mat-card>

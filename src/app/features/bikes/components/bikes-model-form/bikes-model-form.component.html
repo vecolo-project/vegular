@@ -21,7 +21,7 @@
     <mat-form-field class="w-full">
       <mat-label>Fabriquant</mat-label>
       <mat-select formControlName="fieldManufacturer">
-        <mat-option *ngFor="let option of filteredOptions | async"
+        <mat-option *ngFor="let option of manufacturers"
                     [value]="option">
           {{ option.name }}
         </mat-option>
