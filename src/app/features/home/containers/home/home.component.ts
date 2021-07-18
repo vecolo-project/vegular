@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { SessionQuery } from '../../../../core/store/session.query';
 import { User } from '../../../../shared/models/user.model';
 import { Observable } from 'rxjs';
+import { Plan } from 'src/app/shared/models';
+import { ProfileService } from 'src/app/features/profile/store/profile.service';
+import ProfileQuery from 'src/app/features/profile/store/profile.query';
 
 @Component({
   selector: 'app-home',
@@ -11,11 +14,19 @@ import { Observable } from 'rxjs';
 export class HomeComponent implements OnInit {
   user: Observable<User>;
   main: HTMLElement;
+  planList: Observable<Plan[]>;
 
-  constructor(private sessionQuery: SessionQuery) {}
+  constructor(
+    private sessionQuery: SessionQuery,
+    private profileService: ProfileService,
+    private profileQuery: ProfileQuery
+  ) {
+    this.planList = this.profileQuery.selectActivePlans$;
+    this.user = this.sessionQuery.selectUser$;
+  }
 
   ngOnInit(): void {
-    this.user = this.sessionQuery.selectUser$;
+    this.profileService.getActivePlans();
   }
 
   goToPresentation(): void {
