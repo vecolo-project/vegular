@@ -6,16 +6,16 @@
     ></div>
     <!--  TODO position of pill at start on active and with of active ... -->
     <ul class="menu__items">
-      <li class="menu__item menu__item--active">
+      <li class="menu__item menu__item--active" id="presentation-menu">
         <span (click)="goToPresentation.emit()">Présentation</span>
       </li>
-      <li class="menu__item">
+      <li class="menu__item" id="actu-menu">
         <span (click)="goToActu.emit()">Actualités</span>
       </li>
-      <li class="menu__item">
+      <li class="menu__item" id="tarif-menu">
         <span (click)="goToTarif.emit()">Tarif</span>
       </li>
-      <li class="menu__item">
+      <li class="menu__item" id="contact-menu">
         <span (click)="goToContact.emit()">Contact</span>
       </li>
     </ul>
