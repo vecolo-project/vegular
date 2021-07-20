@@ -1,15 +1,21 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Bike, Ride, Station} from "../../../../shared/models";
-import {AnimationOptions} from "ngx-lottie";
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Bike, Ride, Station } from '../../../../shared/models';
+import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'app-new-ride',
   templateUrl: './new-ride.component.html',
-  styleUrls: ['./new-ride.component.scss']
+  styleUrls: ['./new-ride.component.scss'],
 })
 export class NewRideComponent implements OnInit {
-
   @Input()
   bikes: Bike[];
 
@@ -28,20 +34,19 @@ export class NewRideComponent implements OnInit {
   constructor(@Inject(FormBuilder) fb) {
     this.rideForm = fb.group({
       STATION: ['', [Validators.required]],
-      BIKE: ['', [Validators.required]]
+      BIKE: ['', [Validators.required]],
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  onSelectStation(station: Station) {
+  onSelectStation(station: Station): void {
     this.selectStation.emit(station);
     this.rideForm.controls.STATION.patchValue(station);
     this.rideForm.controls.BIKE.patchValue(null);
   }
 
-  onSubmitRide() {
+  onSubmitRide(): void {
     const ride: Ride = {
       startStation: this.rideForm.value.STATION,
       bike: this.rideForm.value.BIKE,
@@ -49,7 +54,7 @@ export class NewRideComponent implements OnInit {
     this.submitRide.emit(ride);
   }
 
-  onStartStationSearch():void{
+  onStartStationSearch(): void {
     this.rideForm.controls.STATION.patchValue(null);
     this.rideForm.controls.BIKE.patchValue(null);
   }

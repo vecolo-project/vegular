@@ -1,17 +1,23 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {Plan, Subscription} from "../../../../shared/models";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MatDialog} from "@angular/material/dialog";
-import {AnimationOptions} from "ngx-lottie";
-import {ConfirmDialogComponent} from "../../../../shared/confirm-dialog/confirm-dialog.component";
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { Plan, Subscription } from '../../../../shared/models';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { AnimationOptions } from 'ngx-lottie';
+import { ConfirmDialogComponent } from '../../../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-subscription-view',
   templateUrl: './subscription-view.component.html',
-  styleUrls: ['./subscription-view.component.scss']
+  styleUrls: ['./subscription-view.component.scss'],
 })
 export class SubscriptionViewComponent implements OnInit {
-
   @Input()
   subscription: Subscription;
 
@@ -32,15 +38,15 @@ export class SubscriptionViewComponent implements OnInit {
 
   lottieMoneyOptions: AnimationOptions = {
     path: 'assets/lottie/money.json',
-  }
+  };
 
   constructor(@Inject(FormBuilder) fb, private dialog: MatDialog) {
     this.subscriptionForm = fb.group({
       START_DATE: ['', [Validators.required]],
       DURATION: ['', [Validators.required, Validators.min(1)]],
       AUTO_RENEW: ['', [Validators.required]],
-      PLAN: ['', [Validators.required]]
-    })
+      PLAN: ['', [Validators.required]],
+    });
   }
 
   ngOnInit(): void {
@@ -49,9 +55,15 @@ export class SubscriptionViewComponent implements OnInit {
 
   onEdit() {
     this.retrievePlans.emit();
-    this.subscriptionForm.controls.START_DATE.patchValue(this.subscription.startDate);
-    this.subscriptionForm.controls.DURATION.patchValue(this.subscription.monthDuration);
-    this.subscriptionForm.controls.AUTO_RENEW.patchValue(this.subscription.autoRenew);
+    this.subscriptionForm.controls.START_DATE.patchValue(
+      this.subscription.startDate
+    );
+    this.subscriptionForm.controls.DURATION.patchValue(
+      this.subscription.monthDuration
+    );
+    this.subscriptionForm.controls.AUTO_RENEW.patchValue(
+      this.subscription.autoRenew
+    );
     this.subscriptionForm.controls.PLAN.patchValue(this.subscription.plan);
     this.editMode = true;
   }
@@ -63,7 +75,7 @@ export class SubscriptionViewComponent implements OnInit {
       monthDuration: this.subscriptionForm.value.DURATION,
       autoRenew: this.subscriptionForm.value.AUTO_RENEW,
       plan: this.subscriptionForm.value.PLAN,
-      user: this.subscription.user
+      user: this.subscription.user,
     };
     this.submit.emit(subscription);
     this.editMode = false;
@@ -72,16 +84,14 @@ export class SubscriptionViewComponent implements OnInit {
   onDelete() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        title: 'Suppression d\'un abonnement',
-        message: 'Êtes vous sûr de vouloir supprimer cet abonnement ?'
-      }
+        title: "Suppression d'un abonnement",
+        message: 'Êtes vous sûr de vouloir supprimer cet abonnement ?',
+      },
     });
-    confirmDialog.afterClosed().subscribe(result => {
+    confirmDialog.afterClosed().subscribe((result) => {
       if (result === true) {
         this.deleteSubscription.emit(this.subscription.id);
       }
-    })
+    });
   }
-
-
 }

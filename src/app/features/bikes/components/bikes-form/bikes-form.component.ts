@@ -1,10 +1,23 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import {Bike, BikeModel, BikeProps, BikeStatus, Station,} from 'src/app/shared/models';
-import {Snackbar} from 'src/app/shared/snackbar/snakbar';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import {
+  Bike,
+  BikeModel,
+  BikeProps,
+  BikeStatus,
+  Station,
+} from 'src/app/shared/models';
+import { Snackbar } from 'src/app/shared/snackbar/snakbar';
 
 @Component({
   selector: 'app-bikes-form',
@@ -104,7 +117,6 @@ export class BikesFormComponent implements OnInit, OnChanges {
     return this.modelOption.find((option) => option.name === model.name);
   }
 
-
   private setFilterForModel(): void {
     this.filteredOptionsModel = this.form.controls.fieldModel.valueChanges.pipe(
       startWith(''),
@@ -141,5 +153,4 @@ export class BikesFormComponent implements OnInit, OnChanges {
     }
     this.router.navigate(['/bikes']);
   }
-
 }

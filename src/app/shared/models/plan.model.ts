@@ -1,4 +1,4 @@
-import {Subscription} from "./index";
+import { Subscription } from './index';
 
 export type Plan = {
   id?: number;
@@ -10,4 +10,4 @@ export type Plan = {
   createdAt?: Date;
   updatedAt?: Date;
   subscriptions?: Subscription[];
-}
+};

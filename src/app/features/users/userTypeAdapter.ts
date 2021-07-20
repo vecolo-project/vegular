@@ -1,4 +1,9 @@
-import {PutUser, RegisterUser, Role, UserFormData,} from 'src/app/shared/models/user.model';
+import {
+  PutUser,
+  RegisterUser,
+  Role,
+  UserFormData,
+} from 'src/app/shared/models/user.model';
 
 export function buildPutUserFromUserFormData(user: UserFormData): PutUser {
   delete user.id;

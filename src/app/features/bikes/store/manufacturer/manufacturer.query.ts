@@ -1,8 +1,11 @@
-import {Injectable} from '@angular/core';
-import {HashMap, QueryEntity} from '@datorama/akita';
-import {Observable} from 'rxjs';
-import {BikeManufacturer} from 'src/app/shared/models';
-import {BikeManufacturerState, BikeManufacturerStore,} from './manufacturer.store';
+import { Injectable } from '@angular/core';
+import { HashMap, QueryEntity } from '@datorama/akita';
+import { Observable } from 'rxjs';
+import { BikeManufacturer } from 'src/app/shared/models';
+import {
+  BikeManufacturerState,
+  BikeManufacturerStore,
+} from './manufacturer.store';
 
 @Injectable({ providedIn: 'root' })
 export class BikeManufacturerQuery extends QueryEntity<
