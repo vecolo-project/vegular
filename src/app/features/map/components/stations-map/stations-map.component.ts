@@ -1,20 +1,9 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
-import {
-  icon,
-  latLng,
-  marker,
-  MarkerClusterGroupOptions,
-  tileLayer,
-} from 'leaflet';
+import {Component, Input, OnChanges, OnInit, SimpleChanges,} from '@angular/core';
+import {icon, latLng, marker, MarkerClusterGroupOptions, tileLayer,} from 'leaflet';
 import 'leaflet.markercluster';
-import { Station, StationMonitoringStatus } from '../../../../shared/models';
-import { routesPath } from '../../../../core/router/router.navigation';
+import {Station, StationMonitoringStatus} from '../../../../shared/models';
+import {routesPath} from '../../../../core/router/router.navigation';
+import {StationStatusPipe} from '../../../../shared/pipes/StationStatusPipe';
 
 @Component({
   selector: 'app-stations-map',
@@ -47,7 +36,8 @@ export class StationsMapComponent implements OnInit, OnChanges {
 
   layers = [];
 
-  constructor() {}
+  constructor(private stationStatusPipe: StationStatusPipe) {
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.layers = [];
@@ -56,7 +46,8 @@ export class StationsMapComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   markerMaker(station: Station): any {
     return marker([station.coordinateY, station.coordinateX], {
@@ -79,12 +70,12 @@ export class StationsMapComponent implements OnInit, OnChanges {
         station.streetName
       } ${station.city.toUpperCase()} (${station.zipcode})</li>
                 <li>Vélos disponibles : ${
-                  station.stationMonitoring[0]?.usedBikeSlot
-                }/${station.bikeCapacity}</li>
+        station.stationMonitoring[0]?.usedBikeSlot
+      }/${station.bikeCapacity}</li>
                 <li>Batterie : ${station.stationMonitoring[0]?.batteryPercent.toFixed(
-                  2
-                )}%</li>
-                <li>État : ${station.stationMonitoring[0]?.status.toUpperCase()}</li>
+        2
+      )}%</li>
+                <li>État : ${this.stationStatusPipe.transform(station.stationMonitoring[0]?.status)}</li>
         `
     );
   }

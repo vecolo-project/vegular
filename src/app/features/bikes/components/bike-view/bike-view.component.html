@@ -25,7 +25,7 @@
           <strong>En charge : </strong>{{bike?.recharging ? 'Oui' : 'Non'}}
           </span>
           <span>
-          <strong>Statut : </strong>{{bike?.status}}
+          <strong>Statut : </strong>{{bike?.status | bikeStatusPipe}}
           </span>
           <span>
             <strong>Modèle : </strong> {{bike?.model?.name}} - {{bike?.model?.bikeManufacturer?.name | uppercase}}
