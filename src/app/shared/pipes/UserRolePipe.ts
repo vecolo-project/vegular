@@ -1,5 +1,5 @@
 import {Pipe} from '@angular/core';
-import {BikeStatus, Role} from '../models';
+import {Role} from '../models';
 
 @Pipe({name: 'userRolePipe'})
 export class UserRolePipe {

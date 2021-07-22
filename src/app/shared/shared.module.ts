@@ -12,6 +12,7 @@ import {BikeSearchComponent} from './bike-search/bike-search.component';
 import {RecaptchaFormsModule, RecaptchaModule} from 'ng-recaptcha';
 import {BikeStatusPipe} from './pipes/BikeStatusPipe';
 import {UserRolePipe} from './pipes/UserRolePipe';
+import {StationStatusPipe} from './pipes/StationStatusPipe';
 
 export function playerFactory(): LottiePlayer {
   return player;
@@ -25,7 +26,8 @@ export function playerFactory(): LottiePlayer {
     StationSearchComponent,
     BikeSearchComponent,
     BikeStatusPipe,
-    UserRolePipe
+    UserRolePipe,
+    StationStatusPipe
   ],
   imports: [
     CommonModule,
@@ -49,7 +51,8 @@ export function playerFactory(): LottiePlayer {
     RecaptchaModule,
     RecaptchaFormsModule,
     BikeStatusPipe,
-    UserRolePipe
+    UserRolePipe,
+    StationStatusPipe
   ]
 })
 export class SharedModule {
