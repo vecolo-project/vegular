@@ -10,13 +10,21 @@ import {UserSearchComponent} from './user-search/user-search.component';
 import {StationSearchComponent} from './station-search/station-search.component';
 import {BikeSearchComponent} from './bike-search/bike-search.component';
 import {RecaptchaFormsModule, RecaptchaModule} from 'ng-recaptcha';
+import {BikeStatusPipe} from './pipes/BikeStatusPipe';
 
 export function playerFactory(): LottiePlayer {
   return player;
 }
 
 @NgModule({
-  declarations: [AddressSearchComponent, ConfirmDialogComponent, UserSearchComponent, StationSearchComponent, BikeSearchComponent],
+  declarations: [
+    AddressSearchComponent,
+    ConfirmDialogComponent,
+    UserSearchComponent,
+    StationSearchComponent,
+    BikeSearchComponent,
+    BikeStatusPipe
+  ],
   imports: [
     CommonModule,
     MaterialModule,
@@ -37,7 +45,8 @@ export function playerFactory(): LottiePlayer {
     StationSearchComponent,
     BikeSearchComponent,
     RecaptchaModule,
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    BikeStatusPipe
   ]
 })
 export class SharedModule {
