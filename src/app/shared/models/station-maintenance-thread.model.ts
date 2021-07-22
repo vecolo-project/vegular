@@ -1,4 +1,4 @@
-import {Station, User} from ".";
+import { Station, User } from '.';
 
 export type StationMaintenanceThread = {
   id: number;

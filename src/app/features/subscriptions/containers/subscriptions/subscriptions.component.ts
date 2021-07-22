@@ -1,27 +1,26 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {RouterNavigation} from "../../../../core/router/router.navigation";
-import {SessionQuery} from "../../../../core/store/session.query";
-import {PlansQuery} from "../../store/plan/plans.query";
-import {SubscriptionsQuery} from "../../store/subscription/subscriptions.query";
-import {Plan, Subscription} from "../../../../shared/models";
-import {Observable} from "rxjs";
-import {PlansService} from "../../store/plan/plans.service";
-import {SubscriptionsService} from "../../store/subscription/subscriptions.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RouterNavigation } from '../../../../core/router/router.navigation';
+import { SessionQuery } from '../../../../core/store/session.query';
+import { PlansQuery } from '../../store/plan/plans.query';
+import { SubscriptionsQuery } from '../../store/subscription/subscriptions.query';
+import { Plan, Subscription } from '../../../../shared/models';
+import { Observable } from 'rxjs';
+import { PlansService } from '../../store/plan/plans.service';
+import { SubscriptionsService } from '../../store/subscription/subscriptions.service';
 
 @Component({
   selector: 'app-subscriptions',
   templateUrl: './subscriptions.component.html',
-  styleUrls: ['./subscriptions.component.scss']
+  styleUrls: ['./subscriptions.component.scss'],
 })
 export class SubscriptionsComponent implements OnInit {
-
   viewPlan: Observable<Plan>;
   planList: Observable<Plan[]>;
   planCount: Observable<number>;
-  viewSubscription: Observable<Subscription>
+  viewSubscription: Observable<Subscription>;
   subscriptionList: Observable<Subscription[]>;
-  subscriptionCount: Observable<number>
+  subscriptionCount: Observable<number>;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,7 +44,7 @@ export class SubscriptionsComponent implements OnInit {
     if (this.isPlanViewMode()) {
       const planId = Number.parseInt(this.route.snapshot.params.id);
       this.planService.getPlan(planId);
-    }else if (this.isSubscriptionViewMode()) {
+    } else if (this.isSubscriptionViewMode()) {
       const subscriptionId = Number.parseInt(this.route.snapshot.params.id);
       this.subscriptionService.getSubscription(subscriptionId);
     }
@@ -112,5 +111,4 @@ export class SubscriptionsComponent implements OnInit {
   onDeleteSubscription(id: number): void {
     this.subscriptionService.deleteSubscription(id);
   }
-
 }

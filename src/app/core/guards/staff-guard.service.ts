@@ -1,7 +1,11 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot,} from '@angular/router';
-import {SessionQuery} from '../store/session.query';
-import {RouterNavigation} from '../router/router.navigation';
+import { Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { SessionQuery } from '../store/session.query';
+import { RouterNavigation } from '../router/router.navigation';
 
 @Injectable({ providedIn: 'root' })
 export class StaffGuardService implements CanActivate {

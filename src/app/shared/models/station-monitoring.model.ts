@@ -1,4 +1,4 @@
-import {Station} from ".";
+import { Station } from '.';
 
 export type StationMonitoring = {
   id: number;
@@ -14,5 +14,5 @@ export type StationMonitoring = {
 export enum StationMonitoringStatus {
   ACTIVE = 'ACTIVE',
   MAINTAINING = 'MAINTAINING',
-  OFF = 'OFF'
+  OFF = 'OFF',
 }

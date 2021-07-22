@@ -1,4 +1,4 @@
-import {Subscription, User} from "./index";
+import { Subscription, User } from './index';
 
 export type Invoice = {
   id: number;
@@ -8,4 +8,4 @@ export type Invoice = {
   updatedAt: Date;
   user: User;
   subscription: Subscription;
-}
+};

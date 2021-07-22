@@ -1,13 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Plan} from "../../../../shared/models";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Plan } from '../../../../shared/models';
 
 @Component({
   selector: 'app-plan-list',
   templateUrl: './plan-list.component.html',
-  styleUrls: ['./plan-list.component.scss']
+  styleUrls: ['./plan-list.component.scss'],
 })
 export class PlanListComponent implements OnInit {
-
   @Input()
   planList: Plan[];
 
@@ -18,7 +17,7 @@ export class PlanListComponent implements OnInit {
   isAdmin: boolean;
 
   @Output()
-  getPlans = new EventEmitter<{ limit: number, offset: number }>();
+  getPlans = new EventEmitter<{ limit: number; offset: number }>();
 
   @Output()
   viewPlan = new EventEmitter<number>();
@@ -29,11 +28,10 @@ export class PlanListComponent implements OnInit {
     'priceMonth',
     'freeMinutes',
     'priceRide',
-    'active'
-  ]
+    'active',
+  ];
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.getPlansF(10, 0);
@@ -44,6 +42,6 @@ export class PlanListComponent implements OnInit {
   }
 
   getPlansF(limit: number, offset: number) {
-    setTimeout(() => this.getPlans.emit({limit, offset}));
+    setTimeout(() => this.getPlans.emit({ limit, offset }));
   }
 }

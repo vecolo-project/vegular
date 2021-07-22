@@ -1,4 +1,11 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { differenceInDays, addMonths } from 'date-fns';
 import { Plan, Subscription, User } from 'src/app/shared/models';
 
@@ -33,14 +40,26 @@ export class SubscriptionComponent implements OnInit, OnChanges {
     this.getPlans.emit();
     if (this.user.subscriptions.length === 1) {
       this.subscribtion = this.user.subscriptions[0];
-      this.numberOfDaysRemaining = differenceInDays(addMonths(new Date(this.subscribtion.startDate), this.subscribtion.monthDuration), new Date());
+      this.numberOfDaysRemaining = differenceInDays(
+        addMonths(
+          new Date(this.subscribtion.startDate),
+          this.subscribtion.monthDuration
+        ),
+        new Date()
+      );
     }
   }
 
   ngOnChanges(): void {
     if (this.user.subscriptions.length === 1) {
       this.subscribtion = this.user.subscriptions[0];
-      this.numberOfDaysRemaining = differenceInDays(addMonths(new Date(this.subscribtion.startDate), this.subscribtion.monthDuration), new Date());
+      this.numberOfDaysRemaining = differenceInDays(
+        addMonths(
+          new Date(this.subscribtion.startDate),
+          this.subscribtion.monthDuration
+        ),
+        new Date()
+      );
     }
   }
 
@@ -56,4 +75,3 @@ export class SubscriptionComponent implements OnInit, OnChanges {
     this.cancelSubscription.emit(this.subscribtion);
   }
 }
-

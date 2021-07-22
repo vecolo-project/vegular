@@ -1,4 +1,4 @@
-import {Bike, User} from ".";
+import { Bike, User } from '.';
 
 export type BikeMaintenanceThread = {
   id: number;
@@ -8,4 +8,4 @@ export type BikeMaintenanceThread = {
   user: User;
   updatedAt: Date;
   createdAt: Date;
-}
+};
