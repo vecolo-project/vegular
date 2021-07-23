@@ -3,6 +3,7 @@ import {BikesStatistics} from '../../../../shared/models';
 import {ChartOptions, ChartType} from 'chart.js';
 import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
 import {AnimationOptions} from 'ngx-lottie';
+import {BikeStatusPipe} from '../../../../shared/pipes/BikeStatusPipe';
 
 @Component({
   selector: 'app-bikes-statistics',
@@ -41,7 +42,7 @@ export class BikesStatisticsComponent implements OnInit, OnChanges {
     path: 'assets/lottie/bike.json',
   };
 
-  constructor() {
+  constructor(private bikeStatusPipe: BikeStatusPipe) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }
@@ -56,7 +57,7 @@ export class BikesStatisticsComponent implements OnInit, OnChanges {
 
   computeChartData(): void {
     this.pieChartData = this.statistics?.map(bikeStatistic => bikeStatistic.total);
-    this.pieChartLabels = this.statistics?.map(bikeStatistic => bikeStatistic.status);
+    this.pieChartLabels = this.statistics?.map(bikeStatistic => this.bikeStatusPipe.transform(bikeStatistic.status));
     this.bikeCount = this.statistics?.reduce((acc, st) => acc + Number(st.total), 0);
   }
 }

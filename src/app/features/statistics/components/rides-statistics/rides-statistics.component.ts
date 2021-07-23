@@ -105,7 +105,7 @@ export class RidesStatisticsComponent implements OnInit, OnChanges {
         spanGaps: true
       }
     ];
-    console.log(this.lineChartData);
+    // console.log(this.lineChartData);
 
     this.lineChartLabels = this.statistics?.map(r => r.day + '/' + (getMonth(this.date.value) + 1));
   }
