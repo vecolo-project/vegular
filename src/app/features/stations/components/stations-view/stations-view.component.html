@@ -5,7 +5,7 @@
       <mat-card-title>Station {{station?.id}}
         - {{station?.streetNumber}} {{station?.streetName}} {{station?.city.toUpperCase()}} ({{station?.zipcode}})
       </mat-card-title>
-      <mat-card-subtitle>État : {{getLastMonitoring()?.status.toUpperCase()}}</mat-card-subtitle>
+      <mat-card-subtitle>État : {{getLastMonitoring()?.status | stationStatusPipe}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="space-y-4">
       <section class="battery-section">
@@ -118,7 +118,7 @@
         <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef>Statut</th>
           <td mat-cell *matCellDef="let element">
-            {{element.status}}
+            {{element.status | bikeStatusPipe}}
           </td>
         </ng-container>
         <ng-container matColumnDef="model">
