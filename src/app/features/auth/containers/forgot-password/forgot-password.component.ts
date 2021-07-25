@@ -1,21 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
-import {SessionService} from "../../../../core/store/session.service";
+import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { SessionService } from '../../../../core/store/session.service';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.scss']
+  styleUrls: ['./forgot-password.component.scss'],
 })
 export class ForgotPasswordComponent implements OnInit {
+  mailForm = new FormControl('', [Validators.required, Validators.email]);
 
-  mailForm = new FormControl('', [Validators.required, Validators.email])
+  constructor(private sessionService: SessionService) {}
 
-  constructor(private sessionService: SessionService) {
-  }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onForgotPasswordSubmit() {
     this.sessionService.forgotPassword(this.mailForm.value);

@@ -1,13 +1,12 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {StationsComponent} from './containers/stations/stations.component';
-import {StationsRoutingModule} from './stations-routing.module';
-import {StationsListComponent} from './components/stations-list/stations-list.component';
-import {StationsViewComponent} from './components/stations-view/stations-view.component';
-import {SharedModule} from "../../shared/shared.module";
-import {StationChartComponent} from './components/station-charts/station-chart.component'
-import {StationCreateComponent} from './components/station-create/station-create.component';
-
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { StationsComponent } from './containers/stations/stations.component';
+import { StationsRoutingModule } from './stations-routing.module';
+import { StationsListComponent } from './components/stations-list/stations-list.component';
+import { StationsViewComponent } from './components/stations-view/stations-view.component';
+import { SharedModule } from '../../shared/shared.module';
+import { StationChartComponent } from './components/station-charts/station-chart.component';
+import { StationCreateComponent } from './components/station-create/station-create.component';
 
 @NgModule({
   declarations: [
@@ -17,11 +16,6 @@ import {StationCreateComponent} from './components/station-create/station-create
     StationChartComponent,
     StationCreateComponent,
   ],
-    imports: [
-        StationsRoutingModule,
-        CommonModule,
-        SharedModule
-    ]
+  imports: [StationsRoutingModule, CommonModule, SharedModule],
 })
-export class StationsModule {
-}
+export class StationsModule {}

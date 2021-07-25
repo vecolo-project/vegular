@@ -1,11 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
-import {SessionQuery} from 'src/app/core/store/session.query';
-import {EditedPassword, EditUser, Invoice, Plan, Ride, Subscription, User} from 'src/app/shared/models';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { SessionQuery } from 'src/app/core/store/session.query';
+import {
+  EditedPassword,
+  EditUser,
+  Invoice,
+  Plan,
+  Ride,
+  Subscription,
+  User,
+} from 'src/app/shared/models';
 import ProfileQuery from '../../store/profile.query';
-import {ProfileService} from '../../store/profile.service';
-import {SessionService} from '../../../../core/store/session.service';
-import {UsersService} from "../../../users/store/users.service";
+import { ProfileService } from '../../store/profile.service';
+import { SessionService } from '../../../../core/store/session.service';
+import { UsersService } from '../../../users/store/users.service';
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +30,6 @@ export class ProfileComponent implements OnInit {
   userRidesCount: Observable<number>;
   userSubscriptionsCount: Observable<number>;
   userInvoicesCount: Observable<number>;
-
 
   constructor(
     private sessionQuery: SessionQuery,
@@ -46,7 +53,6 @@ export class ProfileComponent implements OnInit {
     this.getUserSubscriptions(10, 0);
     this.getUserRides(10, 0);
     this.getUserInvoices(10, 0);
-
   }
 
   changeCurrentPage(newPage: string): void {
@@ -88,5 +94,4 @@ export class ProfileComponent implements OnInit {
   onExportInvoice(invoiceId: number): void {
     this.usersService.exportInvoice(invoiceId);
   }
-
 }

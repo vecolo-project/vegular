@@ -40,6 +40,7 @@ export class UserSubscriptionsStatisticsComponent implements OnInit {
       year: getYear(date)
     });
     datePicker.close();
+    this.date.patchValue(date);
   }
 
 }

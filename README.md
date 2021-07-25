@@ -1,4 +1,8 @@
-# Veback
+# Vegular
+
+## Syllabus
+
+ [Vegular.pdf](./Vegular.pdf) 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.11.
 

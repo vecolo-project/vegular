@@ -35,6 +35,7 @@ export class IncomesStatisticsComponent implements OnInit {
       month: getMonth(date) + 1,
       year: getYear(date)
     });
+    this.date.patchValue(date);
     datePicker.close();
   }
 

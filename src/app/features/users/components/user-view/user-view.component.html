@@ -11,7 +11,7 @@
           <strong>Actif : </strong>{{user?.isActive ? 'Oui' : 'Non'}}
         </span>
         <span>
-          <strong>Role : </strong>{{user?.role}}
+          <strong>Role : </strong>{{user?.role | userRolePipe}}
         </span>
         <span>
           <strong>Date de naissance : </strong>{{user?.birthDate | date: 'dd/MM/yyyy'}}
