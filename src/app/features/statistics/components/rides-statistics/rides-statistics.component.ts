@@ -4,7 +4,7 @@ import {FormControl} from '@angular/forms';
 import {MatDatepicker} from '@angular/material/datepicker';
 import {getMonth, getYear, startOfMonth} from 'date-fns';
 import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
-import {Color, Label, PluginServiceGlobalRegistrationAndOptions} from 'ng2-charts';
+import {Color, Label} from 'ng2-charts';
 import {AnimationOptions} from 'ngx-lottie';
 
 @Component({
@@ -100,8 +100,8 @@ export class RidesStatisticsComponent implements OnInit, OnChanges {
         spanGaps: true
       },
       {
-        data: this.statistics?.map(r => r.totalDuration),
-        label: 'Durée totale des trajets (min)',
+        data: this.statistics?.map(r => Number((r.totalDuration / 60).toFixed(2))),
+        label: 'Durée totale des trajets (heures)',
         spanGaps: true
       }
     ];
