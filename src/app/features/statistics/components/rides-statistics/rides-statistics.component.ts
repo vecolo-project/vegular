@@ -85,6 +85,7 @@ export class RidesStatisticsComponent implements OnInit, OnChanges {
       year: getYear(date)
     });
     datePicker.close();
+    this.date.patchValue(date);
   }
 
   computeChart(): void {
