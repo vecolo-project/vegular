@@ -31,7 +31,7 @@ export class SubscriptionAddComponent implements OnInit {
     this.subscriptionForm = fb.group({
       START_DATE: ['', [Validators.required]],
       DURATION: ['', [Validators.required, Validators.min(1)]],
-      AUTO_RENEW: ['', [Validators.required]],
+      AUTO_RENEW: [false, [Validators.required]],
       USER: ['', [Validators.required]],
       PLAN: ['', [Validators.required]]
     });
